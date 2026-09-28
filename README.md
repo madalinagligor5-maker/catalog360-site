@@ -2,6 +2,10 @@
 
 Fișiere: `index.html` (CSS și JS incluse, fără dependențe), `robots.txt`, `sitemap.xml`, `assets/`.
 
+## Deploy pe Vercel
+
+Proiectul este HTML/CSS/JS static. `vercel.json` setează explicit presetul **Other**, fără comandă de build, și publică direct fișierele din rădăcina proiectului.
+
 ## De completat înainte de lansare
 1. **Fotografie hero** – caută `IMAGINE HERO`; folosește o fotografie reală (WebP, ~1440px lățime, alt text descriptiv).
 2. **Formular Scor Digital360** – caută `TODO producție` în script și conectează endpoint-ul (email, CRM etc.).
