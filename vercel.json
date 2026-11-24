@@ -3,5 +3,8 @@
   "framework": null,
   "buildCommand": null,
   "outputDirectory": ".",
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/titularizare-informatica-tic", "destination": "/", "permanent": true }
+  ]
 }

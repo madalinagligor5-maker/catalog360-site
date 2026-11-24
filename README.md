@@ -1,20 +1,15 @@
-# Catalog360.ro – site static
+# Catalog360.ro – Titularizare Informatică și TIC
 
-Fișiere: `index.html` (CSS și JS incluse, fără dependențe), `titularizare-informatica-tic.html` (ghid de pregătire pentru titularizare, programa 2026 – servit la `/titularizare-informatica-tic`), `robots.txt`, `sitemap.xml`, `assets/`.
+Site static: material de pregătire pentru titularizare la Informatică și Tehnologia Informației, structurat după programa de concurs (Anexa 49, MO nr. 972 bis/23.XI.2026).
+
+Fișiere: `index.html` (CSS și JS incluse), `assets/logo-catalog360.png`, `robots.txt`, `sitemap.xml`, `vercel.json`.
 
 ## Deploy pe Vercel
 
-Proiectul este HTML/CSS/JS static. `vercel.json` setează explicit presetul **Other**, fără comandă de build, și publică direct fișierele din rădăcina proiectului.
+`vercel.json` setează presetul **Other**, fără comandă de build, și publică direct fișierele din rădăcină. Adresa veche `/titularizare-informatica-tic` redirecționează permanent spre `/`.
 
-## De completat înainte de lansare
-1. **Fotografie hero** – caută `IMAGINE HERO`; folosește o fotografie reală (WebP, ~1440px lățime, alt text descriptiv).
-2. **Formular Scor Digital360** – caută `TODO producție` în script și conectează endpoint-ul (email, CRM etc.).
-3. **GTM / GA4 / Search Console** – decomentează snippet-urile din `<head>` și setează ID-urile. Evenimente trimise în dataLayer: `cta_click`, `generate_lead`.
-4. **Date firmă** – footer (`Date firmă`), plus `address`/`telephone` în Schema ProfessionalService când există sediu public.
-5. **Imagine Open Graph** – adaugă un vizual 1200×630 și reactivează meta-tagurile `og:image`.
-6. **Durate din FAQ** – verifică termenele (2–3 / 3–6 săptămâni).
+## Conținut
 
-## SEO
-- Un singur H1, H2/H3 ierarhic, canonical, OG, Schema (Organization, ProfessionalService, Service ×3, WebSite).
-- FAQPage nu este marcat intenționat: Google afișează rich results FAQ doar pentru site-uri guvernamentale/medicale autoritare.
-- BreadcrumbList se adaugă pe subpagini (/seo-local, /creare-site-salon etc.), apoi fiecare pagină nouă intră în sitemap.xml.
+- 10 capitole științifice și 3 de metodică, cu teorie, exerciții rezolvate și teste rapide.
+- Codul din exemple (Python, C++, SQL) a fost rulat; rezultatele afișate sunt cele reale.
+- Progresul utilizatorului se salvează doar în browser (`localStorage`).
