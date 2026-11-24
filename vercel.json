@@ -5,6 +5,10 @@
   "outputDirectory": ".",
   "cleanUrls": true,
   "redirects": [
-    { "source": "/titularizare-informatica-tic", "destination": "/", "permanent": true }
+    {
+      "source": "/titularizare-informatica-tic",
+      "destination": "/programa",
+      "permanent": true
+    }
   ]
 }

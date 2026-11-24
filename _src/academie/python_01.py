@@ -1,4 +1,4 @@
-from util import C, O, T
+from util import C, CO, O, T
 
 LECTII = []
 
@@ -277,11 +277,10 @@ print(s, cnt, mx, poz)''')}
 <li>Variabila buclei poate fi modificată în corp, dar asta <em>nu</em> schimbă iterațiile următoare (spre deosebire de C++).</li>
 </ul>
 <h3>Bucle imbricate</h3>
-{C('''for i in range(1, 4):
+{CO('''for i in range(1, 4):
     for j in range(1, i + 1):
         print(j, end=" ")
     print()''')}
-{O("1\n1 2\n1 2 3")}
 """,
     rezolvate=[
         dict(titlu="Suma divizorilor", enunt="Se citește n natural nenul. Afișează divizorii lui n pe o linie și suma lor pe linia următoare.",
@@ -334,7 +333,7 @@ while n > 0:
 print(s, inv, cmax)''')}
 <div class="note warn"><b>Atenție la n = 0:</b> bucla de mai sus nu se execută, deci 0 are „zero cifre”. Dacă se cere numărul de cifre, tratează separat cazul 0 sau folosește <code>len(str(n))</code>. Și: bucla distruge valoarea lui n – păstrează o copie dacă mai ai nevoie de ea (de exemplu la palindrom: <code>n == inv</code>).</div>
 <h3>Algoritmi numerici de bază</h3>
-{C('''def cmmdc(a, b):              # Euclid
+{CO('''def cmmdc(a, b):              # Euclid
     while b != 0:
         a, b = b, a % b
     return a
@@ -359,7 +358,6 @@ def in_baza(n, b):            # din baza 10 în baza b (2..10)
     return s
 
 print(cmmdc(84, 36), prim(97), in_baza(13, 2), int("1101", 2))''')}
-{O("12 True 1101 13")}
 <h3>break, continue, else</h3>
 <ul>
 <li><code>break</code> oprește imediat bucla curentă; <code>continue</code> sare la următoarea iterație.</li>

@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Academia Python – curs pe lecții pentru titularizare | Catalog360.ro</title>
-<meta name="description" content="Curs de Python pe lecții, de la zero la nivelul probei practice de la titularizarea la Informatică și TIC: teorie, probleme rezolvate și exerciții cu verificare automată direct în browser.">
-<link rel="canonical" href="https://catalog360.ro/python">
+<title>{{TITLU}}</title>
+<meta name="description" content="{{DESCRIERE}}">
+<link rel="canonical" href="https://catalog360.ro/{{URL}}">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#0F2D44">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ro_RO">
 <meta property="og:site_name" content="Catalog360.ro">
-<meta property="og:title" content="Academia Python – curs pe lecții, cu exerciții verificate automat">
-<meta property="og:url" content="https://catalog360.ro/python">
+<meta property="og:title" content="{{TITLU}}">
+<meta property="og:url" content="https://catalog360.ro/{{URL}}">
 <link rel="icon" href="assets/logo-catalog360.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,7 +31,7 @@
   color-scheme: light;
 }
 *,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%; scroll-padding-top:90px}
+html{-webkit-text-size-adjust:100%; scroll-padding-top:130px}
 body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--mint); outline-offset:3px; border-radius:6px}
@@ -67,14 +67,15 @@ p{margin:0 0 12px} ul,ol{margin:0 0 12px; padding-left:1.3em} li{margin-bottom:4
 @media (max-width:640px){ .hide-s{display:none} .show-s{display:inline} .prog .track, .prog .lbl{display:none} .brand-mark{width:150px; height:30px} .brand-mark img{width:150px; transform:translateY(-10px)} }
 
 .hero{padding-block:clamp(32px, 5vw, 64px) 28px}
-.hero-copy{display:grid; gap:16px; max-width:900px}
+.hero-copy{display:grid; gap:16px}
+.hero-copy > *{max-width:900px}
 .hero h1 em{font-style:italic; color:var(--mint-ink)}
 .stats{display:flex; flex-wrap:wrap; gap:10px; margin-top:4px}
 .stats span{background:var(--white); border:1px solid var(--line); border-radius:999px; padding:6px 14px; font-size:.88rem; font-weight:700}
 .stats b{color:var(--mint-ink)}
 
 .layout{display:grid; grid-template-columns:270px minmax(0,1fr); gap:clamp(20px, 3vw, 40px); align-items:start; padding-bottom:72px}
-.toc{position:sticky; top:86px; max-height:calc(100vh - 100px); overflow:auto; background:var(--white); border:1px solid var(--line); border-radius:var(--r); padding:14px 10px; font-size:.9rem}
+.toc{position:sticky; top:128px; max-height:calc(100vh - 142px); overflow:auto; background:var(--white); border:1px solid var(--line); border-radius:var(--r); padding:14px 10px; font-size:.9rem}
 .toc h2{font-family:var(--sans); font-size:.72rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:4px 10px 8px}
 .toc ol{list-style:none; margin:0; padding:0; display:grid; gap:2px}
 .toc li{margin:0}
@@ -150,7 +151,9 @@ pre.out::before{color:var(--muted)}
 .quiz{background:var(--paper); border:1px solid var(--line); border-radius:var(--r); padding:16px 18px; margin-top:32px}
 .quiz > h3{margin:0; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; align-items:baseline}
 .quiz .score{font:700 .86rem var(--sans); color:var(--muted)}
-.q{border:0; padding:0; margin:16px 0 0} .q legend{font-weight:700; padding:0; margin-bottom:8px}
+.q{border:0; padding:0; margin:16px 0 0; min-width:0} .q legend{font-weight:700; padding:0; margin-bottom:8px; display:block; width:100%; max-width:100%}
+.q legend pre{font-weight:400}
+select{max-width:100%}
 .opts{display:grid; gap:8px}
 .opts button{font:inherit; font-size:.94rem; text-align:left; background:var(--white); border:1.5px solid var(--line); border-radius:10px; padding:9px 14px; cursor:pointer; color:var(--ink)}
 .opts button:hover:not(:disabled){border-color:var(--navy)}
@@ -168,6 +171,27 @@ pre.out::before{color:var(--muted)}
 .site-footer a{text-decoration:none} .site-footer a:hover{color:#fff; text-decoration:underline}
 .foot-row{display:flex; flex-wrap:wrap; justify-content:space-between; gap:16px; align-items:center}
 .footer-brand-surface{display:inline-flex; background:#fff; border-radius:12px; padding:8px 12px}
+
+.site-nav{background:var(--navy)}
+.site-nav ul{list-style:none; margin:0; padding:0; display:flex; gap:4px; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch}
+.site-nav ul::-webkit-scrollbar{display:none}
+.site-nav li{margin:0; flex:none}
+.site-nav a{display:block; padding:10px 12px; color:rgba(255,255,255,.82); text-decoration:none; font-size:.88rem; font-weight:700; white-space:nowrap; border-bottom:3px solid transparent}
+.site-nav a:hover{color:#fff}
+.site-nav a[aria-current="page"]{color:#fff; border-bottom-color:var(--mint)}
+.ex.app textarea.ans{display:block; width:100%; min-height:120px; margin-top:12px; font:15px/1.55 var(--sans); border:1.5px solid var(--line); border-radius:12px; padding:12px 14px; background:var(--paper); color:var(--ink); resize:vertical}
+.ex.app textarea.ans:focus{outline:3px solid var(--mint); outline-offset:2px}
+details.sol{margin-top:12px}
+details.sol summary{cursor:pointer; display:inline-flex; font-weight:700; font-size:.92rem; color:var(--navy); padding:8px 14px; border-radius:999px; border:1.5px solid var(--navy); list-style:none}
+details.sol summary::-webkit-details-marker{display:none}
+details.sol[open] summary, details.sol summary:hover{background:var(--navy); color:#fff}
+details.sol .body{margin-top:12px; padding-top:12px; border-top:1px dashed var(--line)}
+.crit{display:grid; gap:6px; margin-top:12px; padding:12px 14px; background:var(--paper); border-radius:12px}
+.crit label{display:flex; gap:10px; align-items:flex-start; font-size:.94rem; cursor:pointer}
+.crit input{margin-top:5px; width:16px; height:16px; accent-color:var(--mint-ink); flex:none}
+.done-toggle.sm{font-size:.86rem; padding:6px 12px; margin-top:10px}
+.ex.app.ok{border-color:var(--mint); box-shadow:0 0 0 3px var(--mint-soft)}
+.lesson table + p, .lesson .tbl + p{margin-top:4px}
 </style>
 </head>
 <body>
@@ -176,19 +200,19 @@ pre.out::before{color:var(--muted)}
   <div class="wrap nav">
     <a class="brand" href="./" aria-label="Catalog360.ro – titularizare Informatică și TIC"><span class="brand-mark"><img src="assets/logo-catalog360.png" alt="Catalog360.ro" width="2172" height="724"></span></a>
     <div class="nav-right">
-      <a href="./">← <span class="hide-s">Programa completă</span><span class="show-s">Programa</span></a>
-      <span class="prog" aria-live="polite"><span class="lbl">Exerciții</span><span class="track" aria-hidden="true"><i id="progBar"></i></span><span id="progTxt">0/{{NR_EX}}</span></span>
+      <span class="prog" aria-live="polite"><span class="lbl">Exerciții rezolvate</span><span class="track" aria-hidden="true"><i id="progBar"></i></span><span id="progTxt">0/{{NR_EX}}</span></span>
     </div>
   </div>
+{{NAV_SITE}}
 </header>
 <main id="continut">
 <section class="hero">
   <div class="wrap hero-copy">
-    <p class="eyebrow">Titularizare Informatică și TIC · Programa, capitolul 5.A</p>
-    <h1>Academia <em>Python</em></h1>
-    <p class="lede">Curs pe lecții, de la primul program până la nivelul probei practice: teorie scurtă, probleme rezolvate și exerciții pe care le scrii și le rulezi direct aici. Pagina îți verifică automat programul pe mai multe teste, ca la un evaluator.</p>
-    <div class="stats"><span><b>{{NR_LECTII}}</b> lecții</span><span><b>{{NR_EX}}</b> exerciții cu verificare automată</span><span>Python 3 rulat în browser – fără instalare</span></div>
-    <p class="hint">Prima rulare încarcă interpretorul Python (câțiva MB, durează câteva secunde); după aceea merge instant. Progresul și codul tău se salvează doar în acest browser.</p>
+    <p class="eyebrow">{{EYEBROW}}</p>
+    <h1>{{H1}}</h1>
+    <p class="lede">{{LEDE}}</p>
+    <div class="stats">{{STATS}}</div>
+    <p class="hint">{{HINT}}</p>
   </div>
 </section>
 <div class="wrap layout">
@@ -202,7 +226,7 @@ pre.out::before{color:var(--muted)}
 </main>
 <footer class="site-footer"><div class="wrap foot-row">
   <a class="footer-brand-surface" href="./" aria-label="Catalog360.ro"><span class="brand-mark"><img src="assets/logo-catalog360.png" alt="Catalog360.ro" width="2172" height="724" loading="lazy"></span></a>
-  <p style="margin:0;max-width:62ch">Material de pregătire independent, după programa de concurs (Anexa 49, MO nr. 972 bis/23.XI.2026). Python rulează local, în browser, cu Pyodide.</p>
+  <p style="margin:0;max-width:62ch">Material de pregătire independent, după programa de concurs (Anexa 49, MO nr. 972 bis/23.XI.2026). Nu este un document oficial al Ministerului Educației. Exercițiile Python rulează local, în browser, cu Pyodide.</p>
 </div></footer>
 
 <script type="text/plain" id="runner">
@@ -257,11 +281,12 @@ def __run(code, stdin, files, echo):
 </script>
 <script>
 var DATE = {{DATE_EX}};
+var APLICATII = {{APLICATII}};
 (function(){
   document.documentElement.classList.add('js');
   var BASE = 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/';
   try { var q = new URLSearchParams(location.search).get('pyo'); if (q && /^http:\/\/(localhost|127\.0\.0\.1)[:/]/.test(q)) BASE = q; } catch (e) {}
-  var KEY = 'c360-academia-python';
+  var KEY = '{{KEY}}';
   var st = {}; try { st = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) {}
   st.cod = st.cod || {}; st.ok = st.ok || {}; st.done = st.done || {};
   function save(){ try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} }
@@ -320,11 +345,12 @@ var DATE = {{DATE_EX}};
 
   // ---------- Exerciții ----------
   var lessons = Array.prototype.slice.call(document.querySelectorAll('.lesson'));
-  var totalEx = Object.keys(DATE).length;
+  var ALL = Object.keys(DATE).concat(APLICATII);
+  var totalEx = ALL.length;
   function counts(){
     var n = 0;
     lessons.forEach(function(L){
-      var ids = Object.keys(DATE).filter(function(k){ return k.indexOf(L.id + '-e') === 0; });
+      var ids = ALL.filter(function(k){ return k.indexOf(L.id + '-e') === 0; });
       var ok = ids.filter(function(k){ return st.ok[k]; }).length; n += ok;
       var c = document.querySelector('[data-cnt="' + L.id + '"]'); if (c && ids.length) c.textContent = ok + '/' + ids.length;
       var a = document.querySelector('.toc a[href="#' + L.id + '"]'); if (a) a.classList.toggle('done', !!st.done[L.id] || (ids.length > 0 && ok === ids.length));
@@ -400,6 +426,16 @@ var DATE = {{DATE_EX}};
     });
   });
 
+  // ---------- Aplicații (răspuns liber) ----------
+  document.querySelectorAll('.ex.app').forEach(function(box){
+    var id = box.getAttribute('data-app'), ans = box.querySelector('textarea.ans'), ok = box.querySelector('.app-ok'), stEl = box.querySelector('.st');
+    st.ans = st.ans || {};
+    if (ans) { ans.value = st.ans[id] || ''; ans.addEventListener('input', function(){ st.ans[id] = ans.value; save(); }); }
+    function mark(){ ok.checked = !!st.ok[id]; box.classList.toggle('ok', !!st.ok[id]); stEl.textContent = st.ok[id] ? '✓ rezolvat' : ''; }
+    ok.addEventListener('change', function(){ st.ok[id] = ok.checked; save(); mark(); counts(); });
+    mark();
+  });
+
   // ---------- Teste grilă ----------
   document.querySelectorAll('[data-quiz]').forEach(function(quiz){
     var qs = quiz.querySelectorAll('.q'), sc = quiz.querySelector('.score'), ans = 0, right = 0;
@@ -428,7 +464,7 @@ var DATE = {{DATE_EX}};
     if (!L) L = document.getElementById(st.last) || lessons[0];
     lessons.forEach(function(x){ x.classList.toggle('show', x === L); });
     links.forEach(function(a){ a.classList.toggle('on', a.getAttribute('href') === '#' + L.id); });
-    st.last = L.id; save();
+    st.last = L.id; st.t = Date.now(); save();
     if (fromHash) {
       if (target && target !== L) target.scrollIntoView();
       else document.querySelector('.layout').scrollIntoView();

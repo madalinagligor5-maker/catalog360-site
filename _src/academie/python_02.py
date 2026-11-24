@@ -1,4 +1,4 @@
-from util import C, O, T
+from util import C, CO, O, T
 
 LECTII = []
 
@@ -29,7 +29,7 @@ del v[0]             # șterge elementul de pe poziția 0 → [3]''')}
    ["<code>reverse()</code>, <code>extend(w)</code>", "inversare pe loc; adăugarea tuturor elementelor lui w", ""])}
 <div class="note warn"><b>Capcane:</b> <code>v = v.sort()</code> face v = None. <code>w = v</code> nu copiază – ambele nume indică aceeași listă. Ștergerea elementelor în timp ce parcurgi lista cu <code>for x in v</code> sare peste elemente – construiește o listă nouă: <code>v = [x for x in v if x % 2 == 0]</code>.</div>
 <h3>Liste ca structuri de date (capitolul 1)</h3>
-{C('''stiva = []
+{CO('''stiva = []
 stiva.append(1); stiva.append(2); stiva.append(3)
 print(stiva.pop())          # 3 – LIFO
 
@@ -43,7 +43,6 @@ f = [0] * 10                # lista de frecvențe pentru valori 0..9
 for x in v:
     f[x] += 1
 print([x for x in range(10) for _ in range(f[x])])   # sortare prin numărare''')}
-{O("3\n1\n[1, 1, 2, 3, 3, 4, 5, 5, 6, 9]")}
 <h3>Comprehensiuni de liste</h3>
 {C('''patrate = [i * i for i in range(1, 6)]            # [1, 4, 9, 16, 25]
 pare = [x for x in v if x % 2 == 0]               # filtrare
@@ -91,23 +90,21 @@ LECTII.append(dict(
    ["Mutabil", "nu", "da", "da (cheile trebuie să fie imutabile)"],
    ["Test <code>in</code>", "O(n)", "O(1) în medie", "O(1) în medie, după cheie"])}
 <h3>Tupluri</h3>
-{C('''p = (3, 4)
+{CO('''p = (3, 4)
 x, y = p                     # despachetare
 t = (1, 2, 3, 2)
 print(t[1], t.count(2), t.index(3), t + (4,), 2 in t)
 def min_max(v):
     return min(v), max(v)    # o funcție poate întoarce un tuplu
 mn, mx = min_max([4, 1, 7])''')}
-{O("2 2 2 (1, 2, 3, 2, 4) True")}
 <h3>Mulțimi</h3>
-{C('''A = {1, 2, 3, 4}; B = {3, 4, 5}
+{CO('''A = {1, 2, 3, 4}; B = {3, 4, 5}
 print(A | B, A & B, A - B, A ^ B)     # reuniune, intersecție, diferență, dif. simetrică
 print({3, 4} <= A, A == {4, 3, 2, 1})  # incluziune, egalitate (ordinea nu contează)
 A.add(9); A.discard(1); A.remove(2)   # remove dă KeyError dacă elementul lipsește
 print(len(set("mississippi")))        # 4 litere distincte''')}
-{O("{1, 2, 3, 4, 5} {3, 4} {1, 2} {1, 2, 5} True True 4")}
 <h3>Dicționare</h3>
-{C('''note = {"Ana": 9, "Dan": 7}
+{CO('''note = {"Ana": 9, "Dan": 7}
 note["Ioana"] = 10          # adăugare
 note["Dan"] += 1            # modificare
 print(note["Ana"], note.get("Mihai", 0), "Dan" in note)
@@ -119,7 +116,6 @@ for w in "a b a c b a".split():
     frecv[w] = frecv.get(w, 0) + 1
 print(frecv)
 print(sorted(frecv, key=frecv.get, reverse=True))   # cheile după frecvență''')}
-{O("9 0 True\nAna 9\nDan 8\nIoana 10\n{'a': 3, 'b': 2, 'c': 1}\n['a', 'b', 'c']")}
 <div class="note"><b>Cum alegi:</b> listă – ordine și poziții; tuplu – grup fix de valori (coordonate, înregistrări); mulțime – „a mai apărut?”, valori distincte, operații de mulțimi; dicționar – asocieri (nume → notă, cuvânt → frecvență).</div>
 """,
     rezolvate=[
@@ -175,17 +171,16 @@ salut("Dan", mesaj="Salut")''')}
 <li>Variabilele create în funcție sunt <strong>locale</strong>. Pentru a modifica o variabilă globală se declară <code>global x</code> (de evitat; mai bine se transmit parametri și se întoarce rezultatul).</li>
 <li><strong>Transmiterea parametrilor</strong>: funcția primește referințe la obiecte. Un obiect <em>imutabil</em> (int, str, tuple) nu poate fi modificat din funcție; un obiect <em>mutabil</em> (listă, dicționar) modificat prin metode (<code>append</code>, <code>v[i] = …</code>) rămâne modificat și în apelant.</li>
 </ul>
-{C('''def f(x, v):
+{CO('''def f(x, v):
     x += 1           # x local devine alt obiect; variabila din apelant nu se schimbă
     v.append(x)      # lista este aceeași – modificarea se vede afară
 
 a, L = 5, [1]
 f(a, L)
 print(a, L)''')}
-{O("5 [1, 6]")}
 <h3>Recursivitate</h3>
 <p>O funcție recursivă se apelează pe ea însăși pentru o problemă mai mică. Obligatoriu: <strong>condiția de oprire</strong> (cazul de bază), altfel apare <code>RecursionError</code> (Python limitează adâncimea la aproximativ 1000 de apeluri).</p>
-{C('''def fact(n):
+{CO('''def fact(n):
     if n <= 1:                      # cazul de bază
         return 1
     return n * fact(n - 1)          # apel pentru o problemă mai mică
@@ -201,9 +196,8 @@ def afis(n):                        # ce se afișează înainte / după apel
     print(n, end=" ")
 
 print(fact(5), cmmdc(84, 36)); afis(3)''')}
-{O("120 12\n3 2 1 1 2 3")}
 <h3>Backtracking recursiv (capitolul 4)</h3>
-{C('''def permutari(n):
+{CO('''def permutari(n):
     x, folosit = [], [False] * (n + 1)
     def bt():
         if len(x) == n:
@@ -217,7 +211,6 @@ print(fact(5), cmmdc(84, 36)); afis(3)''')}
     bt()
 
 permutari(3)''')}
-{O("1 2 3\n1 3 2\n2 1 3\n2 3 1\n3 1 2\n3 2 1")}
 <h3>Module</h3>
 {C('''import math
 from random import randint, choice, shuffle, seed
@@ -322,7 +315,7 @@ LECTII.append(dict(
     programa="Programa 5.A: elemente de limbaj pentru operarea cu date organizate în modele mixte; capitolul 1: modelul mixt",
     obiective=["crearea corectă a unei matrice", "parcurgeri: pe linii, pe coloane, diagonale, vecini", "liste de tupluri/dicționare și sortarea cu key", "un mic Flood Fill pe matrice"],
     teorie=f"""
-{C('''n, m = 3, 4
+{CO('''n, m = 3, 4
 a = [[0] * m for _ in range(n)]        # CORECT: n liste distincte
 gresit = [[0] * m] * n                 # GREȘIT: de n ori ACEEAȘI listă
 gresit[0][0] = 5
@@ -330,9 +323,8 @@ print(gresit[1][0])                    # 5 !
 
 # citirea unei matrice: n linii cu câte m numere
 # a = [list(map(int, input().split())) for _ in range(n)]''')}
-{O("5")}
 <h3>Parcurgeri tipice (matrice pătratică n × n)</h3>
-{C('''a = [[1, 2, 3],
+{CO('''a = [[1, 2, 3],
      [4, 5, 6],
      [7, 8, 9]]
 n = len(a)
@@ -343,10 +335,9 @@ print([a[i][n - 1 - i] for i in range(n)])              # diagonala secundară
 print(list(map(list, zip(*a))))                         # transpusa
 for linie in a:
     print(*linie)''')}
-{O("[6, 15, 24]\n[12, 15, 18]\n[1, 5, 9]\n[3, 5, 7]\n[[1, 4, 7], [2, 5, 8], [3, 6, 9]]\n1 2 3\n4 5 6\n7 8 9")}
 <p>Deasupra diagonalei principale: <code>i &lt; j</code>; sub ea: <code>i &gt; j</code>. Vecinii lui (i, j): <code>(i−1, j), (i+1, j), (i, j−1), (i, j+1)</code> – verifică mereu că indicii sunt în matrice.</p>
 <h3>Liste de înregistrări</h3>
-{C('''elevi = [("Ana", "9A", 9.5), ("Dan", "9B", 8.0), ("Ioana", "9A", 9.5)]
+{CO('''elevi = [("Ana", "9A", 9.5), ("Dan", "9B", 8.0), ("Ioana", "9A", 9.5)]
 # sortare: medie descrescător, apoi nume crescător
 for nume, clasa, medie in sorted(elevi, key=lambda e: (-e[2], e[0])):
     print(nume, medie)
@@ -355,7 +346,6 @@ pe_clase = {}
 for nume, clasa, medie in elevi:
     pe_clase.setdefault(clasa, []).append(nume)
 print(pe_clase)''')}
-{O("Ana 9.5\nIoana 9.5\nDan 8.0\n{'9A': ['Ana', 'Ioana'], '9B': ['Dan']}")}
 """,
     rezolvate=[
         dict(titlu="Zone de apă (Flood Fill)", enunt="Într-o hartă, <code>#</code> este uscat și <code>.</code> este apă. Numără lacurile (zone de apă vecine pe orizontală/verticală).",

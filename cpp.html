@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>C++ de la zero – curs pentru titularizare | Catalog360.ro</title>
+<meta name="description" content="Limbajul C++ pentru titularizarea la Informatică: tipuri, instrucțiuni, tablouri, string, struct, fișiere, pointeri, clase și moștenire – cu exemple compilate și exerciții de tip „ce afișează”.">
+<link rel="canonical" href="https://catalog360.ro/cpp">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0F2D44">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:site_name" content="Catalog360.ro">
+<meta property="og:title" content="C++ de la zero – curs pentru titularizare | Catalog360.ro">
+<meta property="og:url" content="https://catalog360.ro/cpp">
+<link rel="icon" href="assets/logo-catalog360.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --navy:#0F2D44; --navy-3:#24506F; --paper:#FAF8F5; --paper-2:#F3EFE8; --white:#FFFFFF;
+  --ink:#0F2D44; --muted:#51667A; --line:#E4DED4;
+  --mint:#22C55E; --mint-ink:#15803D; --mint-soft:#E7F7EC;
+  --orange-ink:#9A5B00; --orange-soft:#FEF3DC; --red-ink:#B42318; --red-soft:#FDECEA;
+  --code-bg:#0E2233; --code-ink:#E6EDF3;
+  --serif:"Playfair Display", Georgia, serif;
+  --sans:"Manrope", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Consolas, monospace;
+  --r-sm:10px; --r:16px; --r-lg:24px; --wrap:1240px; --gutter:clamp(16px, 4vw, 40px);
+  color-scheme: light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-padding-top:130px}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--mint); outline-offset:3px; border-radius:6px}
+.wrap{max-width:var(--wrap); margin-inline:auto; padding-inline:var(--gutter)}
+.skip{position:absolute; left:-999px; top:8px; background:var(--navy); color:#fff; padding:10px 16px; border-radius:8px; z-index:100}
+.skip:focus{left:16px}
+h1,h2,h3,h4{font-family:var(--serif); font-weight:600; line-height:1.15; letter-spacing:-.01em; margin:0; text-wrap:balance}
+h1{font-size:clamp(2.2rem, 5vw, 3.6rem)}
+h2{font-size:clamp(1.6rem, 3vw, 2.2rem)}
+h3{font-size:1.25rem; margin:28px 0 10px}
+h4{font-family:var(--sans); font-size:1rem; font-weight:800; margin:18px 0 6px}
+p{margin:0 0 12px} ul,ol{margin:0 0 12px; padding-left:1.3em} li{margin-bottom:4px} li::marker{color:var(--mint-ink)}
+.eyebrow{font-size:.78rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--mint-ink); margin:0}
+.lede{font-size:clamp(1.02rem, 1.5vw, 1.15rem); color:var(--muted); max-width:70ch}
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:44px; padding:0 18px; border-radius:999px; font:700 .94rem var(--sans); text-decoration:none; border:2px solid transparent; cursor:pointer; transition:background-color .2s, color .2s}
+.btn-primary{background:var(--mint); color:var(--navy)}
+.btn-primary:hover{background:#2FD46B}
+.btn-ghost{border-color:var(--navy); color:var(--navy); background:transparent}
+.btn-ghost:hover{background:var(--navy); color:#fff}
+.btn-link{background:none; color:var(--navy-3); padding:0 10px; text-decoration:underline; text-underline-offset:3px}
+.btn:disabled{opacity:.6; cursor:wait}
+
+.site-header{position:sticky; top:0; z-index:50; background:rgba(250,248,245,.94); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid var(--line)}
+.nav{display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:70px}
+.brand-mark{display:block; width:180px; height:36px; overflow:hidden}
+.brand-mark img{width:180px; max-width:none; height:auto; transform:translateY(-12px)}
+.nav-right{display:flex; align-items:center; gap:14px; font-size:.9rem; font-weight:700}
+.nav-right a{text-decoration:none}
+.prog{display:flex; align-items:center; gap:8px; color:var(--muted)}
+.prog .track{width:110px; height:8px; border-radius:4px; background:var(--paper-2); border:1px solid var(--line); overflow:hidden}
+.prog .track i{display:block; height:100%; width:0; background:var(--mint); transition:width .3s}
+.show-s{display:none}
+@media (max-width:640px){ .hide-s{display:none} .show-s{display:inline} .prog .track, .prog .lbl{display:none} .brand-mark{width:150px; height:30px} .brand-mark img{width:150px; transform:translateY(-10px)} }
+
+.hero{padding-block:clamp(32px, 5vw, 64px) 28px}
+.hero-copy{display:grid; gap:16px}
+.hero-copy > *{max-width:900px}
+.hero h1 em{font-style:italic; color:var(--mint-ink)}
+.stats{display:flex; flex-wrap:wrap; gap:10px; margin-top:4px}
+.stats span{background:var(--white); border:1px solid var(--line); border-radius:999px; padding:6px 14px; font-size:.88rem; font-weight:700}
+.stats b{color:var(--mint-ink)}
+
+.layout{display:grid; grid-template-columns:270px minmax(0,1fr); gap:clamp(20px, 3vw, 40px); align-items:start; padding-bottom:72px}
+.toc{position:sticky; top:128px; max-height:calc(100vh - 142px); overflow:auto; background:var(--white); border:1px solid var(--line); border-radius:var(--r); padding:14px 10px; font-size:.9rem}
+.toc h2{font-family:var(--sans); font-size:.72rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:4px 10px 8px}
+.toc ol{list-style:none; margin:0; padding:0; display:grid; gap:2px}
+.toc li{margin:0}
+.toc a{display:grid; grid-template-columns:28px 1fr auto; gap:6px; align-items:start; padding:7px 10px; border-radius:8px; text-decoration:none; font-weight:600; line-height:1.35}
+.toc a:hover{background:var(--paper-2)}
+.toc a.on{background:var(--navy); color:#fff}
+.toc a.on .n{color:var(--mint)}
+.toc .n{font-weight:800; color:var(--mint-ink); font-variant-numeric:tabular-nums}
+.toc .cnt{font-size:.74rem; font-weight:800; color:var(--muted); padding-top:2px}
+.toc a.on .cnt{color:rgba(255,255,255,.7)}
+.toc a.done .cnt::after{content:" ✓"; color:var(--mint-ink)}
+.toc a.on.done .cnt::after{color:var(--mint)}
+@media (max-width:1000px){
+  .layout{grid-template-columns:minmax(0,1fr)}
+  .toc{position:static; max-height:none}
+  .toc ol{grid-template-columns:repeat(auto-fill, minmax(min(220px,100%),1fr))}
+}
+
+.lesson{background:var(--white); border:1px solid var(--line); border-radius:var(--r-lg); padding:clamp(18px, 3.5vw, 40px)}
+.js .lesson:not(.show){display:none}
+.les-head{display:grid; grid-template-columns:auto 1fr; gap:16px; align-items:start; padding-bottom:18px; margin-bottom:18px; border-bottom:1px solid var(--line)}
+.les-nr{width:54px; height:54px; border-radius:16px; background:var(--navy); color:#fff; display:grid; place-items:center; font:600 1.5rem var(--serif)}
+.les-prog{font-size:.86rem; color:var(--muted); margin:6px 0 0}
+.obj{background:var(--mint-soft); border-radius:var(--r-sm); padding:14px 18px; margin-bottom:8px}
+.obj h3{margin:0 0 6px; font-size:1.05rem}
+.obj ul{margin:0}
+h3.sec{font-size:1.45rem; margin-top:40px; padding-top:20px; border-top:1px solid var(--line)}
+.hint{font-size:.93rem; color:var(--muted)}
+.note{background:var(--mint-soft); border-radius:var(--r-sm); padding:12px 16px; margin:12px 0; font-size:.95rem}
+.note.warn{background:var(--orange-soft)}
+.tbl{overflow-x:auto; margin:10px 0 16px; border:1px solid var(--line); border-radius:var(--r-sm)}
+table{width:100%; border-collapse:collapse; font-size:.92rem; min-width:520px}
+th,td{text-align:left; padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top}
+th{background:var(--paper-2); font-weight:800; font-size:.84rem}
+tr:last-child td{border-bottom:0}
+td code{white-space:nowrap}
+p code, li code, legend code{overflow-wrap:anywhere}
+code{font-family:var(--mono); font-size:.86em; background:var(--paper-2); padding:1px 6px; border-radius:5px}
+pre{position:relative; background:var(--code-bg); color:var(--code-ink); border-radius:12px; padding:14px 16px; overflow-x:auto; font-size:.86rem; line-height:1.55; margin:8px 0 12px}
+pre code{background:none; padding:0; color:inherit; font-size:inherit; white-space:pre}
+pre[data-lang]::before{content:attr(data-lang); position:absolute; top:7px; right:12px; font:800 .66rem var(--sans); letter-spacing:.1em; text-transform:uppercase; color:rgba(230,237,243,.5)}
+pre.out{background:var(--paper-2); color:var(--ink); border:1px dashed #CFC6B8}
+pre.out::before{color:var(--muted)}
+.io-lbl{font-size:.8rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); margin:10px 0 2px}
+.io-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(min(220px,100%),1fr)); gap:0 14px}
+.io-grid .io-lbl{margin-top:2px}
+.io-grid pre::before{display:none}
+
+.ex{border:1px solid var(--line); border-radius:var(--r); padding:16px 18px; margin:14px 0; background:#FFFEFC}
+.ex-h{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:8px}
+.ex-h b{font-size:.78rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--mint-ink)}
+.ex-h span{font-weight:700}
+.ex-h .lvl{font-size:.7rem; font-weight:800; padding:2px 8px; border-radius:999px; background:var(--paper-2); color:var(--muted)}
+.ex-h .st{margin-left:auto; font-size:.8rem; font-weight:800; color:var(--mint-ink)}
+.ex.ok{border-color:var(--mint); box-shadow:0 0 0 3px var(--mint-soft)}
+.ide{margin-top:12px}
+.ide textarea{display:block; width:100%; min-height:190px; resize:vertical; font:15px/1.55 var(--mono); tab-size:4; color:var(--code-ink); background:var(--code-bg); border:0; border-radius:12px; padding:14px 16px; white-space:pre; overflow:auto}
+.ide textarea:focus{outline:3px solid var(--mint); outline-offset:2px}
+.ide-bar{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; align-items:center}
+.stdin{margin-top:10px}
+.stdin summary{cursor:pointer; font-size:.88rem; font-weight:700; color:var(--navy-3)}
+.stdin textarea{display:block; width:100%; min-height:70px; margin-top:6px; font:14px/1.5 var(--mono); border:1.5px solid var(--line); border-radius:10px; padding:10px 12px; background:var(--paper); color:var(--ink); resize:vertical}
+.res{margin-top:12px; border-radius:12px; padding:12px 14px; font-size:.92rem; background:var(--paper-2)}
+.res.good{background:var(--mint-soft)}
+.res.bad{background:var(--red-soft)}
+.res h4{margin:0 0 6px}
+.res pre{margin:6px 0}
+.res .tests{display:flex; flex-wrap:wrap; gap:6px; margin:6px 0}
+.res .tests span{font-size:.78rem; font-weight:800; padding:3px 9px; border-radius:999px; background:var(--white)}
+.res .tests .p{color:var(--mint-ink)} .res .tests .f{color:var(--red-ink)}
+.cmp{display:grid; grid-template-columns:repeat(auto-fit, minmax(min(200px,100%),1fr)); gap:10px}
+
+.quiz{background:var(--paper); border:1px solid var(--line); border-radius:var(--r); padding:16px 18px; margin-top:32px}
+.quiz > h3{margin:0; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; align-items:baseline}
+.quiz .score{font:700 .86rem var(--sans); color:var(--muted)}
+.q{border:0; padding:0; margin:16px 0 0; min-width:0} .q legend{font-weight:700; padding:0; margin-bottom:8px; display:block; width:100%; max-width:100%}
+.q legend pre{font-weight:400}
+select{max-width:100%}
+.opts{display:grid; gap:8px}
+.opts button{font:inherit; font-size:.94rem; text-align:left; background:var(--white); border:1.5px solid var(--line); border-radius:10px; padding:9px 14px; cursor:pointer; color:var(--ink)}
+.opts button:hover:not(:disabled){border-color:var(--navy)}
+.opts button:disabled{cursor:default}
+.opts button.right{background:var(--mint-soft); border-color:var(--mint); font-weight:700}
+.opts button.wrong{background:var(--red-soft); border-color:#E8A39B}
+.q .why{margin-top:8px; font-size:.9rem; color:var(--muted)}
+.done-row{display:flex; justify-content:flex-end; margin-top:24px}
+.done-toggle{display:inline-flex; align-items:center; gap:10px; font-weight:700; font-size:.94rem; cursor:pointer; padding:9px 16px; border-radius:999px; border:1.5px solid var(--line); background:var(--white)}
+.done-toggle input{width:18px; height:18px; accent-color:var(--mint-ink)}
+.pn{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-top:18px; padding-top:18px; border-top:1px solid var(--line)}
+.pn .btn{white-space:normal; text-align:center; min-height:44px; padding-block:6px}
+
+.site-footer{background:#0B2335; color:rgba(255,255,255,.75); padding-block:36px 24px; font-size:.92rem}
+.site-footer a{text-decoration:none} .site-footer a:hover{color:#fff; text-decoration:underline}
+.foot-row{display:flex; flex-wrap:wrap; justify-content:space-between; gap:16px; align-items:center}
+.footer-brand-surface{display:inline-flex; background:#fff; border-radius:12px; padding:8px 12px}
+
+.site-nav{background:var(--navy)}
+.site-nav ul{list-style:none; margin:0; padding:0; display:flex; gap:4px; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch}
+.site-nav ul::-webkit-scrollbar{display:none}
+.site-nav li{margin:0; flex:none}
+.site-nav a{display:block; padding:10px 12px; color:rgba(255,255,255,.82); text-decoration:none; font-size:.88rem; font-weight:700; white-space:nowrap; border-bottom:3px solid transparent}
+.site-nav a:hover{color:#fff}
+.site-nav a[aria-current="page"]{color:#fff; border-bottom-color:var(--mint)}
+.ex.app textarea.ans{display:block; width:100%; min-height:120px; margin-top:12px; font:15px/1.55 var(--sans); border:1.5px solid var(--line); border-radius:12px; padding:12px 14px; background:var(--paper); color:var(--ink); resize:vertical}
+.ex.app textarea.ans:focus{outline:3px solid var(--mint); outline-offset:2px}
+details.sol{margin-top:12px}
+details.sol summary{cursor:pointer; display:inline-flex; font-weight:700; font-size:.92rem; color:var(--navy); padding:8px 14px; border-radius:999px; border:1.5px solid var(--navy); list-style:none}
+details.sol summary::-webkit-details-marker{display:none}
+details.sol[open] summary, details.sol summary:hover{background:var(--navy); color:#fff}
+details.sol .body{margin-top:12px; padding-top:12px; border-top:1px dashed var(--line)}
+.crit{display:grid; gap:6px; margin-top:12px; padding:12px 14px; background:var(--paper); border-radius:12px}
+.crit label{display:flex; gap:10px; align-items:flex-start; font-size:.94rem; cursor:pointer}
+.crit input{margin-top:5px; width:16px; height:16px; accent-color:var(--mint-ink); flex:none}
+.done-toggle.sm{font-size:.86rem; padding:6px 12px; margin-top:10px}
+.ex.app.ok{border-color:var(--mint); box-shadow:0 0 0 3px var(--mint-soft)}
+.lesson table + p, .lesson .tbl + p{margin-top:4px}
+</style>
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="./" aria-label="Catalog360.ro – titularizare Informatică și TIC"><span class="brand-mark"><img src="assets/logo-catalog360.png" alt="Catalog360.ro" width="2172" height="724"></span></a>
+    <div class="nav-right">
+      <span class="prog" aria-live="polite"><span class="lbl">Exerciții rezolvate</span><span class="track" aria-hidden="true"><i id="progBar"></i></span><span id="progTxt">0/15</span></span>
+    </div>
+  </div>
+<nav class="site-nav" aria-label="Secțiuni"><div class="wrap"><ul><li><a href="./">Acasă</a></li><li><a href="python">1. Python</a></li><li><a href="algoritmi">2. Algoritmi</a></li><li><a href="cpp" aria-current="page">3. C++</a></li><li><a href="metodica">4. Metodică</a></li><li><a href="programa">5. Programa (TIC, BD, IA…)</a></li><li><a href="teste">Teste</a></li></ul></div></nav><script>(function(){var a=document.querySelector('.site-nav a[aria-current]');if(a&&a.parentNode.parentNode.scrollWidth>a.parentNode.parentNode.clientWidth)a.parentNode.parentNode.scrollLeft=a.offsetLeft-16;})();</script>
+</header>
+<main id="continut">
+<section class="hero">
+  <div class="wrap hero-copy">
+    <p class="eyebrow">Etapa 3 · Programare · Programa, capitolul 5.B</p>
+    <h1>C++ <em>de la zero</em></h1>
+    <p class="lede">Limbajul C++ așa cum îl cere programa, explicat prin comparație cu Python: sintaxă, tablouri, string, struct, fișiere, pointeri și programare orientată pe obiecte. Fiecare exemplu a fost compilat și rulat.</p>
+    <div class="stats"><span><b>10</b> lecții</span><span><b>15</b> aplicații cu rezolvare-model</span><span><b>40</b> întrebări de test</span></div>
+    <p class="hint">C++ nu rulează în pagină: exersează în Code::Blocks, Visual Studio sau un compilator online, apoi compară cu rezolvarea-model. Testele grilă de tip „ce afișează” se corectează imediat.</p>
+  </div>
+</section>
+<div class="wrap layout">
+  <nav class="toc" aria-label="Lecții"><h2>Lecții</h2><ol>
+<li><a href="#c1"><span class="n">1</span><span>De la Python la C++</span><span class="cnt" data-cnt="c1">0/2</span></a></li>
+<li><a href="#c2"><span class="n">2</span><span>Instrucțiuni de control</span><span class="cnt" data-cnt="c2">0/2</span></a></li>
+<li><a href="#c3"><span class="n">3</span><span>Tablouri</span><span class="cnt" data-cnt="c3">0/2</span></a></li>
+<li><a href="#c4"><span class="n">4</span><span>Funcții și recursivitate</span><span class="cnt" data-cnt="c4">0/2</span></a></li>
+<li><a href="#c5"><span class="n">5</span><span>Clasa string</span><span class="cnt" data-cnt="c5">0/2</span></a></li>
+<li><a href="#c6"><span class="n">6</span><span>struct și date mixte</span><span class="cnt" data-cnt="c6">0/1</span></a></li>
+<li><a href="#c7"><span class="n">7</span><span>Fișiere text</span><span class="cnt" data-cnt="c7">0/1</span></a></li>
+<li><a href="#c8"><span class="n">8</span><span>Pointeri și memorie dinamică</span><span class="cnt" data-cnt="c8">0/1</span></a></li>
+<li><a href="#c9"><span class="n">9</span><span>Clase și obiecte</span><span class="cnt" data-cnt="c9">0/1</span></a></li>
+<li><a href="#c10"><span class="n">10</span><span>Moștenire și polimorfism</span><span class="cnt" data-cnt="c10">0/1</span></a></li>
+  </ol></nav>
+  <div class="lessons">
+<section class="lesson" id="c1" aria-labelledby="c1-t"><div class="les-head"><span class="les-nr">1</span><div><h2 id="c1-t">De la Python la C++: structura programului, tipuri, citire și afișare</h2><p class="les-prog">Programa 5.B: sintaxă, medii de programare, vocabular, identificatori, constante, tipuri de date simple, variabile, operatori, structura programelor, comentarii, expresii, citire/scriere</p></div></div>
+<div class="obj"><h3>La finalul lecției vei ști</h3><ul><li>cum arată, se compilează și se rulează un program C++</li><li>tipurile simple și declararea variabilelor</li><li>cin și cout</li><li>diferențele de operatori față de Python (/, %, ++, conversii)</li></ul></div>
+
+<p>C++ este un limbaj <strong>compilat</strong>: compilatorul (g++, MSVC) transformă sursa <code>.cpp</code> într-un executabil; erorile de sintaxă și de tip apar înainte de rulare. Medii uzuale: Code::Blocks, Visual Studio, Dev-C++, VS Code + compilator.</p>
+<pre data-lang="c++"><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {                 // execuția începe în funcția main
+    int n;                   // variabilele se declară cu tip
+    cin &gt;&gt; n;                // citire de la tastatură
+    cout &lt;&lt; "Patratul lui " &lt;&lt; n &lt;&lt; " este " &lt;&lt; n * n &lt;&lt; endl;
+    return 0;                // 0 = program încheiat cu succes
+}</code></pre><pre class="out" data-lang="intrare"><code>7</code></pre><pre class="out" data-lang="ieșire"><code>Patratul lui 7 este 49</code></pre>
+<div class="tbl"><table><tr><th></th><th>Python</th><th>C++</th></tr><tr><td>blocuri</td><td>indentare</td><td>acolade <code>{ }</code>; instrucțiunile se termină cu <code>;</code></td></tr><tr><td>variabile</td><td>fără tip declarat</td><td><code>int x = 5; double y; char c = 'a'; bool ok = true;</code></td></tr><tr><td>întregi</td><td>precizie nelimitată</td><td><code>int</code> (de regulă 4 octeți, ±2·10⁹), <code>long long</code> (8 octeți, ±9·10¹⁸); depășirea nu este semnalată</td></tr><tr><td>împărțire</td><td><code>7 / 2 == 3.5</code>, <code>7 // 2 == 3</code></td><td>între întregi <code>7 / 2 == 3</code>; <code>7 / 2.0 == 3.5</code></td></tr><tr><td>negative</td><td><code>-7 // 2 == -4</code>, <code>-7 % 3 == 2</code></td><td><code>-7 / 2 == -3</code> (trunchiere spre 0), <code>-7 % 3 == -1</code></td></tr><tr><td>incrementare</td><td><code>x += 1</code></td><td><code>x++</code>, <code>++x</code>, <code>x += 1</code></td></tr><tr><td>logici</td><td><code>and or not</code></td><td><code>&amp;&amp; || !</code></td></tr><tr><td>conversie</td><td><code>int(x)</code></td><td><code>(int)x</code>, <code>(double)a / b</code></td></tr><tr><td>afișare</td><td><code>print(a, b)</code></td><td><code>cout &lt;&lt; a &lt;&lt; ' ' &lt;&lt; b &lt;&lt; '\n';</code></td></tr></table></div>
+<pre data-lang="c++"><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a = 7, b = 2;
+    cout &lt;&lt; a / b &lt;&lt; " " &lt;&lt; a % b &lt;&lt; " " &lt;&lt; (double)a / b &lt;&lt; "\n";
+    cout &lt;&lt; -7 / 2 &lt;&lt; " " &lt;&lt; -7 % 3 &lt;&lt; "\n";
+    int x = 5;
+    int y = x++;             // y primește 5, apoi x devine 6 (postincrementare)
+    int z = ++x;             // x devine 7, apoi z primește 7 (preincrementare)
+    cout &lt;&lt; x &lt;&lt; " " &lt;&lt; y &lt;&lt; " " &lt;&lt; z &lt;&lt; "\n";
+    char c = 'A' + 2;        // caracterele sunt coduri numerice
+    cout &lt;&lt; c &lt;&lt; " " &lt;&lt; (int)c &lt;&lt; "\n";
+    return 0;
+}</code></pre><pre class="out" data-lang="ieșire"><code>3 1 3.5
+-3 -1
+7 5 7
+C 67</code></pre>
+
+<h3 class="sec">Aplicații</h3><p class="hint">Rezolvă în scris (în caseta de mai jos sau pe hârtie), apoi deschide rezolvarea-model și bifează criteriile pe care le îndeplinește răspunsul tău.</p>
+<div class="ex app" id="c1-e1" data-app="c1-e1"><div class="ex-h"><b>Aplicația 1.1</b><span>Media a trei note</span><span class="lvl">ușor</span><span class="st" aria-live="polite"></span></div><div><p>Scrie un program C++ care citește trei note întregi și afișează media cu exact două zecimale. Indiciu: <code>#include &lt;iomanip&gt;</code>, apoi <code>cout &lt;&lt; fixed &lt;&lt; setprecision(2)</code>.</p></div><textarea class="ans" placeholder="Scrie aici răspunsul tău (se salvează doar în acest browser)" aria-label="Răspunsul tău la aplicația 1.1"></textarea><details class="sol"><summary>Vezi rezolvarea-model</summary><div class="body"><pre data-lang="c++"><code>#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+using namespace std;
+
+int main() {
+    int a, b, c;
+    cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;
+    double m = (a + b + c) / 3.0;      // 3.0, ca împărțirea să fie reală
+    cout &lt;&lt; fixed &lt;&lt; setprecision(2) &lt;&lt; m &lt;&lt; "\n";
+    return 0;
+}</code></pre><p class="io-lbl">Date de intrare</p><pre class="out" data-lang="intrare"><code>9 10 8</code></pre><p class="io-lbl">Se afișează</p><pre class="out" data-lang="ieșire"><code>9.00</code></pre><div class="crit"><p class="io-lbl">Autoevaluare – bifează ce ai în răspunsul tău</p><label><input type="checkbox"> am inclus bibliotecile necesare și am scris funcția main</label><label><input type="checkbox"> am declarat variabilele cu tipuri potrivite</label><label><input type="checkbox"> am evitat împărțirea întreagă (3.0 sau conversie)</label><label><input type="checkbox"> am afișat cu două zecimale</label></div></div></details><div class="ide-bar"><label class="done-toggle sm"><input type="checkbox" class="app-ok"> Am rezolvat și am verificat</label></div></div>
+<div class="ex app" id="c1-e2" data-app="c1-e2"><div class="ex-h"><b>Aplicația 1.2</b><span>Interschimbare și ultima cifră</span><span class="lvl">ușor</span><span class="st" aria-live="polite"></span></div><div><p>Citește două numere naturale a și b. Interschimbă valorile lor folosind o variabilă auxiliară, apoi afișează a, b și suma ultimelor lor cifre.</p></div><textarea class="ans" placeholder="Scrie aici răspunsul tău (se salvează doar în acest browser)" aria-label="Răspunsul tău la aplicația 1.2"></textarea><details class="sol"><summary>Vezi rezolvarea-model</summary><div class="body"><pre data-lang="c++"><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a, b, aux;
+    cin &gt;&gt; a &gt;&gt; b;
+    aux = a; a = b; b = aux;
+    cout &lt;&lt; a &lt;&lt; " " &lt;&lt; b &lt;&lt; " " &lt;&lt; a % 10 + b % 10 &lt;&lt; "\n";
+    return 0;
+}</code></pre><p class="io-lbl">Date de intrare</p><pre class="out" data-lang="intrare"><code>123 45</code></pre><p class="io-lbl">Se afișează</p><pre class="out" data-lang="ieșire"><code>45 123 8</code></pre><div class="crit"><p class="io-lbl">Autoevaluare – bifează ce ai în răspunsul tău</p><label><input type="checkbox"> interschimbarea folosește trei atribuiri</label><label><input type="checkbox"> ultima cifră se obține cu % 10</label><label><input type="checkbox"> afișarea are separatori între valori</label></div></div></details><div class="ide-bar"><label class="done-toggle sm"><input type="checkbox" class="app-ok"> Am rezolvat și am verificat</label></div></div>
+<div class="quiz" data-quiz><h3>Test de verificare <span class="score"></span></h3><fieldset class="q" data-a="1"><legend>1. Ce afișează secvența?<pre data-lang="c++"><code>int a = 17, b = 5;
+cout &lt;&lt; a / b &lt;&lt; " " &lt;&lt; a % b;</code></pre></legend><div class="opts"><button type="button">3.4 2</button><button type="button">3 2</button><button type="button">3 2.0</button><button type="button">4 2</button></div><p class="why" hidden>Împărțirea între întregi dă câtul.</p></fieldset><fieldset class="q" data-a="0"><legend>2. Ce afișează secvența?<pre data-lang="c++"><code>int x = 3;
+int y = x++ + 2;
+cout &lt;&lt; x &lt;&lt; " " &lt;&lt; y;</code></pre></legend><div class="opts"><button type="button">4 5</button><button type="button">4 6</button><button type="button">3 5</button><button type="button">3 6</button></div><p class="why" hidden>x++ folosește valoarea veche (3), apoi x devine 4.</p></fieldset><fieldset class="q" data-a="0"><legend>3. Ce afișează secvența?<pre data-lang="c++"><code>cout &lt;&lt; -9 / 4 &lt;&lt; " " &lt;&lt; -9 % 4;</code></pre></legend><div class="opts"><button type="button">-2 -1</button><button type="button">-3 3</button><button type="button">-2 1</button><button type="button">-3 -1</button></div><p class="why" hidden>Trunchiere spre 0; restul are semnul deîmpărțitului.</p></fieldset><fieldset class="q" data-a="1"><legend>4. Ce tip folosești pentru un produs care poate ajunge la 10¹⁵?</legend><div class="opts"><button type="button">int</button><button type="button">long long</button><button type="button">char</button><button type="button">bool</button></div><p class="why" hidden>int are aproximativ ±2·10⁹.</p></fieldset><fieldset class="q" data-a="1"><legend>5. Unde începe execuția unui program C++?</legend><div class="opts"><button type="button">la prima linie</button><button type="button">în funcția main</button><button type="button">la primul #include</button><button type="button">în prima funcție definită</button></div><p class="why" hidden>main este punctul de intrare.</p></fieldset></div>
+<div class="done-row"><label class="done-toggle"><input type="checkbox" data-done="c1"> Am terminat lecția</label></div><nav class="pn"><span></span><a href="#c2" class="btn btn-primary">2. Instrucțiuni de control →</a></nav></section>
+<section class="lesson" id="c2" aria-labelledby="c2-t"><div class="les-head"><span class="les-nr">2</span><div><h2 id="c2-t">Instrucțiunile C++: if, switch, while, do-while, for</h2><p class="les-prog">Programa 5.B: instrucțiuni; cap. 2: structuri fundamentale</p></div></div>
+<div class="obj"><h3>La finalul lecției vei ști</h3><ul><li>if/else și operatorul condițional</li><li>switch cu break</li><li>cele trei bucle și diferența dintre while și do-while</li><li>capcanele frecvente: = în loc de ==, ; după if/for, acoladele lipsă</li></ul></div>
+
+<pre data-lang="c++"><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int n = 2026, s = 0;
+    while (n &gt; 0) {              // test inițial: se poate să nu se execute deloc
+        s += n % 10;
+        n /= 10;
+    }
+    cout &lt;&lt; "suma cifrelor: " &lt;&lt; s &lt;&lt; "\n";
+
+    int k = 0;
+    do {                         // test final: corpul se execută cel puțin o dată
+        k++;
+    } while (k &lt; 0);
+    cout &lt;&lt; "k = " &lt;&lt; k &lt;&lt; "\n";
+
+    for (int i = 1; i &lt;= 10; i += 3)   // inițializare; condiție; pas
+        cout &lt;&lt; i &lt;&lt; " ";
+    cout &lt;&lt; "\n";
+
+    int zi = 3;
+    switch (zi) {
+        case 1: cout &lt;&lt; "luni"; break;
+        case 2: cout &lt;&lt; "marti"; break;
+        case 3: cout &lt;&lt; "miercuri"; break;
+        default: cout &lt;&lt; "alta zi";
+    }
+    cout &lt;&lt; "\n" &lt;&lt; (s % 2 == 0 ? "suma para" : "suma impara") &lt;&lt; "\n";
+    return 0;
+}</code></pre><pre class="out" data-lang="ieșire"><code>suma cifrelor: 10
+k = 1
+1 4 7 10 
+miercuri
+suma para</code></pre>
+<div class="note warn"><b>Capcane:</b> <code>if (x = 5)</code> atribuie și este mereu adevărat (compilează!); <code>for (...);</code> cu <code>;</code> are corp vid; fără acolade, doar prima instrucțiune aparține lui <code>if</code>/<code>for</code>; fără <code>break</code>, <code>switch</code> continuă în cazurile următoare (fall-through).</div>
+
+<h3 class="sec">Aplicații</h3><p class="hint">Rezolvă în scris (în caseta de mai jos sau pe hârtie), apoi deschide rezolvarea-model și bifează criteriile pe care le îndeplinește răspunsul tău.</p>
+<div class="ex app" id="c2-e1" data-app="c2-e1"><div class="ex-h"><b>Aplicația 2.1</b><span>Numere prime într-un interval</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><div><p>Citește a și b. Afișează numerele prime din [a, b] și câte sunt, folosind o variabilă de tip <code>bool</code> și testul până la √x (<code>d * d &lt;= x</code>).</p></div><textarea class="ans" placeholder="Scrie aici răspunsul tău (se salvează doar în acest browser)" aria-label="Răspunsul tău la aplicația 2.1"></textarea><details class="sol"><summary>Vezi rezolvarea-model</summary><div class="body"><pre data-lang="c++"><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int a, b, cnt = 0;
+    cin &gt;&gt; a &gt;&gt; b;
+    for (int x = a; x &lt;= b; x++) {
+        bool prim = x &gt;= 2;
+        for (int d = 2; d * d &lt;= x &amp;&amp; prim; d++)
+            if (x % d == 0) prim = false;
+        if (prim) { cout &lt;&lt; x &lt;&lt; " "; cnt++; }
+    }
+    cout &lt;&lt; "\n" &lt;&lt; cnt &lt;&lt; "\n";
+    return 0;
+}</code></pre><p class="io-lbl">Date de intrare</p><pre class="out" data-lang="intrare"><code>10 30</code></pre><p class="io-lbl">Se afișează</p><pre class="out" data-lang="ieșire"><code>11 13 17 19 23 29 
+6</code></pre><div class="crit"><p class="io-lbl">Autoevaluare – bifează ce ai în răspunsul tău</p><label><input type="checkbox"> tratez corect 0 și 1</label><label><input type="checkbox"> testez divizorii doar până la √x</label><label><input type="checkbox"> opresc testarea la primul divizor găsit</label><label><input type="checkbox"> număr și afișez corect</label></div></div></details><div class="ide-bar"><label class="done-toggle sm"><input type="checkbox" class="app-ok"> Am rezolvat și am verificat</label></div></div>
+<div class="ex app" id="c2-e2" data-app="c2-e2"><div class="ex-h"><b>Aplicația 2.2</b><span>Meniu cu switch</span><span class="lvl">ușor</span><span class="st" aria-live="polite"></span></div><div><p>Citește un caracter <code>+ - * /</code> și două numere întregi; afișează rezultatul operației folosind <code>switch</code>. La împărțire cu 0 afișează <code>imposibil</code>; la alt caracter, <code>operatie necunoscuta</code>.</p></div><textarea class="ans" placeholder="Scrie aici răspunsul tău (se salvează doar în acest browser)" aria-label="Răspunsul tău la aplicația 2.2"></textarea><details class="sol"><summary>Vezi rezolvarea-model</summary><div class="body"><pre data-lang="c++"><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    char op; int a, b;
+    cin &gt;&gt; op &gt;&gt; a &gt;&gt; b;
+    switch (op) {
+        case '+': cout &lt;&lt; a + b; break;
+        case '-': cout &lt;&lt; a - b; break;
+        case '*': cout &lt;&lt; a * b; break;
+        case '/':
+            if (b == 0) cout &lt;&lt; "imposibil";
+            else cout &lt;&lt; (double)a / b;
+            break;
+        default: cout &lt;&lt; "operatie necunoscuta";
+    }
+    cout &lt;&lt; "\n";
+    return 0;
+}</code></pre><p class="io-lbl">Date de intrare</p><pre class="out" data-lang="intrare"><code>/ 7 2</code></pre><p class="io-lbl">Se afișează</p><pre class="out" data-lang="ieșire"><code>3.5</code></pre><div class="crit"><p class="io-lbl">Autoevaluare – bifează ce ai în răspunsul tău</p><label><input type="checkbox"> fiecare case se încheie cu break</label><label><input type="checkbox"> împărțirea la zero este tratată</label><label><input type="checkbox"> împărțirea dă rezultat real</label><label><input type="checkbox"> există ramura default</label></div></div></details><div class="ide-bar"><label class="done-toggle sm"><input type="checkbox" class="app-ok"> Am rezolvat și am verificat</label></div></div>
+<div class="quiz" data-quiz><h3>Test de verificare <span class="score"></span></h3><fieldset class="q" data-a="2"><legend>1. Ce afișează secvența?<pre data-lang="c++"><code>int x = 2;
+switch (x) {
+    case 1: cout &lt;&lt; "A";
+    case 2: cout &lt;&lt; "B";
+    case 3: cout &lt;&lt; "C";
+    default: cout &lt;&lt; "D";
+}</code></pre></legend><div class="opts"><button type="button">B</button><button type="button">BC</button><button type="button">BCD</button><button type="button">D</button></div><p class="why" hidden>Fără break, execuția continuă în cazurile următoare.</p></fieldset><fieldset class="q" data-a="1"><legend>2. Ce afișează secvența?<pre data-lang="c++"><code>int i = 10;
+do {
+    cout &lt;&lt; i &lt;&lt; " ";
+    i++;
+} while (i &lt; 5);</code></pre></legend><div class="opts"><button type="button">nimic</button><button type="button">10</button><button type="button">10 11</button><button type="button">eroare</button></div><p class="why" hidden>do-while execută corpul o dată înainte de test.</p></fieldset><fieldset class="q" data-a="1"><legend>3. Ce afișează secvența?<pre data-lang="c++"><code>int s = 0;
+for (int i = 1; i &lt;= 5; i++);
+    s++;
+cout &lt;&lt; s;</code></pre></legend><div class="opts"><button type="button">5</button><button type="button">1</button><button type="button">0</button><button type="button">6</button></div><p class="why" hidden>; după for face corpul vid; s++ se execută o singură dată.</p></fieldset><fieldset class="q" data-a="1"><legend>4. Ce afișează secvența?<pre data-lang="c++"><code>int x = 0;
+if (x = 3) cout &lt;&lt; "DA " &lt;&lt; x;
+else cout &lt;&lt; "NU";</code></pre></legend><div class="opts"><button type="button">NU</button><button type="button">DA 3</button><button type="button">DA 0</button><button type="button">eroare de compilare</button></div><p class="why" hidden>x = 3 este o atribuire, iar valoarea 3 este adevărată.</p></fieldset><fieldset class="q" data-a="2"><legend>5. Ce buclă se execută cel puțin o dată?</legend><div class="opts"><button type="button">while</button><button type="button">for</button><button type="button">do-while</button><button type="button">niciuna</button></div><p class="why" hidden>Testul este la final.</p></fieldset></div>
+<div class="done-row"><label class="done-toggle"><input type="checkbox" data-done="c2"> Am terminat lecția</label></div><nav class="pn"><a href="#c1" class="btn btn-ghost">← 1. De la Python la C++</a><a href="#c3" class="btn btn-primary">3. Tablouri →</a></nav></section>
+<section class="lesson" id="c3" aria-labelledby="c3-t"><div class="les-head"><span class="les-nr">3</span><div><h2 id="c3-t">Tablouri unidimensionale (și bidimensionale)</h2><p class="les-prog">Programa 5.B: tablouri unidimensionale pentru memorarea listelor – declarare, acces la un element</p></div></div>
+<div class="obj"><h3>La finalul lecției vei ști</h3><ul><li>declararea și parcurgerea tablourilor</li><li>indicii de la 0 și depășirea limitelor</li><li>algoritmii clasici pe tablouri în C++</li><li>matricele ca tablouri bidimensionale</li></ul></div>
+
+<pre data-lang="c++"><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int v[100];                  // dimensiunea maximă se fixează la compilare
+    int n = 6;
+    int date[] = {5, 2, 9, 1, 7, 3};
+    for (int i = 0; i &lt; n; i++) v[i] = date[i];
+
+    int mx = v[0], poz = 0;
+    for (int i = 1; i &lt; n; i++)
+        if (v[i] &gt; mx) { mx = v[i]; poz = i; }
+    cout &lt;&lt; "maxim " &lt;&lt; mx &lt;&lt; " pe pozitia " &lt;&lt; poz &lt;&lt; "\n";
+
+    for (int i = 0; i &lt; n - 1; i++)        // sortare prin selecție
+        for (int j = i + 1; j &lt; n; j++)
+            if (v[j] &lt; v[i]) { int aux = v[i]; v[i] = v[j]; v[j] = aux; }
+    for (int i = 0; i &lt; n; i++) cout &lt;&lt; v[i] &lt;&lt; " ";
+    cout &lt;&lt; "\n";
+
+    int a[3][3] = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    int sd = 0;
+    for (int i = 0; i &lt; 3; i++) sd += a[i][i];
+    cout &lt;&lt; "diagonala: " &lt;&lt; sd &lt;&lt; "\n";
+    return 0;
+}</code></pre><pre class="out" data-lang="ieșire"><code>maxim 9 pe pozitia 2
+1 2 3 5 7 9 
+diagonala: 15</code></pre>
+<ul>
+<li>Indicii sunt de la 0 la n − 1. C++ <strong>nu verifică</strong> depășirea: <code>v[100]</code> într-un tablou de 100 de elemente este comportament nedefinit (poate „merge”, poate strica alte variabile).</li>
+<li>Tablourile globale sunt inițializate cu 0; cele locale nu (conțin valori reziduale) – inițializează-le: <code>int f[10] = {0};</code></li>
+<li>Un tablou transmis unei funcții se transmite prin adresă: modificările din funcție se văd în apelant.</li>
+<li>Pentru dimensiune variabilă se folosește <code>vector&lt;int&gt;</code> (din <code>&lt;vector&gt;</code>), dar programa cere tablourile clasice.</li>
+</ul>
+
+<h3 class="sec">Aplicații</h3><p class="hint">Rezolvă în scris (în caseta de mai jos sau pe hârtie), apoi deschide rezolvarea-model și bifează criteriile pe care le îndeplinește răspunsul tău.</p>
+<div class="ex app" id="c3-e1" data-app="c3-e1"><div class="ex-h"><b>Aplicația 3.1</b><span>Inserare și ștergere într-un tablou</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><div><p>Citește n și n numere. Inserează valoarea 0 pe poziția 2 (deplasând elementele spre dreapta), apoi șterge primul element negativ (deplasând spre stânga). Afișează tabloul după fiecare operație.</p></div><textarea class="ans" placeholder="Scrie aici răspunsul tău (se salvează doar în acest browser)" aria-label="Răspunsul tău la aplicația 3.1"></textarea><details class="sol"><summary>Vezi rezolvarea-model</summary><div class="body"><pre data-lang="c++"><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int v[101], n;
+    cin &gt;&gt; n;
+    for (int i = 0; i &lt; n; i++) cin &gt;&gt; v[i];
+    for (int i = n; i &gt; 2; i--) v[i] = v[i - 1];   // de la dreapta la stânga!
+    v[2] = 0; n++;
+    for (int i = 0; i &lt; n; i++) cout &lt;&lt; v[i] &lt;&lt; " ";
+    cout &lt;&lt; "\n";
+    int p = -1;
+    for (int i = 0; i &lt; n &amp;&amp; p == -1; i++) if (v[i] &lt; 0) p = i;
+    if (p != -1) {
+        for (int i = p; i &lt; n - 1; i++) v[i] = v[i + 1];
+        n--;
+    }
+    for (int i = 0; i &lt; n; i++) cout &lt;&lt; v[i] &lt;&lt; " ";
+    cout &lt;&lt; "\n";
+    return 0;
+}</code></pre><p class="io-lbl">Date de intrare</p><pre class="out" data-lang="intrare"><code>5
+4 -2 7 -1 9</code></pre><p class="io-lbl">Se afișează</p><pre class="out" data-lang="ieșire"><code>4 -2 0 7 -1 9 
+4 0 7 -1 9</code></pre><div class="crit"><p class="io-lbl">Autoevaluare – bifează ce ai în răspunsul tău</p><label><input type="checkbox"> la inserare deplasez de la final spre poziție</label><label><input type="checkbox"> actualizez n după fiecare operație</label><label><input type="checkbox"> tratez cazul în care nu există negativ</label><label><input type="checkbox"> nu depășesc dimensiunea tabloului</label></div></div></details><div class="ide-bar"><label class="done-toggle sm"><input type="checkbox" class="app-ok"> Am rezolvat și am verificat</label></div></div>
+<div class="ex app" id="c3-e2" data-app="c3-e2"><div class="ex-h"><b>Aplicația 3.2</b><span>Căutare binară în C++</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><div><p>Citește n, un tablou sortat crescător și o valoare x. Afișează poziția lui x (căutare binară) sau -1.</p></div><textarea class="ans" placeholder="Scrie aici răspunsul tău (se salvează doar în acest browser)" aria-label="Răspunsul tău la aplicația 3.2"></textarea><details class="sol"><summary>Vezi rezolvarea-model</summary><div class="body"><pre data-lang="c++"><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int v[1000], n, x;
+    cin &gt;&gt; n;
+    for (int i = 0; i &lt; n; i++) cin &gt;&gt; v[i];
+    cin &gt;&gt; x;
+    int st = 0, dr = n - 1, poz = -1;
+    while (st &lt;= dr &amp;&amp; poz == -1) {
+        int m = (st + dr) / 2;
+        if (v[m] == x) poz = m;
+        else if (v[m] &lt; x) st = m + 1;
+        else dr = m - 1;
+    }
+    cout &lt;&lt; poz &lt;&lt; "\n";
+    return 0;
+}</code></pre><p class="io-lbl">Date de intrare</p><pre class="out" data-lang="intrare"><code>7
+2 5 8 12 16 23 38
+23</code></pre><p class="io-lbl">Se afișează</p><pre class="out" data-lang="ieșire"><code>5</code></pre><div class="crit"><p class="io-lbl">Autoevaluare – bifează ce ai în răspunsul tău</p><label><input type="checkbox"> condiția buclei este st <= dr</label><label><input type="checkbox"> mijlocul se recalculează la fiecare pas</label><label><input type="checkbox"> capetele se mută cu m + 1 / m − 1</label><label><input type="checkbox"> afișez -1 când nu găsesc</label></div></div></details><div class="ide-bar"><label class="done-toggle sm"><input type="checkbox" class="app-ok"> Am rezolvat și am verificat</label></div></div>
+<div class="quiz" data-quiz><h3>Test de verificare <span class="score"></span></h3><fieldset class="q" data-a="0"><legend>1. Ce afișează secvența?<pre data-lang="c++"><code>int v[5] = {4, 8, 15, 16, 23};
+int s = 0;
+for (int i = 1; i &lt; 5; i += 2) s += v[i];
+cout &lt;&lt; s;</code></pre></legend><div class="opts"><button type="button">24</button><button type="button">42</button><button type="button">39</button><button type="button">23</button></div><p class="why" hidden>Pozițiile 1 și 3: 8 + 16.</p></fieldset><fieldset class="q" data-a="1"><legend>2. Ce afișează secvența?<pre data-lang="c++"><code>int f[10] = {0};
+int x = 30322;
+while (x) { f[x % 10]++; x /= 10; }
+cout &lt;&lt; f[3] &lt;&lt; f[2] &lt;&lt; f[0];</code></pre></legend><div class="opts"><button type="button">212</button><button type="button">221</button><button type="button">122</button><button type="button">211</button></div><p class="why" hidden>Cifrele 3, 0, 3, 2, 2: f[3] = 2, f[2] = 2, f[0] = 1, deci se afișează 2, 2, 1.</p></fieldset><fieldset class="q" data-a="1"><legend>3. Care este ultimul indice valid pentru <code>int v[50];</code>?</legend><div class="opts"><button type="button">50</button><button type="button">49</button><button type="button">51</button><button type="button">0</button></div><p class="why" hidden>Indicii sunt de la 0 la 49.</p></fieldset><fieldset class="q" data-a="2"><legend>4. Ce se întâmplă la accesarea <code>v[60]</code> pentru <code>int v[50]</code>?</legend><div class="opts"><button type="button">eroare de compilare</button><button type="button">excepție IndexError</button><button type="button">comportament nedefinit</button><button type="button">se returnează 0</button></div><p class="why" hidden>C++ nu verifică limitele.</p></fieldset></div>
+<div class="done-row"><label class="done-toggle"><input type="checkbox" data-done="c3"> Am terminat lecția</label></div><nav class="pn"><a href="#c2" class="btn btn-ghost">← 2. Instrucțiuni de control</a><a href="#c4" class="btn btn-primary">4. Funcții și recursivitate →</a></nav></section>
+<section class="lesson" id="c4" aria-labelledby="c4-t"><div class="les-head"><span class="les-nr">4</span><div><h2 id="c4-t">Subprograme: funcții, parametri prin valoare și prin referință, recursivitate</h2><p class="les-prog">Programa 5.B: subprograme, subprograme recursive</p></div></div>
+<div class="obj"><h3>La finalul lecției vei ști</h3><ul><li>definirea, declararea (prototipul) și apelul funcțiilor</li><li>transmiterea prin valoare vs. prin referință (&)</li><li>funcțiile void și cele care întorc o valoare</li><li>recursivitatea în C++</li></ul></div>
+
+<pre data-lang="c++"><code>#include &lt;iostream&gt;
+using namespace std;
+
+int sumaCifre(int n) {               // întoarce o valoare
+    int s = 0;
+    while (n) { s += n % 10; n /= 10; }
+    return s;
+}
+
+void dubleaza(int x, int &amp;y) {       // x prin valoare, y prin REFERINȚĂ
+    x *= 2;
+    y *= 2;
+}
+
+long long fact(int n) {              // recursivă
+    if (n &lt;= 1) return 1;
+    return n * fact(n - 1);
+}
+
+void afisVector(int v[], int n) {    // tabloul se transmite prin adresă
+    for (int i = 0; i &lt; n; i++) cout &lt;&lt; v[i] &lt;&lt; " ";
+    cout &lt;&lt; "\n";
+}
+
+int main() {
+    int a = 5, b = 5;
+    dubleaza(a, b);
+    cout &lt;&lt; sumaCifre(2026) &lt;&lt; " " &lt;&lt; a &lt;&lt; " " &lt;&lt; b &lt;&lt; " " &lt;&lt; fact(10) &lt;&lt; "\n";
+    int v[] = {3, 1, 4};
+    afisVector(v, 3);
+    return 0;
+}</code></pre><pre class="out" data-lang="ieșire"><code>10 5 10 3628800
+3 1 4 </code></pre>
+<ul>
+<li>O funcție trebuie <strong>declarată înainte de apel</strong>: fie definită mai sus, fie printr-un prototip (<code>int sumaCifre(int n);</code>) înaintea lui <code>main</code>.</li>
+<li><strong>Prin valoare</strong>: funcția lucrează pe o copie. <strong>Prin referință</strong> (<code>int &amp;y</code>): numele y este un alt nume pentru variabila din apel – modificările rămân.</li>
+<li>Variabilele locale dispar la ieșirea din funcție; cele globale sunt vizibile peste tot (și inițializate cu 0).</li>
+</ul>
+
+<h3 class="sec">Aplicații</h3><p class="hint">Rezolvă în scris (în caseta de mai jos sau pe hârtie), apoi deschide rezolvarea-model și bifează criteriile pe care le îndeplinește răspunsul tău.</p>
+<div class="ex app" id="c4-e1" data-app="c4-e1"><div class="ex-h"><b>Aplicația 4.1</b><span>Funcție cmmdc și simplificarea unei fracții</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><div><p>Scrie funcția <code>int cmmdc(int a, int b)</code> (Euclid) și funcția <code>void simplifica(int &amp;a, int &amp;b)</code>. Programul citește o fracție a/b și afișează forma ireductibilă.</p></div><textarea class="ans" placeholder="Scrie aici răspunsul tău (se salvează doar în acest browser)" aria-label="Răspunsul tău la aplicația 4.1"></textarea><details class="sol"><summary>Vezi rezolvarea-model</summary><div class="body"><pre data-lang="c++"><code>#include &lt;iostream&gt;
+using namespace std;
+
+int cmmdc(int a, int b) {
+    while (b) { int r = a % b; a = b; b = r; }
+    return a;
+}
+
+void simplifica(int &amp;a, int &amp;b) {
+    int d = cmmdc(a, b);
+    a /= d; b /= d;
+}
+
+int main() {
+    int a, b;
+    cin &gt;&gt; a &gt;&gt; b;
+    simplifica(a, b);
+    cout &lt;&lt; a &lt;&lt; "/" &lt;&lt; b &lt;&lt; "\n";
+    return 0;
+}</code></pre><p class="io-lbl">Date de intrare</p><pre class="out" data-lang="intrare"><code>84 36</code></pre><p class="io-lbl">Se afișează</p><pre class="out" data-lang="ieșire"><code>7/3</code></pre><div class="crit"><p class="io-lbl">Autoevaluare – bifează ce ai în răspunsul tău</p><label><input type="checkbox"> cmmdc întoarce valoarea cu return</label><label><input type="checkbox"> simplifica primește parametri prin referință</label><label><input type="checkbox"> nu folosesc variabile globale</label><label><input type="checkbox"> funcțiile sunt definite înainte de main (sau am prototip)</label></div></div></details><div class="ide-bar"><label class="done-toggle sm"><input type="checkbox" class="app-ok"> Am rezolvat și am verificat</label></div></div>
+<div class="ex app" id="c4-e2" data-app="c4-e2"><div class="ex-h"><b>Aplicația 4.2</b><span>Funcție recursivă pentru putere</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><div><p>Scrie o funcție recursivă <code>long long putere(long long a, int n)</code> care calculează aⁿ prin exponențiere rapidă și afișează 3¹⁵ și 2⁴⁰.</p></div><textarea class="ans" placeholder="Scrie aici răspunsul tău (se salvează doar în acest browser)" aria-label="Răspunsul tău la aplicația 4.2"></textarea><details class="sol"><summary>Vezi rezolvarea-model</summary><div class="body"><pre data-lang="c++"><code>#include &lt;iostream&gt;
+using namespace std;
+
+long long putere(long long a, int n) {
+    if (n == 0) return 1;
+    long long p = putere(a, n / 2);
+    if (n % 2 == 0) return p * p;
+    return p * p * a;
+}
+
+int main() {
+    cout &lt;&lt; putere(3, 15) &lt;&lt; " " &lt;&lt; putere(2, 40) &lt;&lt; "\n";
+    return 0;
+}</code></pre><p class="io-lbl">Se afișează</p><pre class="out" data-lang="ieșire"><code>14348907 1099511627776</code></pre><div class="crit"><p class="io-lbl">Autoevaluare – bifează ce ai în răspunsul tău</p><label><input type="checkbox"> există cazul de bază n == 0</label><label><input type="checkbox"> apelul recursiv se face o singură dată pe nivel (p salvat)</label><label><input type="checkbox"> folosesc long long pentru rezultate mari</label></div></div></details><div class="ide-bar"><label class="done-toggle sm"><input type="checkbox" class="app-ok"> Am rezolvat și am verificat</label></div></div>
+<div class="quiz" data-quiz><h3>Test de verificare <span class="score"></span></h3><fieldset class="q" data-a="0"><legend>1. Ce afișează programul?<pre data-lang="c++"><code>void f(int a, int &amp;b) {
+    a = a + b;
+    b = a * 2;
+}
+int main() {
+    int x = 3, y = 4;
+    f(x, y);
+    cout &lt;&lt; x &lt;&lt; " " &lt;&lt; y &lt;&lt; " ";
+    f(y, x);
+    cout &lt;&lt; x &lt;&lt; " " &lt;&lt; y;
+    return 0;
+}</code></pre></legend><div class="opts"><button type="button">3 14 34 14</button><button type="button">7 14 34 14</button><button type="button">3 14 3 14</button><button type="button">3 4 3 4</button></div><p class="why" hidden>Doar parametrul transmis prin referință se modifică în apelant.</p></fieldset><fieldset class="q" data-a="0"><legend>2. Ce afișează programul?<pre data-lang="c++"><code>void g(int n) {
+    if (n &lt; 1) return;
+    cout &lt;&lt; n;
+    g(n - 2);
+    cout &lt;&lt; n;
+}
+int main() {
+    g(5);
+    return 0;
+}</code></pre></legend><div class="opts"><button type="button">531135</button><button type="button">135531</button><button type="button">53135</button><button type="button">531</button></div><p class="why" hidden>Prima afișare la „coborâre”, a doua la „revenire”.</p></fieldset><fieldset class="q" data-a="0"><legend>3. Ce afișează programul?<pre data-lang="c++"><code>int f(int n) {
+    if (n == 0) return 0;
+    if (n % 2 == 0) return f(n / 10) + n % 10;
+    return f(n / 10);
+}
+int main() {
+    cout &lt;&lt; f(28374);
+    return 0;
+}</code></pre></legend><div class="opts"><button type="button">14</button><button type="button">4</button><button type="button">22</button><button type="button">10</button></div><p class="why" hidden>Suma cifrelor pare ale lui n: 2 + 8 + 4.</p></fieldset><fieldset class="q" data-a="1"><legend>4. Ce înseamnă <code>int &amp;x</code> ca parametru?</legend><div class="opts"><button type="button">pointer la x</button><button type="button">transmitere prin referință</button><button type="button">adresa lui x</button><button type="button">x este constant</button></div><p class="why" hidden>x devine un alias al argumentului.</p></fieldset></div>
+<div class="done-row"><label class="done-toggle"><input type="checkbox" data-done="c4"> Am terminat lecția</label></div><nav class="pn"><a href="#c3" class="btn btn-ghost">← 3. Tablouri</a><a href="#c5" class="btn btn-primary">5. Clasa string →</a></nav></section>
+<section class="lesson" id="c5" aria-labelledby="c5-t"><div class="les-head"><span class="les-nr">5</span><div><h2 id="c5-t">Șiruri de caractere: clasa string</h2><p class="les-prog">Programa 5.B: clasa string – concatenare, acces la un caracter, comparare lexicografică; inserare, ștergere, căutare</p></div></div>
+<div class="obj"><h3>La finalul lecției vei ști</h3><ul><li>declararea, citirea (cin și getline) și afișarea unui string</li><li>operatorii +, [], ==, &lt;</li><li>metodele insert, erase, find, substr, length</li><li>diferența față de char[] din C</li></ul></div>
+
+<pre data-lang="c++"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main() {
+    string s = "informatica";
+    cout &lt;&lt; s.length() &lt;&lt; " " &lt;&lt; s[0] &lt;&lt; " " &lt;&lt; s.substr(2, 4) &lt;&lt; "\n";
+    s.insert(0, "ora de ");          // inserare pe poziția 0
+    cout &lt;&lt; s &lt;&lt; "\n";
+    s.erase(0, 7);                   // șterge 7 caractere de la poziția 0
+    cout &lt;&lt; s.find("ma") &lt;&lt; "\n";   // poziția primei apariții
+    if (s.find("xyz") == string::npos) cout &lt;&lt; "negasit\n";
+    s[0] = 'I';                      // string este MUTABIL în C++
+    cout &lt;&lt; s + "!" &lt;&lt; " " &lt;&lt; (string("abc") &lt; string("abd")) &lt;&lt; "\n";
+    s.replace(0, 4, "Mate");          // înlocuiește 4 caractere de la poziția 0
+    cout &lt;&lt; s &lt;&lt; "\n";
+    return 0;
+}</code></pre><pre class="out" data-lang="ieșire"><code>11 i form
+ora de informatica
+5
+negasit
+Informatica! 1
+Matermatica</code></pre>
+<ul>
+<li><code>cin &gt;&gt; s</code> citește un singur cuvânt (până la spațiu); <code>getline(cin, s)</code> citește toată linia. Atenție: după <code>cin &gt;&gt; n</code>, un <code>getline</code> citește restul liniei curente (șir vid) – se folosește <code>cin.ignore()</code> înainte.</li>
+<li><code>find</code> întoarce <code>string::npos</code> când nu găsește. <code>substr(poz, lungime)</code>.</li>
+<li>Spre deosebire de Python, <code>string</code> este mutabil: <code>s[i] = 'x'</code> este permis.</li>
+<li>Șirurile de tip C (<code>char s[100]</code>) se termină cu caracterul <code>'\0'</code> și folosesc funcțiile din <code>&lt;cstring&gt;</code>: <code>strlen</code>, <code>strcpy</code>, <code>strcat</code>, <code>strcmp</code>, <code>strstr</code>.</li>
+</ul>
+
+<h3 class="sec">Aplicații</h3><p class="hint">Rezolvă în scris (în caseta de mai jos sau pe hârtie), apoi deschide rezolvarea-model și bifează criteriile pe care le îndeplinește răspunsul tău.</p>
+<div class="ex app" id="c5-e1" data-app="c5-e1"><div class="ex-h"><b>Aplicația 5.1</b><span>Numărarea cuvintelor și majuscule</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><div><p>Citește o propoziție cu <code>getline</code> (cuvinte separate prin câte un spațiu). Afișează numărul de cuvinte și propoziția cu prima literă a fiecărui cuvânt transformată în majusculă.</p></div><textarea class="ans" placeholder="Scrie aici răspunsul tău (se salvează doar în acest browser)" aria-label="Răspunsul tău la aplicația 5.1"></textarea><details class="sol"><summary>Vezi rezolvarea-model</summary><div class="body"><pre data-lang="c++"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main() {
+    string s;
+    getline(cin, s);
+    int cuv = 0;
+    for (int i = 0; i &lt; (int)s.length(); i++)
+        if (s[i] != ' ' &amp;&amp; (i == 0 || s[i - 1] == ' ')) {
+            cuv++;
+            if (s[i] &gt;= 'a' &amp;&amp; s[i] &lt;= 'z') s[i] = s[i] - 'a' + 'A';
+        }
+    cout &lt;&lt; cuv &lt;&lt; "\n" &lt;&lt; s &lt;&lt; "\n";
+    return 0;
+}</code></pre><p class="io-lbl">Date de intrare</p><pre class="out" data-lang="intrare"><code>ana are mere si pere</code></pre><p class="io-lbl">Se afișează</p><pre class="out" data-lang="ieșire"><code>5
+Ana Are Mere Si Pere</code></pre><div class="crit"><p class="io-lbl">Autoevaluare – bifează ce ai în răspunsul tău</p><label><input type="checkbox"> folosesc getline pentru linia întreagă</label><label><input type="checkbox"> detectez începutul de cuvânt (primul caracter sau după spațiu)</label><label><input type="checkbox"> transform litera prin diferența de coduri sau toupper</label><label><input type="checkbox"> număr corect cuvintele</label></div></div></details><div class="ide-bar"><label class="done-toggle sm"><input type="checkbox" class="app-ok"> Am rezolvat și am verificat</label></div></div>
+<div class="ex app" id="c5-e2" data-app="c5-e2"><div class="ex-h"><b>Aplicația 5.2</b><span>Înlocuirea tuturor aparițiilor</span><span class="lvl">dificil</span><span class="st" aria-live="polite"></span></div><div><p>Citește un text, un cuvânt a și un cuvânt b (pe linii separate). Înlocuiește toate aparițiile lui a cu b folosind <code>find</code>, <code>erase</code> și <code>insert</code> și afișează textul.</p></div><textarea class="ans" placeholder="Scrie aici răspunsul tău (se salvează doar în acest browser)" aria-label="Răspunsul tău la aplicația 5.2"></textarea><details class="sol"><summary>Vezi rezolvarea-model</summary><div class="body"><pre data-lang="c++"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main() {
+    string t, a, b;
+    getline(cin, t); getline(cin, a); getline(cin, b);
+    size_t p = t.find(a);
+    while (p != string::npos) {
+        t.erase(p, a.length());
+        t.insert(p, b);
+        p = t.find(a, p + b.length());   // continuăm DUPĂ textul inserat
+    }
+    cout &lt;&lt; t &lt;&lt; "\n";
+    return 0;
+}</code></pre><p class="io-lbl">Date de intrare</p><pre class="out" data-lang="intrare"><code>un mar si un par si un mar
+mar
+măr</code></pre><p class="io-lbl">Se afișează</p><pre class="out" data-lang="ieșire"><code>un măr si un par si un măr</code></pre><div class="crit"><p class="io-lbl">Autoevaluare – bifează ce ai în răspunsul tău</p><label><input type="checkbox"> caut din nou după poziția textului inserat (evit bucla infinită când b conține a)</label><label><input type="checkbox"> folosesc string::npos pentru oprire</label><label><input type="checkbox"> erase + insert (sau replace) cu lungimile corecte</label></div></div></details><div class="ide-bar"><label class="done-toggle sm"><input type="checkbox" class="app-ok"> Am rezolvat și am verificat</label></div></div>
+<div class="quiz" data-quiz><h3>Test de verificare <span class="score"></span></h3><fieldset class="q" data-a="0"><legend>1. Ce afișează secvența?<pre data-lang="c++"><code>string s = "bacalaureat";
+cout &lt;&lt; s.find("a") &lt;&lt; " " &lt;&lt; s.find("a", 2) &lt;&lt; " " &lt;&lt; s.length();</code></pre></legend><div class="opts"><button type="button">1 3 11</button><button type="button">1 1 11</button><button type="button">0 3 11</button><button type="button">1 3 10</button></div><p class="why" hidden>find caută de la poziția dată.</p></fieldset><fieldset class="q" data-a="0"><legend>2. Ce afișează secvența?<pre data-lang="c++"><code>string s = "programare";
+s.erase(3, 4);
+s.insert(0, "X");
+cout &lt;&lt; s;</code></pre></legend><div class="opts"><button type="button">Xproare</button><button type="button">Xprore</button><button type="button">Xprogre</button><button type="button">proXare</button></div><p class="why" hidden>Se șterg „gram” (pozițiile 3–6), rămâne „proare”.</p></fieldset><fieldset class="q" data-a="0"><legend>3. Ce afișează secvența?<pre data-lang="c++"><code>string a = "Zebra", b = "ana";
+cout &lt;&lt; (a &lt; b) &lt;&lt; (a.length() &gt; b.length());</code></pre></legend><div class="opts"><button type="button">11</button><button type="button">01</button><button type="button">10</button><button type="button">00</button></div><p class="why" hidden>'Z' (90) < 'a' (97); 5 > 3.</p></fieldset><fieldset class="q" data-a="2"><legend>4. Ce citește <code>getline(cin, s)</code>?</legend><div class="opts"><button type="button">un cuvânt</button><button type="button">un caracter</button><button type="button">toată linia</button><button type="button">tot fișierul</button></div><p class="why" hidden>Până la caracterul de linie nouă.</p></fieldset></div>
+<div class="done-row"><label class="done-toggle"><input type="checkbox" data-done="c5"> Am terminat lecția</label></div><nav class="pn"><a href="#c4" class="btn btn-ghost">← 4. Funcții și recursivitate</a><a href="#c6" class="btn btn-primary">6. struct și date mixte →</a></nav></section>
+<section class="lesson" id="c6" aria-labelledby="c6-t"><div class="les-head"><span class="les-nr">6</span><div><h2 id="c6-t">Structuri (struct) și date organizate în modele mixte</h2><p class="les-prog">Programa 5.B: structuri de date pentru date neomogene (înregistrări) – definire, declarare, acces la câmp, atribuiri; elemente de limbaj pentru modele mixte</p></div></div>
+<div class="obj"><h3>La finalul lecției vei ști</h3><ul><li>definirea unui tip struct și declararea variabilelor</li><li>accesul la câmpuri cu . și -></li><li>tablouri de structuri: citire, sortare, căutare</li><li>atribuirea între structuri (copiere câmp cu câmp)</li></ul></div>
+
+<pre data-lang="c++"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+struct Elev {
+    string nume;
+    int clasa;
+    double medie;
+};
+
+int main() {
+    Elev e[3] = {{"Ana", 9, 9.5}, {"Dan", 10, 8.75}, {"Ioana", 9, 9.8}};
+    int n = 3;
+    for (int i = 0; i &lt; n - 1; i++)              // sortare după medie, descrescător
+        for (int j = i + 1; j &lt; n; j++)
+            if (e[j].medie &gt; e[i].medie) {
+                Elev aux = e[i]; e[i] = e[j]; e[j] = aux;   // atribuire între structuri
+            }
+    for (int i = 0; i &lt; n; i++)
+        cout &lt;&lt; e[i].nume &lt;&lt; " (" &lt;&lt; e[i].clasa &lt;&lt; ") " &lt;&lt; e[i].medie &lt;&lt; "\n";
+    Elev *p = &amp;e[0];
+    cout &lt;&lt; p-&gt;nume &lt;&lt; " " &lt;&lt; (*p).medie &lt;&lt; "\n";    // p-&gt;camp este (*p).camp
+    return 0;
+}</code></pre><pre class="out" data-lang="ieșire"><code>Ioana (9) 9.8
+Ana (9) 9.5
+Dan (10) 8.75
+Ioana 9.8</code></pre>
+<ul>
+<li><code>struct</code> grupează date de tipuri diferite într-un singur tip. Câmpurile se accesează cu <code>.</code> (variabilă) sau <code>-&gt;</code> (pointer).</li>
+<li>Atribuirea <code>a = b</code> între structuri copiază toate câmpurile; comparația <code>a == b</code> nu este definită implicit.</li>
+<li>Modele mixte: tablouri de structuri, structuri care conțin tablouri (<code>int note[10];</code>), tablouri bidimensionale.</li>
+</ul>
+
+<h3 class="sec">Aplicații</h3><p class="hint">Rezolvă în scris (în caseta de mai jos sau pe hârtie), apoi deschide rezolvarea-model și bifează criteriile pe care le îndeplinește răspunsul tău.</p>
+<div class="ex app" id="c6-e1" data-app="c6-e1"><div class="ex-h"><b>Aplicația 6.1</b><span>Clasament cu struct</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><div><p>Citește n concurenți (nume și punctaj). Afișează-i în ordinea descrescătoare a punctajului, iar la egalitate alfabetic, folosind un tablou de structuri și o sortare scrisă de tine.</p></div><textarea class="ans" placeholder="Scrie aici răspunsul tău (se salvează doar în acest browser)" aria-label="Răspunsul tău la aplicația 6.1"></textarea><details class="sol"><summary>Vezi rezolvarea-model</summary><div class="body"><pre data-lang="c++"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+struct Concurent { string nume; int p; };
+
+int main() {
+    Concurent v[100];
+    int n;
+    cin &gt;&gt; n;
+    for (int i = 0; i &lt; n; i++) cin &gt;&gt; v[i].nume &gt;&gt; v[i].p;
+    for (int i = 0; i &lt; n - 1; i++)
+        for (int j = i + 1; j &lt; n; j++)
+            if (v[j].p &gt; v[i].p || (v[j].p == v[i].p &amp;&amp; v[j].nume &lt; v[i].nume)) {
+                Concurent aux = v[i]; v[i] = v[j]; v[j] = aux;
+            }
+    for (int i = 0; i &lt; n; i++) cout &lt;&lt; i + 1 &lt;&lt; ". " &lt;&lt; v[i].nume &lt;&lt; " " &lt;&lt; v[i].p &lt;&lt; "\n";
+    return 0;
+}</code></pre><p class="io-lbl">Date de intrare</p><pre class="out" data-lang="intrare"><code>4
+Dan 80
+Ana 95
+Ion 80
+Radu 70</code></pre><p class="io-lbl">Se afișează</p><pre class="out" data-lang="ieșire"><code>1. Ana 95
+2. Dan 80
+3. Ion 80
+4. Radu 70</code></pre><div class="crit"><p class="io-lbl">Autoevaluare – bifează ce ai în răspunsul tău</p><label><input type="checkbox"> am definit struct cu câmpurile necesare</label><label><input type="checkbox"> condiția de ordonare tratează și egalitatea</label><label><input type="checkbox"> interschimb structuri întregi (nu doar un câmp)</label></div></div></details><div class="ide-bar"><label class="done-toggle sm"><input type="checkbox" class="app-ok"> Am rezolvat și am verificat</label></div></div>
+<div class="quiz" data-quiz><h3>Test de verificare <span class="score"></span></h3><fieldset class="q" data-a="0"><legend>1. Ce afișează programul?<pre data-lang="c++"><code>struct P { int x, y; };
+int main() {
+    P a = {1, 2}, b;
+    b = a;
+    b.x = 5;
+    cout &lt;&lt; a.x &lt;&lt; " " &lt;&lt; b.x &lt;&lt; " " &lt;&lt; b.y;
+    return 0;
+}</code></pre></legend><div class="opts"><button type="button">1 5 2</button><button type="button">5 5 2</button><button type="button">1 5 0</button><button type="button">eroare</button></div><p class="why" hidden>Atribuirea copiază; modificarea lui b nu afectează a.</p></fieldset><fieldset class="q" data-a="1"><legend>2. Cum accesezi câmpul medie printr-un pointer p la o structură?</legend><div class="opts"><button type="button">p.medie</button><button type="button">p->medie</button><button type="button">*p.medie</button><button type="button">&amp;p.medie</button></div><p class="why" hidden>p->medie, echivalent cu (*p).medie.</p></fieldset><fieldset class="q" data-a="2"><legend>3. Ce operație NU este definită implicit pentru două variabile struct?</legend><div class="opts"><button type="button">atribuirea a = b</button><button type="button">accesul a.x</button><button type="button">comparația a == b</button><button type="button">transmiterea ca parametru</button></div><p class="why" hidden>== trebuie scris (supraîncărcat) de programator.</p></fieldset></div>
+<div class="done-row"><label class="done-toggle"><input type="checkbox" data-done="c6"> Am terminat lecția</label></div><nav class="pn"><a href="#c5" class="btn btn-ghost">← 5. Clasa string</a><a href="#c7" class="btn btn-primary">7. Fișiere text →</a></nav></section>
+<section class="lesson" id="c7" aria-labelledby="c7-t"><div class="les-head"><span class="les-nr">7</span><div><h2 id="c7-t">Fișiere text în C++</h2><p class="les-prog">Programa 5.B: fișiere text – clase și metode uzuale: deschidere, citire, scriere, închidere</p></div></div>
+<div class="obj"><h3>La finalul lecției vei ști</h3><ul><li>clasele ifstream și ofstream</li><li>citirea până la sfârșitul fișierului</li><li>scrierea în fișier</li><li>citirea linie cu linie cu getline</li></ul></div>
+
+<pre data-lang="c++"><code>#include &lt;fstream&gt;
+using namespace std;
+
+int main() {
+    ifstream fin("date.in");            // deschidere pentru citire
+    ofstream fout("date.out");          // deschidere pentru scriere (golește fișierul)
+    int x, suma = 0, cnt = 0;
+    while (fin &gt;&gt; x) {                  // citește până când nu mai reușește (sfârșit de fișier)
+        suma += x;
+        cnt++;
+    }
+    fout &lt;&lt; cnt &lt;&lt; " " &lt;&lt; suma &lt;&lt; "\n";
+    fin.close();
+    fout.close();
+    return 0;
+}</code></pre>
+<ul>
+<li><code>ifstream</code> (citire) și <code>ofstream</code> (scriere) se folosesc exact ca <code>cin</code> și <code>cout</code>. Pentru adăugare la final: <code>ofstream f("x.txt", ios::app);</code></li>
+<li>Verifică deschiderea: <code>if (!fin) { cout &lt;&lt; "nu exista"; return 1; }</code></li>
+<li><code>while (fin &gt;&gt; x)</code> este forma corectă de citire până la final; <code>while (!fin.eof())</code> poate prelucra ultima valoare de două ori.</li>
+<li>Linie cu linie: <code>string linie; while (getline(fin, linie)) { … }</code></li>
+</ul>
+
+<h3 class="sec">Aplicații</h3><p class="hint">Rezolvă în scris (în caseta de mai jos sau pe hârtie), apoi deschide rezolvarea-model și bifează criteriile pe care le îndeplinește răspunsul tău.</p>
+<div class="ex app" id="c7-e1" data-app="c7-e1"><div class="ex-h"><b>Aplicația 7.1</b><span>Medii din fișier</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><div><p>Fișierul <code>note.in</code> conține pe prima linie n, apoi n linii cu numele elevului și 3 note. Scrie în <code>medii.out</code> numele și media (2 zecimale) fiecărui elev, iar pe ultima linie numele elevului cu media maximă.</p></div><textarea class="ans" placeholder="Scrie aici răspunsul tău (se salvează doar în acest browser)" aria-label="Răspunsul tău la aplicația 7.1"></textarea><details class="sol"><summary>Vezi rezolvarea-model</summary><div class="body"><pre data-lang="c++"><code>#include &lt;fstream&gt;
+#include &lt;iostream&gt;
+#include &lt;iomanip&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main() {
+    ifstream fin("note.in");
+    ofstream fout("medii.out");
+    int n, a, b, c;
+    string nume, best;
+    double mx = -1;
+    fin &gt;&gt; n;
+    fout &lt;&lt; fixed &lt;&lt; setprecision(2);
+    for (int i = 0; i &lt; n; i++) {
+        fin &gt;&gt; nume &gt;&gt; a &gt;&gt; b &gt;&gt; c;
+        double m = (a + b + c) / 3.0;
+        fout &lt;&lt; nume &lt;&lt; " " &lt;&lt; m &lt;&lt; "\n";
+        if (m &gt; mx) { mx = m; best = nume; }
+    }
+    fout &lt;&lt; best &lt;&lt; "\n";
+    fin.close(); fout.close();
+    return 0;
+}</code></pre><p class="io-lbl">Fișierul creat <code>medii.out</code></p><pre class="out" data-lang="fișier"><code>Ana 9.67
+Dan 7.00
+Ioana 9.33
+Ana</code></pre><div class="crit"><p class="io-lbl">Autoevaluare – bifează ce ai în răspunsul tău</p><label><input type="checkbox"> deschid fișierele cu ifstream/ofstream</label><label><input type="checkbox"> citesc din fin, nu din cin</label><label><input type="checkbox"> media este reală, cu 2 zecimale</label><label><input type="checkbox"> închid fișierele</label></div></div></details><div class="ide-bar"><label class="done-toggle sm"><input type="checkbox" class="app-ok"> Am rezolvat și am verificat</label></div></div>
+<div class="quiz" data-quiz><h3>Test de verificare <span class="score"></span></h3><fieldset class="q" data-a="1"><legend>1. Ce clasă se folosește pentru scrierea într-un fișier?</legend><div class="opts"><button type="button">ifstream</button><button type="button">ofstream</button><button type="button">iostream</button><button type="button">fstreamout</button></div><p class="why" hidden>o = output.</p></fieldset><fieldset class="q" data-a="1"><legend>2. Ce face <code>ofstream f("a.txt");</code> dacă fișierul există?</legend><div class="opts"><button type="button">adaugă la final</button><button type="button">îl golește</button><button type="button">dă eroare</button><button type="button">îl citește</button></div><p class="why" hidden>Implicit fișierul este trunchiat; pentru adăugare: ios::app.</p></fieldset><fieldset class="q" data-a="1"><legend>3. Care este forma recomandată de citire a tuturor numerelor?</legend><div class="opts"><button type="button">while (!f.eof())</button><button type="button">while (f >> x)</button><button type="button">for (;;) f >> x;</button><button type="button">do f >> x; while (true);</button></div><p class="why" hidden>Condiția devine falsă exact când citirea eșuează.</p></fieldset></div>
+<div class="done-row"><label class="done-toggle"><input type="checkbox" data-done="c7"> Am terminat lecția</label></div><nav class="pn"><a href="#c6" class="btn btn-ghost">← 6. struct și date mixte</a><a href="#c8" class="btn btn-primary">8. Pointeri și memorie dinamică →</a></nav></section>
+<section class="lesson" id="c8" aria-labelledby="c8-t"><div class="les-head"><span class="les-nr">8</span><div><h2 id="c8-t">Pointeri și alocarea dinamică a memoriei</h2><p class="les-prog">Programa 5.B: pointeri – declarare, alocare și eliberare dinamică; operatorii & și *, atribuiri, adunarea cu un întreg, scăderea a două adrese</p></div></div>
+<div class="obj"><h3>La finalul lecției vei ști</h3><ul><li>ce este o adresă și un pointer</li><li>operatorii &amp; (adresă) și * (dereferențiere)</li><li>aritmetica pointerilor pe tablouri</li><li>new / delete și new[] / delete[]</li></ul></div>
+
+<pre data-lang="c++"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main() {
+    int x = 10;
+    int *p = &amp;x;                 // p memorează adresa lui x
+    *p = 25;                     // modificăm x prin p
+    cout &lt;&lt; x &lt;&lt; " " &lt;&lt; *p &lt;&lt; "\n";
+
+    int v[] = {10, 20, 30, 40, 50};
+    int *a = v;                  // v este adresa primului element
+    int *b = &amp;v[3];
+    cout &lt;&lt; *(a + 2) &lt;&lt; " " &lt;&lt; b - a &lt;&lt; " " &lt;&lt; *b + 1 &lt;&lt; " " &lt;&lt; *(b + 1) &lt;&lt; "\n";
+    a++;                         // a indică acum v[1]
+    cout &lt;&lt; *a &lt;&lt; " " &lt;&lt; a[1] &lt;&lt; "\n";   // a[1] este *(a + 1)
+
+    int n = 4;
+    int *t = new int[n];         // tablou alocat dinamic
+    for (int i = 0; i &lt; n; i++) t[i] = i * i;
+    cout &lt;&lt; t[3] &lt;&lt; "\n";
+    delete[] t;                  // eliberarea memoriei
+    t = nullptr;                 // evităm folosirea unei adrese eliberate
+
+    int *q = new int(7);         // un singur întreg
+    cout &lt;&lt; *q &lt;&lt; "\n";
+    delete q;
+    return 0;
+}</code></pre><pre class="out" data-lang="ieșire"><code>25 25
+30 3 41 50
+20 30
+9
+7</code></pre>
+<ul>
+<li><code>p + k</code> avansează cu k <em>elemente</em> (nu octeți); diferența a doi pointeri din același tablou = numărul de elemente dintre ei.</li>
+<li><code>*p + 1</code> ≠ <code>*(p + 1)</code>: primul adună 1 la valoare, al doilea ia elementul următor.</li>
+<li>Fiecare <code>new</code> are perechea <code>delete</code>, fiecare <code>new[]</code> perechea <code>delete[]</code>. Memoria nealocată corect: <em>memory leak</em>; folosirea după <code>delete</code>: comportament nedefinit.</li>
+<li>Listele înlănțuite din C++ se construiesc cu structuri care conțin un pointer la următorul nod: <code>struct Nod { int info; Nod *urm; };</code></li>
+</ul>
+
+<h3 class="sec">Aplicații</h3><p class="hint">Rezolvă în scris (în caseta de mai jos sau pe hârtie), apoi deschide rezolvarea-model și bifează criteriile pe care le îndeplinește răspunsul tău.</p>
+<div class="ex app" id="c8-e1" data-app="c8-e1"><div class="ex-h"><b>Aplicația 8.1</b><span>Tablou alocat dinamic</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><div><p>Citește n, alocă dinamic un tablou de n întregi, citește elementele, afișează-le în ordine inversă folosind <strong>doar pointeri</strong> (fără indici), apoi eliberează memoria.</p></div><textarea class="ans" placeholder="Scrie aici răspunsul tău (se salvează doar în acest browser)" aria-label="Răspunsul tău la aplicația 8.1"></textarea><details class="sol"><summary>Vezi rezolvarea-model</summary><div class="body"><pre data-lang="c++"><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int n;
+    cin &gt;&gt; n;
+    int *v = new int[n];
+    for (int *p = v; p &lt; v + n; p++) cin &gt;&gt; *p;
+    for (int *p = v + n - 1; p &gt;= v; p--) cout &lt;&lt; *p &lt;&lt; " ";
+    cout &lt;&lt; "\n";
+    delete[] v;
+    return 0;
+}</code></pre><p class="io-lbl">Date de intrare</p><pre class="out" data-lang="intrare"><code>5
+1 2 3 4 5</code></pre><p class="io-lbl">Se afișează</p><pre class="out" data-lang="ieșire"><code>5 4 3 2 1</code></pre><div class="crit"><p class="io-lbl">Autoevaluare – bifează ce ai în răspunsul tău</p><label><input type="checkbox"> aloc cu new int[n]</label><label><input type="checkbox"> parcurg cu pointeri (p++ / p--)</label><label><input type="checkbox"> nu depășesc limitele v ... v + n − 1</label><label><input type="checkbox"> eliberez cu delete[]</label></div></div></details><div class="ide-bar"><label class="done-toggle sm"><input type="checkbox" class="app-ok"> Am rezolvat și am verificat</label></div></div>
+<div class="quiz" data-quiz><h3>Test de verificare <span class="score"></span></h3><fieldset class="q" data-a="0"><legend>1. Ce afișează secvența?<pre data-lang="c++"><code>int v[] = {2, 4, 6, 8};
+int *p = v + 1;
+cout &lt;&lt; *p &lt;&lt; " " &lt;&lt; *(p + 2) &lt;&lt; " " &lt;&lt; *p + 2;</code></pre></legend><div class="opts"><button type="button">4 8 6</button><button type="button">4 6 6</button><button type="button">2 6 4</button><button type="button">4 8 8</button></div><p class="why" hidden>p indică v[1]; *(p+2) este v[3]; *p + 2 = 4 + 2.</p></fieldset><fieldset class="q" data-a="0"><legend>2. Ce afișează secvența?<pre data-lang="c++"><code>int a = 5, b = 9;
+int *p = &amp;a, *q = &amp;b;
+*p = *q;
+q = p;
+*q = 1;
+cout &lt;&lt; a &lt;&lt; " " &lt;&lt; b;</code></pre></legend><div class="opts"><button type="button">1 9</button><button type="button">9 9</button><button type="button">1 1</button><button type="button">5 1</button></div><p class="why" hidden>a primește 9, apoi q indică a și a devine 1; b rămâne 9.</p></fieldset><fieldset class="q" data-a="1"><legend>3. Cum eliberezi memoria alocată cu <code>new int[100]</code>?</legend><div class="opts"><button type="button">delete p;</button><button type="button">delete[] p;</button><button type="button">free(p);</button><button type="button">p = nullptr;</button></div><p class="why" hidden>new[] → delete[].</p></fieldset><fieldset class="q" data-a="0"><legend>4. Ce valoare are <code>q - p</code> dacă p = &amp;v[2] și q = &amp;v[7]?</legend><div class="opts"><button type="button">5</button><button type="button">20</button><button type="button">adresa v[5]</button><button type="button">7</button></div><p class="why" hidden>Numărul de elemente dintre ele.</p></fieldset></div>
+<div class="done-row"><label class="done-toggle"><input type="checkbox" data-done="c8"> Am terminat lecția</label></div><nav class="pn"><a href="#c7" class="btn btn-ghost">← 7. Fișiere text</a><a href="#c9" class="btn btn-primary">9. Clase și obiecte →</a></nav></section>
+<section class="lesson" id="c9" aria-labelledby="c9-t"><div class="les-head"><span class="les-nr">9</span><div><h2 id="c9-t">Programare orientată pe obiecte: clase, obiecte, constructori, destructori</h2><p class="les-prog">Programa 5.B: clasă, membri (date și metode), obiecte, biblioteci, instanțierea unei clase predefinite, niveluri de acces, constructor, destructor, supraîncărcarea metodelor</p></div></div>
+<div class="obj"><h3>La finalul lecției vei ști</h3><ul><li>definirea unei clase cu date private și metode publice</li><li>constructori (inclusiv supraîncărcați) și destructor</li><li>ordinea apelurilor constructor/destructor</li><li>supraîncărcarea metodelor; clasele predefinite (string)</li></ul></div>
+
+<pre data-lang="c++"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class Cont {
+private:                          // accesibil doar din metodele clasei
+    string titular;
+    double sold;
+public:                           // interfața clasei
+    Cont() : titular("anonim"), sold(0) { cout &lt;&lt; "[C-implicit] "; }
+    Cont(string t, double s = 0) : titular(t), sold(s) { cout &lt;&lt; "[C-" &lt;&lt; t &lt;&lt; "] "; }
+    ~Cont() { cout &lt;&lt; "[D-" &lt;&lt; titular &lt;&lt; "] "; }
+
+    void depune(double suma) { if (suma &gt; 0) sold += suma; }
+    void depune(int bancnote, int valoare) { depune((double)bancnote * valoare); }  // supraîncărcare
+    double getSold() const { return sold; }
+};
+
+int main() {
+    Cont a("Ana", 100);
+    a.depune(50.0);
+    a.depune(3, 10);
+    cout &lt;&lt; "\nsold Ana: " &lt;&lt; a.getSold() &lt;&lt; "\n";
+    {
+        Cont b;                   // constructorul implicit
+        cout &lt;&lt; "\n";
+    }                             // b este distrus la ieșirea din bloc
+    cout &lt;&lt; "\nfinal main\n";
+    return 0;
+}                                 // aici este distrus a</code></pre><pre class="out" data-lang="ieșire"><code>[C-Ana] 
+sold Ana: 180
+[C-implicit] 
+[D-anonim] 
+final main
+[D-Ana] </code></pre>
+<ul>
+<li>Niveluri de acces: <code>private</code> (implicit în <code>class</code>), <code>protected</code> (și în clasele derivate), <code>public</code> (implicit în <code>struct</code>). Datele se țin private, iar accesul se face prin metode (încapsulare).</li>
+<li><strong>Constructorul</strong> are numele clasei, fără tip returnat, și se apelează automat la crearea obiectului; poate fi supraîncărcat. <strong>Destructorul</strong> <code>~Clasa()</code> este unic, fără parametri, apelat automat la distrugerea obiectului (ieșirea din bloc, <code>delete</code>).</li>
+<li>Obiectele locale se distrug în ordinea inversă creării.</li>
+<li>Clase predefinite: <code>string</code>, <code>ifstream</code>, <code>vector</code> – se instanțiază și se folosesc prin metodele lor (<code>s.length()</code>).</li>
+</ul>
+
+<h3 class="sec">Aplicații</h3><p class="hint">Rezolvă în scris (în caseta de mai jos sau pe hârtie), apoi deschide rezolvarea-model și bifează criteriile pe care le îndeplinește răspunsul tău.</p>
+<div class="ex app" id="c9-e1" data-app="c9-e1"><div class="ex-h"><b>Aplicația 9.1</b><span>Clasa Fractie</span><span class="lvl">dificil</span><span class="st" aria-live="polite"></span></div><div><p>Scrie clasa <code>Fractie</code> cu numărător și numitor privați, un constructor care simplifică fracția, metoda <code>aduna(Fractie f)</code> care întoarce suma și metoda <code>afiseaza()</code>. Afișează 1/2 + 1/3 și 6/8.</p></div><textarea class="ans" placeholder="Scrie aici răspunsul tău (se salvează doar în acest browser)" aria-label="Răspunsul tău la aplicația 9.1"></textarea><details class="sol"><summary>Vezi rezolvarea-model</summary><div class="body"><pre data-lang="c++"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class Fractie {
+    int a, b;
+    static int cmmdc(int x, int y) { while (y) { int r = x % y; x = y; y = r; } return x &lt; 0 ? -x : x; }
+public:
+    Fractie(int x = 0, int y = 1) {
+        int d = cmmdc(x, y);
+        if (y &lt; 0) d = -d;
+        a = x / d; b = y / d;
+    }
+    Fractie aduna(Fractie f) const { return Fractie(a * f.b + f.a * b, b * f.b); }
+    void afiseaza() const { cout &lt;&lt; a &lt;&lt; "/" &lt;&lt; b &lt;&lt; "\n"; }
+};
+
+int main() {
+    Fractie x(1, 2), y(1, 3);
+    x.aduna(y).afiseaza();
+    Fractie(6, 8).afiseaza();
+    return 0;
+}</code></pre><p class="io-lbl">Se afișează</p><pre class="out" data-lang="ieșire"><code>5/6
+3/4</code></pre><div class="crit"><p class="io-lbl">Autoevaluare – bifează ce ai în răspunsul tău</p><label><input type="checkbox"> datele sunt private</label><label><input type="checkbox"> constructorul simplifică (cmmdc) și normalizează semnul</label><label><input type="checkbox"> aduna întoarce un obiect nou, fără a modifica operanzii</label><label><input type="checkbox"> metodele care nu modifică obiectul sunt const</label></div></div></details><div class="ide-bar"><label class="done-toggle sm"><input type="checkbox" class="app-ok"> Am rezolvat și am verificat</label></div></div>
+<div class="quiz" data-quiz><h3>Test de verificare <span class="score"></span></h3><fieldset class="q" data-a="0"><legend>1. Ce afișează programul?<pre data-lang="c++"><code>class A {
+    int x;
+public:
+    A(int v) : x(v) { cout &lt;&lt; "C" &lt;&lt; x &lt;&lt; " "; }
+    ~A() { cout &lt;&lt; "D" &lt;&lt; x &lt;&lt; " "; }
+};
+int main() {
+    A a(1);
+    A b(2);
+    return 0;
+}</code></pre></legend><div class="opts"><button type="button">C1 C2 D2 D1</button><button type="button">C1 C2 D1 D2</button><button type="button">C1 D1 C2 D2</button><button type="button">C2 C1 D1 D2</button></div><p class="why" hidden>Distrugerea se face în ordine inversă construirii.</p></fieldset><fieldset class="q" data-a="0"><legend>2. Ce afișează programul?<pre data-lang="c++"><code>class Calc {
+public:
+    int f(int a) { return a * 2; }
+    int f(int a, int b) { return a + b; }
+    double f(double a) { return a / 2; }
+};
+int main() {
+    Calc c;
+    cout &lt;&lt; c.f(3) &lt;&lt; " " &lt;&lt; c.f(3, 4) &lt;&lt; " " &lt;&lt; c.f(3.0);
+    return 0;
+}</code></pre></legend><div class="opts"><button type="button">6 7 1.5</button><button type="button">1.5 7 6</button><button type="button">6 7 6</button><button type="button">eroare</button></div><p class="why" hidden>Se alege varianta după numărul și tipul argumentelor.</p></fieldset><fieldset class="q" data-a="1"><legend>3. Membrii declarați fără specificator într-o <code>class</code> sunt:</legend><div class="opts"><button type="button">public</button><button type="button">private</button><button type="button">protected</button><button type="button">statici</button></div><p class="why" hidden>În struct ar fi public.</p></fieldset><fieldset class="q" data-a="2"><legend>4. Ce afirmație despre destructor este adevărată?</legend><div class="opts"><button type="button">poate fi supraîncărcat</button><button type="button">are parametri</button><button type="button">este unic și fără parametri</button><button type="button">returnează int</button></div><p class="why" hidden>~Clasa(), unul singur.</p></fieldset></div>
+<div class="done-row"><label class="done-toggle"><input type="checkbox" data-done="c9"> Am terminat lecția</label></div><nav class="pn"><a href="#c8" class="btn btn-ghost">← 8. Pointeri și memorie dinamică</a><a href="#c10" class="btn btn-primary">10. Moștenire și polimorfism →</a></nav></section>
+<section class="lesson" id="c10" aria-labelledby="c10-t"><div class="les-head"><span class="les-nr">10</span><div><h2 id="c10-t">Clase derivate: moștenire și polimorfism</h2><p class="les-prog">Programa 5.B: clasă derivată</p></div></div>
+<div class="obj"><h3>La finalul lecției vei ști</h3><ul><li>sintaxa moștenirii publice</li><li>ordinea constructorilor/destructorilor la moștenire</li><li>redefinirea metodelor și funcțiile virtuale</li><li>de ce destructorul bazei trebuie să fie virtual</li></ul></div>
+
+<pre data-lang="c++"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class Figura {
+protected:
+    string nume;
+public:
+    Figura(string n) : nume(n) { cout &lt;&lt; "C-" &lt;&lt; nume &lt;&lt; " "; }
+    virtual double arie() const { return 0; }
+    virtual ~Figura() { cout &lt;&lt; "D-" &lt;&lt; nume &lt;&lt; " "; }
+};
+
+class Dreptunghi : public Figura {
+    double L, l;
+public:
+    Dreptunghi(double a, double b) : Figura("Dr"), L(a), l(b) { cout &lt;&lt; "C-Dreptunghi "; }
+    double arie() const override { return L * l; }
+    ~Dreptunghi() { cout &lt;&lt; "D-Dreptunghi "; }
+};
+
+class Cerc : public Figura {
+    double r;
+public:
+    Cerc(double x) : Figura("Cerc"), r(x) {}
+    double arie() const override { return 3.14 * r * r; }
+};
+
+int main() {
+    Figura *f[2] = {new Dreptunghi(2, 3), new Cerc(1)};
+    cout &lt;&lt; "\n";
+    for (int i = 0; i &lt; 2; i++) cout &lt;&lt; f[i]-&gt;arie() &lt;&lt; " ";   // polimorfism
+    cout &lt;&lt; "\n";
+    for (int i = 0; i &lt; 2; i++) delete f[i];
+    cout &lt;&lt; "\n";
+    return 0;
+}</code></pre><pre class="out" data-lang="ieșire"><code>C-Dr C-Dreptunghi C-Cerc 
+6 3.14 
+D-Dreptunghi D-Dr D-Cerc </code></pre>
+<ul>
+<li><code>class D : public B</code> – D moștenește membrii lui B; membrii <code>protected</code> ai lui B sunt accesibili în D, cei <code>private</code> nu.</li>
+<li>Construcție: întâi constructorul bazei (apelat în lista de inițializare), apoi al derivatei; distrugere: invers.</li>
+<li>Prin <code>virtual</code>, apelul <code>f-&gt;arie()</code> pe un pointer la bază execută metoda clasei reale a obiectului (<strong>polimorfism</strong>). Fără <code>virtual</code> s-ar apela <code>Figura::arie()</code>.</li>
+<li>Destructorul bazei trebuie să fie <code>virtual</code> când obiectele derivate se șterg prin pointeri la bază; altfel destructorul derivatei nu se apelează.</li>
+</ul>
+
+<h3 class="sec">Aplicații</h3><p class="hint">Rezolvă în scris (în caseta de mai jos sau pe hârtie), apoi deschide rezolvarea-model și bifează criteriile pe care le îndeplinește răspunsul tău.</p>
+<div class="ex app" id="c10-e1" data-app="c10-e1"><div class="ex-h"><b>Aplicația 10.1</b><span>Angajat și Manager</span><span class="lvl">dificil</span><span class="st" aria-live="polite"></span></div><div><p>Clasa <code>Angajat</code> (nume, salariu – protected) are metoda virtuală <code>venit()</code>. Clasa derivată <code>Manager</code> adaugă un bonus și redefinește <code>venit()</code>. Într-un tablou de pointeri la <code>Angajat</code>, memorează un angajat și un manager și afișează venitul total.</p></div><textarea class="ans" placeholder="Scrie aici răspunsul tău (se salvează doar în acest browser)" aria-label="Răspunsul tău la aplicația 10.1"></textarea><details class="sol"><summary>Vezi rezolvarea-model</summary><div class="body"><pre data-lang="c++"><code>#include &lt;iostream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+class Angajat {
+protected:
+    string nume;
+    double salariu;
+public:
+    Angajat(string n, double s) : nume(n), salariu(s) {}
+    virtual double venit() const { return salariu; }
+    virtual ~Angajat() {}
+};
+
+class Manager : public Angajat {
+    double bonus;
+public:
+    Manager(string n, double s, double b) : Angajat(n, s), bonus(b) {}
+    double venit() const override { return salariu + bonus; }
+};
+
+int main() {
+    Angajat *v[2] = {new Angajat("Ana", 4000), new Manager("Dan", 6000, 1500)};
+    double total = 0;
+    for (int i = 0; i &lt; 2; i++) total += v[i]-&gt;venit();
+    cout &lt;&lt; total &lt;&lt; "\n";
+    for (int i = 0; i &lt; 2; i++) delete v[i];
+    return 0;
+}</code></pre><p class="io-lbl">Se afișează</p><pre class="out" data-lang="ieșire"><code>11500</code></pre><div class="crit"><p class="io-lbl">Autoevaluare – bifează ce ai în răspunsul tău</p><label><input type="checkbox"> Manager moștenește public din Angajat</label><label><input type="checkbox"> constructorul derivatei apelează constructorul bazei</label><label><input type="checkbox"> venit() este virtual în bază</label><label><input type="checkbox"> destructorul bazei este virtual; eliberez memoria</label></div></div></details><div class="ide-bar"><label class="done-toggle sm"><input type="checkbox" class="app-ok"> Am rezolvat și am verificat</label></div></div>
+<div class="quiz" data-quiz><h3>Test de verificare <span class="score"></span></h3><fieldset class="q" data-a="0"><legend>1. Ce afișează programul?<pre data-lang="c++"><code>class B {
+public:
+    B() { cout &lt;&lt; "B"; }
+    ~B() { cout &lt;&lt; "~B"; }
+};
+class D : public B {
+public:
+    D() { cout &lt;&lt; "D"; }
+    ~D() { cout &lt;&lt; "~D"; }
+};
+int main() {
+    D x;
+    return 0;
+}</code></pre></legend><div class="opts"><button type="button">BD~D~B</button><button type="button">DB~B~D</button><button type="button">BD~B~D</button><button type="button">D~D</button></div><p class="why" hidden>Baza se construiește prima și se distruge ultima.</p></fieldset><fieldset class="q" data-a="0"><legend>2. Ce afișează programul?<pre data-lang="c++"><code>class A {
+public:
+    void f() { cout &lt;&lt; "A"; }
+    virtual void g() { cout &lt;&lt; "A"; }
+};
+class B : public A {
+public:
+    void f() { cout &lt;&lt; "B"; }
+    void g() override { cout &lt;&lt; "B"; }
+};
+int main() {
+    A *p = new B();
+    p-&gt;f();
+    p-&gt;g();
+    delete p;
+    return 0;
+}</code></pre></legend><div class="opts"><button type="button">AB</button><button type="button">BB</button><button type="button">AA</button><button type="button">BA</button></div><p class="why" hidden>f nu este virtuală (se alege după tipul pointerului), g este virtuală (după tipul obiectului).</p></fieldset><fieldset class="q" data-a="1"><legend>3. Membrii <code>private</code> ai clasei de bază sunt, în clasa derivată:</legend><div class="opts"><button type="button">accesibili direct</button><button type="button">inaccesibili direct</button><button type="button">copiați ca public</button><button type="button">șterși</button></div><p class="why" hidden>Doar protected și public sunt accesibili în derivată.</p></fieldset><fieldset class="q" data-a="1"><legend>4. Ce permite cuvântul cheie <code>virtual</code>?</legend><div class="opts"><button type="button">moștenirea multiplă</button><button type="button">apelul metodei clasei reale prin pointer la bază</button><button type="button">accesul la membrii privați</button><button type="button">crearea de obiecte fără constructor</button></div><p class="why" hidden>Legare dinamică (polimorfism).</p></fieldset></div>
+<div class="done-row"><label class="done-toggle"><input type="checkbox" data-done="c10"> Am terminat lecția</label></div><nav class="pn"><a href="#c9" class="btn btn-ghost">← 9. Clase și obiecte</a><a href="metodica" class="btn btn-primary">Etapa 4: Metodică →</a></nav></section>
+  </div>
+</div>
+</main>
+<footer class="site-footer"><div class="wrap foot-row">
+  <a class="footer-brand-surface" href="./" aria-label="Catalog360.ro"><span class="brand-mark"><img src="assets/logo-catalog360.png" alt="Catalog360.ro" width="2172" height="724" loading="lazy"></span></a>
+  <p style="margin:0;max-width:62ch">Material de pregătire independent, după programa de concurs (Anexa 49, MO nr. 972 bis/23.XI.2026). Nu este un document oficial al Ministerului Educației. Exercițiile Python rulează local, în browser, cu Pyodide.</p>
+</div></footer>
+
+<script type="text/plain" id="runner">
+import sys, io, os, traceback
+
+def __run(code, stdin, files, echo):
+    os.chdir('/home/pyodide')
+    for n in os.listdir('.'):
+        if os.path.isfile(n):
+            os.remove(n)
+    for n, c in files.items():
+        with open(n, 'w', encoding='utf-8') as f:
+            f.write(c)
+    sin = io.StringIO(stdin)
+    out = io.StringIO()
+
+    def inp(prompt=''):
+        if echo and prompt:
+            out.write(str(prompt))
+        linie = sin.readline()
+        if not linie:
+            raise EOFError('nu mai sunt date de intrare')
+        linie = linie.rstrip('\n')
+        if echo:
+            out.write(linie + '\n')
+        return linie
+
+    g = {'__name__': '__main__', 'input': inp}
+    vechi = (sys.stdin, sys.stdout)
+    sys.stdin, sys.stdout = sin, out
+    err = ''
+    try:
+        exec(compile(code, 'program.py', 'exec'), g)
+    except SystemExit:
+        pass
+    except SyntaxError as e:
+        err = f'SyntaxError: {e.msg} (linia {e.lineno})'
+    except BaseException as e:
+        cadre = [f for f in traceback.extract_tb(e.__traceback__) if f.filename == 'program.py']
+        err = f'{type(e).__name__}: {e}' + (f' (linia {cadre[-1].lineno})' if cadre else '')
+    finally:
+        sys.stdin, sys.stdout = vechi
+    fo = {}
+    for n in os.listdir('.'):
+        if n not in files and os.path.isfile(n):
+            try:
+                with open(n, encoding='utf-8') as f:
+                    fo[n] = f.read()
+            except Exception:
+                pass
+    return out.getvalue(), err, fo
+</script>
+<script>
+var DATE = {};
+var APLICATII = ["c1-e1", "c1-e2", "c2-e1", "c2-e2", "c3-e1", "c3-e2", "c4-e1", "c4-e2", "c5-e1", "c5-e2", "c6-e1", "c7-e1", "c8-e1", "c9-e1", "c10-e1"];
+(function(){
+  document.documentElement.classList.add('js');
+  var BASE = 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/';
+  try { var q = new URLSearchParams(location.search).get('pyo'); if (q && /^http:\/\/(localhost|127\.0\.0\.1)[:/]/.test(q)) BASE = q; } catch (e) {}
+  var KEY = 'c360-curs-cpp';
+  var st = {}; try { st = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) {}
+  st.cod = st.cod || {}; st.ok = st.ok || {}; st.done = st.done || {};
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} }
+  function esc(t){ return String(t).replace(/[&<>]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); }
+  function norm(t){ var l = String(t).replace(/\r\n/g, '\n').split('\n').map(function(x){ return x.replace(/\s+$/, ''); }); while (l.length && l[l.length-1] === '') l.pop(); return l.join('\n'); }
+
+  // ---------- Python în Web Worker ----------
+  var WSRC = "var py=null;self.onmessage=async function(e){var m=e.data;try{if(m.type==='init'){importScripts(m.base+'pyodide.js');py=await loadPyodide({indexURL:m.base});py.runPython(m.runner);postMessage({type:'ready'});return;}var f=py.globals.get('__run');var r=f(m.code,m.stdin,py.toPy(m.files||{}),!!m.echo);var a=r.toJs({dict_converter:Object.fromEntries});r.destroy();f.destroy();postMessage({type:'res',id:m.id,out:a[0],err:a[1],files:a[2]});}catch(x){postMessage({type:m.type==='init'?'fail':'res',id:m.id,out:'',err:String(x),files:{}});}};";
+  var worker = null, ready = null, seq = 0;
+  function boot(){
+    if (ready) return ready;
+    worker = new Worker(URL.createObjectURL(new Blob([WSRC], {type:'text/javascript'})));
+    ready = new Promise(function(res, rej){
+      worker.onmessage = function(e){ if (e.data.type === 'ready') res(); else if (e.data.type === 'fail') rej(e.data.err); };
+      worker.onerror = function(e){ rej(e.message || 'eroare la încărcare'); };
+    });
+    ready.catch(function(){ worker && worker.terminate(); worker = null; ready = null; });
+    worker.postMessage({type:'init', base:BASE, runner:document.getElementById('runner').textContent});
+    return ready;
+  }
+  function run(code, stdin, files, echo){
+    return boot().then(function(){
+      return new Promise(function(resolve){
+        var id = ++seq;
+        var t = setTimeout(function(){ worker.terminate(); worker = null; ready = null;
+          resolve({out:'', err:'Timp depășit (peste 8 secunde). Verifică dacă buclele se termină și dacă citești exact câte date există.', files:{}}); }, 8000);
+        worker.onmessage = function(e){ if (e.data.type === 'res' && e.data.id === id){ clearTimeout(t); resolve(e.data); } };
+        worker.postMessage({type:'run', id:id, code:code, stdin:stdin, files:files || {}, echo:echo});
+      });
+    });
+  }
+
+  // ---------- Editor ----------
+  function editor(ta){
+    ta.addEventListener('keydown', function(e){
+      var s = ta.selectionStart, en = ta.selectionEnd, v = ta.value;
+      if (e.key === 'Tab' && !e.ctrlKey && !e.altKey) {
+        e.preventDefault();
+        if (e.shiftKey) {
+          var ls = v.lastIndexOf('\n', s - 1) + 1;
+          var m = v.slice(ls).match(/^ {1,4}/);
+          if (m) { ta.value = v.slice(0, ls) + v.slice(ls + m[0].length); ta.selectionStart = ta.selectionEnd = Math.max(ls, s - m[0].length); }
+        } else { ta.value = v.slice(0, s) + '    ' + v.slice(en); ta.selectionStart = ta.selectionEnd = s + 4; }
+        ta.dispatchEvent(new Event('input'));
+      } else if (e.key === 'Enter' && !e.ctrlKey && !e.metaKey) {
+        var ls2 = v.lastIndexOf('\n', s - 1) + 1, line = v.slice(ls2, s);
+        var ind = line.match(/^ */)[0]; if (/:\s*$/.test(line)) ind += '    ';
+        e.preventDefault();
+        ta.value = v.slice(0, s) + '\n' + ind + v.slice(en); ta.selectionStart = ta.selectionEnd = s + 1 + ind.length;
+        ta.dispatchEvent(new Event('input'));
+      } else if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault(); var b = ta.closest('.ex').querySelector('.b-check'); if (b) b.click();
+      }
+    });
+  }
+
+  // ---------- Exerciții ----------
+  var lessons = Array.prototype.slice.call(document.querySelectorAll('.lesson'));
+  var ALL = Object.keys(DATE).concat(APLICATII);
+  var totalEx = ALL.length;
+  function counts(){
+    var n = 0;
+    lessons.forEach(function(L){
+      var ids = ALL.filter(function(k){ return k.indexOf(L.id + '-e') === 0; });
+      var ok = ids.filter(function(k){ return st.ok[k]; }).length; n += ok;
+      var c = document.querySelector('[data-cnt="' + L.id + '"]'); if (c && ids.length) c.textContent = ok + '/' + ids.length;
+      var a = document.querySelector('.toc a[href="#' + L.id + '"]'); if (a) a.classList.toggle('done', !!st.done[L.id] || (ids.length > 0 && ok === ids.length));
+    });
+    document.getElementById('progTxt').textContent = n + '/' + totalEx;
+    document.getElementById('progBar').style.width = (totalEx ? n / totalEx * 100 : 0) + '%';
+  }
+  document.querySelectorAll('.ex.task').forEach(function(box){
+    var id = box.getAttribute('data-ex'), D = DATE[id];
+    var ta = box.querySelector('.ide textarea'), res = box.querySelector('.res'), stEl = box.querySelector('.st');
+    var bCheck = box.querySelector('.b-check'), bRun = box.querySelector('.b-run');
+    ta.value = st.cod[id] != null ? st.cod[id] : D.start;
+    ta.rows = Math.max(8, ta.value.split('\n').length + 2);
+    editor(ta);
+    ta.addEventListener('input', function(){ st.cod[id] = ta.value; save(); });
+    function mark(){ box.classList.toggle('ok', !!st.ok[id]); stEl.textContent = st.ok[id] ? '✓ rezolvat' : ''; }
+    mark();
+    function busy(on, msg){ bCheck.disabled = bRun.disabled = on; if (on){ res.hidden = false; res.className = 'res'; res.innerHTML = '<p>' + msg + '</p>'; } }
+    function loadMsg(){ return ready ? 'Se rulează…' : 'Se încarcă Python în browser (doar prima dată, câteva secunde)…'; }
+    bRun.addEventListener('click', function(){
+      busy(true, loadMsg());
+      var fis = D.teste[0].fis;
+      run(ta.value, box.querySelector('.stdin textarea').value + '\n', fis, true).then(function(r){
+        busy(false);
+        var h = '<h4>Rezultatul rulării</h4><pre class="out" data-lang="ieșire"><code>' + esc(r.out || '(nimic afișat)') + '</code></pre>';
+        Object.keys(r.files || {}).forEach(function(n){ h += '<p class="io-lbl">Fișierul ' + esc(n) + '</p><pre class="out"><code>' + esc(r.files[n]) + '</code></pre>'; });
+        if (r.err) h += '<p><b>Eroare:</b> <code>' + esc(r.err) + '</code></p>';
+        res.className = 'res' + (r.err ? ' bad' : ''); res.innerHTML = h;
+      }, function(err){ busy(false); res.className = 'res bad'; res.innerHTML = '<p>Interpretorul Python nu s-a putut încărca (verifică conexiunea la internet). Detalii: ' + esc(err) + '</p>'; });
+    });
+    bCheck.addEventListener('click', function(){
+      busy(true, loadMsg());
+      var i = 0, rez = [];
+      function next(){
+        if (i >= D.teste.length) return finish();
+        var T = D.teste[i];
+        run(ta.value, T['in'] ? T['in'] + (T['in'].slice(-1) === '\n' ? '' : '\n') : '', T.fis, false).then(function(r){
+          var ok = !r.err && norm(r.out) === T.out;
+          var lipsa = '';
+          if (ok && T.fout) Object.keys(T.fout).forEach(function(n){
+            if (!(n in r.files)) { ok = false; lipsa = 'Programul nu a creat fișierul ' + n + '.'; }
+            else if (norm(r.files[n]) !== T.fout[n]) { ok = false; lipsa = 'Conținutul fișierului ' + n + ' nu este cel așteptat.'; r.outFile = [n, r.files[n]]; }
+          });
+          rez.push({ok:ok, r:r, T:T, lipsa:lipsa}); i++;
+          if (!ok) return finish(); next();
+        }, function(err){ busy(false); res.className = 'res bad'; res.innerHTML = '<p>Interpretorul Python nu s-a putut încărca (verifică conexiunea la internet). Detalii: ' + esc(err) + '</p>'; });
+      }
+      function finish(){
+        busy(false);
+        var all = rez.length === D.teste.length && rez.every(function(x){ return x.ok; });
+        var h = '<div class="tests">' + D.teste.map(function(_, k){ var x = rez[k]; return '<span class="' + (x ? (x.ok ? 'p' : 'f') : '') + '">Test ' + (k+1) + (x ? (x.ok ? ' ✓' : ' ✗') : ' –') + '</span>'; }).join('') + '</div>';
+        if (all) { h = '<h4>Corect! Toate cele ' + D.teste.length + ' teste au trecut.</h4>' + h; st.ok[id] = true; save(); }
+        else {
+          var f = rez[rez.length - 1], T = f.T;
+          h = '<h4>Testul ' + rez.length + ' nu a trecut</h4>' + h;
+          Object.keys(T.fis || {}).forEach(function(n){ h += '<p class="io-lbl">Fișierul ' + esc(n) + '</p><pre class="out"><code>' + esc(T.fis[n]) + '</code></pre>'; });
+          if (T['in']) h += '<p class="io-lbl">Intrare</p><pre class="out"><code>' + esc(T['in']) + '</code></pre>';
+          if (f.r.err) h += '<p><b>Eroare:</b> <code>' + esc(f.r.err) + '</code></p>';
+          else if (f.lipsa) h += '<p>' + esc(f.lipsa) + '</p>' + (f.r.outFile ? '<div class="cmp"><div><p class="io-lbl">Așteptat</p><pre class="out"><code>' + esc(T.fout[f.r.outFile[0]]) + '</code></pre></div><div><p class="io-lbl">Obținut</p><pre class="out"><code>' + esc(f.r.outFile[1]) + '</code></pre></div></div>' : '');
+          else h += '<div class="cmp"><div><p class="io-lbl">Așteptat</p><pre class="out"><code>' + esc(T.out || '(nimic)') + '</code></pre></div><div><p class="io-lbl">Obținut</p><pre class="out"><code>' + esc(norm(f.r.out) || '(nimic)') + '</code></pre></div></div>';
+        }
+        res.className = 'res ' + (all ? 'good' : 'bad'); res.innerHTML = h; mark(); counts();
+      }
+      next();
+    });
+    box.querySelector('.b-sol').addEventListener('click', function(){
+      if (ta.value.trim() && ta.value !== D.start && ta.value !== D.sol && !confirm('Înlocuiești codul tău cu soluția? (Încearcă întâi singur!)')) return;
+      ta.value = D.sol; ta.rows = Math.max(8, D.sol.split('\n').length + 2); st.cod[id] = ta.value; save();
+    });
+    box.querySelector('.b-reset').addEventListener('click', function(){
+      if (!confirm('Ștergi codul scris și revii la varianta inițială?')) return;
+      ta.value = D.start; st.cod[id] = ta.value; save();
+    });
+  });
+
+  // ---------- Aplicații (răspuns liber) ----------
+  document.querySelectorAll('.ex.app').forEach(function(box){
+    var id = box.getAttribute('data-app'), ans = box.querySelector('textarea.ans'), ok = box.querySelector('.app-ok'), stEl = box.querySelector('.st');
+    st.ans = st.ans || {};
+    if (ans) { ans.value = st.ans[id] || ''; ans.addEventListener('input', function(){ st.ans[id] = ans.value; save(); }); }
+    function mark(){ ok.checked = !!st.ok[id]; box.classList.toggle('ok', !!st.ok[id]); stEl.textContent = st.ok[id] ? '✓ rezolvat' : ''; }
+    ok.addEventListener('change', function(){ st.ok[id] = ok.checked; save(); mark(); counts(); });
+    mark();
+  });
+
+  // ---------- Teste grilă ----------
+  document.querySelectorAll('[data-quiz]').forEach(function(quiz){
+    var qs = quiz.querySelectorAll('.q'), sc = quiz.querySelector('.score'), ans = 0, right = 0;
+    qs.forEach(function(q){
+      var c = +q.getAttribute('data-a'), bs = q.querySelectorAll('.opts button');
+      bs.forEach(function(b, i){ b.addEventListener('click', function(){
+        bs.forEach(function(x){ x.disabled = true; }); bs[c].classList.add('right');
+        if (i !== c) b.classList.add('wrong'); else right++; ans++;
+        q.querySelector('.why').hidden = false;
+        sc.textContent = right + ' corecte din ' + ans + (ans < qs.length ? ' · mai ai ' + (qs.length - ans) : ' · gata');
+      }); });
+    });
+  });
+
+  // ---------- Lecție terminată ----------
+  document.querySelectorAll('[data-done]').forEach(function(b){
+    var id = b.getAttribute('data-done'); b.checked = !!st.done[id];
+    b.addEventListener('change', function(){ st.done[id] = b.checked; save(); counts(); });
+  });
+
+  // ---------- Navigare: o lecție pe ecran ----------
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  function show(fromHash){
+    var h = decodeURIComponent(location.hash.slice(1)), target = h ? document.getElementById(h) : null;
+    var L = target ? (target.classList.contains('lesson') ? target : target.closest('.lesson')) : null;
+    if (!L) L = document.getElementById(st.last) || lessons[0];
+    lessons.forEach(function(x){ x.classList.toggle('show', x === L); });
+    links.forEach(function(a){ a.classList.toggle('on', a.getAttribute('href') === '#' + L.id); });
+    st.last = L.id; st.t = Date.now(); save();
+    if (fromHash) {
+      if (target && target !== L) target.scrollIntoView();
+      else document.querySelector('.layout').scrollIntoView();
+    }
+  }
+  window.addEventListener('hashchange', function(){ show(true); });
+  show(!!location.hash);
+  counts();
+})();
+</script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-from util import C, O, T
+from util import C, CO, O, T
 
 LECTII = []
 
@@ -15,7 +15,7 @@ LECTII.append(dict(
    ["2 000 – 5 000", "O(n²)", "bule, selecție, două bucle imbricate"],
    ["10⁵ – 10⁶", "O(n log n) sau O(n)", "sorted, căutare binară, frecvențe, ciur"],
    ["10¹² (o singură valoare)", "O(√n) sau O(log n)", "primalitate, exponențiere rapidă"])}
-{C('''def ciur(n):                        # toate numerele prime ≤ n
+{CO('''def ciur(n):                        # toate numerele prime ≤ n
     prim = [True] * (n + 1)
     prim[0] = prim[1] = False
     for i in range(2, int(n ** 0.5) + 1):
@@ -48,14 +48,12 @@ def prima_poz(v, x):                # prima poziție cu v[i] >= x (v sortat)
 print(ciur(30))
 w = [5, 1, 4, 2]; bule(w); print(w)
 print(prima_poz([1, 3, 3, 7, 9], 3), prima_poz([1, 3, 3, 7, 9], 8), prima_poz([1, 3], 10))''')}
-{O("[2, 3, 5, 7, 11, 13, 17, 19, 23, 29]\n[1, 2, 4, 5]\n1 4 2")}
 <p>În biblioteca standard: <code>bisect.bisect_left(v, x)</code> face exact ce face <code>prima_poz</code>. La examen poți fi rugat să implementezi algoritmul, deci învață-l și „de mână”.</p>
 <h3>Generare sistematică</h3>
-{C('''from itertools import product, permutations, combinations
+{CO('''from itertools import product, permutations, combinations
 print(list(product([0, 1], repeat=2)))       # produs cartezian
 print(list(permutations("abc", 2))[:4])      # aranjamente
 print(list(combinations(range(1, 5), 2)))    # combinări''')}
-{O("[(0, 0), (0, 1), (1, 0), (1, 1)]\n[('a', 'b'), ('a', 'c'), ('b', 'a'), ('b', 'c')]\n[(1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)]")}
 """,
     rezolvate=[
         dict(titlu="Sortare prin numărare (listă de frecvențe)", enunt="Se dau note întregi de la 1 la 10. Afișează-le sortate și nota cea mai frecventă.",
@@ -90,7 +88,7 @@ LECTII.append(dict(
     programa="Programa 5.A: clasă, membri (date și metode), obiecte, biblioteci, niveluri de acces, constructor, destructor/finalizer, clasă derivată; capitolul 1: modelul obiectual",
     obiective=["definirea unei clase cu constructor și metode", "atribute de instanță și de clasă", "niveluri de acces prin convenție și name mangling", "moștenire, super() și suprascriere", "metode speciale: __str__, __eq__, __lt__"],
     teorie=f"""
-{C('''class ContBancar:
+{CO('''class ContBancar:
     banca = "Banca Școlii"                 # atribut de CLASĂ (comun tuturor obiectelor)
 
     def __init__(self, titular, sold=0):   # constructorul
@@ -125,7 +123,6 @@ b = ContEconomii("Dan", 200); b.aplica_dobanda()
 for c in (a, b):
     print(c)
 print(isinstance(b, ContBancar), ContBancar.banca)''')}
-{O("Ana: 150 lei\nDan: 210.0 lei (economii, 5%)\nTrue Banca Școlii")}
 <ul>
 <li><code>self</code> este obiectul curent; se scrie explicit ca prim parametru al metodelor.</li>
 <li>Python nu are <code>private</code>/<code>public</code> ca C++: <code>_x</code> este o convenție, iar <code>__x</code> este doar redenumit (<em>name mangling</em>).</li>

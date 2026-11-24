@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Algoritmi și structuri de date – curs pentru titularizare | Catalog360.ro</title>
+<meta name="description" content="Algoritmi și structuri de date pentru titularizarea la Informatică: complexitate, metode de programare, stive, cozi, grafuri, arbori, criptare – cu exerciții verificate automat în Python.">
+<link rel="canonical" href="https://catalog360.ro/algoritmi">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0F2D44">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:site_name" content="Catalog360.ro">
+<meta property="og:title" content="Algoritmi și structuri de date – curs pentru titularizare | Catalog360.ro">
+<meta property="og:url" content="https://catalog360.ro/algoritmi">
+<link rel="icon" href="assets/logo-catalog360.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --navy:#0F2D44; --navy-3:#24506F; --paper:#FAF8F5; --paper-2:#F3EFE8; --white:#FFFFFF;
+  --ink:#0F2D44; --muted:#51667A; --line:#E4DED4;
+  --mint:#22C55E; --mint-ink:#15803D; --mint-soft:#E7F7EC;
+  --orange-ink:#9A5B00; --orange-soft:#FEF3DC; --red-ink:#B42318; --red-soft:#FDECEA;
+  --code-bg:#0E2233; --code-ink:#E6EDF3;
+  --serif:"Playfair Display", Georgia, serif;
+  --sans:"Manrope", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Consolas, monospace;
+  --r-sm:10px; --r:16px; --r-lg:24px; --wrap:1240px; --gutter:clamp(16px, 4vw, 40px);
+  color-scheme: light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-padding-top:130px}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--mint); outline-offset:3px; border-radius:6px}
+.wrap{max-width:var(--wrap); margin-inline:auto; padding-inline:var(--gutter)}
+.skip{position:absolute; left:-999px; top:8px; background:var(--navy); color:#fff; padding:10px 16px; border-radius:8px; z-index:100}
+.skip:focus{left:16px}
+h1,h2,h3,h4{font-family:var(--serif); font-weight:600; line-height:1.15; letter-spacing:-.01em; margin:0; text-wrap:balance}
+h1{font-size:clamp(2.2rem, 5vw, 3.6rem)}
+h2{font-size:clamp(1.6rem, 3vw, 2.2rem)}
+h3{font-size:1.25rem; margin:28px 0 10px}
+h4{font-family:var(--sans); font-size:1rem; font-weight:800; margin:18px 0 6px}
+p{margin:0 0 12px} ul,ol{margin:0 0 12px; padding-left:1.3em} li{margin-bottom:4px} li::marker{color:var(--mint-ink)}
+.eyebrow{font-size:.78rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--mint-ink); margin:0}
+.lede{font-size:clamp(1.02rem, 1.5vw, 1.15rem); color:var(--muted); max-width:70ch}
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:44px; padding:0 18px; border-radius:999px; font:700 .94rem var(--sans); text-decoration:none; border:2px solid transparent; cursor:pointer; transition:background-color .2s, color .2s}
+.btn-primary{background:var(--mint); color:var(--navy)}
+.btn-primary:hover{background:#2FD46B}
+.btn-ghost{border-color:var(--navy); color:var(--navy); background:transparent}
+.btn-ghost:hover{background:var(--navy); color:#fff}
+.btn-link{background:none; color:var(--navy-3); padding:0 10px; text-decoration:underline; text-underline-offset:3px}
+.btn:disabled{opacity:.6; cursor:wait}
+
+.site-header{position:sticky; top:0; z-index:50; background:rgba(250,248,245,.94); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid var(--line)}
+.nav{display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:70px}
+.brand-mark{display:block; width:180px; height:36px; overflow:hidden}
+.brand-mark img{width:180px; max-width:none; height:auto; transform:translateY(-12px)}
+.nav-right{display:flex; align-items:center; gap:14px; font-size:.9rem; font-weight:700}
+.nav-right a{text-decoration:none}
+.prog{display:flex; align-items:center; gap:8px; color:var(--muted)}
+.prog .track{width:110px; height:8px; border-radius:4px; background:var(--paper-2); border:1px solid var(--line); overflow:hidden}
+.prog .track i{display:block; height:100%; width:0; background:var(--mint); transition:width .3s}
+.show-s{display:none}
+@media (max-width:640px){ .hide-s{display:none} .show-s{display:inline} .prog .track, .prog .lbl{display:none} .brand-mark{width:150px; height:30px} .brand-mark img{width:150px; transform:translateY(-10px)} }
+
+.hero{padding-block:clamp(32px, 5vw, 64px) 28px}
+.hero-copy{display:grid; gap:16px}
+.hero-copy > *{max-width:900px}
+.hero h1 em{font-style:italic; color:var(--mint-ink)}
+.stats{display:flex; flex-wrap:wrap; gap:10px; margin-top:4px}
+.stats span{background:var(--white); border:1px solid var(--line); border-radius:999px; padding:6px 14px; font-size:.88rem; font-weight:700}
+.stats b{color:var(--mint-ink)}
+
+.layout{display:grid; grid-template-columns:270px minmax(0,1fr); gap:clamp(20px, 3vw, 40px); align-items:start; padding-bottom:72px}
+.toc{position:sticky; top:128px; max-height:calc(100vh - 142px); overflow:auto; background:var(--white); border:1px solid var(--line); border-radius:var(--r); padding:14px 10px; font-size:.9rem}
+.toc h2{font-family:var(--sans); font-size:.72rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:4px 10px 8px}
+.toc ol{list-style:none; margin:0; padding:0; display:grid; gap:2px}
+.toc li{margin:0}
+.toc a{display:grid; grid-template-columns:28px 1fr auto; gap:6px; align-items:start; padding:7px 10px; border-radius:8px; text-decoration:none; font-weight:600; line-height:1.35}
+.toc a:hover{background:var(--paper-2)}
+.toc a.on{background:var(--navy); color:#fff}
+.toc a.on .n{color:var(--mint)}
+.toc .n{font-weight:800; color:var(--mint-ink); font-variant-numeric:tabular-nums}
+.toc .cnt{font-size:.74rem; font-weight:800; color:var(--muted); padding-top:2px}
+.toc a.on .cnt{color:rgba(255,255,255,.7)}
+.toc a.done .cnt::after{content:" ✓"; color:var(--mint-ink)}
+.toc a.on.done .cnt::after{color:var(--mint)}
+@media (max-width:1000px){
+  .layout{grid-template-columns:minmax(0,1fr)}
+  .toc{position:static; max-height:none}
+  .toc ol{grid-template-columns:repeat(auto-fill, minmax(min(220px,100%),1fr))}
+}
+
+.lesson{background:var(--white); border:1px solid var(--line); border-radius:var(--r-lg); padding:clamp(18px, 3.5vw, 40px)}
+.js .lesson:not(.show){display:none}
+.les-head{display:grid; grid-template-columns:auto 1fr; gap:16px; align-items:start; padding-bottom:18px; margin-bottom:18px; border-bottom:1px solid var(--line)}
+.les-nr{width:54px; height:54px; border-radius:16px; background:var(--navy); color:#fff; display:grid; place-items:center; font:600 1.5rem var(--serif)}
+.les-prog{font-size:.86rem; color:var(--muted); margin:6px 0 0}
+.obj{background:var(--mint-soft); border-radius:var(--r-sm); padding:14px 18px; margin-bottom:8px}
+.obj h3{margin:0 0 6px; font-size:1.05rem}
+.obj ul{margin:0}
+h3.sec{font-size:1.45rem; margin-top:40px; padding-top:20px; border-top:1px solid var(--line)}
+.hint{font-size:.93rem; color:var(--muted)}
+.note{background:var(--mint-soft); border-radius:var(--r-sm); padding:12px 16px; margin:12px 0; font-size:.95rem}
+.note.warn{background:var(--orange-soft)}
+.tbl{overflow-x:auto; margin:10px 0 16px; border:1px solid var(--line); border-radius:var(--r-sm)}
+table{width:100%; border-collapse:collapse; font-size:.92rem; min-width:520px}
+th,td{text-align:left; padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top}
+th{background:var(--paper-2); font-weight:800; font-size:.84rem}
+tr:last-child td{border-bottom:0}
+td code{white-space:nowrap}
+p code, li code, legend code{overflow-wrap:anywhere}
+code{font-family:var(--mono); font-size:.86em; background:var(--paper-2); padding:1px 6px; border-radius:5px}
+pre{position:relative; background:var(--code-bg); color:var(--code-ink); border-radius:12px; padding:14px 16px; overflow-x:auto; font-size:.86rem; line-height:1.55; margin:8px 0 12px}
+pre code{background:none; padding:0; color:inherit; font-size:inherit; white-space:pre}
+pre[data-lang]::before{content:attr(data-lang); position:absolute; top:7px; right:12px; font:800 .66rem var(--sans); letter-spacing:.1em; text-transform:uppercase; color:rgba(230,237,243,.5)}
+pre.out{background:var(--paper-2); color:var(--ink); border:1px dashed #CFC6B8}
+pre.out::before{color:var(--muted)}
+.io-lbl{font-size:.8rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); margin:10px 0 2px}
+.io-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(min(220px,100%),1fr)); gap:0 14px}
+.io-grid .io-lbl{margin-top:2px}
+.io-grid pre::before{display:none}
+
+.ex{border:1px solid var(--line); border-radius:var(--r); padding:16px 18px; margin:14px 0; background:#FFFEFC}
+.ex-h{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:8px}
+.ex-h b{font-size:.78rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--mint-ink)}
+.ex-h span{font-weight:700}
+.ex-h .lvl{font-size:.7rem; font-weight:800; padding:2px 8px; border-radius:999px; background:var(--paper-2); color:var(--muted)}
+.ex-h .st{margin-left:auto; font-size:.8rem; font-weight:800; color:var(--mint-ink)}
+.ex.ok{border-color:var(--mint); box-shadow:0 0 0 3px var(--mint-soft)}
+.ide{margin-top:12px}
+.ide textarea{display:block; width:100%; min-height:190px; resize:vertical; font:15px/1.55 var(--mono); tab-size:4; color:var(--code-ink); background:var(--code-bg); border:0; border-radius:12px; padding:14px 16px; white-space:pre; overflow:auto}
+.ide textarea:focus{outline:3px solid var(--mint); outline-offset:2px}
+.ide-bar{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; align-items:center}
+.stdin{margin-top:10px}
+.stdin summary{cursor:pointer; font-size:.88rem; font-weight:700; color:var(--navy-3)}
+.stdin textarea{display:block; width:100%; min-height:70px; margin-top:6px; font:14px/1.5 var(--mono); border:1.5px solid var(--line); border-radius:10px; padding:10px 12px; background:var(--paper); color:var(--ink); resize:vertical}
+.res{margin-top:12px; border-radius:12px; padding:12px 14px; font-size:.92rem; background:var(--paper-2)}
+.res.good{background:var(--mint-soft)}
+.res.bad{background:var(--red-soft)}
+.res h4{margin:0 0 6px}
+.res pre{margin:6px 0}
+.res .tests{display:flex; flex-wrap:wrap; gap:6px; margin:6px 0}
+.res .tests span{font-size:.78rem; font-weight:800; padding:3px 9px; border-radius:999px; background:var(--white)}
+.res .tests .p{color:var(--mint-ink)} .res .tests .f{color:var(--red-ink)}
+.cmp{display:grid; grid-template-columns:repeat(auto-fit, minmax(min(200px,100%),1fr)); gap:10px}
+
+.quiz{background:var(--paper); border:1px solid var(--line); border-radius:var(--r); padding:16px 18px; margin-top:32px}
+.quiz > h3{margin:0; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; align-items:baseline}
+.quiz .score{font:700 .86rem var(--sans); color:var(--muted)}
+.q{border:0; padding:0; margin:16px 0 0; min-width:0} .q legend{font-weight:700; padding:0; margin-bottom:8px; display:block; width:100%; max-width:100%}
+.q legend pre{font-weight:400}
+select{max-width:100%}
+.opts{display:grid; gap:8px}
+.opts button{font:inherit; font-size:.94rem; text-align:left; background:var(--white); border:1.5px solid var(--line); border-radius:10px; padding:9px 14px; cursor:pointer; color:var(--ink)}
+.opts button:hover:not(:disabled){border-color:var(--navy)}
+.opts button:disabled{cursor:default}
+.opts button.right{background:var(--mint-soft); border-color:var(--mint); font-weight:700}
+.opts button.wrong{background:var(--red-soft); border-color:#E8A39B}
+.q .why{margin-top:8px; font-size:.9rem; color:var(--muted)}
+.done-row{display:flex; justify-content:flex-end; margin-top:24px}
+.done-toggle{display:inline-flex; align-items:center; gap:10px; font-weight:700; font-size:.94rem; cursor:pointer; padding:9px 16px; border-radius:999px; border:1.5px solid var(--line); background:var(--white)}
+.done-toggle input{width:18px; height:18px; accent-color:var(--mint-ink)}
+.pn{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-top:18px; padding-top:18px; border-top:1px solid var(--line)}
+.pn .btn{white-space:normal; text-align:center; min-height:44px; padding-block:6px}
+
+.site-footer{background:#0B2335; color:rgba(255,255,255,.75); padding-block:36px 24px; font-size:.92rem}
+.site-footer a{text-decoration:none} .site-footer a:hover{color:#fff; text-decoration:underline}
+.foot-row{display:flex; flex-wrap:wrap; justify-content:space-between; gap:16px; align-items:center}
+.footer-brand-surface{display:inline-flex; background:#fff; border-radius:12px; padding:8px 12px}
+
+.site-nav{background:var(--navy)}
+.site-nav ul{list-style:none; margin:0; padding:0; display:flex; gap:4px; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch}
+.site-nav ul::-webkit-scrollbar{display:none}
+.site-nav li{margin:0; flex:none}
+.site-nav a{display:block; padding:10px 12px; color:rgba(255,255,255,.82); text-decoration:none; font-size:.88rem; font-weight:700; white-space:nowrap; border-bottom:3px solid transparent}
+.site-nav a:hover{color:#fff}
+.site-nav a[aria-current="page"]{color:#fff; border-bottom-color:var(--mint)}
+.ex.app textarea.ans{display:block; width:100%; min-height:120px; margin-top:12px; font:15px/1.55 var(--sans); border:1.5px solid var(--line); border-radius:12px; padding:12px 14px; background:var(--paper); color:var(--ink); resize:vertical}
+.ex.app textarea.ans:focus{outline:3px solid var(--mint); outline-offset:2px}
+details.sol{margin-top:12px}
+details.sol summary{cursor:pointer; display:inline-flex; font-weight:700; font-size:.92rem; color:var(--navy); padding:8px 14px; border-radius:999px; border:1.5px solid var(--navy); list-style:none}
+details.sol summary::-webkit-details-marker{display:none}
+details.sol[open] summary, details.sol summary:hover{background:var(--navy); color:#fff}
+details.sol .body{margin-top:12px; padding-top:12px; border-top:1px dashed var(--line)}
+.crit{display:grid; gap:6px; margin-top:12px; padding:12px 14px; background:var(--paper); border-radius:12px}
+.crit label{display:flex; gap:10px; align-items:flex-start; font-size:.94rem; cursor:pointer}
+.crit input{margin-top:5px; width:16px; height:16px; accent-color:var(--mint-ink); flex:none}
+.done-toggle.sm{font-size:.86rem; padding:6px 12px; margin-top:10px}
+.ex.app.ok{border-color:var(--mint); box-shadow:0 0 0 3px var(--mint-soft)}
+.lesson table + p, .lesson .tbl + p{margin-top:4px}
+</style>
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="./" aria-label="Catalog360.ro – titularizare Informatică și TIC"><span class="brand-mark"><img src="assets/logo-catalog360.png" alt="Catalog360.ro" width="2172" height="724"></span></a>
+    <div class="nav-right">
+      <span class="prog" aria-live="polite"><span class="lbl">Exerciții rezolvate</span><span class="track" aria-hidden="true"><i id="progBar"></i></span><span id="progTxt">0/47</span></span>
+    </div>
+  </div>
+<nav class="site-nav" aria-label="Secțiuni"><div class="wrap"><ul><li><a href="./">Acasă</a></li><li><a href="python">1. Python</a></li><li><a href="algoritmi" aria-current="page">2. Algoritmi</a></li><li><a href="cpp">3. C++</a></li><li><a href="metodica">4. Metodică</a></li><li><a href="programa">5. Programa (TIC, BD, IA…)</a></li><li><a href="teste">Teste</a></li></ul></div></nav><script>(function(){var a=document.querySelector('.site-nav a[aria-current]');if(a&&a.parentNode.parentNode.scrollWidth>a.parentNode.parentNode.clientWidth)a.parentNode.parentNode.scrollLeft=a.offsetLeft-16;})();</script>
+</header>
+<main id="continut">
+<section class="hero">
+  <div class="wrap hero-copy">
+    <p class="eyebrow">Etapa 2 · Programare · Programa, capitolele 1, 2, 3, 4</p>
+    <h1>Algoritmi și <em>structuri de date</em></h1>
+    <p class="lede">Tot ce cere programa la algoritmică, explicat de la zero: complexitate, metode de programare, structuri liniare, grafuri și arbori. Fiecare algoritm îl implementezi tu, iar pagina îl verifică pe teste.</p>
+    <div class="stats"><span><b>12</b> lecții</span><span><b>47</b> exerciții cu verificare automată</span><span><b>49</b> întrebări de test</span></div>
+    <p class="hint">Recomandat după cursul de Python (lecțiile 0–13). Codul rulează în browser; progresul se salvează doar în acest browser.</p>
+  </div>
+</section>
+<div class="wrap layout">
+  <nav class="toc" aria-label="Lecții"><h2>Lecții</h2><ol>
+<li><a href="#a1"><span class="n">1</span><span>Algoritm și complexitate</span><span class="cnt" data-cnt="a1">0/3</span></a></li>
+<li><a href="#a2"><span class="n">2</span><span>Recursivitate și Divide et impera</span><span class="cnt" data-cnt="a2">0/4</span></a></li>
+<li><a href="#a3"><span class="n">3</span><span>Metoda Greedy</span><span class="cnt" data-cnt="a3">0/4</span></a></li>
+<li><a href="#a4"><span class="n">4</span><span>Metoda Backtracking</span><span class="cnt" data-cnt="a4">0/5</span></a></li>
+<li><a href="#a5"><span class="n">5</span><span>Programare dinamică</span><span class="cnt" data-cnt="a5">0/5</span></a></li>
+<li><a href="#a6"><span class="n">6</span><span>Stive, cozi, liste înlănțuite</span><span class="cnt" data-cnt="a6">0/4</span></a></li>
+<li><a href="#a7"><span class="n">7</span><span>Grafuri: noțiuni, reprezentare</span><span class="cnt" data-cnt="a7">0/4</span></a></li>
+<li><a href="#a8"><span class="n">8</span><span>Parcurgeri BFS și DFS</span><span class="cnt" data-cnt="a8">0/4</span></a></li>
+<li><a href="#a9"><span class="n">9</span><span>Drumuri minime</span><span class="cnt" data-cnt="a9">0/3</span></a></li>
+<li><a href="#a10"><span class="n">10</span><span>Arbore parțial de cost minim</span><span class="cnt" data-cnt="a10">0/3</span></a></li>
+<li><a href="#a11"><span class="n">11</span><span>Arbori, ABC, heap</span><span class="cnt" data-cnt="a11">0/4</span></a></li>
+<li><a href="#a12"><span class="n">12</span><span>Criptare, Fletcher, Flood Fill</span><span class="cnt" data-cnt="a12">0/4</span></a></li>
+  </ol></nav>
+  <div class="lessons">
+<section class="lesson" id="a1" aria-labelledby="a1-t"><div class="les-head"><span class="les-nr">1</span><div><h2 id="a1-t">Algoritm, corectitudine și complexitate</h2><p class="les-prog">Programa cap. 2: algoritm, gândire computațională, criterii de elaborare a testelor, eficiența algoritmilor</p></div></div>
+<div class="obj"><h3>La finalul lecției vei ști</h3><ul><li>proprietățile unui algoritm și etapele rezolvării unei probleme</li><li>cum numeri operațiile și ce înseamnă O(n), O(n²), O(log n)</li><li>cum alegi un algoritm după dimensiunea datelor</li><li>cum transformi un algoritm O(n²) în unul O(n) sau O(n log n)</li></ul></div>
+
+<p>Un <strong>algoritm</strong> este o succesiune finită de pași clari care transformă datele de intrare în datele de ieșire. Proprietăți: <strong>generalitate</strong>, <strong>finitudine</strong>, <strong>claritate</strong> (determinism), <strong>corectitudine</strong>, <strong>eficiență</strong>. Gândirea computațională înseamnă: descompunere, recunoașterea tiparelor, abstractizare, proiectarea algoritmului.</p>
+<h3>Complexitatea în timp</h3>
+<p>Numărăm câte operații elementare face algoritmul în funcție de dimensiunea n a datelor și păstrăm doar termenul dominant, fără constante: 3n² + 5n + 7 operații ⇒ <strong>O(n²)</strong>.</p>
+<div class="tbl"><table><tr><th>Secvență</th><th>Număr de pași</th><th>Complexitate</th></tr><tr><td>o buclă de la 1 la n</td><td>n</td><td>O(n)</td></tr><tr><td>două bucle imbricate de la 1 la n</td><td>n²</td><td>O(n²)</td></tr><tr><td><code>for i in range(n): for j in range(i, n)</code></td><td>n(n+1)/2</td><td>O(n²)</td></tr><tr><td><code>while n &gt; 0: n //= 10</code></td><td>numărul de cifre ≈ log₁₀ n</td><td>O(log n)</td></tr><tr><td><code>while i * i &lt;= n: i += 1</code></td><td>√n</td><td>O(√n)</td></tr><tr><td>înjumătățirea intervalului (căutare binară)</td><td>log₂ n</td><td>O(log n)</td></tr><tr><td>sortare prin interclasare</td><td>≈ n log₂ n</td><td>O(n log n)</td></tr></table></div>
+<p>Ordinea, de la cel mai rapid la cel mai lent: O(1) &lt; O(log n) &lt; O(√n) &lt; O(n) &lt; O(n log n) &lt; O(n²) &lt; O(n³) &lt; O(2ⁿ) &lt; O(n!). Un calculator face orientativ 10⁷–10⁸ operații simple pe secundă în Python (mai multe în C++); cu n = 10⁵, un algoritm O(n²) face 10¹⁰ pași – mult prea mult.</p>
+<h3>Trei tehnici care reduc complexitatea</h3>
+<ul>
+<li><strong>Sume parțiale</strong>: <code>s[i] = v[0] + … + v[i−1]</code>; suma pe intervalul [a, b] este <code>s[b+1] − s[a]</code> în O(1) în loc de O(n).</li>
+<li><strong>Doi indici</strong> (two pointers) pe o listă sortată: unul de la stânga, unul de la dreapta.</li>
+<li><strong>Memorie suplimentară</strong>: liste de frecvențe, mulțimi, dicționare – testul „am mai văzut valoarea?” devine O(1).</li>
+</ul>
+<pre data-lang="python"><code>v = [3, 1, 4, 1, 5, 9, 2, 6]
+s = [0]
+for x in v:
+    s.append(s[-1] + x)          # sume parțiale
+print(s[6] - s[2])               # suma v[2..5] = 4 + 1 + 5 + 9</code></pre><pre class="out" data-lang="ieșire"><code>19</code></pre>
+<h3>Corectitudine și testare</h3>
+<p>Un algoritm se testează pe: un caz obișnuit, <strong>cazuri limită</strong> (n = 0 sau 1, toate valorile egale, valori negative, valoarea maximă), date care fac fiecare ramură <code>if</code> să se execute, date mari (timp de execuție).</p>
+
+<h3 class="sec">Probleme rezolvate</h3>
+<div class="ex solved"><div class="ex-h"><b>Rezolvată 1.1</b><span>Suma divizorilor în O(√n)</span></div><p>Divizorii vin în perechi (d, n/d); e suficient să mergem până la √n.</p><pre data-lang="python"><code>n = int(input())
+s = 0
+d = 1
+while d * d &lt;= n:
+    if n % d == 0:
+        s += d
+        if d != n // d:
+            s += n // d
+    d += 1
+print(s)</code></pre><p class="io-lbl">Date de intrare</p><pre class="out" data-lang="intrare"><code>36</code></pre><p class="io-lbl">Se afișează</p><pre class="out" data-lang="ieșire"><code>91</code></pre><div class="note">Pentru 36: perechile (1, 36), (2, 18), (3, 12), (4, 9), iar 6 se adună o singură dată. Pentru n = 10¹² sunt 10⁶ pași în loc de 10¹².</div></div>
+<h3 class="sec">Exerciții</h3><p class="hint">La exercițiile de programare scrii codul în editor și apeși <b>Verifică</b>: pagina îl rulează pe mai multe teste. Citește datele exact cum cere enunțul și afișează doar ce se cere (mesajele din <code>input("...")</code> nu contează).</p>
+<div class="ex task" id="a1-e1" data-ex="a1-e1"><div class="ex-h"><b>Exercițiul 1.1</b><span>Suma divizorilor pentru n mare</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>Se citește n (1 ≤ n ≤ 10<sup>12</sup>). Afișează numărul de divizori și suma lor, separate prin spațiu. Un algoritm O(n) depășește timpul.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>36</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>9 91</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 1.1"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">36</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a1-e2" data-ex="a1-e2"><div class="ex-h"><b>Exercițiul 1.2</b><span>Interogări de sume</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>Pe prima linie n și q, pe a doua n numere întregi, apoi q linii cu câte două poziții a b (1 ≤ a ≤ b ≤ n, numerotare de la 1). Pentru fiecare interogare afișează suma elementelor de la a la b. Folosește sume parțiale.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>5 3
+1 2 3 4 5
+1 5
+2 3
+4 4</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>15
+5
+4</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 1.2"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">5 3
+1 2 3 4 5
+1 5
+2 3
+4 4</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a1-e3" data-ex="a1-e3"><div class="ex-h"><b>Exercițiul 1.3</b><span>Perechi cu suma S (doi indici)</span><span class="lvl">dificil</span><span class="st" aria-live="polite"></span></div><p>Pe prima linie o listă de numere întregi <strong>distincte</strong>, sortată crescător, pe a doua S. Afișează toate perechile (a, b), a &lt; b, cu a + b = S, câte una pe linie, în ordinea crescătoare a lui a; dacă nu există, afișează <code>nu exista</code>. Folosește tehnica celor doi indici (O(n)).</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>1 2 4 5 7 9 11
+11</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>2 9
+4 7</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 1.3"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">1 2 4 5 7 9 11
+11</textarea></details><div class="res" hidden></div></div></div>
+<div class="quiz" data-quiz><h3>Test de verificare <span class="score"></span></h3><fieldset class="q" data-a="2"><legend>1. Ce complexitate are <code>for i in range(n): for j in range(n): for k in range(n): ...</code>?</legend><div class="opts"><button type="button">O(n)</button><button type="button">O(n²)</button><button type="button">O(n³)</button><button type="button">O(3n)</button></div><p class="why" hidden>Trei bucle imbricate, fiecare de n ori.</p></fieldset><fieldset class="q" data-a="1"><legend>2. Cum se simplifică 5n² + 100n + 3?</legend><div class="opts"><button type="button">O(n)</button><button type="button">O(n²)</button><button type="button">O(5n²)</button><button type="button">O(100n)</button></div><p class="why" hidden>Se păstrează termenul dominant, fără constante.</p></fieldset><fieldset class="q" data-a="0"><legend>3. Care este mai rapid pentru n mare?</legend><div class="opts"><button type="button">O(n log n)</button><button type="button">O(n²)</button><button type="button">O(n√n)</button><button type="button">O(2ⁿ)</button></div><p class="why" hidden>n log n crește cel mai încet dintre ele.</p></fieldset><fieldset class="q" data-a="1"><legend>4. Câte iterații face <code>while n &gt; 0: n //= 2</code> pentru n = 1000?</legend><div class="opts"><button type="button">500</button><button type="button">10</button><button type="button">1000</button><button type="button">3</button></div><p class="why" hidden>⌊log₂ 1000⌋ + 1 = 10.</p></fieldset><fieldset class="q" data-a="1"><legend>5. Proprietatea algoritmului de a rezolva o clasă de probleme, nu un singur caz, este:</legend><div class="opts"><button type="button">finitudinea</button><button type="button">generalitatea</button><button type="button">claritatea</button><button type="button">eficiența</button></div><p class="why" hidden>Generalitatea.</p></fieldset></div>
+<div class="done-row"><label class="done-toggle"><input type="checkbox" data-done="a1"> Am terminat lecția</label></div><nav class="pn"><span></span><a href="#a2" class="btn btn-primary">2. Recursivitate și Divide et impera →</a></nav></section>
+<section class="lesson" id="a2" aria-labelledby="a2-t"><div class="les-head"><span class="les-nr">2</span><div><h2 id="a2-t">Recursivitate și metoda Divide et impera</h2><p class="les-prog">Programa cap. 4: metoda Divide et impera; cap. 3: sortarea prin interclasare, sortarea rapidă, căutarea binară</p></div></div>
+<div class="obj"><h3>La finalul lecției vei ști</h3><ul><li>cum funcționează stiva de apeluri</li><li>schema Divide et impera: împarte – rezolvă – combină</li><li>sortarea prin interclasare și sortarea rapidă</li><li>recurența T(n) = 2T(n/2) + n ⇒ O(n log n)</li></ul></div>
+
+<p>La fiecare apel, parametrii și variabilele locale se pun pe <strong>stiva de apeluri</strong>; la <code>return</code> se revine în apelant, exact în punctul de după apel. O funcție recursivă are obligatoriu un <strong>caz de bază</strong> și apeluri pe probleme <strong>mai mici</strong>.</p>
+<h3>Divide et impera</h3>
+<ol><li><strong>Divide</strong>: problema se împarte în subprobleme <em>independente</em> de același tip (de regulă în două jumătăți).</li>
+<li><strong>Impera</strong>: subproblemele se rezolvă recursiv; cele elementare direct.</li>
+<li><strong>Combină</strong>: soluțiile subproblemelor se compun în soluția problemei.</li></ol>
+<pre data-lang="python"><code>def interclasare(a, b):
+    i = j = 0
+    c = []
+    while i &lt; len(a) and j &lt; len(b):
+        if a[i] &lt;= b[j]:
+            c.append(a[i]); i += 1
+        else:
+            c.append(b[j]); j += 1
+    return c + a[i:] + b[j:]
+
+def merge_sort(v):                      # O(n log n), stabilă
+    if len(v) &lt;= 1:
+        return v
+    m = len(v) // 2
+    return interclasare(merge_sort(v[:m]), merge_sort(v[m:]))
+
+def quick_sort(v):                      # O(n log n) în medie, O(n²) în cel mai rău caz
+    if len(v) &lt;= 1:
+        return v
+    p = v[len(v) // 2]
+    return quick_sort([x for x in v if x &lt; p]) + [x for x in v if x == p] + quick_sort([x for x in v if x &gt; p])
+
+print(merge_sort([38, 27, 43, 3, 9, 82, 10]), quick_sort([5, 1, 5, 0]))</code></pre><pre class="out" data-lang="ieșire"><code>[3, 9, 10, 27, 38, 43, 82] [0, 1, 5, 5]</code></pre>
+<p><strong>De ce O(n log n)?</strong> Lista se înjumătățește de log₂ n ori; pe fiecare nivel, interclasările costă în total n ⇒ n · log₂ n.</p>
+<p><strong>Turnurile din Hanoi</strong>: pentru a muta n discuri de pe A pe C, muți n−1 pe B, discul mare pe C, apoi n−1 de pe B pe C ⇒ M(n) = 2M(n−1) + 1 = 2ⁿ − 1 mutări.</p>
+
+<h3 class="sec">Probleme rezolvate</h3>
+<div class="ex solved"><div class="ex-h"><b>Rezolvată 2.1</b><span>Maximul prin Divide et impera</span></div><pre data-lang="python"><code>def maxim(v, st, dr):
+    if st == dr:
+        return v[st]
+    m = (st + dr) // 2
+    return max(maxim(v, st, m), maxim(v, m + 1, dr))
+
+v = [4, 9, 2, 17, 5]
+print(maxim(v, 0, len(v) - 1))</code></pre><p class="io-lbl">Se afișează</p><pre class="out" data-lang="ieșire"><code>17</code></pre></div>
+<h3 class="sec">Exerciții</h3><p class="hint">La exercițiile de programare scrii codul în editor și apeși <b>Verifică</b>: pagina îl rulează pe mai multe teste. Citește datele exact cum cere enunțul și afișează doar ce se cere (mesajele din <code>input("...")</code> nu contează).</p>
+<div class="ex task" id="a2-e1" data-ex="a2-e1"><div class="ex-h"><b>Exercițiul 2.1</b><span>Turnurile din Hanoi</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>Se citește n (1 ≤ n ≤ 10). Afișează numărul de mutări, apoi fiecare mutare pe câte o linie, sub forma <code>A C</code> (de pe tija A pe tija C). Discurile sunt inițial pe A și trebuie mutate pe C, cu B intermediar.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>2</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>3
+A B
+A C
+B C</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 2.1"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">2</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a2-e2" data-ex="a2-e2"><div class="ex-h"><b>Exercițiul 2.2</b><span>Sortare prin interclasare</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>Pe o linie se dau numere întregi. Sortează-le cu <strong>merge sort scris de tine</strong> (fără sort/sorted) și afișează lista sortată.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>38 27 43 3 9 82 10</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>3 9 10 27 38 43 82</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 2.2"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">38 27 43 3 9 82 10</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a2-e3" data-ex="a2-e3"><div class="ex-h"><b>Exercițiul 2.3</b><span>Numărul de inversiuni</span><span class="lvl">dificil</span><span class="st" aria-live="polite"></span></div><p>O inversiune este o pereche de poziții i &lt; j cu v[i] &gt; v[j]. Pe prima linie n (n ≤ 100 000), pe a doua n numere. Afișează numărul de inversiuni. Indiciu: numără-le în timpul interclasării – când iei un element din jumătatea dreaptă, el formează inversiuni cu toate elementele rămase în stânga.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>5
+2 4 1 3 5</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>3</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 2.3"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">5
+2 4 1 3 5</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a2-e4" data-ex="a2-e4"><div class="ex-h"><b>Exercițiul 2.4</b><span>Căutare binară recursivă</span><span class="lvl">ușor</span><span class="st" aria-live="polite"></span></div><p>Pe prima linie o listă sortată crescător de numere distincte, pe a doua mai multe valori x. Pentru fiecare x afișează poziția lui (de la 0) sau -1, folosind o funcție <strong>recursivă</strong>.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>2 5 8 12 16 23 38
+23 2 38 7 100</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>5 0 6 -1 -1</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 2.4"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">2 5 8 12 16 23 38
+23 2 38 7 100</textarea></details><div class="res" hidden></div></div></div>
+<div class="quiz" data-quiz><h3>Test de verificare <span class="score"></span></h3><fieldset class="q" data-a="1"><legend>1. Ce condiție trebuie să îndeplinească subproblemele la Divide et impera?</legend><div class="opts"><button type="button">să fie suprapuse</button><button type="button">să fie independente</button><button type="button">să fie rezolvate greedy</button><button type="button">să aibă aceeași soluție</button></div><p class="why" hidden>Subproblemele suprapuse sunt specifice programării dinamice.</p></fieldset><fieldset class="q" data-a="1"><legend>2. Câte mutări sunt necesare pentru 5 discuri la Hanoi?</legend><div class="opts"><button type="button">25</button><button type="button">31</button><button type="button">32</button><button type="button">10</button></div><p class="why" hidden>2⁵ − 1 = 31.</p></fieldset><fieldset class="q" data-a="1"><legend>3. Care sortare are O(n²) în cel mai defavorabil caz?</legend><div class="opts"><button type="button">interclasare</button><button type="button">rapidă</button><button type="button">heapsort</button><button type="button">numărare</button></div><p class="why" hidden>Quicksort cu pivoți nefavorabili.</p></fieldset><fieldset class="q" data-a="1"><legend>4. Ce se întâmplă fără caz de bază într-o funcție recursivă în Python?</legend><div class="opts"><button type="button">returnează None</button><button type="button">RecursionError</button><button type="button">buclă infinită fără eroare</button><button type="button">SyntaxError</button></div><p class="why" hidden>Se depășește adâncimea maximă a stivei de apeluri.</p></fieldset></div>
+<div class="done-row"><label class="done-toggle"><input type="checkbox" data-done="a2"> Am terminat lecția</label></div><nav class="pn"><a href="#a1" class="btn btn-ghost">← 1. Algoritm și complexitate</a><a href="#a3" class="btn btn-primary">3. Metoda Greedy →</a></nav></section>
+<section class="lesson" id="a3" aria-labelledby="a3-t"><div class="les-head"><span class="les-nr">3</span><div><h2 id="a3-t">Metoda Greedy</h2><p class="les-prog">Programa cap. 4: metoda Greedy</p></div></div>
+<div class="obj"><h3>La finalul lecției vei ști</h3><ul><li>ideea alegerii optime locale</li><li>problemele clasice: spectacole, rucsac fracționar, plata cu bancnote</li><li>de ce greedy trebuie demonstrat și când nu funcționează</li></ul></div>
+
+<p>Metoda <strong>Greedy</strong> construiește soluția pas cu pas, alegând de fiecare dată elementul care pare cel mai bun în acel moment, fără a reveni asupra alegerii. Schema: se sortează candidații după un criteriu, apoi se parcurg și se adaugă fiecare candidat <em>compatibil</em> cu soluția parțială.</p>
+<p>Este rapidă (de obicei O(n log n), din cauza sortării), dar <strong>corectitudinea trebuie demonstrată</strong> pentru fiecare problemă. Contraexemplu clasic: plata sumei 6 cu monede {1, 3, 4} – greedy alege 4 + 1 + 1 (3 monede), optimul este 3 + 3 (2 monede).</p>
+<div class="tbl"><table><tr><th>Problemă</th><th>Criteriul greedy corect</th></tr><tr><td>Numărul maxim de spectacole fără suprapunere</td><td>ora de <strong>sfârșit</strong> crescătoare</td></tr><tr><td>Rucsac fracționar (obiectele se pot tăia)</td><td>raportul valoare / greutate descrescător</td></tr><tr><td>Plata cu bancnote românești (1, 5, 10, 50, 100, 200, 500)</td><td>cea mai mare bancnotă care încape (sistem canonic)</td></tr><tr><td>Minimizarea timpului mediu de așteptare la o coadă</td><td>durata serviciului crescătoare</td></tr><tr><td>Arbore parțial de cost minim, drumuri minime</td><td>Prim, Kruskal, Dijkstra (lecțiile 9–10)</td></tr></table></div>
+<pre data-lang="python"><code>spect = [(1, 4), (3, 5), (0, 6), (5, 7), (3, 9), (5, 9), (6, 10), (8, 11), (8, 12), (2, 14), (12, 16)]
+spect.sort(key=lambda s: s[1])          # după ora de sfârșit
+ales, sfarsit = [], -1
+for inceput, final in spect:
+    if inceput &gt;= sfarsit:              # compatibil cu ultimul ales
+        ales.append((inceput, final))
+        sfarsit = final
+print(ales)</code></pre><pre class="out" data-lang="ieșire"><code>[(1, 4), (5, 7), (8, 11), (12, 16)]</code></pre>
+
+<h3 class="sec">Probleme rezolvate</h3>
+<div class="ex solved"><div class="ex-h"><b>Rezolvată 3.1</b><span>Rucsac fracționar</span></div><pre data-lang="python"><code>G = 50
+obiecte = [(60, 10), (100, 20), (120, 30)]       # (valoare, greutate)
+obiecte.sort(key=lambda o: o[0] / o[1], reverse=True)
+total = 0
+for v, g in obiecte:
+    if g &lt;= G:
+        total += v; G -= g
+    else:
+        total += v * G / g
+        break
+print(total)</code></pre><p class="io-lbl">Se afișează</p><pre class="out" data-lang="ieșire"><code>240.0</code></pre></div>
+<h3 class="sec">Exerciții</h3><p class="hint">La exercițiile de programare scrii codul în editor și apeși <b>Verifică</b>: pagina îl rulează pe mai multe teste. Citește datele exact cum cere enunțul și afișează doar ce se cere (mesajele din <code>input("...")</code> nu contează).</p>
+<div class="ex task" id="a3-e1" data-ex="a3-e1"><div class="ex-h"><b>Exercițiul 3.1</b><span>Spectacole</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>Pe prima linie n, apoi n linii cu ora de început și ora de sfârșit (minute de la miezul nopții) ale unui spectacol. Afișează numărul maxim de spectacole care pot fi vizionate integral (un spectacol poate începe exact când se termină altul).</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>5
+600 660
+630 700
+660 720
+700 800
+720 780</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>3</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 3.1"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">5
+600 660
+630 700
+660 720
+700 800
+720 780</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a3-e2" data-ex="a3-e2"><div class="ex-h"><b>Exercițiul 3.2</b><span>Plata cu bancnote</span><span class="lvl">ușor</span><span class="st" aria-live="polite"></span></div><p>Se citește o sumă S (lei, număr natural). Folosind bancnotele 500, 200, 100, 50, 10, 5, 1, afișează plata cu un număr minim de bancnote: pe fiecare linie <code>valoare x numar</code>, doar pentru bancnotele folosite, în ordine descrescătoare.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>1789</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>500 x 3
+200 x 1
+50 x 1
+10 x 3
+5 x 1
+1 x 4</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 3.2"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">1789</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a3-e3" data-ex="a3-e3"><div class="ex-h"><b>Exercițiul 3.3</b><span>Rucsac fracționar</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>Pe prima linie n și G (capacitatea), apoi n linii <code>valoare greutate</code>. Obiectele se pot tăia. Afișează valoarea maximă cu două zecimale.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>3 50
+60 10
+100 20
+120 30</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>240.00</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 3.3"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">3 50
+60 10
+100 20
+120 30</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a3-e4" data-ex="a3-e4"><div class="ex-h"><b>Exercițiul 3.4</b><span>Coada la ghișeu</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>Pe prima linie n, pe a doua duratele de servire ale celor n persoane. Ele pot fi servite în orice ordine. Afișează timpul total minim de așteptare (suma momentelor la care începe servirea fiecărei persoane).</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>3
+5 1 3</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>5</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 3.4"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">3
+5 1 3</textarea></details><div class="res" hidden></div></div></div>
+<div class="quiz" data-quiz><h3>Test de verificare <span class="score"></span></h3><fieldset class="q" data-a="2"><legend>1. Ce criteriu greedy dă numărul maxim de spectacole?</legend><div class="opts"><button type="button">ora de început crescătoare</button><button type="button">durata crescătoare</button><button type="button">ora de sfârșit crescătoare</button><button type="button">durata descrescătoare</button></div><p class="why" hidden>Lasă cel mai mult timp pentru restul.</p></fieldset><fieldset class="q" data-a="1"><legend>2. Pentru monedele {1, 3, 4} și suma 6, greedy dă:</legend><div class="opts"><button type="button">optimul, 2 monede</button><button type="button">3 monede, neoptim</button><button type="button">nicio soluție</button><button type="button">1 monedă</button></div><p class="why" hidden>4 + 1 + 1, dar optimul este 3 + 3.</p></fieldset><fieldset class="q" data-a="1"><legend>3. Ce trebuie făcut pentru a folosi Greedy corect?</legend><div class="opts"><button type="button">nimic</button><button type="button">demonstrat că alegerea locală duce la optim</button><button type="button">generate toate soluțiile</button><button type="button">memorate subproblemele</button></div><p class="why" hidden>Altfel algoritmul poate fi greșit.</p></fieldset></div>
+<div class="done-row"><label class="done-toggle"><input type="checkbox" data-done="a3"> Am terminat lecția</label></div><nav class="pn"><a href="#a2" class="btn btn-ghost">← 2. Recursivitate și Divide et impera</a><a href="#a4" class="btn btn-primary">4. Metoda Backtracking →</a></nav></section>
+<section class="lesson" id="a4" aria-labelledby="a4-t"><div class="les-head"><span class="les-nr">4</span><div><h2 id="a4-t">Metoda Backtracking</h2><p class="les-prog">Programa cap. 4: metoda Backtracking; cap. 3: metode de generare sistematică</p></div></div>
+<div class="obj"><h3>La finalul lecției vei ști</h3><ul><li>schema generală a backtracking-ului</li><li>permutări, aranjamente, combinări, submulțimi, partiții</li><li>condiții de continuare (validare) și tăierea ramurilor</li><li>ordinea lexicografică a soluțiilor</li></ul></div>
+
+<p>Backtracking construiește soluția <em>x₁, x₂, …, xₖ</em> element cu element. Pentru poziția curentă încearcă pe rând toate valorile posibile; dacă valoarea respectă <strong>condițiile de continuare</strong>, trece la poziția următoare; când valorile se epuizează, <strong>revine</strong> la poziția anterioară. Complexitatea este exponențială, dar condițiile de continuare taie multe ramuri.</p>
+<pre data-lang="pseudocod"><code>def bt(k):                       # schema generală
+    for v in candidati(k):       # valorile posibile pentru poziția k
+        x[k] = v
+        if valid(k):             # condiții de continuare
+            if solutie(k):
+                afiseaza()
+            else:
+                bt(k + 1)</code></pre>
+<div class="tbl"><table><tr><th>Ce generăm</th><th>Condiția pentru x[k]</th><th>Număr de soluții</th></tr><tr><td>permutări ale lui {1..n}</td><td>x[k] nu a mai fost folosit</td><td>n!</td></tr><tr><td>aranjamente de n luate câte p</td><td>x[k] nefolosit; soluție la k = p</td><td>n!/(n−p)!</td></tr><tr><td>combinări de n luate câte p</td><td>x[k] &gt; x[k−1]</td><td>C(n, p)</td></tr><tr><td>submulțimi</td><td>x[k] &gt; x[k−1]; fiecare prefix e soluție</td><td>2ⁿ − 1 nevide</td></tr><tr><td>produs cartezian</td><td>orice valoare</td><td>n₁·n₂·…</td></tr><tr><td>partiții ale lui n (sume)</td><td>x[k] ≥ x[k−1] și suma ≤ n</td><td>–</td></tr></table></div>
+<pre data-lang="python"><code>n = 4
+x, folosit = [], [False] * (n + 1)
+cnt = 0
+def dame(k):                     # problema damelor: x[i] = coloana damei de pe linia i
+    global cnt
+    if k == n:
+        cnt += 1
+        if cnt == 1: print(x)
+        return
+    for c in range(n):
+        if all(x[i] != c and abs(x[i] - c) != k - i for i in range(k)):
+            x.append(c); dame(k + 1); x.pop()
+dame(0); print(cnt)</code></pre><pre class="out" data-lang="ieșire"><code>[1, 3, 0, 2]
+2</code></pre>
+
+<h3 class="sec">Probleme rezolvate</h3>
+<div class="ex solved"><div class="ex-h"><b>Rezolvată 4.1</b><span>Partițiile unui număr</span></div><p>Scrie n ca sumă de numere naturale nenule, în ordine crescătoare a termenilor (fără să numărăm de două ori aceeași descompunere).</p><pre data-lang="python"><code>n = int(input())
+x = []
+def bt(rest, minim):
+    if rest == 0:
+        print("+".join(map(str, x)))
+        return
+    for v in range(minim, rest + 1):
+        x.append(v)
+        bt(rest - v, v)
+        x.pop()
+bt(n, 1)</code></pre><p class="io-lbl">Date de intrare</p><pre class="out" data-lang="intrare"><code>4</code></pre><p class="io-lbl">Se afișează</p><pre class="out" data-lang="ieșire"><code>1+1+1+1
+1+1+2
+1+3
+2+2
+4</code></pre></div>
+<h3 class="sec">Exerciții</h3><p class="hint">La exercițiile de programare scrii codul în editor și apeși <b>Verifică</b>: pagina îl rulează pe mai multe teste. Citește datele exact cum cere enunțul și afișează doar ce se cere (mesajele din <code>input("...")</code> nu contează).</p>
+<div class="ex task" id="a4-e1" data-ex="a4-e1"><div class="ex-h"><b>Exercițiul 4.1</b><span>Permutări</span><span class="lvl">ușor</span><span class="st" aria-live="polite"></span></div><p>Se citește n (1 ≤ n ≤ 7). Afișează toate permutările mulțimii {1, …, n} în ordine lexicografică, fără itertools.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>3</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>1 2 3
+1 3 2
+2 1 3
+2 3 1
+3 1 2
+3 2 1</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 4.1"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">3</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a4-e2" data-ex="a4-e2"><div class="ex-h"><b>Exercițiul 4.2</b><span>Combinări</span><span class="lvl">ușor</span><span class="st" aria-live="polite"></span></div><p>Se citesc n și p (1 ≤ p ≤ n ≤ 10). Afișează combinările de n luate câte p, în ordine lexicografică.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>5 3</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>1 2 3
+1 2 4
+1 2 5
+1 3 4
+1 3 5
+1 4 5
+2 3 4
+2 3 5
+2 4 5
+3 4 5</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 4.2"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">5 3</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a4-e3" data-ex="a4-e3"><div class="ex-h"><b>Exercițiul 4.3</b><span>Câte soluții pentru n dame</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>Se citește n (1 ≤ n ≤ 9). Afișează numărul de moduri de a așeza n dame pe o tablă n × n fără să se atace.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>4</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>2</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 4.3"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">4</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a4-e4" data-ex="a4-e4"><div class="ex-h"><b>Exercițiul 4.4</b><span>Submulțimi cu suma dată</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>Pe prima linie numere naturale distincte, sortate crescător; pe a doua S. Afișează toate submulțimile cu suma S, câte una pe linie, în ordine lexicografică (după valori), sau <code>0</code> dacă nu există. Folosește condiția de continuare „suma parțială ≤ S”.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>1 2 3 4 5 6
+7</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>1 2 4
+1 6
+2 5
+3 4</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 4.4"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">1 2 3 4 5 6
+7</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a4-e5" data-ex="a4-e5"><div class="ex-h"><b>Exercițiul 4.5</b><span>Cuvinte din litere</span><span class="lvl">dificil</span><span class="st" aria-live="polite"></span></div><p>Se citesc un șir de litere distincte și k. Afișează, în ordine lexicografică, toate „cuvintele” de k litere distincte din șir care <strong>nu</strong> au două vocale alăturate (vocale: a, e, i, o, u).</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>abe
+2</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>ab
+ba
+be
+eb</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 4.5"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">abe
+2</textarea></details><div class="res" hidden></div></div></div>
+<div class="quiz" data-quiz><h3>Test de verificare <span class="score"></span></h3><fieldset class="q" data-a="0"><legend>1. Ce soluție urmează după 1 4 5 la combinări de 5 luate câte 3?</legend><div class="opts"><button type="button">2 3 4</button><button type="button">1 5 6</button><button type="button">2 4 5</button><button type="button">1 4 6</button></div><p class="why" hidden>Ordinea: 123, 124, 125, 134, 135, 145, 234…</p></fieldset><fieldset class="q" data-a="1"><legend>2. Câte aranjamente de 5 luate câte 2 există?</legend><div class="opts"><button type="button">10</button><button type="button">20</button><button type="button">25</button><button type="button">120</button></div><p class="why" hidden>5 · 4 = 20.</p></fieldset><fieldset class="q" data-a="1"><legend>3. Ce rol au condițiile de continuare?</legend><div class="opts"><button type="button">afișează soluția</button><button type="button">elimină din timp ramurile care nu pot duce la soluții</button><button type="button">sortează datele</button><button type="button">memorează subproblemele</button></div><p class="why" hidden>Reduc drastic numărul de configurații încercate.</p></fieldset><fieldset class="q" data-a="2"><legend>4. Câte permutări are o mulțime cu 6 elemente?</legend><div class="opts"><button type="button">36</button><button type="button">120</button><button type="button">720</button><button type="button">64</button></div><p class="why" hidden>6! = 720.</p></fieldset></div>
+<div class="done-row"><label class="done-toggle"><input type="checkbox" data-done="a4"> Am terminat lecția</label></div><nav class="pn"><a href="#a3" class="btn btn-ghost">← 3. Metoda Greedy</a><a href="#a5" class="btn btn-primary">5. Programare dinamică →</a></nav></section>
+<section class="lesson" id="a5" aria-labelledby="a5-t"><div class="les-head"><span class="les-nr">5</span><div><h2 id="a5-t">Programarea dinamică</h2><p class="les-prog">Programa cap. 4: metoda programării dinamice</p></div></div>
+<div class="obj"><h3>La finalul lecției vei ști</h3><ul><li>subprobleme suprapuse și substructură optimă</li><li>cum scrii relația de recurență și ordinea de calcul</li><li>problemele clasice: subșir crescător maximal, rucsac 0/1, triunghi, subșir comun, drumuri în grilă</li><li>reconstituirea soluției</li></ul></div>
+
+<p>Programarea dinamică se aplică atunci când problema are <strong>substructură optimă</strong> (soluția optimă conține soluțiile optime ale subproblemelor) și <strong>subprobleme suprapuse</strong> (aceleași subprobleme apar de multe ori). Fiecare subproblemă se rezolvă <em>o singură dată</em>, iar rezultatul se memorează într-un tablou.</p>
+<ol><li>Definește starea: ce reprezintă <code>d[i]</code> (sau <code>d[i][j]</code>).</li><li>Scrie relația de recurență.</li><li>Stabilește cazurile de bază și ordinea de completare.</li><li>Rezultatul este într-o anumită celulă (sau maximul tabloului).</li></ol>
+<div class="tbl"><table><tr><th>Problemă</th><th>Stare</th><th>Recurență</th></tr><tr><td>Subșir crescător maximal</td><td>L[i] = lungimea celui mai lung subșir crescător care se termină în v[i]</td><td>L[i] = 1 + max(L[j]), j &lt; i, v[j] &lt; v[i]</td></tr><tr><td>Rucsac 0/1</td><td>d[c] = valoarea maximă cu capacitatea c</td><td>d[c] = max(d[c], d[c − g] + v), c descrescător</td></tr><tr><td>Triunghi de numere</td><td>S[i][j] = suma maximă de la (i, j) în jos</td><td>S[i][j] = T[i][j] + max(S[i+1][j], S[i+1][j+1])</td></tr><tr><td>Cel mai lung subșir comun</td><td>C[i][j] pentru prefixele a[:i], b[:j]</td><td>C[i−1][j−1] + 1 dacă a[i−1] = b[j−1], altfel max(C[i−1][j], C[i][j−1])</td></tr><tr><td>Drumuri în grilă (doar dreapta/jos)</td><td>D[i][j] = numărul de drumuri până la (i, j)</td><td>D[i][j] = D[i−1][j] + D[i][j−1]</td></tr></table></div>
+<pre data-lang="python"><code>from functools import lru_cache
+@lru_cache(maxsize=None)          # memoizare: varianta „de sus în jos”
+def fib(n):
+    return n if n &lt; 2 else fib(n - 1) + fib(n - 2)
+print(fib(80))</code></pre><pre class="out" data-lang="ieșire"><code>23416728348467685</code></pre>
+
+<h3 class="sec">Probleme rezolvate</h3>
+<div class="ex solved"><div class="ex-h"><b>Rezolvată 5.1</b><span>Subșir crescător maximal cu reconstituire</span></div><pre data-lang="python"><code>v = [5, 2, 8, 6, 3, 6, 9, 7]
+n = len(v)
+L, prec = [1] * n, [-1] * n
+for i in range(n):
+    for j in range(i):
+        if v[j] &lt; v[i] and L[j] + 1 &gt; L[i]:
+            L[i], prec[i] = L[j] + 1, j
+i = L.index(max(L))
+sir = []
+while i != -1:
+    sir.append(v[i]); i = prec[i]
+print(max(L), sir[::-1])</code></pre><p class="io-lbl">Se afișează</p><pre class="out" data-lang="ieșire"><code>4 [2, 3, 6, 9]</code></pre><div class="note">Vectorul <code>prec</code> memorează de unde am venit, ca să putem reconstitui subșirul de la final spre început.</div></div>
+<h3 class="sec">Exerciții</h3><p class="hint">La exercițiile de programare scrii codul în editor și apeși <b>Verifică</b>: pagina îl rulează pe mai multe teste. Citește datele exact cum cere enunțul și afișează doar ce se cere (mesajele din <code>input("...")</code> nu contează).</p>
+<div class="ex task" id="a5-e1" data-ex="a5-e1"><div class="ex-h"><b>Exercițiul 5.1</b><span>Subșir crescător maximal</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>Pe prima linie n (n ≤ 1000), pe a doua n numere întregi. Afișează lungimea celui mai lung subșir <strong>strict</strong> crescător (elementele nu trebuie să fie consecutive).</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>8
+5 2 8 6 3 6 9 7</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>4</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 5.1"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">8
+5 2 8 6 3 6 9 7</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a5-e2" data-ex="a5-e2"><div class="ex-h"><b>Exercițiul 5.2</b><span>Rucsac 0/1</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>Pe prima linie n și G, apoi n linii <code>greutate valoare</code>. Fiecare obiect poate fi luat cel mult o dată, întreg. Afișează valoarea maximă.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>4 7
+1 1
+3 4
+4 5
+5 7</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>9</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 5.2"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">4 7
+1 1
+3 4
+4 5
+5 7</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a5-e3" data-ex="a5-e3"><div class="ex-h"><b>Exercițiul 5.3</b><span>Triunghiul de numere</span><span class="lvl">ușor</span><span class="st" aria-live="polite"></span></div><p>Pe prima linie n, apoi n linii: linia i are i numere. Pornind din vârf, la fiecare pas cobori pe elementul de dedesubt sau pe cel din dreapta-jos. Afișează suma maximă.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>5
+7
+3 8
+8 1 0
+2 7 4 4
+4 5 2 6 5</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>30</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 5.3"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">5
+7
+3 8
+8 1 0
+2 7 4 4
+4 5 2 6 5</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a5-e4" data-ex="a5-e4"><div class="ex-h"><b>Exercițiul 5.4</b><span>Cel mai lung subșir comun</span><span class="lvl">dificil</span><span class="st" aria-live="polite"></span></div><p>Se citesc două cuvinte. Afișează lungimea celui mai lung subșir comun (literele nu trebuie să fie consecutive, dar își păstrează ordinea).</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>ALGORITM
+LOGARITM</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>6</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 5.4"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">ALGORITM
+LOGARITM</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a5-e5" data-ex="a5-e5"><div class="ex-h"><b>Exercițiul 5.5</b><span>Drumuri cu obstacole</span><span class="lvl">dificil</span><span class="st" aria-live="polite"></span></div><p>Pe prima linie n și m, apoi n linii cu m caractere (<code>.</code> liber, <code>#</code> obstacol). Din colțul stânga-sus te poți deplasa doar la dreapta sau în jos. Afișează numărul de drumuri până în colțul dreapta-jos, modulo 1 000 000 007.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>3 3
+...
+.#.
+...</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>2</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 5.5"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">3 3
+...
+.#.
+...</textarea></details><div class="res" hidden></div></div></div>
+<div class="quiz" data-quiz><h3>Test de verificare <span class="score"></span></h3><fieldset class="q" data-a="1"><legend>1. Programarea dinamică se aplică atunci când subproblemele sunt:</legend><div class="opts"><button type="button">independente</button><button type="button">suprapuse</button><button type="button">sortate</button><button type="button">de dimensiune egală</button></div><p class="why" hidden>Rezultatele lor se reutilizează.</p></fieldset><fieldset class="q" data-a="1"><legend>2. La rucsacul 0/1 cu un singur vector d[c], capacitatea c se parcurge:</legend><div class="opts"><button type="button">crescător</button><button type="button">descrescător</button><button type="button">în orice ordine</button><button type="button">doar pentru c par</button></div><p class="why" hidden>Altfel un obiect ar putea fi folosit de mai multe ori.</p></fieldset><fieldset class="q" data-a="1"><legend>3. Ce valoare are C[i][j] pentru cel mai lung subșir comun dacă a[i−1] = b[j−1]?</legend><div class="opts"><button type="button">C[i−1][j]</button><button type="button">C[i−1][j−1] + 1</button><button type="button">max(C[i−1][j], C[i][j−1])</button><button type="button">0</button></div><p class="why" hidden>Litera comună prelungește subșirul comun al prefixelor.</p></fieldset><fieldset class="q" data-a="1"><legend>4. Ce face decoratorul <code>@lru_cache</code>?</legend><div class="opts"><button type="button">sortează</button><button type="button">memorează rezultatele apelurilor</button><button type="button">limitează recursivitatea</button><button type="button">paralelizează</button></div><p class="why" hidden>Memoizare: un apel cu aceiași parametri se calculează o singură dată.</p></fieldset></div>
+<div class="done-row"><label class="done-toggle"><input type="checkbox" data-done="a5"> Am terminat lecția</label></div><nav class="pn"><a href="#a4" class="btn btn-ghost">← 4. Metoda Backtracking</a><a href="#a6" class="btn btn-primary">6. Stive, cozi, liste înlănțuite →</a></nav></section>
+<section class="lesson" id="a6" aria-labelledby="a6-t"><div class="les-head"><span class="les-nr">6</span><div><h2 id="a6-t">Structuri liniare: stiva, coada, lista înlănțuită</h2><p class="les-prog">Programa cap. 1: modelul liniar – stivă, coadă, liste simplu/dublu înlănțuite, circulare</p></div></div>
+<div class="obj"><h3>La finalul lecției vei ști</h3><ul><li>operațiile stivei și ale cozii și complexitatea lor</li><li>aplicații: paranteze, forma postfixată, simulări</li><li>implementarea unei liste simplu înlănțuite cu o clasă Nod</li></ul></div>
+
+<div class="tbl"><table><tr><th>Structură</th><th>Principiu</th><th>În Python</th><th>Aplicații</th></tr><tr><td>Stivă</td><td>LIFO</td><td><code>list</code>: <code>append</code>, <code>pop()</code>, vârful <code>s[-1]</code></td><td>paranteze, anularea operațiilor (undo), recursivitate, evaluarea expresiilor</td></tr><tr><td>Coadă</td><td>FIFO</td><td><code>collections.deque</code>: <code>append</code>, <code>popleft()</code></td><td>simulări de așteptare, parcurgerea în lățime (BFS)</td></tr><tr><td>Listă simplu înlănțuită</td><td>nod = informație + legătură spre următorul</td><td>clasă proprie <code>Nod</code></td><td>inserări/ștergeri O(1) după un nod cunoscut</td></tr></table></div>
+<pre data-lang="python"><code>class Nod:
+    def __init__(self, info, urm=None):
+        self.info = info
+        self.urm = urm
+
+class Lista:
+    def __init__(self):
+        self.prim = None
+    def adauga_inceput(self, x):          # O(1)
+        self.prim = Nod(x, self.prim)
+    def adauga_final(self, x):            # O(n) fără pointer spre ultimul nod
+        nou = Nod(x)
+        if self.prim is None:
+            self.prim = nou; return
+        p = self.prim
+        while p.urm is not None:
+            p = p.urm
+        p.urm = nou
+    def sterge(self, x):                  # prima apariție a lui x
+        if self.prim and self.prim.info == x:
+            self.prim = self.prim.urm; return
+        p = self.prim
+        while p and p.urm and p.urm.info != x:
+            p = p.urm
+        if p and p.urm:
+            p.urm = p.urm.urm
+    def __str__(self):
+        v, p = [], self.prim
+        while p:
+            v.append(str(p.info)); p = p.urm
+        return " -&gt; ".join(v) or "(vida)"
+
+L = Lista()
+for x in (3, 5, 7): L.adauga_final(x)
+L.adauga_inceput(1); L.sterge(5)
+print(L)</code></pre><pre class="out" data-lang="ieșire"><code>1 -&gt; 3 -&gt; 7</code></pre>
+<p>La lista <strong>dublu înlănțuită</strong> fiecare nod are și legătura <code>prec</code>; la cea <strong>circulară</strong>, ultimul nod indică spre primul (parcurgerea se oprește când revii la nodul de pornire).</p>
+<h3>Forma postfixată (poloneză inversă)</h3>
+<p>Expresia <code>(3 + 4) * 2</code> se scrie postfixat <code>3 4 + 2 *</code>. Evaluarea cu o stivă: numerele se pun pe stivă; la un operator se scot doi operanzi (întâi cel din dreapta), se calculează și se pune rezultatul.</p>
+
+<h3 class="sec">Probleme rezolvate</h3>
+<div class="ex solved"><div class="ex-h"><b>Rezolvată 6.1</b><span>Simularea unei cozi la casă</span></div><pre data-lang="python"><code>from collections import deque
+coada = deque(["Ana", "Dan", "Ioana"])
+coada.append("Radu")
+while coada:
+    print("servit:", coada.popleft())</code></pre><p class="io-lbl">Se afișează</p><pre class="out" data-lang="ieșire"><code>servit: Ana
+servit: Dan
+servit: Ioana
+servit: Radu</code></pre></div>
+<h3 class="sec">Exerciții</h3><p class="hint">La exercițiile de programare scrii codul în editor și apeși <b>Verifică</b>: pagina îl rulează pe mai multe teste. Citește datele exact cum cere enunțul și afișează doar ce se cere (mesajele din <code>input("...")</code> nu contează).</p>
+<div class="ex task" id="a6-e1" data-ex="a6-e1"><div class="ex-h"><b>Exercițiul 6.1</b><span>Paranteze corecte</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>Se citesc mai multe linii (prima: n, apoi n expresii) formate din parantezele <code>()[]{}</code>. Pentru fiecare afișează <code>DA</code> dacă parantezele sunt închise corect și în ordinea corectă, altfel <code>NU</code>.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>5
+([]{})
+([)]
+((
+)
+{[()()]}</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>DA
+NU
+NU
+NU
+DA</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 6.1"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">5
+([]{})
+([)]
+((
+)
+{[()()]}</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a6-e2" data-ex="a6-e2"><div class="ex-h"><b>Exercițiul 6.2</b><span>Evaluarea formei postfixate</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>Se citește o expresie postfixată cu numere întregi și operatorii <code>+ - *</code>, separate prin spații. Afișează valoarea ei.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>3 4 + 2 *</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>14</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 6.2"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">3 4 + 2 *</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a6-e3" data-ex="a6-e3"><div class="ex-h"><b>Exercițiul 6.3</b><span>Josephus cu o coadă</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>n copii (numerotați 1..n) stau în cerc. Se numără din k în k și copilul la care se ajunge iese din joc; numărătoarea continuă cu următorul. Se citesc n și k. Afișează ordinea ieșirii din joc. Folosește o coadă (deque) ca listă circulară.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>7 3</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>3 6 2 7 5 1 4</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 6.3"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">7 3</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a6-e4" data-ex="a6-e4"><div class="ex-h"><b>Exercițiul 6.4</b><span>Listă înlănțuită</span><span class="lvl">dificil</span><span class="st" aria-live="polite"></span></div><p>Completează clasa <code>Lista</code> (simplu înlănțuită) cu metodele <code>adauga_final</code>, <code>inverseaza</code> (inversează legăturile, fără liste Python auxiliare) și <code>__str__</code> (elementele separate prin spațiu sau <code>vida</code>). Programul citește numere, le adaugă la final, afișează lista, o inversează și o afișează din nou.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>1 2 3 4</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>1 2 3 4
+4 3 2 1</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 6.4"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">1 2 3 4</textarea></details><div class="res" hidden></div></div></div>
+<div class="quiz" data-quiz><h3>Test de verificare <span class="score"></span></h3><fieldset class="q" data-a="1"><legend>1. Ce structură folosește parcurgerea în lățime (BFS)?</legend><div class="opts"><button type="button">stiva</button><button type="button">coada</button><button type="button">heap-ul</button><button type="button">dicționarul</button></div><p class="why" hidden>FIFO: nodurile se vizitează în ordinea descoperirii.</p></fieldset><fieldset class="q" data-a="0"><legend>2. Cum se scrie postfixat <code>2 * (3 + 4)</code>?</legend><div class="opts"><button type="button">2 3 4 + *</button><button type="button">2 3 * 4 +</button><button type="button">* 2 + 3 4</button><button type="button">2 3 4 * +</button></div><p class="why" hidden>Operanzii păstrează ordinea; operatorul vine după operanzii lui.</p></fieldset><fieldset class="q" data-a="1"><legend>3. De ce <code>list.pop(0)</code> este lent pentru o coadă mare?</legend><div class="opts"><button type="button">nu este lent</button><button type="button">mută toate celelalte elemente: O(n)</button><button type="button">sortează lista</button><button type="button">creează o copie</button></div><p class="why" hidden>deque.popleft() este O(1).</p></fieldset><fieldset class="q" data-a="1"><legend>4. Într-o listă circulară simplu înlănțuită, ultimul nod indică spre:</legend><div class="opts"><button type="button">None</button><button type="button">primul nod</button><button type="button">el însuși</button><button type="button">nodul din mijloc</button></div><p class="why" hidden>De aceea nu există legătură nulă.</p></fieldset></div>
+<div class="done-row"><label class="done-toggle"><input type="checkbox" data-done="a6"> Am terminat lecția</label></div><nav class="pn"><a href="#a5" class="btn btn-ghost">← 5. Programare dinamică</a><a href="#a7" class="btn btn-primary">7. Grafuri: noțiuni, reprezentare →</a></nav></section>
+<section class="lesson" id="a7" aria-labelledby="a7-t"><div class="les-head"><span class="les-nr">7</span><div><h2 id="a7-t">Grafuri: noțiuni de bază și reprezentare</h2><p class="les-prog">Programa cap. 1: modelul rețea – graf neorientat/orientat, subgraf, graf parțial, graf transpus, complet, bipartit, conex, tare conex, ponderat, hamiltonian, eulerian</p></div></div>
+<div class="obj"><h3>La finalul lecției vei ști</h3><ul><li>vocabularul: nod, muchie/arc, grad, lanț/drum, ciclu/circuit</li><li>tipurile de grafuri din programă</li><li>matricea de adiacență, listele de adiacență, lista muchiilor</li><li>formulele care apar în subiecte</li></ul></div>
+
+<div class="tbl"><table><tr><th>Noțiune</th><th>Graf neorientat</th><th>Graf orientat</th></tr><tr><td>legătură</td><td>muchie [x, y]</td><td>arc (x, y) – de la x la y</td></tr><tr><td>grad</td><td>d(x) = nr. de muchii incidente; Σd(x) = 2m</td><td>d⁺(x) extern, d⁻(x) intern; Σd⁺ = Σd⁻ = m</td></tr><tr><td>succesiune de noduri legate</td><td>lanț; elementar dacă nodurile sunt distincte</td><td>drum</td></tr><tr><td>închisă</td><td>ciclu</td><td>circuit</td></tr><tr><td>„legat”</td><td>conex: lanț între oricare două noduri</td><td>tare conex: drum de la x la y și de la y la x, pentru orice x, y</td></tr><tr><td>nr. maxim de legături</td><td>n(n−1)/2 (graf complet)</td><td>n(n−1)</td></tr><tr><td>nr. de grafuri cu n noduri date</td><td>2<sup>n(n−1)/2</sup></td><td>4<sup>n(n−1)/2</sup></td></tr></table></div>
+<ul>
+<li><strong>Graf parțial</strong>: aceleași noduri, o parte din muchii (se elimină muchii) – 2<sup>m</sup> grafuri parțiale. <strong>Subgraf</strong>: o parte din noduri, cu <em>toate</em> muchiile dintre ele (se elimină noduri).</li>
+<li><strong>Graf transpus</strong> (orientat): arcele inversate. <strong>Ponderat</strong>: fiecare muchie are un cost.</li>
+<li><strong>Bipartit</strong>: nodurile se împart în două mulțimi și orice muchie leagă noduri din mulțimi diferite (⇔ nu are cicluri impare).</li>
+<li><strong>Eulerian</strong>: ciclu care folosește fiecare muchie o dată ⇔ conex (fără a număra nodurile izolate) și toate gradele pare. <strong>Hamiltonian</strong>: ciclu elementar prin toate nodurile (nu există o condiție simplă necesară și suficientă; Dirac: d(x) ≥ n/2 este suficientă).</li>
+</ul>
+<pre data-lang="python"><code>n, m = 4, 4
+muchii = [(1, 2), (1, 3), (2, 3), (3, 4)]
+A = [[0] * (n + 1) for _ in range(n + 1)]       # matrice de adiacență, indici 1..n
+L = [[] for _ in range(n + 1)]                  # liste de adiacență
+for x, y in muchii:
+    A[x][y] = A[y][x] = 1
+    L[x].append(y); L[y].append(x)
+print([sum(A[i]) for i in range(1, n + 1)])     # gradele
+print(L[3])</code></pre><pre class="out" data-lang="ieșire"><code>[2, 2, 3, 1]
+[1, 2, 4]</code></pre>
+<p>Matricea de adiacență ocupă n² și răspunde în O(1) la „există muchia [x, y]?”; listele de adiacență ocupă n + m și sunt preferate pentru parcurgeri pe grafuri mari.</p>
+
+<h3 class="sec">Probleme rezolvate</h3>
+<div class="ex solved"><div class="ex-h"><b>Rezolvată 7.1</b><span>Grade și noduri izolate</span></div><pre data-lang="python"><code>n, m = 5, 4
+muchii = [(1, 2), (2, 3), (3, 1), (3, 4)]
+grad = [0] * (n + 1)
+for x, y in muchii:
+    grad[x] += 1; grad[y] += 1
+print("grade:", grad[1:])
+print("izolate:", [i for i in range(1, n + 1) if grad[i] == 0])
+print("grad maxim:", max(grad), "la nodurile", [i for i in range(1, n + 1) if grad[i] == max(grad)])</code></pre><p class="io-lbl">Se afișează</p><pre class="out" data-lang="ieșire"><code>grade: [2, 2, 3, 1, 0]
+izolate: [5]
+grad maxim: 3 la nodurile [3]</code></pre></div>
+<h3 class="sec">Exerciții</h3><p class="hint">La exercițiile de programare scrii codul în editor și apeși <b>Verifică</b>: pagina îl rulează pe mai multe teste. Citește datele exact cum cere enunțul și afișează doar ce se cere (mesajele din <code>input("...")</code> nu contează).</p>
+<div class="ex task" id="a7-e1" data-ex="a7-e1"><div class="ex-h"><b>Exercițiul 7.1</b><span>Gradele nodurilor</span><span class="lvl">ușor</span><span class="st" aria-live="polite"></span></div><p>Graful se citește astfel: pe prima linie n (noduri, numerotate 1..n) și m (muchii), apoi m linii <code>x y</code>. Afișează gradele nodurilor 1..n pe o linie, apoi numărul de noduri cu grad impar.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>6 7
+1 2
+1 3
+2 3
+3 4
+4 5
+4 6
+5 6</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>2 2 3 3 2 2
+2</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 7.1"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">6 7
+1 2
+1 3
+2 3
+3 4
+4 5
+4 6
+5 6</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a7-e2" data-ex="a7-e2"><div class="ex-h"><b>Exercițiul 7.2</b><span>Matricea de adiacență</span><span class="lvl">ușor</span><span class="st" aria-live="polite"></span></div><p>Graful se citește astfel: pe prima linie n (noduri, numerotate 1..n) și m (muchii), apoi m linii <code>x y</code>. Afișează matricea de adiacență (n linii cu câte n valori 0/1).</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>4 4
+1 2
+1 3
+2 3
+3 4</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>0 1 1 0
+1 0 1 0
+1 1 0 1
+0 0 1 0</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 7.2"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">4 4
+1 2
+1 3
+2 3
+3 4</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a7-e3" data-ex="a7-e3"><div class="ex-h"><b>Exercițiul 7.3</b><span>Grad intern și extern</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>Graf <strong>orientat</strong>: pe prima linie n și m, apoi m arce <code>x y</code> (de la x la y). Afișează nodurile care au grad intern egal cu gradul extern (crescător, pe o linie), sau <code>0</code> dacă nu există; pe linia a doua, listele de adiacență ale grafului transpus pentru fiecare nod, sub forma <code>nod: vecini</code> (vecinii crescător).</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>4 5
+1 2
+2 3
+3 1
+3 4
+4 2</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>1 4
+1: 3
+2: 1 4
+3: 2
+4: 3</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 7.3"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">4 5
+1 2
+2 3
+3 1
+3 4
+4 2</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a7-e4" data-ex="a7-e4"><div class="ex-h"><b>Exercițiul 7.4</b><span>Eulerian?</span><span class="lvl">dificil</span><span class="st" aria-live="polite"></span></div><p>Graful se citește astfel: pe prima linie n (noduri, numerotate 1..n) și m (muchii), apoi m linii <code>x y</code>. Graful este conex. Afișează <code>ciclu eulerian</code> dacă toate gradele sunt pare, <code>lant eulerian</code> dacă exact două noduri au grad impar, altfel <code>nu</code>.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>6 7
+1 2
+1 3
+2 3
+3 4
+4 5
+4 6
+5 6</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>lant eulerian</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 7.4"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">6 7
+1 2
+1 3
+2 3
+3 4
+4 5
+4 6
+5 6</textarea></details><div class="res" hidden></div></div></div>
+<div class="quiz" data-quiz><h3>Test de verificare <span class="score"></span></h3><fieldset class="q" data-a="2"><legend>1. Un graf neorientat cu 7 noduri are cel mult câte muchii?</legend><div class="opts"><button type="button">49</button><button type="button">42</button><button type="button">21</button><button type="button">14</button></div><p class="why" hidden>7 · 6 / 2 = 21.</p></fieldset><fieldset class="q" data-a="1"><legend>2. Suma gradelor unui graf neorientat cu 9 muchii este:</legend><div class="opts"><button type="button">9</button><button type="button">18</button><button type="button">81</button><button type="button">depinde</button></div><p class="why" hidden>Fiecare muchie contribuie cu 2.</p></fieldset><fieldset class="q" data-a="1"><legend>3. Prin eliminarea unor muchii (păstrând toate nodurile) se obține un:</legend><div class="opts"><button type="button">subgraf</button><button type="button">graf parțial</button><button type="button">graf transpus</button><button type="button">graf complet</button></div><p class="why" hidden>Graf parțial.</p></fieldset><fieldset class="q" data-a="1"><legend>4. Câte grafuri neorientate cu 4 noduri date există?</legend><div class="opts"><button type="button">16</button><button type="button">64</button><button type="button">4096</button><button type="button">24</button></div><p class="why" hidden>2⁶ = 64.</p></fieldset><fieldset class="q" data-a="1"><legend>5. Un graf este bipartit dacă și numai dacă:</legend><div class="opts"><button type="button">este conex</button><button type="button">nu are cicluri de lungime impară</button><button type="button">are toate gradele pare</button><button type="button">este complet</button></div><p class="why" hidden>Teorema lui König.</p></fieldset></div>
+<div class="done-row"><label class="done-toggle"><input type="checkbox" data-done="a7"> Am terminat lecția</label></div><nav class="pn"><a href="#a6" class="btn btn-ghost">← 6. Stive, cozi, liste înlănțuite</a><a href="#a8" class="btn btn-primary">8. Parcurgeri BFS și DFS →</a></nav></section>
+<section class="lesson" id="a8" aria-labelledby="a8-t"><div class="les-head"><span class="les-nr">8</span><div><h2 id="a8-t">Parcurgerea grafurilor: în lățime (BFS) și în adâncime (DFS)</h2><p class="les-prog">Programa cap. 3: metoda de parcurgere în lățime (BFS) și în adâncime (DFS)</p></div></div>
+<div class="obj"><h3>La finalul lecției vei ști</h3><ul><li>BFS cu o coadă și distanța minimă în număr de muchii</li><li>DFS recursiv și iterativ</li><li>aplicații: componente conexe, verificarea bipartiției, lanțul minim</li></ul></div>
+
+<pre data-lang="python"><code>from collections import deque
+
+def bfs(L, s, n):
+    dist = [-1] * (n + 1)
+    dist[s] = 0
+    q, ordine = deque([s]), []
+    while q:
+        x = q.popleft(); ordine.append(x)
+        for y in L[x]:
+            if dist[y] == -1:          # nevizitat
+                dist[y] = dist[x] + 1
+                q.append(y)
+    return ordine, dist
+
+def dfs(L, x, viz, ordine):
+    viz[x] = True; ordine.append(x)
+    for y in L[x]:
+        if not viz[y]:
+            dfs(L, y, viz, ordine)
+
+n = 6
+L = [[], [2, 3], [1, 4], [1, 4, 6], [2, 3, 5], [4, 6], [3, 5]]   # vecinii în ordine crescătoare
+o, d = bfs(L, 1, n); print(o, d[1:])
+o2 = []; dfs(L, 1, [False] * (n + 1), o2); print(o2)</code></pre><pre class="out" data-lang="ieșire"><code>[1, 2, 3, 4, 6, 5] [0, 1, 1, 2, 3, 2]
+[1, 2, 4, 3, 6, 5]</code></pre>
+<ul>
+<li>Ambele parcurgeri au complexitatea O(n + m) cu liste de adiacență (O(n²) cu matrice).</li>
+<li>BFS vizitează nodurile în ordinea distanței față de sursă ⇒ <strong>lanț minim</strong> în graf neponderat. Pentru a reconstitui lanțul se memorează tatăl fiecărui nod.</li>
+<li>Numărul de <strong>componente conexe</strong> = de câte ori pornim o nouă parcurgere dintr-un nod nevizitat.</li>
+<li>Un graf este <strong>bipartit</strong> dacă îl putem colora cu 2 culori în timpul parcurgerii fără conflict.</li>
+<li>Ordinea parcurgerii depinde de ordinea vecinilor – în subiecte se precizează de obicei „vecinii în ordine crescătoare”.</li>
+</ul>
+
+<h3 class="sec">Exerciții</h3><p class="hint">La exercițiile de programare scrii codul în editor și apeși <b>Verifică</b>: pagina îl rulează pe mai multe teste. Citește datele exact cum cere enunțul și afișează doar ce se cere (mesajele din <code>input("...")</code> nu contează).</p>
+<div class="ex task" id="a8-e1" data-ex="a8-e1"><div class="ex-h"><b>Exercițiul 8.1</b><span>Parcurgerile BFS și DFS</span><span class="lvl">ușor</span><span class="st" aria-live="polite"></span></div><p>Graful se citește astfel: pe prima linie n (noduri, numerotate 1..n) și m (muchii), apoi m linii <code>x y</code>. Pe ultima linie se dă nodul de start s. Vecinii se parcurg în ordine crescătoare. Afișează ordinea BFS pe prima linie și ordinea DFS pe a doua.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>6 7
+1 2
+1 3
+2 4
+3 4
+4 5
+5 6
+3 6
+1</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>1 2 3 4 6 5
+1 2 4 3 6 5</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 8.1"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">6 7
+1 2
+1 3
+2 4
+3 4
+4 5
+5 6
+3 6
+1</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a8-e2" data-ex="a8-e2"><div class="ex-h"><b>Exercițiul 8.2</b><span>Componente conexe</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>Graful se citește astfel: pe prima linie n (noduri, numerotate 1..n) și m (muchii), apoi m linii <code>x y</code>. Afișează numărul de componente conexe, apoi, pe câte o linie, nodurile fiecărei componente în ordine crescătoare (componentele ordonate după cel mai mic nod).</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>7 4
+1 2
+2 3
+4 5
+6 7</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>3
+1 2 3
+4 5
+6 7</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 8.2"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">7 4
+1 2
+2 3
+4 5
+6 7</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a8-e3" data-ex="a8-e3"><div class="ex-h"><b>Exercițiul 8.3</b><span>Lanțul minim</span><span class="lvl">dificil</span><span class="st" aria-live="polite"></span></div><p>Graful se citește astfel: pe prima linie n (noduri, numerotate 1..n) și m (muchii), apoi m linii <code>x y</code>. Pe ultima linie se dau două noduri a și b. Afișează lungimea (în muchii) a celui mai scurt lanț de la a la b și lanțul (vecinii în ordine crescătoare, deci lanțul găsit de BFS), sau <code>-1</code> dacă nu există.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>6 7
+1 2
+1 3
+2 4
+3 4
+4 5
+5 6
+3 6
+1 5</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>3
+1 2 4 5</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 8.3"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">6 7
+1 2
+1 3
+2 4
+3 4
+4 5
+5 6
+3 6
+1 5</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a8-e4" data-ex="a8-e4"><div class="ex-h"><b>Exercițiul 8.4</b><span>Bipartit?</span><span class="lvl">dificil</span><span class="st" aria-live="polite"></span></div><p>Graful se citește astfel: pe prima linie n (noduri, numerotate 1..n) și m (muchii), apoi m linii <code>x y</code>. Afișează <code>DA</code> dacă graful este bipartit, altfel <code>NU</code>. (Graful poate avea mai multe componente conexe.)</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>4 4
+1 2
+2 3
+3 4
+4 1</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>DA</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 8.4"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">4 4
+1 2
+2 3
+3 4
+4 1</textarea></details><div class="res" hidden></div></div></div>
+<div class="quiz" data-quiz><h3>Test de verificare <span class="score"></span></h3><fieldset class="q" data-a="1"><legend>1. Ce structură de date folosește BFS?</legend><div class="opts"><button type="button">stivă</button><button type="button">coadă</button><button type="button">heap</button><button type="button">matrice</button></div><p class="why" hidden>Coada asigură ordinea pe niveluri.</p></fieldset><fieldset class="q" data-a="1"><legend>2. Complexitatea BFS cu liste de adiacență este:</legend><div class="opts"><button type="button">O(n²)</button><button type="button">O(n + m)</button><button type="button">O(n · m)</button><button type="button">O(m log n)</button></div><p class="why" hidden>Fiecare nod și fiecare muchie sunt prelucrate de un număr constant de ori.</p></fieldset><fieldset class="q" data-a="1"><legend>3. Cum afli numărul de componente conexe?</legend><div class="opts"><button type="button">numărul de muchii − n</button><button type="button">de câte ori pornești o parcurgere dintr-un nod nevizitat</button><button type="button">gradul maxim</button><button type="button">n − 1</button></div><p class="why" hidden>Fiecare parcurgere nouă descoperă o componentă.</p></fieldset><fieldset class="q" data-a="1"><legend>4. Care parcurgere dă lanțul cu cele mai puține muchii?</legend><div class="opts"><button type="button">DFS</button><button type="button">BFS</button><button type="button">ambele</button><button type="button">niciuna</button></div><p class="why" hidden>BFS vizitează nodurile în ordinea distanței.</p></fieldset></div>
+<div class="done-row"><label class="done-toggle"><input type="checkbox" data-done="a8"> Am terminat lecția</label></div><nav class="pn"><a href="#a7" class="btn btn-ghost">← 7. Grafuri: noțiuni, reprezentare</a><a href="#a9" class="btn btn-primary">9. Drumuri minime →</a></nav></section>
+<section class="lesson" id="a9" aria-labelledby="a9-t"><div class="les-head"><span class="les-nr">9</span><div><h2 id="a9-t">Drumuri minime: Dijkstra, Roy-Floyd și Roy-Warshall</h2><p class="les-prog">Programa cap. 3: algoritmul lui Dijkstra, algoritmul Roy-Floyd, algoritmul Roy-Warshall</p></div></div>
+<div class="obj"><h3>La finalul lecției vei ști</h3><ul><li>Dijkstra pentru drumuri minime de la o sursă (costuri nenegative)</li><li>Roy-Floyd pentru toate perechile</li><li>Roy-Warshall pentru matricea drumurilor (închiderea tranzitivă)</li></ul></div>
+
+<pre data-lang="python"><code>import heapq
+def dijkstra(L, s, n):                  # L[x] = [(y, cost), ...]
+    INF = float("inf")
+    d = [INF] * (n + 1); d[s] = 0
+    pq = [(0, s)]
+    while pq:
+        dx, x = heapq.heappop(pq)
+        if dx &gt; d[x]:
+            continue                    # intrare veche, deja îmbunătățită
+        for y, c in L[x]:
+            if d[x] + c &lt; d[y]:
+                d[y] = d[x] + c
+                heapq.heappush(pq, (d[y], y))
+    return d</code></pre>
+<p>Varianta clasică din manuale, fără heap: de n ori se alege nodul nefixat cu distanța minimă, se fixează și se relaxează muchiile lui – O(n²). Cu heap: O(m log n). <strong>Nu funcționează cu costuri negative.</strong></p>
+<pre data-lang="python"><code>def roy_floyd(d, n):                  # d = matricea costurilor, INF unde nu există muchie, 0 pe diagonală
+    for k in range(1, n + 1):           # k – nodul intermediar, OBLIGATORIU bucla exterioară
+        for i in range(1, n + 1):
+            for j in range(1, n + 1):
+                if d[i][k] + d[k][j] &lt; d[i][j]:
+                    d[i][j] = d[i][k] + d[k][j]
+
+def roy_warshall(a, n):                 # a = matricea de adiacență (0/1)
+    for k in range(1, n + 1):
+        for i in range(1, n + 1):
+            for j in range(1, n + 1):
+                if a[i][k] and a[k][j]:
+                    a[i][j] = 1</code></pre>
+<p>Ambele sunt O(n³). După Roy-Warshall, <code>a[i][j] = 1</code> ⇔ există drum de la i la j; un graf orientat este tare conex ⇔ matricea drumurilor are 1 peste tot în afara diagonalei.</p>
+
+<h3 class="sec">Exerciții</h3><p class="hint">La exercițiile de programare scrii codul în editor și apeși <b>Verifică</b>: pagina îl rulează pe mai multe teste. Citește datele exact cum cere enunțul și afișează doar ce se cere (mesajele din <code>input("...")</code> nu contează).</p>
+<div class="ex task" id="a9-e1" data-ex="a9-e1"><div class="ex-h"><b>Exercițiul 9.1</b><span>Dijkstra</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>Graf <strong>orientat</strong> ponderat: pe prima linie n, m și sursa s, apoi m linii <code>x y c</code> (arc de la x la y cu costul c ≥ 0). Afișează costul minim de la s la fiecare nod 1..n, pe o linie, cu <code>-1</code> pentru nodurile inaccesibile.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>5 7 1
+1 2 4
+1 3 1
+3 2 2
+2 4 1
+3 4 5
+4 5 3
+5 1 1</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>0 3 1 4 7</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 9.1"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">5 7 1
+1 2 4
+1 3 1
+3 2 2
+2 4 1
+3 4 5
+4 5 3
+5 1 1</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a9-e2" data-ex="a9-e2"><div class="ex-h"><b>Exercițiul 9.2</b><span>Roy-Floyd</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>Graf orientat ponderat: pe prima linie n și m, apoi m arce <code>x y c</code>. Afișează matricea drumurilor minime (n linii), cu <code>-</code> acolo unde nu există drum (pe diagonală 0).</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>4 6
+1 2 3
+2 3 2
+3 4 1
+4 1 2
+1 4 7
+2 1 8</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>0 3 5 6
+5 0 2 3
+3 6 0 1
+2 5 7 0</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 9.2"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">4 6
+1 2 3
+2 3 2
+3 4 1
+4 1 2
+1 4 7
+2 1 8</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a9-e3" data-ex="a9-e3"><div class="ex-h"><b>Exercițiul 9.3</b><span>Tare conex? (Roy-Warshall)</span><span class="lvl">dificil</span><span class="st" aria-live="polite"></span></div><p>Graf orientat: pe prima linie n și m, apoi m arce <code>x y</code>. Aplică Roy-Warshall și afișează matricea drumurilor (n linii, valori 0/1, cu a[i][i] = 1 doar dacă i se află pe un circuit), apoi <code>tare conex</code> sau <code>nu</code>.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>4 5
+1 2
+2 3
+3 1
+3 4
+4 3</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>1 1 1 1
+1 1 1 1
+1 1 1 1
+1 1 1 1
+tare conex</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 9.3"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">4 5
+1 2
+2 3
+3 1
+3 4
+4 3</textarea></details><div class="res" hidden></div></div></div>
+<div class="quiz" data-quiz><h3>Test de verificare <span class="score"></span></h3><fieldset class="q" data-a="1"><legend>1. Ce restricție are algoritmul lui Dijkstra?</legend><div class="opts"><button type="button">graful trebuie să fie neorientat</button><button type="button">costurile trebuie să fie nenegative</button><button type="button">graful trebuie să fie complet</button><button type="button">maxim 100 de noduri</button></div><p class="why" hidden>Costurile negative invalidează fixarea definitivă a nodurilor.</p></fieldset><fieldset class="q" data-a="1"><legend>2. În Roy-Floyd, bucla pe nodul intermediar k trebuie să fie:</legend><div class="opts"><button type="button">cea interioară</button><button type="button">cea exterioară</button><button type="button">oricare</button><button type="button">doar pentru k par</button></div><p class="why" hidden>Altfel nu se iau în calcul corect toate drumurile prin nodurile 1..k.</p></fieldset><fieldset class="q" data-a="1"><legend>3. Ce calculează Roy-Warshall?</legend><div class="opts"><button type="button">costurile minime</button><button type="button">matricea drumurilor (dacă există drum)</button><button type="button">arborele parțial de cost minim</button><button type="button">gradele</button></div><p class="why" hidden>Închiderea tranzitivă.</p></fieldset><fieldset class="q" data-a="1"><legend>4. Complexitatea lui Roy-Floyd este:</legend><div class="opts"><button type="button">O(n²)</button><button type="button">O(n³)</button><button type="button">O(m log n)</button><button type="button">O(n + m)</button></div><p class="why" hidden>Trei bucle imbricate.</p></fieldset></div>
+<div class="done-row"><label class="done-toggle"><input type="checkbox" data-done="a9"> Am terminat lecția</label></div><nav class="pn"><a href="#a8" class="btn btn-ghost">← 8. Parcurgeri BFS și DFS</a><a href="#a10" class="btn btn-primary">10. Arbore parțial de cost minim →</a></nav></section>
+<section class="lesson" id="a10" aria-labelledby="a10-t"><div class="les-head"><span class="les-nr">10</span><div><h2 id="a10-t">Arborele parțial de cost minim: Prim și Kruskal</h2><p class="les-prog">Programa cap. 3: algoritmul lui Prim, algoritmul lui Kruskal</p></div></div>
+<div class="obj"><h3>La finalul lecției vei ști</h3><ul><li>ce este un arbore parțial de cost minim (APM)</li><li>algoritmul lui Kruskal cu structura union-find</li><li>algoritmul lui Prim</li><li>de ce ambele sunt algoritmi greedy</li></ul></div>
+
+<p>Pentru un graf neorientat, conex și ponderat, un <strong>arbore parțial</strong> păstrează toate cele n noduri și n − 1 muchii, fără cicluri. Cel de <strong>cost minim</strong> are suma costurilor minimă (de exemplu, cablarea cea mai ieftină a unor clădiri).</p>
+<pre data-lang="python"><code>def kruskal(n, muchii):               # muchii = [(cost, x, y), ...]
+    tata = list(range(n + 1))
+    def rad(x):                         # rădăcina mulțimii lui x (cu comprimarea drumului)
+        while tata[x] != x:
+            tata[x] = tata[tata[x]]
+            x = tata[x]
+        return x
+    cost, alese = 0, []
+    for c, x, y in sorted(muchii):      # muchiile în ordinea crescătoare a costului
+        rx, ry = rad(x), rad(y)
+        if rx != ry:                    # nu formează ciclu
+            tata[rx] = ry
+            cost += c; alese.append((x, y))
+    return cost, alese</code></pre>
+<p><strong>Prim</strong>: pornește dintr-un nod și adaugă repetat cea mai ieftină muchie care leagă arborele de un nod din afara lui (cu heap: O(m log n)). <strong>Kruskal</strong>: sortează muchiile și le adaugă pe cele care nu închid un ciclu (O(m log m)). Când costurile sunt distincte, APM este unic și ambii algoritmi îl găsesc.</p>
+
+<h3 class="sec">Exerciții</h3><p class="hint">La exercițiile de programare scrii codul în editor și apeși <b>Verifică</b>: pagina îl rulează pe mai multe teste. Citește datele exact cum cere enunțul și afișează doar ce se cere (mesajele din <code>input("...")</code> nu contează).</p>
+<div class="ex task" id="a10-e1" data-ex="a10-e1"><div class="ex-h"><b>Exercițiul 10.1</b><span>Kruskal</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>Pe prima linie n și m, apoi m muchii <code>x y c</code> ale unui graf neorientat conex. Afișează costul arborelui parțial de cost minim.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>6 9
+1 2 7
+1 3 9
+1 6 14
+2 3 10
+2 4 15
+3 4 11
+3 6 2
+4 5 6
+5 6 9</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>33</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 10.1"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">6 9
+1 2 7
+1 3 9
+1 6 14
+2 3 10
+2 4 15
+3 4 11
+3 6 2
+4 5 6
+5 6 9</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a10-e2" data-ex="a10-e2"><div class="ex-h"><b>Exercițiul 10.2</b><span>Prim, cu muchiile alese</span><span class="lvl">dificil</span><span class="st" aria-live="polite"></span></div><p>Aceleași date ca mai sus. Aplică algoritmul lui Prim pornind din nodul 1 și afișează muchiile în ordinea în care sunt adăugate, ca <code>x y c</code> (x – nodul deja în arbore), apoi costul total. La costuri egale, alege muchia cu nodul nou cel mai mic. Folosește heapq cu tupluri (cost, nod_nou, nod_din_arbore).</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>6 9
+1 2 7
+1 3 9
+1 6 14
+2 3 10
+2 4 15
+3 4 11
+3 6 2
+4 5 6
+5 6 9</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>1 2 7
+1 3 9
+3 6 2
+6 5 9
+5 4 6
+33</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 10.2"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">6 9
+1 2 7
+1 3 9
+1 6 14
+2 3 10
+2 4 15
+3 4 11
+3 6 2
+4 5 6
+5 6 9</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a10-e3" data-ex="a10-e3"><div class="ex-h"><b>Exercițiul 10.3</b><span>Componente cu union-find</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>Pe prima linie n și q, apoi q operații: <code>U x y</code> (unește mulțimile lui x și y) sau <code>Q x y</code> (afișează <code>DA</code> dacă x și y sunt în aceeași mulțime, altfel <code>NU</code>). La final afișează numărul de mulțimi.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>5 6
+U 1 2
+Q 1 2
+Q 1 3
+U 3 4
+U 2 4
+Q 1 3</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>DA
+NU
+DA
+2</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 10.3"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">5 6
+U 1 2
+Q 1 2
+Q 1 3
+U 3 4
+U 2 4
+Q 1 3</textarea></details><div class="res" hidden></div></div></div>
+<div class="quiz" data-quiz><h3>Test de verificare <span class="score"></span></h3><fieldset class="q" data-a="1"><legend>1. Câte muchii are un arbore parțial al unui graf conex cu 10 noduri?</legend><div class="opts"><button type="button">10</button><button type="button">9</button><button type="button">45</button><button type="button">depinde de graf</button></div><p class="why" hidden>n − 1.</p></fieldset><fieldset class="q" data-a="1"><legend>2. Kruskal adaugă o muchie dacă:</legend><div class="opts"><button type="button">are cost minim global</button><button type="button">nu formează ciclu cu muchiile alese</button><button type="button">pleacă din nodul 1</button><button type="button">are cost par</button></div><p class="why" hidden>Verificarea se face cu union-find.</p></fieldset><fieldset class="q" data-a="1"><legend>3. Prim și Kruskal sunt algoritmi de tip:</legend><div class="opts"><button type="button">backtracking</button><button type="button">greedy</button><button type="button">divide et impera</button><button type="button">programare dinamică</button></div><p class="why" hidden>Aleg la fiecare pas muchia cea mai ieftină permisă.</p></fieldset></div>
+<div class="done-row"><label class="done-toggle"><input type="checkbox" data-done="a10"> Am terminat lecția</label></div><nav class="pn"><a href="#a9" class="btn btn-ghost">← 9. Drumuri minime</a><a href="#a11" class="btn btn-primary">11. Arbori, ABC, heap →</a></nav></section>
+<section class="lesson" id="a11" aria-labelledby="a11-t"><div class="les-head"><span class="les-nr">11</span><div><h2 id="a11-t">Arbori: vectorul de tați, arbori binari, arbori binari de căutare, ansamblu (heap)</h2><p class="les-prog">Programa cap. 1: modelul ierarhic – arbore cu rădăcină, ordonat, binar, binar de căutare, binar complet, heap; cap. 3: parcurgeri în preordine, inordine, postordine</p></div></div>
+<div class="obj"><h3>La finalul lecției vei ști</h3><ul><li>vectorul de tați: rădăcină, frunze, niveluri, înălțime</li><li>parcurgerile unui arbore binar</li><li>inserarea și căutarea în ABC</li><li>heap-ul: inserare, extragerea minimului, heapq</li></ul></div>
+
+<ul>
+<li><strong>Arbore</strong> = graf conex fără cicluri; n noduri ⇒ n − 1 muchii. Cu rădăcină se memorează prin <strong>vectorul de tați</strong>: <code>tata[rad] = 0</code>. Frunzele sunt nodurile care nu apar în vector. Nivelul (adâncimea) unui nod = numărul de muchii până la rădăcină; înălțimea = nivelul maxim.</li>
+<li><strong>Arbore binar</strong>: fiecare nod are cel mult doi fii (stâng, drept). Pe nivelul k: cel mult 2<sup>k</sup> noduri; de înălțime h: cel mult 2<sup>h+1</sup> − 1 noduri.</li>
+<li><strong>Arbore binar complet</strong>: toate nivelurile pline, cu excepția ultimului, completat de la stânga. Se memorează într-un vector: fiii nodului i (de la 1) sunt 2i și 2i + 1.</li>
+<li><strong>ABC</strong>: stânga &lt; rădăcina &lt; dreapta în fiecare nod; <strong>inordinea</strong> dă cheile sortate. Căutare/inserare în O(h).</li>
+<li><strong>Heap (ansamblu)</strong>: arbore binar complet; în min-heap fiecare părinte ≤ fiii. Inserare: urcare (sift-up); extragerea minimului: ultimul element trece în rădăcină și coboară (sift-down) – ambele O(log n). În Python: modulul <code>heapq</code> (min-heap pe o listă).</li>
+</ul>
+<pre data-lang="python"><code>class Nod:
+    def __init__(self, k):
+        self.k, self.st, self.dr = k, None, None
+
+def insereaza(r, k):
+    if r is None:
+        return Nod(k)
+    if k &lt; r.k: r.st = insereaza(r.st, k)
+    else:       r.dr = insereaza(r.dr, k)
+    return r
+
+def preordine(r):  return [] if r is None else [r.k] + preordine(r.st) + preordine(r.dr)
+def inordine(r):   return [] if r is None else inordine(r.st) + [r.k] + inordine(r.dr)
+def postordine(r): return [] if r is None else postordine(r.st) + postordine(r.dr) + [r.k]
+
+r = None
+for k in [50, 30, 70, 20, 40, 60, 80, 35]:
+    r = insereaza(r, k)
+print(preordine(r)); print(inordine(r)); print(postordine(r))
+
+import heapq
+h = []
+for x in [5, 3, 8, 1, 9]:
+    heapq.heappush(h, x)
+print(h, heapq.heappop(h), h)</code></pre><pre class="out" data-lang="ieșire"><code>[50, 30, 20, 40, 35, 70, 60, 80]
+[20, 30, 35, 40, 50, 60, 70, 80]
+[20, 35, 40, 30, 60, 80, 70, 50]
+[3, 5, 8, 9] 1 [3, 5, 8, 9]</code></pre>
+
+<h3 class="sec">Exerciții</h3><p class="hint">La exercițiile de programare scrii codul în editor și apeși <b>Verifică</b>: pagina îl rulează pe mai multe teste. Citește datele exact cum cere enunțul și afișează doar ce se cere (mesajele din <code>input("...")</code> nu contează).</p>
+<div class="ex task" id="a11-e1" data-ex="a11-e1"><div class="ex-h"><b>Exercițiul 11.1</b><span>Vectorul de tați</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>Pe prima linie n, pe a doua vectorul de tați (tata[i] pentru i = 1..n, 0 pentru rădăcină). Afișează pe linii separate: rădăcina, frunzele (crescător) și înălțimea arborelui.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>6
+2 0 2 1 1 3</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>2
+4 5 6
+2</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 11.1"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">6
+2 0 2 1 1 3</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a11-e2" data-ex="a11-e2"><div class="ex-h"><b>Exercițiul 11.2</b><span>Parcurgerile unui ABC</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>Se citesc chei întregi distincte, pe o linie. Inserează-le, în ordine, într-un arbore binar de căutare inițial vid. Afișează parcurgerile în preordine, inordine și postordine (câte una pe linie) și înălțimea arborelui.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>50 30 70 20 40 60 80 35</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>50 30 20 40 35 70 60 80
+20 30 35 40 50 60 70 80
+20 35 40 30 60 80 70 50
+3</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 11.2"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">50 30 70 20 40 60 80 35</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a11-e3" data-ex="a11-e3"><div class="ex-h"><b>Exercițiul 11.3</b><span>Cele mai mici k valori (heap)</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>Pe prima linie n și k, pe a doua n numere întregi. Afișează cele mai mici k valori în ordine crescătoare, folosind <code>heapq</code> (heapify + heappop de k ori).</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>8 3
+5 1 9 3 7 2 8 6</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>1 2 3</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 11.3"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">8 3
+5 1 9 3 7 2 8 6</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a11-e4" data-ex="a11-e4"><div class="ex-h"><b>Exercițiul 11.4</b><span>Min-heap scris de mână</span><span class="lvl">dificil</span><span class="st" aria-live="polite"></span></div><p>Implementează un min-heap într-o listă (fără heapq). Pe prima linie n, apoi n comenzi: <code>ins x</code> sau <code>ext</code> (afișează și elimină minimul; <code>gol</code> dacă heap-ul este vid). La final afișează lista internă a heap-ului (sau <code>vid</code>).</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>8
+ins 5
+ins 3
+ins 8
+ins 1
+ext
+ins 9
+ins 2
+ext</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>1
+2
+3 5 8 9</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 11.4"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">8
+ins 5
+ins 3
+ins 8
+ins 1
+ext
+ins 9
+ins 2
+ext</textarea></details><div class="res" hidden></div></div></div>
+<div class="quiz" data-quiz><h3>Test de verificare <span class="score"></span></h3><fieldset class="q" data-a="1"><legend>1. Ce parcurgere a unui ABC dă cheile sortate crescător?</legend><div class="opts"><button type="button">preordine</button><button type="button">inordine</button><button type="button">postordine</button><button type="button">în lățime</button></div><p class="why" hidden>Stânga – rădăcină – dreapta.</p></fieldset><fieldset class="q" data-a="1"><legend>2. Într-un arbore binar complet memorat în vector de la poziția 1, fiii nodului 5 sunt:</legend><div class="opts"><button type="button">6 și 7</button><button type="button">10 și 11</button><button type="button">9 și 10</button><button type="button">4 și 6</button></div><p class="why" hidden>2i și 2i + 1.</p></fieldset><fieldset class="q" data-a="1"><legend>3. Cât costă extragerea minimului dintr-un min-heap cu n elemente?</legend><div class="opts"><button type="button">O(1)</button><button type="button">O(log n)</button><button type="button">O(n)</button><button type="button">O(n log n)</button></div><p class="why" hidden>Elementul coboară pe cel mult înălțimea arborelui.</p></fieldset><fieldset class="q" data-a="2"><legend>4. Un arbore binar de înălțime 3 are cel mult:</legend><div class="opts"><button type="button">7 noduri</button><button type="button">8 noduri</button><button type="button">15 noduri</button><button type="button">16 noduri</button></div><p class="why" hidden>2⁴ − 1 = 15.</p></fieldset><fieldset class="q" data-a="1"><legend>5. În vectorul de tați, frunzele sunt nodurile care:</legend><div class="opts"><button type="button">au tata = 0</button><button type="button">nu apar ca valoare în vector</button><button type="button">au cel mai mare număr</button><button type="button">apar de două ori</button></div><p class="why" hidden>Nu sunt tată pentru niciun nod.</p></fieldset></div>
+<div class="done-row"><label class="done-toggle"><input type="checkbox" data-done="a11"> Am terminat lecția</label></div><nav class="pn"><a href="#a10" class="btn btn-ghost">← 10. Arbore parțial de cost minim</a><a href="#a12" class="btn btn-primary">12. Criptare, Fletcher, Flood Fill →</a></nav></section>
+<section class="lesson" id="a12" aria-labelledby="a12-t"><div class="les-head"><span class="les-nr">12</span><div><h2 id="a12-t">Criptare, verificarea integrității și Flood Fill</h2><p class="les-prog">Programa cap. 3: substituție monoalfabetică, cifrul lui Cezar, cifrul Vigenère, algoritmul lui Fletcher; algoritmi de umplere (Flood Fill)</p></div></div>
+<div class="obj"><h3>La finalul lecției vei ști</h3><ul><li>cifrurile din programă și cum se sparg</li><li>suma de control Fletcher-16 și de ce detectează inversările</li><li>Flood Fill recursiv și iterativ</li></ul></div>
+
+<div class="tbl"><table><tr><th>Metodă</th><th>Criptare</th><th>Slăbiciune</th></tr><tr><td>Substituție monoalfabetică</td><td>fiecare literă → litera corespunzătoare dintr-un alfabet permutat (cheia)</td><td>analiza frecvenței literelor</td></tr><tr><td>Cezar</td><td>c = (p + k) mod 26</td><td>doar 25 de chei – forță brută</td></tr><tr><td>Vigenère</td><td>litera i se deplasează cu litera i mod |cheie| a cheii (A = 0)</td><td>dacă se află lungimea cheii, devine o serie de cifruri Cezar</td></tr></table></div>
+<pre data-lang="python"><code>def vigenere(text, cheie, semn=1):          # semn = -1 pentru decriptare
+    rez, j = [], 0
+    for c in text:
+        if c.isupper():
+            d = ord(cheie[j % len(cheie)]) - 65
+            rez.append(chr((ord(c) - 65 + semn * d) % 26 + 65)); j += 1
+        else:
+            rez.append(c)
+    return "".join(rez)
+
+def fletcher16(octeti):
+    s1 = s2 = 0
+    for b in octeti:
+        s1 = (s1 + b) % 255
+        s2 = (s2 + s1) % 255
+    return s2 * 256 + s1
+
+print(vigenere("ATTACK AT DAWN", "LEMON"), fletcher16(b"abcde"), fletcher16(b"AB"), fletcher16(b"BA"))</code></pre><pre class="out" data-lang="ieșire"><code>LXFOPV EF RNHR 51440 50307 50563</code></pre>
+<p><strong>Fletcher</strong> nu criptează: produce o <em>sumă de control</em> trimisă împreună cu datele; destinatarul o recalculează și detectează modificările. Spre deosebire de o simplă sumă a octeților, a doua sumă (s2) depinde de poziție, deci „AB” și „BA” dau valori diferite.</p>
+<p><strong>Flood Fill</strong> marchează toate celulele unei zone pornind dintr-o celulă: DFS (recursiv sau cu stivă) sau BFS (cu coadă). Pentru grile mari se preferă varianta cu stivă/coadă (limita de recursivitate din Python).</p>
+
+<h3 class="sec">Exerciții</h3><p class="hint">La exercițiile de programare scrii codul în editor și apeși <b>Verifică</b>: pagina îl rulează pe mai multe teste. Citește datele exact cum cere enunțul și afișează doar ce se cere (mesajele din <code>input("...")</code> nu contează).</p>
+<div class="ex task" id="a12-e1" data-ex="a12-e1"><div class="ex-h"><b>Exercițiul 12.1</b><span>Spargerea cifrului lui Cezar</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>Se citește un text criptat cu Cezar (litere mari și spații) și un cuvânt despre care se știe că apare în textul clar. Găsește cheia k (0..25) și afișează k și textul decriptat; dacă sunt mai multe chei posibile, alege-o pe cea mai mică.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>LQIRUPDWLFD HVWH IUXPRDVD
+ESTE</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>3
+INFORMATICA ESTE FRUMOASA</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 12.1"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">LQIRUPDWLFD HVWH IUXPRDVD
+ESTE</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a12-e2" data-ex="a12-e2"><div class="ex-h"><b>Exercițiul 12.2</b><span>Vigenère</span><span class="lvl">mediu</span><span class="st" aria-live="polite"></span></div><p>Pe prima linie <code>C</code> (criptare) sau <code>D</code> (decriptare), pe a doua cheia (litere mari), pe a treia textul (litere mari, spații și alte semne care rămân neschimbate; cheia avansează doar la litere). Afișează rezultatul.</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>C
+LEMON
+ATTACK AT DAWN</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>LXFOPV EF RNHR</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 12.2"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">C
+LEMON
+ATTACK AT DAWN</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a12-e3" data-ex="a12-e3"><div class="ex-h"><b>Exercițiul 12.3</b><span>Fletcher-16</span><span class="lvl">ușor</span><span class="st" aria-live="polite"></span></div><p>Se citește o linie de text (caractere ASCII). Afișează suma de control Fletcher-16 a octeților textului, în zecimal, și apoi în hexazecimal cu 4 cifre mari (de exemplu <code>C8F0</code>).</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>abcde</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>51440
+C8F0</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 12.3"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">abcde</textarea></details><div class="res" hidden></div></div></div>
+<div class="ex task" id="a12-e4" data-ex="a12-e4"><div class="ex-h"><b>Exercițiul 12.4</b><span>Cea mai mare zonă</span><span class="lvl">dificil</span><span class="st" aria-live="polite"></span></div><p>Pe prima linie n și m, apoi n linii cu m caractere (<code>#</code> uscat, <code>.</code> apă). Afișează numărul de insule (zone de <code>#</code> vecine pe orizontală/verticală) și suprafața celei mai mari insule (0 dacă nu există).</p><p class="io-lbl ex-lbl">Exemplu</p><div class="io-grid"><div><p class="io-lbl">Intrare</p><pre class="out" data-lang="intrare"><code>4 5
+##...
+##.##
+...#.
+#.###</code></pre></div><div><p class="io-lbl">Ieșire</p><pre class="out" data-lang="ieșire"><code>3 6</code></pre></div></div><div class="ide"><textarea placeholder="# Scrie programul aici" spellcheck="false" autocapitalize="off" aria-label="Editor de cod pentru exercițiul 12.4"></textarea><div class="ide-bar"><button type="button" class="btn btn-primary b-check">Verifică</button><button type="button" class="btn btn-ghost b-run">Rulează cu intrarea</button><button type="button" class="btn btn-link b-sol">Arată soluția</button><button type="button" class="btn btn-link b-reset">Resetează</button></div><details class="stdin"><summary>Intrare pentru „Rulează”</summary><textarea class="in" spellcheck="false" aria-label="Date de intrare">4 5
+##...
+##.##
+...#.
+#.###</textarea></details><div class="res" hidden></div></div></div>
+<div class="quiz" data-quiz><h3>Test de verificare <span class="score"></span></h3><fieldset class="q" data-a="1"><legend>1. Câte chei utile are cifrul lui Cezar pe alfabetul englez?</legend><div class="opts"><button type="button">26</button><button type="button">25</button><button type="button">26!</button><button type="button">13</button></div><p class="why" hidden>Cheia 0 lasă textul neschimbat.</p></fieldset><fieldset class="q" data-a="1"><legend>2. Ce scop are algoritmul lui Fletcher?</legend><div class="opts"><button type="button">criptare</button><button type="button">verificarea integrității datelor</button><button type="button">compresie</button><button type="button">sortare</button></div><p class="why" hidden>Este o sumă de control.</p></fieldset><fieldset class="q" data-a="1"><legend>3. Cum se sparge de obicei o substituție monoalfabetică?</legend><div class="opts"><button type="button">forță brută pe 26 de chei</button><button type="button">analiza frecvenței literelor</button><button type="button">nu se poate</button><button type="button">cu Dijkstra</button></div><p class="why" hidden>Literele frecvente ale limbii rămân frecvente în textul criptat.</p></fieldset><fieldset class="q" data-a="1"><legend>4. De ce Fletcher detectează inversarea a doi octeți, iar suma simplă nu?</legend><div class="opts"><button type="button">folosește modulo 255</button><button type="button">a doua sumă depinde de poziția octeților</button><button type="button">folosește criptare</button><button type="button">nu detectează</button></div><p class="why" hidden>s2 acumulează sumele parțiale.</p></fieldset></div>
+<div class="done-row"><label class="done-toggle"><input type="checkbox" data-done="a12"> Am terminat lecția</label></div><nav class="pn"><a href="#a11" class="btn btn-ghost">← 11. Arbori, ABC, heap</a><a href="cpp" class="btn btn-primary">Etapa 3: C++ →</a></nav></section>
+  </div>
+</div>
+</main>
+<footer class="site-footer"><div class="wrap foot-row">
+  <a class="footer-brand-surface" href="./" aria-label="Catalog360.ro"><span class="brand-mark"><img src="assets/logo-catalog360.png" alt="Catalog360.ro" width="2172" height="724" loading="lazy"></span></a>
+  <p style="margin:0;max-width:62ch">Material de pregătire independent, după programa de concurs (Anexa 49, MO nr. 972 bis/23.XI.2026). Nu este un document oficial al Ministerului Educației. Exercițiile Python rulează local, în browser, cu Pyodide.</p>
+</div></footer>
+
+<script type="text/plain" id="runner">
+import sys, io, os, traceback
+
+def __run(code, stdin, files, echo):
+    os.chdir('/home/pyodide')
+    for n in os.listdir('.'):
+        if os.path.isfile(n):
+            os.remove(n)
+    for n, c in files.items():
+        with open(n, 'w', encoding='utf-8') as f:
+            f.write(c)
+    sin = io.StringIO(stdin)
+    out = io.StringIO()
+
+    def inp(prompt=''):
+        if echo and prompt:
+            out.write(str(prompt))
+        linie = sin.readline()
+        if not linie:
+            raise EOFError('nu mai sunt date de intrare')
+        linie = linie.rstrip('\n')
+        if echo:
+            out.write(linie + '\n')
+        return linie
+
+    g = {'__name__': '__main__', 'input': inp}
+    vechi = (sys.stdin, sys.stdout)
+    sys.stdin, sys.stdout = sin, out
+    err = ''
+    try:
+        exec(compile(code, 'program.py', 'exec'), g)
+    except SystemExit:
+        pass
+    except SyntaxError as e:
+        err = f'SyntaxError: {e.msg} (linia {e.lineno})'
+    except BaseException as e:
+        cadre = [f for f in traceback.extract_tb(e.__traceback__) if f.filename == 'program.py']
+        err = f'{type(e).__name__}: {e}' + (f' (linia {cadre[-1].lineno})' if cadre else '')
+    finally:
+        sys.stdin, sys.stdout = vechi
+    fo = {}
+    for n in os.listdir('.'):
+        if n not in files and os.path.isfile(n):
+            try:
+                with open(n, encoding='utf-8') as f:
+                    fo[n] = f.read()
+            except Exception:
+                pass
+    return out.getvalue(), err, fo
+</script>
+<script>
+var DATE = {"a1-e1": {"teste": [{"in": "36", "fis": {}, "out": "9 91"}, {"in": "1", "fis": {}, "out": "1 1"}, {"in": "97", "fis": {}, "out": "2 98"}, {"in": "999999999989", "fis": {}, "out": "2 999999999990"}, {"in": "735134400000", "fis": {}, "out": "3840 3866692515840"}], "sol": "n = int(input())\ncnt = s = 0\nd = 1\nwhile d * d <= n:\n    if n % d == 0:\n        cnt += 1; s += d\n        if d != n // d:\n            cnt += 1; s += n // d\n    d += 1\nprint(cnt, s)\n", "start": ""}, "a1-e2": {"teste": [{"in": "5 3\n1 2 3 4 5\n1 5\n2 3\n4 4", "fis": {}, "out": "15\n5\n4"}, {"in": "3 2\n-1 5 -2\n1 1\n1 3", "fis": {}, "out": "-1\n2"}], "sol": "n, q = map(int, input().split())\nv = list(map(int, input().split()))\ns = [0]\nfor x in v:\n    s.append(s[-1] + x)\nfor _ in range(q):\n    a, b = map(int, input().split())\n    print(s[b] - s[a - 1])\n", "start": ""}, "a1-e3": {"teste": [{"in": "1 2 4 5 7 9 11\n11", "fis": {}, "out": "2 9\n4 7"}, {"in": "1 2 3\n10", "fis": {}, "out": "nu exista"}, {"in": "-5 -1 0 1 5\n0", "fis": {}, "out": "-5 5\n-1 1"}], "sol": "v = list(map(int, input().split()))\nS = int(input())\ni, j = 0, len(v) - 1\ngasit = False\nwhile i < j:\n    t = v[i] + v[j]\n    if t == S:\n        print(v[i], v[j]); gasit = True\n        i += 1; j -= 1\n    elif t < S:\n        i += 1\n    else:\n        j -= 1\nif not gasit:\n    print(\"nu exista\")\n", "start": ""}, "a2-e1": {"teste": [{"in": "2", "fis": {}, "out": "3\nA B\nA C\nB C"}, {"in": "1", "fis": {}, "out": "1\nA C"}, {"in": "3", "fis": {}, "out": "7\nA C\nA B\nC B\nA C\nB A\nB C\nA C"}, {"in": "6", "fis": {}, "out": "63\nA B\nA C\nB C\nA B\nC A\nC B\nA B\nA C\nB C\nB A\nC A\nB C\nA B\nA C\nB C\nA B\nC A\nC B\nA B\nC A\nB C\nB A\nC A\nC B\nA B\nA C\nB C\nA B\nC A\nC B\nA B\nA C\nB C\nB A\nC A\nB C\nA B\nA C\nB C\nB A\nC A\nC B\nA B\nC A\nB C\nB A\nC A\nB C\nA B\nA C\nB C\nA B\nC A\nC B\nA B\nA C\nB C\nB A\nC A\nB C\nA B\nA C\nB C"}], "sol": "def hanoi(n, a, b, c, m):\n    if n == 0:\n        return\n    hanoi(n - 1, a, c, b, m)\n    m.append(a + ' ' + c)\n    hanoi(n - 1, b, a, c, m)\n\nn = int(input())\nm = []\nhanoi(n, 'A', 'B', 'C', m)\nprint(len(m))\nprint('\\n'.join(m))\n", "start": ""}, "a2-e2": {"teste": [{"in": "38 27 43 3 9 82 10", "fis": {}, "out": "3 9 10 27 38 43 82"}, {"in": "1", "fis": {}, "out": "1"}, {"in": "5 -1 5 0 -1", "fis": {}, "out": "-1 -1 0 5 5"}], "sol": "def ms(v):\n    if len(v) <= 1:\n        return v\n    m = len(v) // 2\n    a, b = ms(v[:m]), ms(v[m:])\n    i = j = 0\n    c = []\n    while i < len(a) and j < len(b):\n        if a[i] <= b[j]:\n            c.append(a[i]); i += 1\n        else:\n            c.append(b[j]); j += 1\n    return c + a[i:] + b[j:]\n\nprint(*ms(list(map(int, input().split()))))\n", "start": ""}, "a2-e3": {"teste": [{"in": "5\n2 4 1 3 5", "fis": {}, "out": "3"}, {"in": "3\n1 2 3", "fis": {}, "out": "0"}, {"in": "4\n4 3 2 1", "fis": {}, "out": "6"}, {"in": "6\n1 1 1 0 0 0", "fis": {}, "out": "9"}], "sol": "import sys\nsys.setrecursionlimit(10000)\ndef ms(v):\n    if len(v) <= 1:\n        return v, 0\n    m = len(v) // 2\n    a, x = ms(v[:m])\n    b, y = ms(v[m:])\n    i = j = 0\n    c = []\n    inv = x + y\n    while i < len(a) and j < len(b):\n        if a[i] <= b[j]:\n            c.append(a[i]); i += 1\n        else:\n            c.append(b[j]); j += 1\n            inv += len(a) - i\n    return c + a[i:] + b[j:], inv\n\nn = int(input())\nprint(ms(list(map(int, input().split())))[1])\n", "start": ""}, "a2-e4": {"teste": [{"in": "2 5 8 12 16 23 38\n23 2 38 7 100", "fis": {}, "out": "5 0 6 -1 -1"}, {"in": "5\n5 4", "fis": {}, "out": "0 -1"}], "sol": "def cauta(v, x, st, dr):\n    if st > dr:\n        return -1\n    m = (st + dr) // 2\n    if v[m] == x:\n        return m\n    return cauta(v, x, m + 1, dr) if v[m] < x else cauta(v, x, st, m - 1)\n\nv = list(map(int, input().split()))\nprint(*[cauta(v, x, 0, len(v) - 1) for x in map(int, input().split())])\n", "start": ""}, "a3-e1": {"teste": [{"in": "5\n600 660\n630 700\n660 720\n700 800\n720 780", "fis": {}, "out": "3"}, {"in": "1\n0 10", "fis": {}, "out": "1"}, {"in": "3\n0 100\n10 20\n20 30", "fis": {}, "out": "2"}], "sol": "n = int(input())\nv = [tuple(map(int, input().split())) for _ in range(n)]\nv.sort(key=lambda s: s[1])\ncnt, t = 0, -1\nfor a, b in v:\n    if a >= t:\n        cnt += 1; t = b\nprint(cnt)\n", "start": ""}, "a3-e2": {"teste": [{"in": "1789", "fis": {}, "out": "500 x 3\n200 x 1\n50 x 1\n10 x 3\n5 x 1\n1 x 4"}, {"in": "5", "fis": {}, "out": "5 x 1"}, {"in": "0", "fis": {}, "out": ""}, {"in": "999", "fis": {}, "out": "500 x 1\n200 x 2\n50 x 1\n10 x 4\n5 x 1\n1 x 4"}], "sol": "S = int(input())\nfor b in (500, 200, 100, 50, 10, 5, 1):\n    if S >= b:\n        print(b, 'x', S // b)\n        S %= b\n", "start": ""}, "a3-e3": {"teste": [{"in": "3 50\n60 10\n100 20\n120 30", "fis": {}, "out": "240.00"}, {"in": "1 5\n10 10", "fis": {}, "out": "5.00"}, {"in": "2 100\n1 1\n2 1", "fis": {}, "out": "3.00"}], "sol": "n, G = map(int, input().split())\nv = [tuple(map(int, input().split())) for _ in range(n)]\nv.sort(key=lambda o: o[0] / o[1], reverse=True)\ntot = 0\nfor val, g in v:\n    if G <= 0:\n        break\n    luat = min(g, G)\n    tot += val * luat / g\n    G -= luat\nprint(f'{tot:.2f}')\n", "start": ""}, "a3-e4": {"teste": [{"in": "3\n5 1 3", "fis": {}, "out": "5"}, {"in": "1\n7", "fis": {}, "out": "0"}, {"in": "4\n2 2 2 2", "fis": {}, "out": "12"}], "sol": "n = int(input())\nv = sorted(map(int, input().split()))\nt = total = 0\nfor d in v:\n    total += t\n    t += d\nprint(total)\n", "start": ""}, "a4-e1": {"teste": [{"in": "3", "fis": {}, "out": "1 2 3\n1 3 2\n2 1 3\n2 3 1\n3 1 2\n3 2 1"}, {"in": "1", "fis": {}, "out": "1"}, {"in": "4", "fis": {}, "out": "1 2 3 4\n1 2 4 3\n1 3 2 4\n1 3 4 2\n1 4 2 3\n1 4 3 2\n2 1 3 4\n2 1 4 3\n2 3 1 4\n2 3 4 1\n2 4 1 3\n2 4 3 1\n3 1 2 4\n3 1 4 2\n3 2 1 4\n3 2 4 1\n3 4 1 2\n3 4 2 1\n4 1 2 3\n4 1 3 2\n4 2 1 3\n4 2 3 1\n4 3 1 2\n4 3 2 1"}], "sol": "n = int(input())\nx, f = [], [False] * (n + 1)\ndef bt():\n    if len(x) == n:\n        print(*x); return\n    for v in range(1, n + 1):\n        if not f[v]:\n            f[v] = True; x.append(v)\n            bt()\n            x.pop(); f[v] = False\nbt()\n", "start": ""}, "a4-e2": {"teste": [{"in": "5 3", "fis": {}, "out": "1 2 3\n1 2 4\n1 2 5\n1 3 4\n1 3 5\n1 4 5\n2 3 4\n2 3 5\n2 4 5\n3 4 5"}, {"in": "3 3", "fis": {}, "out": "1 2 3"}, {"in": "4 1", "fis": {}, "out": "1\n2\n3\n4"}], "sol": "n, p = map(int, input().split())\nx = []\ndef bt(start):\n    if len(x) == p:\n        print(*x); return\n    for v in range(start, n + 1):\n        x.append(v); bt(v + 1); x.pop()\nbt(1)\n", "start": ""}, "a4-e3": {"teste": [{"in": "4", "fis": {}, "out": "2"}, {"in": "1", "fis": {}, "out": "1"}, {"in": "6", "fis": {}, "out": "4"}, {"in": "8", "fis": {}, "out": "92"}], "sol": "n = int(input())\nx = []\ncnt = 0\ndef bt(k):\n    global cnt\n    if k == n:\n        cnt += 1; return\n    for c in range(n):\n        if all(x[i] != c and abs(x[i] - c) != k - i for i in range(k)):\n            x.append(c); bt(k + 1); x.pop()\nbt(0)\nprint(cnt)\n", "start": ""}, "a4-e4": {"teste": [{"in": "1 2 3 4 5 6\n7", "fis": {}, "out": "1 2 4\n1 6\n2 5\n3 4"}, {"in": "5 10\n3", "fis": {}, "out": "0"}, {"in": "2 3 5\n10", "fis": {}, "out": "2 3 5"}], "sol": "v = list(map(int, input().split()))\nS = int(input())\nx = []\ngasit = False\ndef bt(i, s):\n    global gasit\n    if s == S and x:\n        print(*x); gasit = True\n    for j in range(i, len(v)):\n        if s + v[j] <= S:\n            x.append(v[j]); bt(j + 1, s + v[j]); x.pop()\nbt(0, 0)\nif not gasit:\n    print(0)\n", "start": ""}, "a4-e5": {"teste": [{"in": "abe\n2", "fis": {}, "out": "ab\nba\nbe\neb"}, {"in": "aei\n2", "fis": {}, "out": ""}, {"in": "mare\n3", "fis": {}, "out": "ame\namr\nare\narm\nema\nemr\nera\nerm\nmar\nmer\nmra\nmre\nram\nrem\nrma\nrme"}], "sol": "s = sorted(input().strip())\nk = int(input())\nx = []\ndef bt():\n    if len(x) == k:\n        print(''.join(x)); return\n    for c in s:\n        if c not in x and not (x and x[-1] in 'aeiou' and c in 'aeiou'):\n            x.append(c); bt(); x.pop()\nbt()\n", "start": ""}, "a5-e1": {"teste": [{"in": "8\n5 2 8 6 3 6 9 7", "fis": {}, "out": "4"}, {"in": "1\n4", "fis": {}, "out": "1"}, {"in": "5\n5 4 3 2 1", "fis": {}, "out": "1"}, {"in": "6\n1 1 2 2 3 3", "fis": {}, "out": "3"}], "sol": "n = int(input())\nv = list(map(int, input().split()))\nL = [1] * n\nfor i in range(n):\n    for j in range(i):\n        if v[j] < v[i]:\n            L[i] = max(L[i], L[j] + 1)\nprint(max(L))\n", "start": ""}, "a5-e2": {"teste": [{"in": "4 7\n1 1\n3 4\n4 5\n5 7", "fis": {}, "out": "9"}, {"in": "1 3\n5 10", "fis": {}, "out": "0"}, {"in": "3 10\n5 10\n4 40\n6 30", "fis": {}, "out": "70"}], "sol": "n, G = map(int, input().split())\nd = [0] * (G + 1)\nfor _ in range(n):\n    g, v = map(int, input().split())\n    for c in range(G, g - 1, -1):\n        d[c] = max(d[c], d[c - g] + v)\nprint(d[G])\n", "start": ""}, "a5-e3": {"teste": [{"in": "5\n7\n3 8\n8 1 0\n2 7 4 4\n4 5 2 6 5", "fis": {}, "out": "30"}, {"in": "1\n9", "fis": {}, "out": "9"}, {"in": "3\n1\n2 3\n10 1 1", "fis": {}, "out": "13"}], "sol": "n = int(input())\nt = [list(map(int, input().split())) for _ in range(n)]\nfor i in range(n - 2, -1, -1):\n    for j in range(i + 1):\n        t[i][j] += max(t[i + 1][j], t[i + 1][j + 1])\nprint(t[0][0])\n", "start": ""}, "a5-e4": {"teste": [{"in": "ALGORITM\nLOGARITM", "fis": {}, "out": "6"}, {"in": "abc\ndef", "fis": {}, "out": "0"}, {"in": "informatica\nmatematica", "fis": {}, "out": "6"}], "sol": "a, b = input(), input()\nC = [[0] * (len(b) + 1) for _ in range(len(a) + 1)]\nfor i in range(1, len(a) + 1):\n    for j in range(1, len(b) + 1):\n        C[i][j] = C[i-1][j-1] + 1 if a[i-1] == b[j-1] else max(C[i-1][j], C[i][j-1])\nprint(C[len(a)][len(b)])\n", "start": ""}, "a5-e5": {"teste": [{"in": "3 3\n...\n.#.\n...", "fis": {}, "out": "2"}, {"in": "1 1\n.", "fis": {}, "out": "1"}, {"in": "2 2\n.#\n#.", "fis": {}, "out": "0"}, {"in": "3 4\n....\n....\n....", "fis": {}, "out": "10"}], "sol": "n, m = map(int, input().split())\ng = [input() for _ in range(n)]\nM = 10**9 + 7\nd = [[0] * m for _ in range(n)]\nfor i in range(n):\n    for j in range(m):\n        if g[i][j] == '#':\n            continue\n        if i == 0 and j == 0:\n            d[i][j] = 1\n        else:\n            d[i][j] = ((d[i-1][j] if i else 0) + (d[i][j-1] if j else 0)) % M\nprint(d[n-1][m-1])\n", "start": ""}, "a6-e1": {"teste": [{"in": "5\n([]{})\n([)]\n((\n)\n{[()()]}", "fis": {}, "out": "DA\nNU\nNU\nNU\nDA"}, {"in": "1\n[]", "fis": {}, "out": "DA"}], "sol": "n = int(input())\npereche = {')': '(', ']': '[', '}': '{'}\nfor _ in range(n):\n    s = input().strip()\n    st = []\n    ok = True\n    for c in s:\n        if c in '([{':\n            st.append(c)\n        elif not st or st.pop() != pereche[c]:\n            ok = False; break\n    print('DA' if ok and not st else 'NU')\n", "start": ""}, "a6-e2": {"teste": [{"in": "3 4 + 2 *", "fis": {}, "out": "14"}, {"in": "5 1 2 + 4 * + 3 -", "fis": {}, "out": "14"}, {"in": "10 3 -", "fis": {}, "out": "7"}, {"in": "7", "fis": {}, "out": "7"}], "sol": "st = []\nfor t in input().split():\n    if t in '+-*':\n        b = st.pop(); a = st.pop()\n        st.append(a + b if t == '+' else a - b if t == '-' else a * b)\n    else:\n        st.append(int(t))\nprint(st[0])\n", "start": ""}, "a6-e3": {"teste": [{"in": "7 3", "fis": {}, "out": "3 6 2 7 5 1 4"}, {"in": "1 5", "fis": {}, "out": "1"}, {"in": "5 1", "fis": {}, "out": "1 2 3 4 5"}, {"in": "6 2", "fis": {}, "out": "2 4 6 3 1 5"}], "sol": "from collections import deque\nn, k = map(int, input().split())\nq = deque(range(1, n + 1))\nrez = []\nwhile q:\n    q.rotate(-(k - 1))\n    rez.append(q.popleft())\nprint(*rez)\n", "start": ""}, "a6-e4": {"teste": [{"in": "1 2 3 4", "fis": {}, "out": "1 2 3 4\n4 3 2 1"}, {"in": "7", "fis": {}, "out": "7\n7"}, {"in": "5 5 9", "fis": {}, "out": "5 5 9\n9 5 5"}], "sol": "class Nod:\n    def __init__(self, info, urm=None):\n        self.info = info\n        self.urm = urm\n\nclass Lista:\n    def __init__(self):\n        self.prim = None\n        self.ultim = None\n    def adauga_final(self, x):\n        n = Nod(x)\n        if self.prim is None:\n            self.prim = self.ultim = n\n        else:\n            self.ultim.urm = n\n            self.ultim = n\n    def inverseaza(self):\n        prec, p = None, self.prim\n        self.ultim = self.prim\n        while p:\n            p.urm, prec, p = prec, p, p.urm\n        self.prim = prec\n    def __str__(self):\n        v, p = [], self.prim\n        while p:\n            v.append(str(p.info)); p = p.urm\n        return \" \".join(v) if v else \"vida\"\n\nL = Lista()\nfor x in map(int, input().split()):\n    L.adauga_final(x)\nprint(L)\nL.inverseaza()\nprint(L)\n", "start": "class Nod:\n    def __init__(self, info, urm=None):\n        self.info = info\n        self.urm = urm\n\nclass Lista:\n    def __init__(self):\n        self.prim = None\n    # completează metodele\n\nL = Lista()\nfor x in map(int, input().split()):\n    L.adauga_final(x)\nprint(L)\nL.inverseaza()\nprint(L)\n"}, "a7-e1": {"teste": [{"in": "6 7\n1 2\n1 3\n2 3\n3 4\n4 5\n4 6\n5 6", "fis": {}, "out": "2 2 3 3 2 2\n2"}, {"in": "3 0", "fis": {}, "out": "0 0 0\n0"}, {"in": "2 1\n1 2", "fis": {}, "out": "1 1\n2"}], "sol": "n, m = map(int, input().split())\ng = [0] * (n + 1)\nfor _ in range(m):\n    x, y = map(int, input().split())\n    g[x] += 1; g[y] += 1\nprint(*g[1:])\nprint(sum(1 for d in g[1:] if d % 2))\n", "start": ""}, "a7-e2": {"teste": [{"in": "4 4\n1 2\n1 3\n2 3\n3 4", "fis": {}, "out": "0 1 1 0\n1 0 1 0\n1 1 0 1\n0 0 1 0"}, {"in": "1 0", "fis": {}, "out": "0"}], "sol": "n, m = map(int, input().split())\nA = [[0] * n for _ in range(n)]\nfor _ in range(m):\n    x, y = map(int, input().split())\n    A[x-1][y-1] = A[y-1][x-1] = 1\nfor r in A:\n    print(*r)\n", "start": ""}, "a7-e3": {"teste": [{"in": "4 5\n1 2\n2 3\n3 1\n3 4\n4 2", "fis": {}, "out": "1 4\n1: 3\n2: 1 4\n3: 2\n4: 3"}, {"in": "2 1\n1 2", "fis": {}, "out": "0\n1:\n2: 1"}], "sol": "n, m = map(int, input().split())\nde = [0] * (n + 1); di = [0] * (n + 1)\nT = [[] for _ in range(n + 1)]\nfor _ in range(m):\n    x, y = map(int, input().split())\n    de[x] += 1; di[y] += 1\n    T[y].append(x)\negal = [i for i in range(1, n + 1) if de[i] == di[i]]\nprint(*egal if egal else [0])\nfor i in range(1, n + 1):\n    print(f'{i}:', *sorted(T[i]))\n", "start": ""}, "a7-e4": {"teste": [{"in": "6 7\n1 2\n1 3\n2 3\n3 4\n4 5\n4 6\n5 6", "fis": {}, "out": "lant eulerian"}, {"in": "3 3\n1 2\n2 3\n3 1", "fis": {}, "out": "ciclu eulerian"}, {"in": "4 3\n1 2\n1 3\n1 4", "fis": {}, "out": "nu"}], "sol": "n, m = map(int, input().split())\ng = [0] * (n + 1)\nfor _ in range(m):\n    x, y = map(int, input().split())\n    g[x] += 1; g[y] += 1\nk = sum(1 for d in g[1:] if d % 2)\nprint('ciclu eulerian' if k == 0 else 'lant eulerian' if k == 2 else 'nu')\n", "start": ""}, "a8-e1": {"teste": [{"in": "6 7\n1 2\n1 3\n2 4\n3 4\n4 5\n5 6\n3 6\n1", "fis": {}, "out": "1 2 3 4 6 5\n1 2 4 3 6 5"}, {"in": "5 4\n1 2\n1 3\n2 4\n2 5\n2", "fis": {}, "out": "2 1 4 5 3\n2 1 3 4 5"}, {"in": "3 0\n2", "fis": {}, "out": "2\n2"}], "sol": "import sys\nsys.setrecursionlimit(10000)\nfrom collections import deque\nn, m = map(int, input().split())\nL = [[] for _ in range(n + 1)]\nfor _ in range(m):\n    x, y = map(int, input().split())\n    L[x].append(y); L[y].append(x)\nfor v in L: v.sort()\ns = int(input())\nviz = [False] * (n + 1); viz[s] = True\nq, o = deque([s]), []\nwhile q:\n    x = q.popleft(); o.append(x)\n    for y in L[x]:\n        if not viz[y]:\n            viz[y] = True; q.append(y)\nprint(*o)\nviz = [False] * (n + 1); o = []\ndef dfs(x):\n    viz[x] = True; o.append(x)\n    for y in L[x]:\n        if not viz[y]: dfs(y)\ndfs(s)\nprint(*o)\n", "start": ""}, "a8-e2": {"teste": [{"in": "7 4\n1 2\n2 3\n4 5\n6 7", "fis": {}, "out": "3\n1 2 3\n4 5\n6 7"}, {"in": "3 0", "fis": {}, "out": "3\n1\n2\n3"}, {"in": "4 3\n1 4\n4 2\n2 3", "fis": {}, "out": "1\n1 2 3 4"}], "sol": "from collections import deque\nn, m = map(int, input().split())\nL = [[] for _ in range(n + 1)]\nfor _ in range(m):\n    x, y = map(int, input().split())\n    L[x].append(y); L[y].append(x)\nviz = [False] * (n + 1)\ncomp = []\nfor s in range(1, n + 1):\n    if not viz[s]:\n        viz[s] = True; q = deque([s]); c = []\n        while q:\n            x = q.popleft(); c.append(x)\n            for y in L[x]:\n                if not viz[y]:\n                    viz[y] = True; q.append(y)\n        comp.append(sorted(c))\nprint(len(comp))\nfor c in comp:\n    print(*c)\n", "start": ""}, "a8-e3": {"teste": [{"in": "6 7\n1 2\n1 3\n2 4\n3 4\n4 5\n5 6\n3 6\n1 5", "fis": {}, "out": "3\n1 2 4 5"}, {"in": "4 2\n1 2\n3 4\n1 4", "fis": {}, "out": "-1"}, {"in": "2 1\n1 2\n2 2", "fis": {}, "out": "0\n2"}], "sol": "from collections import deque\nn, m = map(int, input().split())\nL = [[] for _ in range(n + 1)]\nfor _ in range(m):\n    x, y = map(int, input().split())\n    L[x].append(y); L[y].append(x)\nfor v in L: v.sort()\na, b = map(int, input().split())\ntata = [0] * (n + 1); d = [-1] * (n + 1); d[a] = 0\nq = deque([a])\nwhile q:\n    x = q.popleft()\n    for y in L[x]:\n        if d[y] == -1:\n            d[y] = d[x] + 1; tata[y] = x; q.append(y)\nif d[b] == -1:\n    print(-1)\nelse:\n    drum = [b]\n    while drum[-1] != a:\n        drum.append(tata[drum[-1]])\n    print(d[b])\n    print(*drum[::-1])\n", "start": ""}, "a8-e4": {"teste": [{"in": "4 4\n1 2\n2 3\n3 4\n4 1", "fis": {}, "out": "DA"}, {"in": "3 3\n1 2\n2 3\n3 1", "fis": {}, "out": "NU"}, {"in": "5 2\n1 2\n4 5", "fis": {}, "out": "DA"}], "sol": "from collections import deque\nn, m = map(int, input().split())\nL = [[] for _ in range(n + 1)]\nfor _ in range(m):\n    x, y = map(int, input().split())\n    L[x].append(y); L[y].append(x)\nc = [-1] * (n + 1)\nok = True\nfor s in range(1, n + 1):\n    if c[s] == -1:\n        c[s] = 0; q = deque([s])\n        while q and ok:\n            x = q.popleft()\n            for y in L[x]:\n                if c[y] == -1:\n                    c[y] = 1 - c[x]; q.append(y)\n                elif c[y] == c[x]:\n                    ok = False\nprint('DA' if ok else 'NU')\n", "start": ""}, "a9-e1": {"teste": [{"in": "5 7 1\n1 2 4\n1 3 1\n3 2 2\n2 4 1\n3 4 5\n4 5 3\n5 1 1", "fis": {}, "out": "0 3 1 4 7"}, {"in": "3 1 2\n1 2 5", "fis": {}, "out": "-1 0 -1"}, {"in": "4 4 1\n1 2 0\n2 3 0\n3 4 7\n1 4 10", "fis": {}, "out": "0 0 0 7"}], "sol": "import heapq\nn, m, s = map(int, input().split())\nL = [[] for _ in range(n + 1)]\nfor _ in range(m):\n    x, y, c = map(int, input().split())\n    L[x].append((y, c))\nINF = float('inf')\nd = [INF] * (n + 1); d[s] = 0\npq = [(0, s)]\nwhile pq:\n    dx, x = heapq.heappop(pq)\n    if dx > d[x]: continue\n    for y, c in L[x]:\n        if d[x] + c < d[y]:\n            d[y] = d[x] + c; heapq.heappush(pq, (d[y], y))\nprint(*[v if v < INF else -1 for v in d[1:]])\n", "start": ""}, "a9-e2": {"teste": [{"in": "4 6\n1 2 3\n2 3 2\n3 4 1\n4 1 2\n1 4 7\n2 1 8", "fis": {}, "out": "0 3 5 6\n5 0 2 3\n3 6 0 1\n2 5 7 0"}, {"in": "3 1\n1 2 5", "fis": {}, "out": "0 5 -\n- 0 -\n- - 0"}], "sol": "n, m = map(int, input().split())\nINF = float('inf')\nd = [[0 if i == j else INF for j in range(n + 1)] for i in range(n + 1)]\nfor _ in range(m):\n    x, y, c = map(int, input().split())\n    d[x][y] = min(d[x][y], c)\nfor k in range(1, n + 1):\n    for i in range(1, n + 1):\n        for j in range(1, n + 1):\n            if d[i][k] + d[k][j] < d[i][j]:\n                d[i][j] = d[i][k] + d[k][j]\nfor i in range(1, n + 1):\n    print(*['-' if d[i][j] == INF else d[i][j] for j in range(1, n + 1)])\n", "start": ""}, "a9-e3": {"teste": [{"in": "4 5\n1 2\n2 3\n3 1\n3 4\n4 3", "fis": {}, "out": "1 1 1 1\n1 1 1 1\n1 1 1 1\n1 1 1 1\ntare conex"}, {"in": "3 2\n1 2\n2 3", "fis": {}, "out": "0 1 1\n0 0 1\n0 0 0\nnu"}], "sol": "n, m = map(int, input().split())\na = [[0] * (n + 1) for _ in range(n + 1)]\nfor _ in range(m):\n    x, y = map(int, input().split())\n    a[x][y] = 1\nfor k in range(1, n + 1):\n    for i in range(1, n + 1):\n        for j in range(1, n + 1):\n            if a[i][k] and a[k][j]:\n                a[i][j] = 1\nfor i in range(1, n + 1):\n    print(*a[i][1:])\nok = all(a[i][j] for i in range(1, n + 1) for j in range(1, n + 1) if i != j)\nprint('tare conex' if ok else 'nu')\n", "start": ""}, "a10-e1": {"teste": [{"in": "6 9\n1 2 7\n1 3 9\n1 6 14\n2 3 10\n2 4 15\n3 4 11\n3 6 2\n4 5 6\n5 6 9", "fis": {}, "out": "33"}, {"in": "2 1\n1 2 5", "fis": {}, "out": "5"}, {"in": "4 6\n1 2 1\n1 3 1\n1 4 1\n2 3 1\n2 4 1\n3 4 1", "fis": {}, "out": "3"}], "sol": "n, m = map(int, input().split())\nE = []\nfor _ in range(m):\n    x, y, c = map(int, input().split())\n    E.append((c, x, y))\nt = list(range(n + 1))\ndef r(x):\n    while t[x] != x:\n        t[x] = t[t[x]]; x = t[x]\n    return x\ncost = 0\nfor c, x, y in sorted(E):\n    a, b = r(x), r(y)\n    if a != b:\n        t[a] = b; cost += c\nprint(cost)\n", "start": ""}, "a10-e2": {"teste": [{"in": "6 9\n1 2 7\n1 3 9\n1 6 14\n2 3 10\n2 4 15\n3 4 11\n3 6 2\n4 5 6\n5 6 9", "fis": {}, "out": "1 2 7\n1 3 9\n3 6 2\n6 5 9\n5 4 6\n33"}, {"in": "3 3\n1 2 1\n2 3 1\n1 3 1", "fis": {}, "out": "1 2 1\n1 3 1\n2"}], "sol": "import heapq\nn, m = map(int, input().split())\nL = [[] for _ in range(n + 1)]\nfor _ in range(m):\n    x, y, c = map(int, input().split())\n    L[x].append((y, c)); L[y].append((x, c))\nin_arb = [False] * (n + 1)\nin_arb[1] = True\npq = [(c, y, 1) for y, c in L[1]]\nheapq.heapify(pq)\ntotal = 0\nwhile pq:\n    c, y, x = heapq.heappop(pq)\n    if in_arb[y]: continue\n    in_arb[y] = True\n    print(x, y, c); total += c\n    for z, cz in L[y]:\n        if not in_arb[z]:\n            heapq.heappush(pq, (cz, z, y))\nprint(total)\n", "start": ""}, "a10-e3": {"teste": [{"in": "5 6\nU 1 2\nQ 1 2\nQ 1 3\nU 3 4\nU 2 4\nQ 1 3", "fis": {}, "out": "DA\nNU\nDA\n2"}, {"in": "3 1\nQ 1 1", "fis": {}, "out": "DA\n3"}], "sol": "n, q = map(int, input().split())\nt = list(range(n + 1))\ndef r(x):\n    while t[x] != x:\n        t[x] = t[t[x]]; x = t[x]\n    return x\nk = n\nfor _ in range(q):\n    op, x, y = input().split()\n    a, b = r(int(x)), r(int(y))\n    if op == 'U':\n        if a != b:\n            t[a] = b; k -= 1\n    else:\n        print('DA' if a == b else 'NU')\nprint(k)\n", "start": ""}, "a11-e1": {"teste": [{"in": "6\n2 0 2 1 1 3", "fis": {}, "out": "2\n4 5 6\n2"}, {"in": "1\n0", "fis": {}, "out": "1\n1\n0"}, {"in": "5\n0 1 2 3 4", "fis": {}, "out": "1\n5\n4"}], "sol": "n = int(input())\nt = [0] + list(map(int, input().split()))\nrad = t.index(0, 1)\nfrunze = [i for i in range(1, n + 1) if i not in set(t[1:])]\ndef niv(i):\n    k = 0\n    while t[i]:\n        i = t[i]; k += 1\n    return k\nprint(rad)\nprint(*frunze)\nprint(max(niv(i) for i in range(1, n + 1)))\n", "start": ""}, "a11-e2": {"teste": [{"in": "50 30 70 20 40 60 80 35", "fis": {}, "out": "50 30 20 40 35 70 60 80\n20 30 35 40 50 60 70 80\n20 35 40 30 60 80 70 50\n3"}, {"in": "1 2 3 4", "fis": {}, "out": "1 2 3 4\n1 2 3 4\n4 3 2 1\n3"}, {"in": "8", "fis": {}, "out": "8\n8\n8\n0"}], "sol": "import sys\nsys.setrecursionlimit(10000)\nclass N:\n    def __init__(s, k): s.k = k; s.st = s.dr = None\ndef ins(r, k):\n    if r is None: return N(k)\n    if k < r.k: r.st = ins(r.st, k)\n    else: r.dr = ins(r.dr, k)\n    return r\ndef pre(r): return [] if r is None else [r.k] + pre(r.st) + pre(r.dr)\ndef ino(r): return [] if r is None else ino(r.st) + [r.k] + ino(r.dr)\ndef post(r): return [] if r is None else post(r.st) + post(r.dr) + [r.k]\ndef h(r): return -1 if r is None else 1 + max(h(r.st), h(r.dr))\nr = None\nfor k in map(int, input().split()):\n    r = ins(r, k)\nprint(*pre(r)); print(*ino(r)); print(*post(r)); print(h(r))\n", "start": ""}, "a11-e3": {"teste": [{"in": "8 3\n5 1 9 3 7 2 8 6", "fis": {}, "out": "1 2 3"}, {"in": "3 3\n3 2 1", "fis": {}, "out": "1 2 3"}, {"in": "5 1\n-1 -5 0 4 2", "fis": {}, "out": "-5"}], "sol": "import heapq\nn, k = map(int, input().split())\nv = list(map(int, input().split()))\nheapq.heapify(v)\nprint(*[heapq.heappop(v) for _ in range(k)])\n", "start": ""}, "a11-e4": {"teste": [{"in": "8\nins 5\nins 3\nins 8\nins 1\next\nins 9\nins 2\next", "fis": {}, "out": "1\n2\n3 5 8 9"}, {"in": "2\next\nins 4", "fis": {}, "out": "gol\n4"}], "sol": "h = []\ndef ins(x):\n    h.append(x); i = len(h) - 1\n    while i > 0 and h[(i - 1) // 2] > h[i]:\n        p = (i - 1) // 2; h[p], h[i] = h[i], h[p]; i = p\ndef ext():\n    m = h[0]; h[0] = h[-1]; h.pop(); i = 0\n    while True:\n        a, b, c = i, 2 * i + 1, 2 * i + 2\n        if b < len(h) and h[b] < h[a]: a = b\n        if c < len(h) and h[c] < h[a]: a = c\n        if a == i: break\n        h[a], h[i] = h[i], h[a]; i = a\n    return m\nn = int(input())\nfor _ in range(n):\n    c = input().split()\n    if c[0] == 'ins': ins(int(c[1]))\n    else: print(ext() if h else 'gol')\nprint(*h if h else ['vid'])\n", "start": ""}, "a12-e1": {"teste": [{"in": "LQIRUPDWLFD HVWH IUXPRDVD\nESTE", "fis": {}, "out": "3\nINFORMATICA ESTE FRUMOASA"}, {"in": "ABC\nABC", "fis": {}, "out": "0\nABC"}, {"in": "BMFDF\nALECE", "fis": {}, "out": "1\nALECE"}], "sol": "t = input()\nw = input()\nfor k in range(26):\n    d = ''.join(chr((ord(c) - 65 - k) % 26 + 65) if c.isupper() else c for c in t)\n    if w in d.split():\n        print(k); print(d); break\n", "start": ""}, "a12-e2": {"teste": [{"in": "C\nLEMON\nATTACK AT DAWN", "fis": {}, "out": "LXFOPV EF RNHR"}, {"in": "D\nLEMON\nLXFOPV EF RNHR", "fis": {}, "out": "ATTACK AT DAWN"}, {"in": "C\nCAT\nPROFESOR, 2026!", "fis": {}, "out": "RRHHELQR, 2026!"}], "sol": "op = input().strip()\nk = input().strip()\nt = input()\ns = 1 if op == 'C' else -1\nr, j = [], 0\nfor c in t:\n    if 'A' <= c <= 'Z':\n        r.append(chr((ord(c) - 65 + s * (ord(k[j % len(k)]) - 65)) % 26 + 65)); j += 1\n    else:\n        r.append(c)\nprint(''.join(r))\n", "start": ""}, "a12-e3": {"teste": [{"in": "abcde", "fis": {}, "out": "51440\nC8F0"}, {"in": "abcdef", "fis": {}, "out": "8279\n2057"}, {"in": "Titularizare 2026", "fis": {}, "out": "63983\nF9EF"}], "sol": "s1 = s2 = 0\nfor b in input().encode():\n    s1 = (s1 + b) % 255\n    s2 = (s2 + s1) % 255\nv = s2 * 256 + s1\nprint(v)\nprint(f'{v:04X}')\n", "start": ""}, "a12-e4": {"teste": [{"in": "4 5\n##...\n##.##\n...#.\n#.###", "fis": {}, "out": "3 6"}, {"in": "2 2\n..\n..", "fis": {}, "out": "0 0"}, {"in": "1 5\n#.#.#", "fis": {}, "out": "3 1"}], "sol": "n, m = map(int, input().split())\ng = [list(input()) for _ in range(n)]\nnr = mx = 0\nfor i in range(n):\n    for j in range(m):\n        if g[i][j] == '#':\n            nr += 1; g[i][j] = '.'; st = [(i, j)]; s = 0\n            while st:\n                x, y = st.pop(); s += 1\n                for a, b in ((x+1, y), (x-1, y), (x, y+1), (x, y-1)):\n                    if 0 <= a < n and 0 <= b < m and g[a][b] == '#':\n                        g[a][b] = '.'; st.append((a, b))\n            mx = max(mx, s)\nprint(nr, mx)\n", "start": ""}};
+var APLICATII = [];
+(function(){
+  document.documentElement.classList.add('js');
+  var BASE = 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/';
+  try { var q = new URLSearchParams(location.search).get('pyo'); if (q && /^http:\/\/(localhost|127\.0\.0\.1)[:/]/.test(q)) BASE = q; } catch (e) {}
+  var KEY = 'c360-curs-algoritmi';
+  var st = {}; try { st = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) {}
+  st.cod = st.cod || {}; st.ok = st.ok || {}; st.done = st.done || {};
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} }
+  function esc(t){ return String(t).replace(/[&<>]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); }
+  function norm(t){ var l = String(t).replace(/\r\n/g, '\n').split('\n').map(function(x){ return x.replace(/\s+$/, ''); }); while (l.length && l[l.length-1] === '') l.pop(); return l.join('\n'); }
+
+  // ---------- Python în Web Worker ----------
+  var WSRC = "var py=null;self.onmessage=async function(e){var m=e.data;try{if(m.type==='init'){importScripts(m.base+'pyodide.js');py=await loadPyodide({indexURL:m.base});py.runPython(m.runner);postMessage({type:'ready'});return;}var f=py.globals.get('__run');var r=f(m.code,m.stdin,py.toPy(m.files||{}),!!m.echo);var a=r.toJs({dict_converter:Object.fromEntries});r.destroy();f.destroy();postMessage({type:'res',id:m.id,out:a[0],err:a[1],files:a[2]});}catch(x){postMessage({type:m.type==='init'?'fail':'res',id:m.id,out:'',err:String(x),files:{}});}};";
+  var worker = null, ready = null, seq = 0;
+  function boot(){
+    if (ready) return ready;
+    worker = new Worker(URL.createObjectURL(new Blob([WSRC], {type:'text/javascript'})));
+    ready = new Promise(function(res, rej){
+      worker.onmessage = function(e){ if (e.data.type === 'ready') res(); else if (e.data.type === 'fail') rej(e.data.err); };
+      worker.onerror = function(e){ rej(e.message || 'eroare la încărcare'); };
+    });
+    ready.catch(function(){ worker && worker.terminate(); worker = null; ready = null; });
+    worker.postMessage({type:'init', base:BASE, runner:document.getElementById('runner').textContent});
+    return ready;
+  }
+  function run(code, stdin, files, echo){
+    return boot().then(function(){
+      return new Promise(function(resolve){
+        var id = ++seq;
+        var t = setTimeout(function(){ worker.terminate(); worker = null; ready = null;
+          resolve({out:'', err:'Timp depășit (peste 8 secunde). Verifică dacă buclele se termină și dacă citești exact câte date există.', files:{}}); }, 8000);
+        worker.onmessage = function(e){ if (e.data.type === 'res' && e.data.id === id){ clearTimeout(t); resolve(e.data); } };
+        worker.postMessage({type:'run', id:id, code:code, stdin:stdin, files:files || {}, echo:echo});
+      });
+    });
+  }
+
+  // ---------- Editor ----------
+  function editor(ta){
+    ta.addEventListener('keydown', function(e){
+      var s = ta.selectionStart, en = ta.selectionEnd, v = ta.value;
+      if (e.key === 'Tab' && !e.ctrlKey && !e.altKey) {
+        e.preventDefault();
+        if (e.shiftKey) {
+          var ls = v.lastIndexOf('\n', s - 1) + 1;
+          var m = v.slice(ls).match(/^ {1,4}/);
+          if (m) { ta.value = v.slice(0, ls) + v.slice(ls + m[0].length); ta.selectionStart = ta.selectionEnd = Math.max(ls, s - m[0].length); }
+        } else { ta.value = v.slice(0, s) + '    ' + v.slice(en); ta.selectionStart = ta.selectionEnd = s + 4; }
+        ta.dispatchEvent(new Event('input'));
+      } else if (e.key === 'Enter' && !e.ctrlKey && !e.metaKey) {
+        var ls2 = v.lastIndexOf('\n', s - 1) + 1, line = v.slice(ls2, s);
+        var ind = line.match(/^ */)[0]; if (/:\s*$/.test(line)) ind += '    ';
+        e.preventDefault();
+        ta.value = v.slice(0, s) + '\n' + ind + v.slice(en); ta.selectionStart = ta.selectionEnd = s + 1 + ind.length;
+        ta.dispatchEvent(new Event('input'));
+      } else if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault(); var b = ta.closest('.ex').querySelector('.b-check'); if (b) b.click();
+      }
+    });
+  }
+
+  // ---------- Exerciții ----------
+  var lessons = Array.prototype.slice.call(document.querySelectorAll('.lesson'));
+  var ALL = Object.keys(DATE).concat(APLICATII);
+  var totalEx = ALL.length;
+  function counts(){
+    var n = 0;
+    lessons.forEach(function(L){
+      var ids = ALL.filter(function(k){ return k.indexOf(L.id + '-e') === 0; });
+      var ok = ids.filter(function(k){ return st.ok[k]; }).length; n += ok;
+      var c = document.querySelector('[data-cnt="' + L.id + '"]'); if (c && ids.length) c.textContent = ok + '/' + ids.length;
+      var a = document.querySelector('.toc a[href="#' + L.id + '"]'); if (a) a.classList.toggle('done', !!st.done[L.id] || (ids.length > 0 && ok === ids.length));
+    });
+    document.getElementById('progTxt').textContent = n + '/' + totalEx;
+    document.getElementById('progBar').style.width = (totalEx ? n / totalEx * 100 : 0) + '%';
+  }
+  document.querySelectorAll('.ex.task').forEach(function(box){
+    var id = box.getAttribute('data-ex'), D = DATE[id];
+    var ta = box.querySelector('.ide textarea'), res = box.querySelector('.res'), stEl = box.querySelector('.st');
+    var bCheck = box.querySelector('.b-check'), bRun = box.querySelector('.b-run');
+    ta.value = st.cod[id] != null ? st.cod[id] : D.start;
+    ta.rows = Math.max(8, ta.value.split('\n').length + 2);
+    editor(ta);
+    ta.addEventListener('input', function(){ st.cod[id] = ta.value; save(); });
+    function mark(){ box.classList.toggle('ok', !!st.ok[id]); stEl.textContent = st.ok[id] ? '✓ rezolvat' : ''; }
+    mark();
+    function busy(on, msg){ bCheck.disabled = bRun.disabled = on; if (on){ res.hidden = false; res.className = 'res'; res.innerHTML = '<p>' + msg + '</p>'; } }
+    function loadMsg(){ return ready ? 'Se rulează…' : 'Se încarcă Python în browser (doar prima dată, câteva secunde)…'; }
+    bRun.addEventListener('click', function(){
+      busy(true, loadMsg());
+      var fis = D.teste[0].fis;
+      run(ta.value, box.querySelector('.stdin textarea').value + '\n', fis, true).then(function(r){
+        busy(false);
+        var h = '<h4>Rezultatul rulării</h4><pre class="out" data-lang="ieșire"><code>' + esc(r.out || '(nimic afișat)') + '</code></pre>';
+        Object.keys(r.files || {}).forEach(function(n){ h += '<p class="io-lbl">Fișierul ' + esc(n) + '</p><pre class="out"><code>' + esc(r.files[n]) + '</code></pre>'; });
+        if (r.err) h += '<p><b>Eroare:</b> <code>' + esc(r.err) + '</code></p>';
+        res.className = 'res' + (r.err ? ' bad' : ''); res.innerHTML = h;
+      }, function(err){ busy(false); res.className = 'res bad'; res.innerHTML = '<p>Interpretorul Python nu s-a putut încărca (verifică conexiunea la internet). Detalii: ' + esc(err) + '</p>'; });
+    });
+    bCheck.addEventListener('click', function(){
+      busy(true, loadMsg());
+      var i = 0, rez = [];
+      function next(){
+        if (i >= D.teste.length) return finish();
+        var T = D.teste[i];
+        run(ta.value, T['in'] ? T['in'] + (T['in'].slice(-1) === '\n' ? '' : '\n') : '', T.fis, false).then(function(r){
+          var ok = !r.err && norm(r.out) === T.out;
+          var lipsa = '';
+          if (ok && T.fout) Object.keys(T.fout).forEach(function(n){
+            if (!(n in r.files)) { ok = false; lipsa = 'Programul nu a creat fișierul ' + n + '.'; }
+            else if (norm(r.files[n]) !== T.fout[n]) { ok = false; lipsa = 'Conținutul fișierului ' + n + ' nu este cel așteptat.'; r.outFile = [n, r.files[n]]; }
+          });
+          rez.push({ok:ok, r:r, T:T, lipsa:lipsa}); i++;
+          if (!ok) return finish(); next();
+        }, function(err){ busy(false); res.className = 'res bad'; res.innerHTML = '<p>Interpretorul Python nu s-a putut încărca (verifică conexiunea la internet). Detalii: ' + esc(err) + '</p>'; });
+      }
+      function finish(){
+        busy(false);
+        var all = rez.length === D.teste.length && rez.every(function(x){ return x.ok; });
+        var h = '<div class="tests">' + D.teste.map(function(_, k){ var x = rez[k]; return '<span class="' + (x ? (x.ok ? 'p' : 'f') : '') + '">Test ' + (k+1) + (x ? (x.ok ? ' ✓' : ' ✗') : ' –') + '</span>'; }).join('') + '</div>';
+        if (all) { h = '<h4>Corect! Toate cele ' + D.teste.length + ' teste au trecut.</h4>' + h; st.ok[id] = true; save(); }
+        else {
+          var f = rez[rez.length - 1], T = f.T;
+          h = '<h4>Testul ' + rez.length + ' nu a trecut</h4>' + h;
+          Object.keys(T.fis || {}).forEach(function(n){ h += '<p class="io-lbl">Fișierul ' + esc(n) + '</p><pre class="out"><code>' + esc(T.fis[n]) + '</code></pre>'; });
+          if (T['in']) h += '<p class="io-lbl">Intrare</p><pre class="out"><code>' + esc(T['in']) + '</code></pre>';
+          if (f.r.err) h += '<p><b>Eroare:</b> <code>' + esc(f.r.err) + '</code></p>';
+          else if (f.lipsa) h += '<p>' + esc(f.lipsa) + '</p>' + (f.r.outFile ? '<div class="cmp"><div><p class="io-lbl">Așteptat</p><pre class="out"><code>' + esc(T.fout[f.r.outFile[0]]) + '</code></pre></div><div><p class="io-lbl">Obținut</p><pre class="out"><code>' + esc(f.r.outFile[1]) + '</code></pre></div></div>' : '');
+          else h += '<div class="cmp"><div><p class="io-lbl">Așteptat</p><pre class="out"><code>' + esc(T.out || '(nimic)') + '</code></pre></div><div><p class="io-lbl">Obținut</p><pre class="out"><code>' + esc(norm(f.r.out) || '(nimic)') + '</code></pre></div></div>';
+        }
+        res.className = 'res ' + (all ? 'good' : 'bad'); res.innerHTML = h; mark(); counts();
+      }
+      next();
+    });
+    box.querySelector('.b-sol').addEventListener('click', function(){
+      if (ta.value.trim() && ta.value !== D.start && ta.value !== D.sol && !confirm('Înlocuiești codul tău cu soluția? (Încearcă întâi singur!)')) return;
+      ta.value = D.sol; ta.rows = Math.max(8, D.sol.split('\n').length + 2); st.cod[id] = ta.value; save();
+    });
+    box.querySelector('.b-reset').addEventListener('click', function(){
+      if (!confirm('Ștergi codul scris și revii la varianta inițială?')) return;
+      ta.value = D.start; st.cod[id] = ta.value; save();
+    });
+  });
+
+  // ---------- Aplicații (răspuns liber) ----------
+  document.querySelectorAll('.ex.app').forEach(function(box){
+    var id = box.getAttribute('data-app'), ans = box.querySelector('textarea.ans'), ok = box.querySelector('.app-ok'), stEl = box.querySelector('.st');
+    st.ans = st.ans || {};
+    if (ans) { ans.value = st.ans[id] || ''; ans.addEventListener('input', function(){ st.ans[id] = ans.value; save(); }); }
+    function mark(){ ok.checked = !!st.ok[id]; box.classList.toggle('ok', !!st.ok[id]); stEl.textContent = st.ok[id] ? '✓ rezolvat' : ''; }
+    ok.addEventListener('change', function(){ st.ok[id] = ok.checked; save(); mark(); counts(); });
+    mark();
+  });
+
+  // ---------- Teste grilă ----------
+  document.querySelectorAll('[data-quiz]').forEach(function(quiz){
+    var qs = quiz.querySelectorAll('.q'), sc = quiz.querySelector('.score'), ans = 0, right = 0;
+    qs.forEach(function(q){
+      var c = +q.getAttribute('data-a'), bs = q.querySelectorAll('.opts button');
+      bs.forEach(function(b, i){ b.addEventListener('click', function(){
+        bs.forEach(function(x){ x.disabled = true; }); bs[c].classList.add('right');
+        if (i !== c) b.classList.add('wrong'); else right++; ans++;
+        q.querySelector('.why').hidden = false;
+        sc.textContent = right + ' corecte din ' + ans + (ans < qs.length ? ' · mai ai ' + (qs.length - ans) : ' · gata');
+      }); });
+    });
+  });
+
+  // ---------- Lecție terminată ----------
+  document.querySelectorAll('[data-done]').forEach(function(b){
+    var id = b.getAttribute('data-done'); b.checked = !!st.done[id];
+    b.addEventListener('change', function(){ st.done[id] = b.checked; save(); counts(); });
+  });
+
+  // ---------- Navigare: o lecție pe ecran ----------
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  function show(fromHash){
+    var h = decodeURIComponent(location.hash.slice(1)), target = h ? document.getElementById(h) : null;
+    var L = target ? (target.classList.contains('lesson') ? target : target.closest('.lesson')) : null;
+    if (!L) L = document.getElementById(st.last) || lessons[0];
+    lessons.forEach(function(x){ x.classList.toggle('show', x === L); });
+    links.forEach(function(a){ a.classList.toggle('on', a.getAttribute('href') === '#' + L.id); });
+    st.last = L.id; st.t = Date.now(); save();
+    if (fromHash) {
+      if (target && target !== L) target.scrollIntoView();
+      else document.querySelector('.layout').scrollIntoView();
+    }
+  }
+  window.addEventListener('hashchange', function(){ show(true); });
+  show(!!location.hash);
+  counts();
+})();
+</script>
+</body>
+</html>

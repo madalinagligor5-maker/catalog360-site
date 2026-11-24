@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Teste pentru titularizare Informatică și TIC | Catalog360.ro</title>
+<meta name="description" content="Teste grilă pentru titularizarea la Informatică și TIC: alegi secțiunile (Python, algoritmi, C++, metodică, programa) și numărul de întrebări; primești scorul, explicațiile și istoricul.">
+<link rel="canonical" href="https://catalog360.ro/teste">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0F2D44">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:site_name" content="Catalog360.ro">
+<meta property="og:title" content="Teste pentru titularizare Informatică și TIC">
+<meta property="og:url" content="https://catalog360.ro/teste">
+<link rel="icon" href="assets/logo-catalog360.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;600&display=swap">
+{{CSS}}
+<style>
+.box{background:var(--white); border:1px solid var(--line); border-radius:var(--r-lg); padding:clamp(18px, 3.5vw, 36px); margin-bottom:24px}
+.page{padding-bottom:64px; max-width:900px}
+.choices{display:grid; grid-template-columns:repeat(auto-fill, minmax(min(250px,100%),1fr)); gap:10px; margin:10px 0 18px}
+.choice{display:flex; gap:10px; align-items:flex-start; border:1.5px solid var(--line); border-radius:12px; padding:12px 14px; cursor:pointer; background:var(--paper)}
+.choice input{margin-top:4px; width:18px; height:18px; accent-color:var(--mint-ink); flex:none}
+.choice small{display:block; color:var(--muted); font-weight:600}
+.row{display:flex; flex-wrap:wrap; gap:16px; align-items:center; margin:8px 0 18px}
+.row label{font-weight:700}
+.row select{font:inherit; padding:8px 12px; border-radius:10px; border:1.5px solid var(--line); background:var(--paper); color:var(--ink)}
+.qhead{display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; font-weight:800; color:var(--muted); font-size:.88rem}
+.qsrc{font-size:.8rem; color:var(--muted); margin:2px 0 10px}
+.qtext{font-size:1.12rem; font-weight:700; margin:6px 0 14px}
+.timer{font-variant-numeric:tabular-nums}
+.big{font:600 clamp(2.6rem, 7vw, 4rem) var(--serif); line-height:1}
+.review .q{border-top:1px solid var(--line); padding-top:14px; margin-top:14px}
+.review .ok{color:var(--mint-ink); font-weight:800} .review .ko{color:var(--red-ink); font-weight:800}
+.bysec{display:grid; gap:8px; margin:12px 0}
+.bysec div{display:grid; grid-template-columns:minmax(0,1fr) 140px 60px; gap:10px; align-items:center; font-size:.94rem}
+.bysec .bar{height:8px; border-radius:4px; background:var(--paper-2); overflow:hidden}
+.bysec .bar i{display:block; height:100%; background:var(--mint)}
+.hist table{min-width:0}
+</style>
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="./" aria-label="Catalog360.ro – titularizare Informatică și TIC"><span class="brand-mark"><img src="assets/logo-catalog360.png" alt="Catalog360.ro" width="2172" height="724"></span></a>
+    <div class="nav-right"><span class="timer" id="timer" aria-live="off"></span></div>
+  </div>
+{{NAV_SITE}}
+</header>
+<main id="continut">
+<section class="hero"><div class="wrap hero-copy">
+  <p class="eyebrow">Verificare · Teste grilă</p>
+  <h1>Teste <em>pe secțiuni</em></h1>
+  <p class="lede">Alege ce vrei să verifici și câte întrebări. Întrebările sunt extrase aleatoriu din cele {{NR_Q}} ale cursurilor și ale sintezei pe programă; după fiecare răspuns vezi explicația, iar la final scorul pe secțiuni și ce trebuie recitit.</p>
+</div></section>
+<div class="wrap page">
+  <section class="box" id="setup" aria-labelledby="setup-t">
+    <h2 id="setup-t">Configurează testul</h2>
+    <div class="choices" id="secs"></div>
+    <div class="row">
+      <label for="nr">Număr de întrebări</label>
+      <select id="nr"><option>10</option><option selected>20</option><option>30</option><option>50</option><option value="0">toate</option></select>
+      <label for="mod">Mod</label>
+      <select id="mod"><option value="invatare">învățare (vezi explicația după fiecare răspuns)</option><option value="examen">examen (rezultatele doar la final, cu cronometru)</option></select>
+    </div>
+    <div class="row"><button type="button" class="btn btn-primary" id="start">Începe testul</button><button type="button" class="btn btn-ghost" id="toate">Selectează tot</button><span class="hint" id="cate"></span></div>
+  </section>
+  <section class="box" id="run" hidden aria-live="polite"></section>
+  <section class="box" id="final" hidden></section>
+  <section class="box hist" id="hist" aria-labelledby="hist-t"><h2 id="hist-t">Istoricul tău</h2><div id="histbody"><p class="hint">Niciun test încă.</p></div></section>
+</div>
+</main>
+<footer class="site-footer"><div class="wrap foot-row">
+  <a class="footer-brand-surface" href="./" aria-label="Catalog360.ro"><span class="brand-mark"><img src="assets/logo-catalog360.png" alt="Catalog360.ro" width="2172" height="724" loading="lazy"></span></a>
+  <p style="margin:0;max-width:62ch">Material de pregătire independent, după programa de concurs (Anexa 49, MO nr. 972 bis/23.XI.2026). Întrebările nu sunt subiecte oficiale.</p>
+</div></footer>
+<script>
+var BANCA = {{BANCA}};
+(function(){
+  var HK = 'c360-teste-istoric';
+  function get(){ try { return JSON.parse(localStorage.getItem(HK) || '[]') || []; } catch (e) { return []; } }
+  function put(v){ try { localStorage.setItem(HK, JSON.stringify(v.slice(-30))); } catch (e) {} }
+  function esc(t){ return String(t).replace(/[&<>]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); }
+  // grupuri: secțiune → curs/capitol
+  var grupuri = {};
+  BANCA.forEach(function(q){ var g = q.s === 'Programare' ? 'Programare – ' + q.c : q.s; (grupuri[g] = grupuri[g] || []).push(q); });
+  var nume = Object.keys(grupuri).sort();
+  var secs = document.getElementById('secs');
+  nume.forEach(function(g){
+    var l = document.createElement('label'); l.className = 'choice';
+    l.innerHTML = '<input type="checkbox" value="' + esc(g) + '" checked><span>' + esc(g) + '<small>' + grupuri[g].length + ' întrebări</small></span>';
+    secs.appendChild(l);
+  });
+  function alese(){ return Array.prototype.slice.call(secs.querySelectorAll('input:checked')).map(function(i){ return i.value; }); }
+  function upd(){ var n = alese().reduce(function(s, g){ return s + grupuri[g].length; }, 0); document.getElementById('cate').textContent = n + ' întrebări disponibile'; }
+  secs.addEventListener('change', upd); upd();
+  document.getElementById('toate').addEventListener('click', function(){ secs.querySelectorAll('input').forEach(function(i){ i.checked = true; }); upd(); });
+
+  var run = document.getElementById('run'), fin = document.getElementById('final'), setup = document.getElementById('setup'), timerEl = document.getElementById('timer');
+  var Q = [], i = 0, rasp = [], mod = 'invatare', t0 = 0, tick = null;
+  function shuffle(a){ for (var k = a.length - 1; k > 0; k--){ var j = Math.floor(Math.random() * (k + 1)); var x = a[k]; a[k] = a[j]; a[j] = x; } return a; }
+  document.getElementById('start').addEventListener('click', function(){
+    var g = alese(); if (!g.length) { alert('Alege cel puțin o secțiune.'); return; }
+    var pool = []; g.forEach(function(x){ pool = pool.concat(grupuri[x]); });
+    var n = +document.getElementById('nr').value || pool.length;
+    Q = shuffle(pool.slice()).slice(0, Math.min(n, pool.length)).map(function(q){
+      var ord = shuffle(q.o.map(function(_, k){ return k; }));
+      return {q:q, ord:ord, a:ord.indexOf(q.a)};
+    });
+    mod = document.getElementById('mod').value; i = 0; rasp = []; t0 = Date.now();
+    setup.hidden = true; fin.hidden = true; run.hidden = false;
+    clearInterval(tick);
+    if (mod === 'examen') tick = setInterval(function(){ var s = Math.floor((Date.now() - t0) / 1000); timerEl.textContent = '⏱ ' + Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }, 1000);
+    arata();
+  });
+  function arata(){
+    var x = Q[i], q = x.q;
+    var h = '<div class="qhead"><span>Întrebarea ' + (i + 1) + ' din ' + Q.length + '</span><span>' + rasp.filter(function(r){ return r.ok; }).length + ' corecte</span></div>';
+    h += '<p class="qsrc">' + esc(q.s === 'Programare' ? q.c : q.s) + ' · ' + esc(q.l) + '</p>';
+    h += '<p class="qtext">' + q.q + '</p><div class="opts">';
+    x.ord.forEach(function(k){ h += '<button type="button">' + q.o[k] + '</button>'; });
+    h += '</div><p class="why" hidden></p><div class="row" style="margin-top:16px"><button type="button" class="btn btn-primary" id="next" hidden>' + (i + 1 < Q.length ? 'Următoarea →' : 'Vezi rezultatul') + '</button><button type="button" class="btn btn-link" id="stop">Oprește testul</button></div>';
+    run.innerHTML = h;
+    var bs = run.querySelectorAll('.opts button');
+    bs.forEach(function(b, k){ b.addEventListener('click', function(){
+      var ok = k === x.a; rasp.push({x:x, ales:k, ok:ok});
+      bs.forEach(function(y){ y.disabled = true; });
+      if (mod === 'invatare') {
+        bs[x.a].classList.add('right'); if (!ok) b.classList.add('wrong');
+        var w = run.querySelector('.why'); w.hidden = false; w.innerHTML = (ok ? '<b>Corect.</b> ' : '<b>Greșit.</b> ') + q.w + ' <a href="' + q.u + '">Recitește lecția</a>';
+        var nx = document.getElementById('next'); nx.hidden = false; nx.focus();
+      } else { b.classList.add('right'); setTimeout(urm, 250); }
+    }); });
+    document.getElementById('next').addEventListener('click', urm);
+    document.getElementById('stop').addEventListener('click', function(){ if (rasp.length) gata(); else { run.hidden = true; setup.hidden = false; clearInterval(tick); timerEl.textContent = ''; } });
+  }
+  function urm(){ i++; if (i < Q.length) arata(); else gata(); }
+  function gata(){
+    clearInterval(tick); timerEl.textContent = '';
+    var n = rasp.length, ok = rasp.filter(function(r){ return r.ok; }).length, p = Math.round(ok / n * 100), sec = Math.floor((Date.now() - t0) / 1000);
+    var pe = {};
+    rasp.forEach(function(r){ var g = r.x.q.s === 'Programare' ? 'Programare – ' + r.x.q.c : r.x.q.s; pe[g] = pe[g] || [0, 0]; pe[g][1]++; if (r.ok) pe[g][0]++; });
+    var h = '<h2>Rezultat</h2><p class="big">' + p + '%</p><p>' + ok + ' răspunsuri corecte din ' + n + ' · timp ' + Math.floor(sec / 60) + ' min ' + (sec % 60) + ' s</p>';
+    h += '<p>' + (p >= 85 ? 'Foarte bine – ești pregătit(ă) pe aceste secțiuni.' : p >= 65 ? 'Bine, dar recitește lecțiile la care ai greșit.' : 'Reia lecțiile din secțiunile cu scor mic, apoi refă testul.') + '</p>';
+    h += '<div class="bysec">' + Object.keys(pe).sort().map(function(g){ var v = pe[g], q = Math.round(v[0] / v[1] * 100); return '<div><span>' + esc(g) + '</span><span class="bar"><i style="width:' + q + '%"></i></span><b>' + v[0] + '/' + v[1] + '</b></div>'; }).join('') + '</div>';
+    var gresite = rasp.filter(function(r){ return !r.ok; });
+    if (gresite.length) {
+      h += '<h3>De recitit (' + gresite.length + ')</h3><div class="review">';
+      gresite.forEach(function(r){ var q = r.x.q;
+        h += '<div class="q"><p><b>' + q.q + '</b></p><p><span class="ko">Ai ales:</span> ' + q.o[r.x.ord[r.ales]] + '<br><span class="ok">Corect:</span> ' + q.o[q.a] + '</p><p class="why">' + q.w + ' <a href="' + q.u + '">' + esc(q.l) + '</a></p></div>'; });
+      h += '</div>';
+    }
+    h += '<div class="row" style="margin-top:18px"><button type="button" class="btn btn-primary" id="again">Test nou</button></div>';
+    run.hidden = true; fin.hidden = false; fin.innerHTML = h;
+    document.getElementById('again').addEventListener('click', function(){ fin.hidden = true; setup.hidden = false; setup.scrollIntoView(); });
+    var ist = get(); ist.push({d:new Date().toISOString().slice(0, 16).replace('T', ' '), n:n, ok:ok, p:p, s:Object.keys(pe).join(', ')}); put(ist); istoric();
+    fin.scrollIntoView();
+  }
+  function istoric(){
+    var ist = get(); if (!ist.length) return;
+    var h = '<div class="tbl"><table><tr><th>Data</th><th>Scor</th><th>Secțiuni</th></tr>';
+    ist.slice().reverse().forEach(function(x){ h += '<tr><td>' + esc(x.d) + '</td><td><b>' + x.p + '%</b> (' + x.ok + '/' + x.n + ')</td><td>' + esc(x.s) + '</td></tr>'; });
+    document.getElementById('histbody').innerHTML = h + '</table></div>';
+  }
+  istoric();
+})();
+</script>
+</body>
+</html>
