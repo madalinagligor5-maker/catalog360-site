@@ -527,6 +527,7 @@ details.sol .body{margin-top:14px; padding-top:14px; border-top:1px dashed var(-
     <li><strong>Cutie neagră</strong> (black-box) – pornind de la specificație: <em>clase de echivalență</em> (un test din fiecare categorie de date) și <em>valori limită</em> (0, 1, maximul admis, lista vidă, un singur element, toate elementele egale).</li>
     <li><strong>Cutie albă</strong> (white-box) – pornind de la cod: fiecare instrucțiune și fiecare ramură a fiecărei decizii să fie executate măcar o dată; bucle executate de 0, 1 și mai multe ori.</li>
     <li>Teste pentru date incorecte (validare) și teste de performanță (date mari, pentru timp de execuție).</li>
+    <li><strong>Testarea automată</strong>: testele se scriu ca și cod și se rulează la fiecare modificare – în Python cu <code>assert</code>, cu <code>doctest</code> (exemple în documentația funcției) sau cu <code>pytest</code> (funcții <code>test_…</code>). Un test care eșuează arată imediat ce modificare a introdus o eroare.</li>
   </ul>
   <h4>Eficiența algoritmilor</h4>
   <div class="tbl"><table>
@@ -603,6 +604,34 @@ până când C</code></pre>
 cât timp not C execută
     S</code></pre>
       <p>Structura <em>repetă</em> execută corpul cel puțin o dată și se oprește când condiția devine <strong>adevărată</strong>; de aceea S apare o dată înainte, iar condiția se neagă.</p>
+    </div></details>
+  </div>
+
+  <div class="ex">
+    <div class="ex-h"><b>Ex. 2.5</b><span>Teste automate în Python</span><span class="lvl">mediu</span></div>
+    <p>Transformați testele de la Ex. 2.3 în teste automate pentru funcția <code>este_bisect</code>.</p>
+    <details class="sol"><summary>Vezi rezolvarea</summary><div class="body">
+<pre data-lang="python"><code><span class="k">def</span> este_bisect(an: int) -&gt; bool:
+    <span class="s">"""
+    &gt;&gt;&gt; este_bisect(2024)
+    True
+    &gt;&gt;&gt; este_bisect(1900)
+    False
+    """</span>
+    <span class="k">return</span> an % 4 == 0 <span class="k">and</span> an % 100 != 0 <span class="k">or</span> an % 400 == 0
+
+<span class="k">def</span> test_este_bisect():                <span class="c"># rulat automat de: pytest fisier.py</span>
+    <span class="k">assert</span> este_bisect(2024)
+    <span class="k">assert</span> <span class="k">not</span> este_bisect(2026)
+    <span class="k">assert</span> <span class="k">not</span> este_bisect(1900)
+    <span class="k">assert</span> este_bisect(2000)
+
+<span class="k">if</span> __name__ == <span class="s">"__main__"</span>:
+    <span class="k">import</span> doctest
+    doctest.testmod()                     <span class="c"># verifică exemplele din docstring</span>
+    test_este_bisect()
+    print(<span class="s">"toate testele au trecut"</span>)</code></pre>
+      <p>Fiecare <code>assert</code> corespunde unei clase de echivalență din Ex. 2.3. Dacă o condiție este falsă, programul se oprește cu <code>AssertionError</code> și arată testul care a eșuat.</p>
     </div></details>
   </div>
 
@@ -1095,6 +1124,35 @@ print(d[G])                                <span class="c"># 9</span></code></pr
     <tr><td><code>dict</code></td><td><code>d[cheie]</code> (KeyError dacă lipsește), <code>in</code> (testează cheile)</td><td><code>get(k, implicit)</code>, <code>keys()</code>, <code>values()</code>, <code>items()</code>, <code>pop(k)</code></td></tr>
     <tr><td><code>tuple</code></td><td><code>t[i]</code>, <code>in</code>, <code>+</code>, <code>*</code>; tuplu cu un element: <code>(4,)</code></td><td><code>count(x)</code>, <code>index(x)</code></td></tr>
   </table></div>
+  <h4>Alte elemente de limbaj care apar frecvent</h4>
+  <div class="grid2">
+    <div class="card"><h4>Numere reale și identitate</h4><ul>
+      <li><code>0.1 + 0.2 == 0.3</code> este <code>False</code> (rezultatul este 0.30000000000000004): numerele reale se memorează aproximativ în baza 2. Se compară cu <code>math.isclose(a, b)</code> sau cu o toleranță.</li>
+      <li><code>==</code> compară <strong>valorile</strong>, <code>is</code> verifică dacă este <strong>același obiect</strong>; <code>is</code> se folosește practic doar pentru <code>None</code>: <code>if x is None</code>.</li>
+    </ul></div>
+    <div class="card"><h4>Construcții compacte</h4><ul>
+      <li>Expresia condițională: <code>"par" if x % 2 == 0 else "impar"</code>.</li>
+      <li>Comprehensiuni: <code>[x*x for x in v if x &gt; 0]</code>, <code>{c for c in s}</code>, <code>{k: v for k, v in perechi}</code>.</li>
+      <li><code>for … else</code> / <code>while … else</code>: ramura <code>else</code> se execută doar dacă bucla s-a terminat <strong>fără <code>break</code></strong> (util la căutări).</li>
+      <li><code>enumerate(v)</code> dă perechi (indice, valoare); <code>zip(a, b)</code> parcurge două liste în paralel.</li>
+    </ul></div>
+  </div>
+  <h4>Excepții</h4>
+<pre data-lang="python"><code><span class="k">try</span>:
+    n = int(input(<span class="s">"n = "</span>))
+    print(100 / n)
+<span class="k">except</span> ValueError:                 <span class="c"># textul nu este un număr întreg</span>
+    print(<span class="s">"Introduceți un număr întreg!"</span>)
+<span class="k">except</span> ZeroDivisionError:
+    print(<span class="s">"n nu poate fi 0"</span>)
+<span class="k">else</span>:                              <span class="c"># doar dacă NU a apărut nicio excepție</span>
+    print(<span class="s">"calcul reușit"</span>)
+<span class="k">finally</span>:                           <span class="c"># se execută întotdeauna</span>
+    print(<span class="s">"gata"</span>)
+
+<span class="c"># Semnalarea unei erori în propriile funcții:</span>
+<span class="c"># if n &lt; 0: raise ValueError("n trebuie să fie natural")</span></code></pre>
+  <p>Excepții uzuale: <code>ValueError</code>, <code>TypeError</code>, <code>ZeroDivisionError</code>, <code>IndexError</code>, <code>KeyError</code>, <code>FileNotFoundError</code>, <code>AttributeError</code>, <code>NameError</code>. Tratarea lor este esențială la validarea datelor citite de la utilizator, inclusiv în interfețele tkinter.</p>
   <h4>Fișiere text</h4>
 <pre data-lang="python"><code><span class="k">with</span> open(<span class="s">"date.in"</span>) <span class="k">as</span> f:                 <span class="c"># implicit mod "r"; with închide automat fișierul</span>
     n = int(f.readline())
@@ -1131,7 +1189,7 @@ fereastra.mainloop()</code></pre>
   <p><strong>Gestionarii de geometrie</strong>: <code>pack()</code> – așază widget-urile unul după altul (sus/jos/stânga/dreapta); <code>grid(row, column)</code> – tabel; <code>place(x, y)</code> – poziționare absolută. Într-un același container nu se amestecă <code>pack</code> cu <code>grid</code>. <code>Text</code> este o casetă multi-linie: <code>t.get("1.0", tk.END)</code>; <code>Canvas</code> permite desen: <code>create_line</code>, <code>create_rectangle</code>, <code>create_oval</code>, <code>create_text</code>.</p>
   <h4>Programare orientată pe obiecte în Python</h4>
   <ul>
-    <li>Constructorul este <code>__init__(self, …)</code>; finalizer-ul este <code>__del__(self)</code> (apelat când obiectul nu mai are referințe).</li>
+    <li>Constructorul este <code>__init__(self, …)</code>; finalizer-ul este <code>__del__(self)</code> (apelat când obiectul nu mai are referințe). În practică <code>__del__</code> se folosește rar: memoria este eliberată automat, iar momentul apelului nu este garantat (de exemplu, dacă mai există referințe sau la închiderea programului). Pentru eliberarea resurselor (fișiere, conexiuni) se preferă <code>with</code>, <code>try … finally</code> sau o metodă apelată explicit (<code>close()</code>).</li>
     <li>Niveluri de acces prin <strong>convenție</strong>: <code>nume</code> public, <code>_nume</code> „protejat” (intern), <code>__nume</code> „privat” – Python aplică <em>name mangling</em> (devine <code>_Clasa__nume</code>); nu există o restricție reală ca în C++.</li>
     <li>Moștenire: <code>class Derivata(Baza):</code>, apel la constructorul bazei cu <code>super().__init__(…)</code>; suprascrierea metodelor; <code>isinstance(obj, Clasa)</code>.</li>
     <li>Atribut de clasă (comun tuturor obiectelor) vs. atribut de instanță (<code>self.x</code>).</li>
@@ -1255,6 +1313,53 @@ print(<span class="s">"Media maximă:"</span>, cel_mai_bun[0])</code></pre>
     </div></details>
   </div>
 
+  <div class="ex">
+    <div class="ex-h"><b>Ex. 5A.7</b><span>Excepții</span><span class="lvl">mediu</span></div>
+<pre data-lang="python"><code><span class="k">def</span> media(note):
+    <span class="k">try</span>:
+        m = sum(note) / len(note)
+    <span class="k">except</span> ZeroDivisionError:
+        print(<span class="s">"lista goala"</span>)
+        <span class="k">return</span> None
+    <span class="k">else</span>:
+        print(<span class="s">"ok"</span>)
+        <span class="k">return</span> m
+    <span class="k">finally</span>:
+        print(<span class="s">"gata"</span>)
+
+print(media([8, 10]))
+print(media([]))</code></pre>
+    <details class="sol"><summary>Vezi rezolvarea</summary><div class="body">
+<pre class="out" data-lang="ieșire"><code>ok
+gata
+9.0
+lista goala
+gata
+None</code></pre>
+      <p>Blocul <code>finally</code> se execută înainte ca funcția să returneze efectiv, chiar dacă <code>return</code> apare în <code>else</code> sau în <code>except</code>; de aceea „gata” apare înaintea valorii afișate de <code>print</code>.</p>
+    </div></details>
+  </div>
+  <div class="ex">
+    <div class="ex-h"><b>Ex. 5A.8</b><span>Comprehensiuni, for…else, numere reale</span><span class="lvl">mediu</span></div>
+<pre data-lang="python"><code><span class="k">import</span> math
+print(0.1 + 0.2 == 0.3, math.isclose(0.1 + 0.2, 0.3))
+a = [1, 2]; b = [1, 2]; c = a
+print(a == b, a <span class="k">is</span> b, a <span class="k">is</span> c)
+print([x * x <span class="k">for</span> x <span class="k">in</span> range(6) <span class="k">if</span> x % 2 == 0], {x: x % 3 <span class="k">for</span> x <span class="k">in</span> range(4)})
+<span class="k">for</span> d <span class="k">in</span> range(2, 9):
+    <span class="k">if</span> 91 % d == 0:
+        print(<span class="s">"divizor"</span>, d); <span class="k">break</span>
+<span class="k">else</span>:
+    print(<span class="s">"fara divizori in [2, 8]"</span>)</code></pre>
+    <details class="sol"><summary>Vezi rezolvarea</summary><div class="body">
+<pre class="out" data-lang="ieșire"><code>False True
+True False True
+[0, 4, 16] {0: 0, 1: 1, 2: 2, 3: 0}
+divizor 7</code></pre>
+      <p>91 = 7 · 13, deci bucla se oprește cu <code>break</code> și ramura <code>else</code> nu se execută. Pentru 97 (număr prim) s-ar fi afișat „fara divizori in [2, 8]”.</p>
+    </div></details>
+  </div>
+
   <div class="quiz" data-quiz>
     <h3>Test rapid – capitolul 5A <span class="score"></span></h3>
     <fieldset class="q" data-a="2"><legend>1. Ce creează expresia <code>{}</code> în Python?</legend><div class="opts">
@@ -1272,6 +1377,12 @@ print(<span class="s">"Media maximă:"</span>, cel_mai_bun[0])</code></pre>
     <fieldset class="q" data-a="1"><legend>5. Ce metodă a unui fișier deschis cu open() citește o singură linie?</legend><div class="opts">
       <button type="button">read()</button><button type="button">readline()</button><button type="button">readlines()</button><button type="button">get()</button></div>
       <p class="why" hidden>readline() citește linia curentă, inclusiv caracterul de sfârșit de linie.</p></fieldset>
+    <fieldset class="q" data-a="3"><legend>6. Ramura <code>else</code> a unei bucle <code>for</code> se execută:</legend><div class="opts">
+      <button type="button">mereu</button><button type="button">dacă bucla nu a avut nicio iterație</button><button type="button">doar după un break</button><button type="button">dacă bucla s-a terminat fără break</button></div>
+      <p class="why" hidden>else-ul buclei rulează la terminarea normală, nu după break.</p></fieldset>
+    <fieldset class="q" data-a="1"><legend>7. Ce excepție produce <code>int("12a")</code>?</legend><div class="opts">
+      <button type="button">TypeError</button><button type="button">ValueError</button><button type="button">SyntaxError</button><button type="button">nicio excepție, întoarce 12</button></div>
+      <p class="why" hidden>Tipul este corect (str), dar valoarea nu poate fi convertită.</p></fieldset>
   </div>
   <div class="done-row"><label class="done-toggle"><input type="checkbox" data-done="c5a"> Am recapitulat capitolul</label></div>
 </section>
@@ -1657,8 +1768,10 @@ con.close()</code></pre>
     <tr><td>Instanță / exemplu</td><td>un rând din setul de date</td></tr>
     <tr><td>Atribut (caracteristică, feature)</td><td>o coloană folosită ca intrare (ex.: ore de studiu)</td></tr>
     <tr><td>Etichetă (label, țintă)</td><td>valoarea de prezis (ex.: nota, „promovat/respins”)</td></tr>
-    <tr><td>Antrenare / testare</td><td>modelul învață pe setul de antrenare și este evaluat pe date nevăzute (set de testare, de ex. 70%/30%)</td></tr>
-    <tr><td>Supraînvățare (overfitting)</td><td>performanță foarte bună la antrenare, slabă la testare – modelul a „memorat” datele</td></tr>
+    <tr><td>Antrenare / testare</td><td>modelul învață pe setul de antrenare și este evaluat pe date nevăzute (set de testare). <code>train_test_split</code> păstrează implicit 25% pentru testare; <code>stratify=y</code> păstrează proporția claselor în ambele părți</td></tr>
+    <tr><td>Generalizare</td><td>capacitatea modelului de a face predicții corecte pe date noi, cu aceleași caracteristici ca datele de antrenare – scopul real al învățării</td></tr>
+    <tr><td>Supraînvățare (overfitting)</td><td>model prea complex: performanță foarte bună la antrenare, slabă la testare – modelul a „memorat” particularitățile datelor</td></tr>
+    <tr><td>Subînvățare (underfitting)</td><td>model prea simplu: rezultate slabe atât la antrenare, cât și la testare</td></tr>
     <tr><td>Date categorice</td><td>valori din categorii (clasa „9A”, culoarea) – se codifică numeric: <em>label encoding</em> sau <em>one-hot</em></td></tr>
     <tr><td>Normalizare min-max</td><td>x' = (x − min) / (max − min), în intervalul [0, 1]</td></tr>
     <tr><td>Standardizare (scalare z)</td><td>z = (x − medie) / abatere standard</td></tr>
@@ -1666,17 +1779,30 @@ con.close()</code></pre>
     <tr><td>Date lipsă</td><td>eliminarea rândurilor (<code>dropna</code>) sau completarea (<code>fillna</code> cu media/mediana/valoarea cea mai frecventă)</td></tr>
   </table></div>
   <div class="grid2">
-    <div class="card"><h4>Nesupervizat – K-means</h4><ol><li>Se aleg k centroizi inițiali.</li><li>Fiecare punct se asociază celui mai apropiat centroid.</li><li>Fiecare centroid devine media punctelor din grupul său.</li><li>Se repetă 2–3 până când grupurile nu se mai schimbă.</li></ol><p>Rezultatul depinde de inițializare; k se alege de utilizator (de ex. „metoda cotului”).</p></div>
+    <div class="card"><h4>Nesupervizat – K-means</h4><ol><li>Se aleg k centroizi inițiali.</li><li>Fiecare punct se asociază celui mai apropiat centroid.</li><li>Fiecare centroid devine media punctelor din grupul său.</li><li>Se repetă 2–3 până când grupurile nu se mai schimbă.</li></ol><p>Rezultatul depinde de inițializare; k se alege de utilizator (de ex. „metoda cotului”). Limite: fiecare cluster este descris doar de centrul său, deci K-means găsește bine grupuri „rotunde”, de dimensiuni apropiate; eșuează la grupuri alungite, de forme complicate sau cu densități foarte diferite. Media este sensibilă la valori extreme.</p></div>
     <div class="card"><h4>Supervizat</h4><ul>
       <li><strong>Regresie liniară</strong>: y = a·x + b, cu a = Σ(x−x̄)(y−ȳ) / Σ(x−x̄)², b = ȳ − a·x̄ (metoda celor mai mici pătrate). Prezice valori numerice.</li>
-      <li><strong>KNN</strong>: clasa majoritară dintre cei k vecini cei mai apropiați (distanța euclidiană); k impar evită egalitățile la 2 clase; atributele trebuie scalate.</li>
-      <li><strong>Arbore de decizie</strong>: la fiecare nod se alege atributul care separă cel mai bine clasele (câștig informațional pe baza entropiei H = −Σ pᵢ log₂ pᵢ, sau indicele Gini 1 − Σ pᵢ²).</li>
+      <li><strong>KNN</strong>: clasa majoritară dintre cei k vecini cei mai apropiați (distanța euclidiană); k impar evită egalitățile la 2 clase. <strong>k mic</strong> (de ex. 1) ⇒ frontieră de decizie neregulată, model complex, risc de supraînvățare; <strong>k mare</strong> ⇒ frontieră netedă, model simplu, risc de subînvățare. Atributele trebuie scalate, altfel cele cu valori mari domină distanța. Predicția devine lentă pe seturi mari.</li>
+      <li><strong>Arbore de decizie</strong>: la fiecare nod se alege atributul care separă cel mai bine clasele (câștig informațional pe baza entropiei H = −Σ pᵢ log₂ pᵢ, sau indicele Gini 1 − Σ pᵢ²). Un arbore crescut până la capăt are frunze pure și tinde să supraînvețe; se limitează prin <strong>pre-tăiere</strong> (pre-pruning): <code>max_depth</code>, <code>max_leaf_nodes</code>, <code>min_samples_leaf</code>. Avantaj: modelul este ușor de vizualizat și explicat și nu necesită scalarea datelor.</li>
     </ul></div>
   </div>
   <h4>Perceptronul</h4>
   <p>Neuronul artificial calculează suma ponderată a intrărilor plus o deplasare (bias) și aplică o funcție de activare: ieșire = 1 dacă w₁x₁ + … + wₙxₙ + b &gt; 0, altfel 0. <strong>Învățarea</strong>: pentru fiecare exemplu greșit, wᵢ ← wᵢ + η·(t − o)·xᵢ și b ← b + η·(t − o) (η – rata de învățare, t – ieșirea dorită, o – ieșirea obținută). Un perceptron poate învăța doar funcții <em>liniar separabile</em> (AND, OR, nu și XOR). Rețelele neuronale cu straturi ascunse (multistrat) rezolvă probleme neliniare și se antrenează prin propagarea înapoi a erorii (backpropagation).</p>
+  <h4>Preprocesarea corectă a datelor</h4>
+  <ul>
+    <li><code>MinMaxScaler</code> (aduce fiecare atribut în [0, 1]) și <code>StandardScaler</code> (medie 0, abatere standard 1) se <strong>antrenează doar pe setul de antrenare</strong> (<code>fit</code>), apoi <strong>aceeași</strong> transformare se aplică ambelor seturi (<code>transform</code>). Dacă scalăm setul de testare cu propriul minim și maxim, punctele sunt deplasate inconsecvent; dacă scalăm totul înainte de împărțire, informație din setul de testare „se scurge” în antrenare (<em>data leakage</em>), iar evaluarea devine prea optimistă.</li>
+    <li>Atributele categorice se codifică <strong>one-hot</strong> cu <code>pd.get_dummies</code>: o coloană 0/1 pentru fiecare categorie (de ex. <code>clasa_9A</code>, <code>clasa_9B</code>). Codificarea 9A = 0, 9B = 1, 10A = 2 ar sugera o ordine care nu există.</li>
+  </ul>
   <h4>Metrici de evaluare</h4>
-  <p>Clasificare: <strong>acuratețe</strong> = predicții corecte / total; matricea de confuzie; precizie și recall. Regresie: eroarea medie pătratică (MSE), eroarea absolută medie (MAE), coeficientul R².</p>
+  <p>Pentru clasificarea binară, <strong>matricea de confuzie</strong> numără: TP (pozitive prezise corect), TN (negative prezise corect), FP (negative prezise greșit ca pozitive), FN (pozitive ratate). În scikit-learn (<code>confusion_matrix</code>) rândurile sunt clasele reale, iar coloanele clasele prezise.</p>
+  <div class="tbl"><table>
+    <tr><th>Metrică</th><th>Formulă</th><th>Când contează</th></tr>
+    <tr><td>Acuratețe</td><td>(TP + TN) / total</td><td>clase echilibrate</td></tr>
+    <tr><td>Precizie</td><td>TP / (TP + FP)</td><td>când alarmele false sunt costisitoare (de ex. filtru de spam care nu trebuie să blocheze mesaje bune)</td></tr>
+    <tr><td>Recall (sensibilitate)</td><td>TP / (TP + FN)</td><td>când nu trebuie ratat niciun caz pozitiv (de ex. depistarea unei boli)</td></tr>
+    <tr><td>Scor F1</td><td>2 · P · R / (P + R)</td><td>un singur număr care echilibrează precizia și recall-ul</td></tr>
+  </table></div>
+  <p>La <strong>clase dezechilibrate</strong> acuratețea înșală: dacă 90% dintre elevi promovează, un „model” care prezice mereu „promovat” are 90% acuratețe, dar nu identifică niciun elev în risc. <strong>Validarea încrucișată</strong> (k-fold, de ex. <code>cross_val_score(model, X, y, cv=5)</code>) împarte datele în k părți și folosește pe rând fiecare parte pentru testare – rezultatul nu mai depinde de o singură împărțire norocoasă. Regresie: eroarea medie pătratică (MSE), eroarea absolută medie (MAE), coeficientul R².</p>
 
   <h4>Biblioteci Python – fișă</h4>
 <pre data-lang="python"><code><span class="k">import</span> numpy <span class="k">as</span> np, pandas <span class="k">as</span> pd, matplotlib.pyplot <span class="k">as</span> plt
@@ -1777,6 +1903,57 @@ print(df[df[<span class="s">"nota"</span>] &gt;= 9][<span class="s">"nume"</span
     <p>Normalizați min-max valorile 10, 20, 40, 50.</p>
     <details class="sol"><summary>Vezi rezolvarea</summary><div class="body"><p>min = 10, max = 50 ⇒ (x − 10)/40: <strong>0; 0,25; 0,75; 1</strong>.</p></div></details>
   </div>
+  <div class="ex">
+    <div class="ex-h"><b>Ex. 7.8</b><span>Matricea de confuzie</span><span class="lvl">mediu</span></div>
+    <p>Un model care identifică elevii în risc de abandon (clasa pozitivă) este testat pe 100 de elevi, dintre care 10 sunt efectiv în risc. Modelul îi detectează corect pe 8 dintre ei, iar dintre cei 90 care nu sunt în risc, 4 sunt semnalați greșit. Construiți matricea de confuzie și calculați acuratețea, precizia, recall-ul și F1. Ce acuratețe ar avea un „model” care spune mereu „nu este în risc”?</p>
+    <details class="sol"><summary>Vezi rezolvarea</summary><div class="body">
+<pre class="out" data-lang="matrice"><code>                prezis: risc   prezis: fără risc
+real: risc          TP = 8          FN = 2
+real: fără risc     FP = 4          TN = 86</code></pre>
+      <p>Acuratețe = (8 + 86)/100 = <strong>0,94</strong>; precizie = 8/12 ≈ <strong>0,667</strong>; recall = 8/10 = <strong>0,8</strong>; F1 = 2·0,667·0,8/(0,667 + 0,8) ≈ <strong>0,727</strong> (verificat cu <code>sklearn.metrics</code>).</p>
+      <p>Modelul „mereu fără risc” are acuratețea <strong>0,90</strong>, deși nu găsește niciun elev în risc (recall = 0). De aceea, la clase dezechilibrate nu ne uităm doar la acuratețe.</p>
+    </div></details>
+  </div>
+  <div class="ex">
+    <div class="ex-h"><b>Ex. 7.9</b><span>Scalare corectă și supraînvățare (scikit-learn)</span><span class="lvl">dificil</span></div>
+<pre data-lang="python"><code><span class="k">from</span> sklearn.datasets <span class="k">import</span> load_breast_cancer
+<span class="k">from</span> sklearn.model_selection <span class="k">import</span> train_test_split
+<span class="k">from</span> sklearn.preprocessing <span class="k">import</span> MinMaxScaler
+<span class="k">from</span> sklearn.neighbors <span class="k">import</span> KNeighborsClassifier
+<span class="k">from</span> sklearn.tree <span class="k">import</span> DecisionTreeClassifier
+
+X, y = load_breast_cancer(return_X_y=True)
+X_tr, X_te, y_tr, y_te = train_test_split(X, y, stratify=y, random_state=0)
+
+scaler = MinMaxScaler().fit(X_tr)          <span class="c"># se învață min și max DOAR din antrenare</span>
+X_tr_s, X_te_s = scaler.transform(X_tr), scaler.transform(X_te)
+
+fara = KNeighborsClassifier(n_neighbors=5).fit(X_tr, y_tr).score(X_te, y_te)
+cu = KNeighborsClassifier(n_neighbors=5).fit(X_tr_s, y_tr).score(X_te_s, y_te)
+print(f<span class="s">"KNN fără scalare: {fara:.3f}, cu scalare: {cu:.3f}"</span>)
+
+<span class="k">for</span> d <span class="k">in</span> [None, 4]:
+    t = DecisionTreeClassifier(max_depth=d, random_state=0).fit(X_tr, y_tr)
+    print(f<span class="s">"max_depth={d}: antrenare {t.score(X_tr, y_tr):.3f}, testare {t.score(X_te, y_te):.3f}"</span>)</code></pre>
+    <p>Ce se afișează? Interpretați rezultatele.</p>
+    <details class="sol"><summary>Vezi rezolvarea</summary><div class="body">
+<pre class="out" data-lang="ieșire"><code>KNN fără scalare: 0.916, cu scalare: 0.951
+max_depth=None: antrenare 1.000, testare 0.902
+max_depth=4: antrenare 0.986, testare 0.909</code></pre>
+      <p>Setul are 30 de atribute cu ordine de mărime foarte diferite; fără scalare, distanța KNN este dominată de câteva atribute mari. Scalarea crește acuratețea de la 91,6% la 95,1%.</p>
+      <p>Arborele nelimitat are 100% la antrenare, dar mai puțin la testare – semn de supraînvățare. Limitarea adâncimii scade scorul la antrenare și îl crește ușor la testare: modelul generalizează mai bine.</p>
+    </div></details>
+  </div>
+  <div class="ex">
+    <div class="ex-h"><b>Ex. 7.10</b><span>One-hot</span><span class="lvl">ușor</span></div>
+    <p>Ce produce <code>pd.get_dummies(df, columns=["clasa"], dtype=int)</code> pentru tabelul cu coloanele <code>clasa</code> = 9A, 9B, 9A și <code>nota</code> = 9, 7, 10?</p>
+    <details class="sol"><summary>Vezi rezolvarea</summary><div class="body">
+<pre class="out" data-lang="ieșire"><code>   nota  clasa_9A  clasa_9B
+0     9         1         0
+1     7         0         1
+2    10         1         0</code></pre>
+    </div></details>
+  </div>
 
   <div class="quiz" data-quiz>
     <h3>Test rapid – capitolul 7 <span class="score"></span></h3>
@@ -1795,6 +1972,15 @@ print(df[df[<span class="s">"nota"</span>] &gt;= 9][<span class="s">"nume"</span
     <fieldset class="q" data-a="1"><legend>5. Ce funcție NumPy rezolvă sistemul A·x = b?</legend><div class="opts">
       <button type="button">np.dot(A, b)</button><button type="button">np.linalg.solve(A, b)</button><button type="button">np.linalg.det(A)</button><button type="button">np.solve(A, b)</button></div>
       <p class="why" hidden>np.linalg.solve.</p></fieldset>
+    <fieldset class="q" data-a="2"><legend>6. Cum se aplică corect un MinMaxScaler?</legend><div class="opts">
+      <button type="button">fit pe tot setul de date, apoi împărțire</button><button type="button">fit separat pe antrenare și pe testare</button><button type="button">fit pe antrenare, transform pe antrenare și pe testare</button><button type="button">doar pe setul de testare</button></div>
+      <p class="why" hidden>Aceeași transformare, învățată doar din datele de antrenare.</p></fieldset>
+    <fieldset class="q" data-a="0"><legend>7. Pentru depistarea unei boli, unde un caz ratat e foarte grav, metrica cea mai importantă este:</legend><div class="opts">
+      <button type="button">recall-ul</button><button type="button">precizia</button><button type="button">acuratețea</button><button type="button">MSE</button></div>
+      <p class="why" hidden>Recall = TP / (TP + FN) penalizează cazurile pozitive ratate.</p></fieldset>
+    <fieldset class="q" data-a="3"><legend>8. În KNN, alegerea k = 1 conduce de regulă la:</legend><div class="opts">
+      <button type="button">subînvățare</button><button type="button">un model foarte simplu</button><button type="button">o frontieră de decizie netedă</button><button type="button">risc de supraînvățare</button></div>
+      <p class="why" hidden>Un singur vecin urmărește fiecare punct de antrenare, inclusiv zgomotul.</p></fieldset>
   </div>
   <div class="done-row"><label class="done-toggle"><input type="checkbox" data-done="c7"> Am recapitulat capitolul</label></div>
 </section>
@@ -2512,6 +2698,14 @@ oprește motoarele</code></pre>
     <li>Tanenbaum, A.S., <em>Rețele de calculatoare</em>, Byblos, 2004.</li>
     <li><span class="star">★</span> Tudor, V., <em>Curs de programare în Python 3</em>, vol. 1 – Fundamente pentru începători; vol. 2 – Structuri de date și algoritmi, L&amp;S Info-mat, 2022.</li>
   </ol>
+  <h3>Resurse suplimentare (în limba engleză, nu fac parte din programă)</h3>
+  <p>Folosite pentru verificarea și completarea capitolelor 2, 5.A și 7 ale acestei pagini:</p>
+  <ul>
+    <li>Müller, A.C., Guido, S., <em>Introduction to Machine Learning with Python</em>, O’Reilly – generalizare, KNN, arbori de decizie, K-means, scalare, codificare one-hot, metrici de evaluare, validare încrucișată.</li>
+    <li>Lutz, M., <em>Learning Python</em>, ed. a 4-a, O’Reilly, 2009 – tipurile predefinite, fișiere, excepții, clase (atribute „pseudo-private”, <code>__del__</code>). Atenție: ediția este din 2009; unele detalii despre versiunile vechi de Python nu mai sunt actuale.</li>
+    <li>Weise, T., <em>Programming with Python</em> – tipuri simple, colecții, bucle, funcții, excepții, testare automată, clase și moștenire.</li>
+    <li>Copes, F., <em>The Python Handbook</em> – recapitulare rapidă a sintaxei.</li>
+  </ul>
   <h3>Pentru metodică</h3>
   <ol>
     <li><span class="star">★</span> Curriculumul național în vigoare pentru disciplinele informatice (plan-cadru, programe, standarde naționale de evaluare, note de prezentare).</li>
