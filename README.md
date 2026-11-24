@@ -1,6 +1,6 @@
 # Catalog360.ro – site static
 
-Fișiere: `index.html` (CSS și JS incluse, fără dependențe), `robots.txt`, `sitemap.xml`, `assets/`.
+Fișiere: `index.html` (CSS și JS incluse, fără dependențe), `titularizare-informatica-tic.html` (ghid de pregătire pentru titularizare, programa 2026 – servit la `/titularizare-informatica-tic`), `robots.txt`, `sitemap.xml`, `assets/`.
 
 ## Deploy pe Vercel
 
