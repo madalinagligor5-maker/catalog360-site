@@ -192,6 +192,13 @@ details.sol .body{margin-top:12px; padding-top:12px; border-top:1px dashed var(-
 .done-toggle.sm{font-size:.86rem; padding:6px 12px; margin-top:10px}
 .ex.app.ok{border-color:var(--mint); box-shadow:0 0 0 3px var(--mint-soft)}
 .lesson table + p, .lesson .tbl + p{margin-top:4px}
+
+.exam-btn{min-height:38px; padding:0 14px; font-size:.84rem}
+.exam-btn[aria-pressed="true"]{background:var(--navy); color:#fff}
+.exam .b-sol, .exam .b-run, .exam .stdin{display:none}
+.exam .ex.task{border-color:var(--navy-3)}
+@media (max-width:640px){ .exam-btn{padding:0 10px; font-size:.78rem} }
+code, pre, textarea, kbd{font-variant-ligatures:none; font-feature-settings:"liga" 0, "calt" 0}
 </style>
 </head>
 <body>
@@ -200,10 +207,11 @@ details.sol .body{margin-top:12px; padding-top:12px; border-top:1px dashed var(-
   <div class="wrap nav">
     <a class="brand" href="./" aria-label="Catalog360.ro – titularizare Informatică și TIC"><span class="brand-mark"><img src="assets/logo-catalog360.png" alt="Catalog360.ro" width="2172" height="724"></span></a>
     <div class="nav-right">
+      <button type="button" class="btn btn-ghost exam-btn" id="examBtn" aria-pressed="false" hidden>Mod examen: oprit</button>
       <span class="prog" aria-live="polite"><span class="lbl">Exerciții rezolvate</span><span class="track" aria-hidden="true"><i id="progBar"></i></span><span id="progTxt">0/47</span></span>
     </div>
   </div>
-<nav class="site-nav" aria-label="Secțiuni"><div class="wrap"><ul><li><a href="./">Acasă</a></li><li><a href="python">1. Python</a></li><li><a href="algoritmi" aria-current="page">2. Algoritmi</a></li><li><a href="cpp">3. C++</a></li><li><a href="metodica">4. Metodică</a></li><li><a href="programa">5. Programa (TIC, BD, IA…)</a></li><li><a href="teste">Teste</a></li></ul></div></nav><script>(function(){var a=document.querySelector('.site-nav a[aria-current]');if(a&&a.parentNode.parentNode.scrollWidth>a.parentNode.parentNode.clientWidth)a.parentNode.parentNode.scrollLeft=a.offsetLeft-16;})();</script>
+<nav class="site-nav" aria-label="Secțiuni"><div class="wrap"><ul><li><a href="./">Acasă</a></li><li><a href="python">1. Python</a></li><li><a href="culegere">Culegere Python</a></li><li><a href="algoritmi" aria-current="page">2. Algoritmi</a></li><li><a href="cpp">3. C++</a></li><li><a href="metodica">4. Metodică</a></li><li><a href="programa">5. Programa (TIC, BD, IA…)</a></li><li><a href="teste">Teste</a></li><li><a href="simulari">Simulări</a></li></ul></div></nav><script>(function(){var a=document.querySelector('.site-nav a[aria-current]');if(a&&a.parentNode.parentNode.scrollWidth>a.parentNode.parentNode.clientWidth)a.parentNode.parentNode.scrollLeft=a.offsetLeft-16;})();</script>
 </header>
 <main id="continut">
 <section class="hero">
@@ -1152,6 +1160,9 @@ var APLICATII = [];
   var KEY = 'c360-curs-algoritmi';
   var st = {}; try { st = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) {}
   st.cod = st.cod || {}; st.ok = st.ok || {}; st.done = st.done || {};
+  st.t0 = st.t0 || {}; st.tm = st.tm || {}; st.inc = st.inc || {};
+  var EXAM = !!st.exam, marks = [];
+  function mmss(x){ return Math.floor(x / 60) + ':' + String(x % 60).padStart(2, '0'); }
   function save(){ try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} }
   function esc(t){ return String(t).replace(/[&<>]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); }
   function norm(t){ var l = String(t).replace(/\r\n/g, '\n').split('\n').map(function(x){ return x.replace(/\s+$/, ''); }); while (l.length && l[l.length-1] === '') l.pop(); return l.join('\n'); }
@@ -1228,8 +1239,9 @@ var APLICATII = [];
     ta.value = st.cod[id] != null ? st.cod[id] : D.start;
     ta.rows = Math.max(8, ta.value.split('\n').length + 2);
     editor(ta);
-    ta.addEventListener('input', function(){ st.cod[id] = ta.value; save(); });
-    function mark(){ box.classList.toggle('ok', !!st.ok[id]); stEl.textContent = st.ok[id] ? '✓ rezolvat' : ''; }
+    ta.addEventListener('input', function(){ st.cod[id] = ta.value; if (EXAM && !st.ok[id] && !st.t0[id]) st.t0[id] = Date.now(); save(); });
+    function mark(){ box.classList.toggle('ok', !!st.ok[id]); stEl.textContent = st.ok[id] ? ('✓ rezolvat' + (st.tm[id] ? ' în ' + mmss(st.tm[id]) : '')) : (EXAM && st.t0[id] ? '⏱ ' + mmss(Math.floor((Date.now() - st.t0[id]) / 1000)) : ''); }
+    marks.push(mark);
     mark();
     function busy(on, msg){ bCheck.disabled = bRun.disabled = on; if (on){ res.hidden = false; res.className = 'res'; res.innerHTML = '<p>' + msg + '</p>'; } }
     function loadMsg(){ return ready ? 'Se rulează…' : 'Se încarcă Python în browser (doar prima dată, câteva secunde)…'; }
@@ -1258,15 +1270,23 @@ var APLICATII = [];
             else if (norm(r.files[n]) !== T.fout[n]) { ok = false; lipsa = 'Conținutul fișierului ' + n + ' nu este cel așteptat.'; r.outFile = [n, r.files[n]]; }
           });
           rez.push({ok:ok, r:r, T:T, lipsa:lipsa}); i++;
-          if (!ok) return finish(); next();
+          if (!ok && !EXAM) return finish(); next();
         }, function(err){ busy(false); res.className = 'res bad'; res.innerHTML = '<p>Interpretorul Python nu s-a putut încărca (verifică conexiunea la internet). Detalii: ' + esc(err) + '</p>'; });
       }
       function finish(){
         busy(false);
         var all = rez.length === D.teste.length && rez.every(function(x){ return x.ok; });
         var h = '<div class="tests">' + D.teste.map(function(_, k){ var x = rez[k]; return '<span class="' + (x ? (x.ok ? 'p' : 'f') : '') + '">Test ' + (k+1) + (x ? (x.ok ? ' ✓' : ' ✗') : ' –') + '</span>'; }).join('') + '</div>';
-        if (all) { h = '<h4>Corect! Toate cele ' + D.teste.length + ' teste au trecut.</h4>' + h; st.ok[id] = true; save(); }
-        else {
+        if (all) {
+          h = '<h4>Corect! Toate cele ' + D.teste.length + ' teste au trecut.</h4>' + h;
+          if (!st.ok[id] && st.t0[id]) st.tm[id] = Math.floor((Date.now() - st.t0[id]) / 1000);
+          st.ok[id] = true; save();
+        } else if (EXAM) {
+          st.inc[id] = (st.inc[id] || 0) + 1; save();
+          var trec = rez.filter(function(x){ return x.ok; }).length;
+          h = '<h4>' + trec + ' din ' + D.teste.length + ' teste au trecut</h4>' + h +
+              '<p>În modul examen testele sunt ascunse, ca la un evaluator. Verifică-ți singur(ă) programul pe cazuri limită: valori minime și maxime, 0, valori egale, date fără soluție. Încercarea ' + st.inc[id] + '.</p>';
+        } else {
           var f = rez[rez.length - 1], T = f.T;
           h = '<h4>Testul ' + rez.length + ' nu a trecut</h4>' + h;
           Object.keys(T.fis || {}).forEach(function(n){ h += '<p class="io-lbl">Fișierul ' + esc(n) + '</p><pre class="out"><code>' + esc(T.fis[n]) + '</code></pre>'; });
@@ -1298,6 +1318,25 @@ var APLICATII = [];
     ok.addEventListener('change', function(){ st.ok[id] = ok.checked; save(); mark(); counts(); });
     mark();
   });
+
+  // ---------- Mod examen ----------
+  var eb = document.getElementById('examBtn');
+  function setExam(on){
+    EXAM = on; st.exam = on; save();
+    document.documentElement.classList.toggle('exam', on);
+    eb.setAttribute('aria-pressed', on ? 'true' : 'false');
+    eb.textContent = 'Mod examen: ' + (on ? 'pornit' : 'oprit');
+    marks.forEach(function(f){ f(); });
+  }
+  if (Object.keys(DATE).length) {
+    eb.hidden = false;
+    eb.addEventListener('click', function(){
+      if (!EXAM && !confirm('Mod examen: soluțiile și rularea liberă sunt ascunse, testele nu mai arată datele, iar cronometrul pornește când începi să scrii la un exercițiu. Pornești?')) return;
+      setExam(!EXAM);
+    });
+    setExam(EXAM);
+    setInterval(function(){ if (EXAM) marks.forEach(function(f){ f(); }); }, 1000);
+  }
 
   // ---------- Teste grilă ----------
   document.querySelectorAll('[data-quiz]').forEach(function(quiz){

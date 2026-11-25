@@ -66,3 +66,20 @@ def QZ(intro, cod, opts, a, why, main=True, antet=None):
     antet = CPP_ANTET if antet is None else antet
     complet = antet + ("int main() {\n" + cod + "\n    return 0;\n}\n" if main else cod)
     return (f"{intro}{C(cod, 'c++')}", opts, a, why, complet)
+
+
+def P(titlu, nivel, enunt, sol, *intrari, fis=None, fout=None, start=None):
+    """Exercițiu cu verificare automată.
+    intrari: șiruri de intrare (tastatură) – câte unul pe test;
+    fis: listă de dicționare {nume_fișier: conținut}, câte unul pe test (pentru probleme cu fișiere);
+    fout: numele fișierului de ieșire verificat."""
+    if fis:
+        teste = [{"in": (intrari[i] if i < len(intrari) else ""), "fisiere": f} for i, f in enumerate(fis)]
+    else:
+        teste = [{"in": x} for x in intrari]
+    d = dict(titlu=titlu, nivel=nivel, enunt=enunt, sol=sol, teste=teste)
+    if fout:
+        d["fisier_iesire"] = fout
+    if start:
+        d["start"] = start
+    return d

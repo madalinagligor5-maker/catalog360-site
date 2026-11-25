@@ -70,6 +70,7 @@
   <p class="sect-label">Programare</p>
   <div class="steps">
     <a class="step" href="python" data-curs="python.html"><span class="num">1</span><div><h3>Python de la zero</h3><p>Variabile, decizii, bucle, șiruri, liste, dicționare, funcții, fișiere, POO, tkinter – nivelul probei practice.</p><div class="meta"><span>{{NL_python}} lecții</span><span>{{NE_python}} exerciții verificate automat</span></div></div><div class="pr"><b>0%</b><small>0 / {{NE_python}} exerciții</small><div class="bar"><i></i></div></div></a>
+    <a class="step" href="culegere" data-curs="culegere.html"><span class="num">1+</span><div><h3>Culegere Python de nivel examen</h3><p>Probleme pe capitole, cu teste ascunse, cazuri limită și date mari; „Modul examen” ascunde soluțiile și cronometrează fiecare problemă.</p><div class="meta"><span>{{NL_culegere}} capitole</span><span>{{NE_culegere}} probleme</span></div></div><div class="pr"><b>0%</b><small>0 / {{NE_culegere}} probleme</small><div class="bar"><i></i></div></div></a>
     <a class="step" href="algoritmi" data-curs="algoritmi.html"><span class="num">2</span><div><h3>Algoritmi și structuri de date</h3><p>Complexitate, metode de programare, stive și cozi, grafuri, arbori, criptare – fiecare algoritm implementat și testat.</p><div class="meta"><span>{{NL_algoritmi}} lecții</span><span>{{NE_algoritmi}} exerciții verificate automat</span></div></div><div class="pr"><b>0%</b><small>0 / {{NE_algoritmi}} exerciții</small><div class="bar"><i></i></div></div></a>
     <a class="step" href="cpp" data-curs="cpp.html"><span class="num">3</span><div><h3>C++ de la zero</h3><p>Limbajul C++ pentru proba scrisă: tablouri, string, struct, fișiere, pointeri, clase – explicat prin comparație cu Python.</p><div class="meta"><span>{{NL_cpp}} lecții</span><span>{{NE_cpp}} aplicații</span></div></div><div class="pr"><b>0%</b><small>0 / {{NE_cpp}} aplicații</small><div class="bar"><i></i></div></div></a>
   </div>
@@ -83,6 +84,7 @@
   </div>
   <p class="sect-label">Verificare</p>
   <div class="steps">
+    <a class="step tst" href="simulari" id="st-sim"><span class="num">✎</span><div><h3>Simulări de probă scrisă</h3><p>Lucrări complete (specialitate + metodică) pe timp, cu barem detaliat, rezolvări-model și nota calculată după autoevaluare.</p><div class="meta"><span>3 simulări</span><span>90 p + 10 din oficiu</span></div></div><div class="pr"><b>–</b><small>nicio simulare încă</small><div class="bar"><i></i></div></div></a>
     <a class="step tst" href="teste" id="st-teste"><span class="num">✓</span><div><h3>Teste pe secțiuni și test general</h3><p>Alegi secțiunile și numărul de întrebări; primești scorul, explicațiile și istoricul rezultatelor.</p><div class="meta"><span>{{NR_Q}} întrebări în bancă</span></div></div><div class="pr"><b>–</b><small>niciun test încă</small><div class="bar"><i></i></div></div></a>
   </div>
 
@@ -93,11 +95,12 @@
       <tr><th>Săptămâna</th><th>Ce parcurgi</th><th>Verificare</th></tr>
       <tr><td>1–3</td><td><a href="python">Python</a>, lecțiile 0–8 (de la primul program până la dicționare)</td><td>toate exercițiile lecțiilor; test „Python”</td></tr>
       <tr><td>4–5</td><td><a href="python">Python</a>, lecțiile 9–16 (funcții, fișiere, matrice, excepții, algoritmi, POO, tkinter, simulare)</td><td>simularea de probă practică pe timp</td></tr>
+      <tr><td>4–8 (în paralel)</td><td><a href="culegere">Culegerea Python</a>: câte un capitol pe săptămână, în <b>Modul examen</b></td><td>o problemă medie în 15–20 de minute, una dificilă în 30</td></tr>
       <tr><td>6–8</td><td><a href="algoritmi">Algoritmi și structuri de date</a></td><td>exercițiile + test „Algoritmi”</td></tr>
       <tr><td>9–10</td><td><a href="cpp">C++</a></td><td>aplicațiile „ce afișează” + test „C++”</td></tr>
       <tr><td>11–13</td><td><a href="metodica">Metodică</a> (o lecție la 2 zile; scrie aplicațiile ca la examen)</td><td>test „Metodică”; o lecție proiectată complet</td></tr>
       <tr><td>14–15</td><td><a href="programa">Programa</a>: capitolele 6–10 (baze de date, învățare automată, societate digitală, conținuturi digitale, sisteme de calcul)</td><td>testele de la finalul capitolelor</td></tr>
-      <tr><td>16</td><td>Recapitulare generală</td><td><a href="teste">teste generale</a> repetate, până treci constant de 80%</td></tr>
+      <tr><td>16</td><td>Recapitulare generală</td><td><a href="simulari">simulările de probă scrisă</a> pe timp + <a href="teste">teste generale</a>, până treci constant de 80%</td></tr>
     </table></div>
   </section>
 
@@ -150,6 +153,13 @@
     t.querySelector('.pr b').textContent = u.p + '%';
     t.querySelector('.pr small').textContent = 'ultimul test · ' + ist.length + ' teste date';
     t.querySelector('.pr i').style.width = u.p + '%';
+  }
+  var sim = get('c360-simulari') || {}, ps = Object.keys(sim).filter(function(k){ return sim[k].predat; });
+  if (ps.length) {
+    var best = Math.max.apply(null, ps.map(function(k){ return sim[k].puncte; })), es = document.getElementById('st-sim');
+    es.querySelector('.pr b').textContent = ((best + 10) / 10).toFixed(2);
+    es.querySelector('.pr small').textContent = 'cea mai bună notă · ' + ps.length + ' din 3 simulări';
+    es.querySelector('.pr i').style.width = (best / 90 * 100) + '%';
   }
   if (ultim) { var c = document.getElementById('continua'); c.href = ultim; c.textContent = 'Continuă de unde ai rămas'; }
 })();

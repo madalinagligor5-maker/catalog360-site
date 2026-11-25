@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Simulări de probă scrisă – titularizare Informatică și TIC | Catalog360.ro</title>
+<meta name="description" content="Simulări complete de probă scrisă pentru titularizarea la Informatică și TIC: specialitate și metodică, cu cronometru, barem detaliat, rezolvări-model verificate și autoevaluare.">
+<link rel="canonical" href="https://catalog360.ro/simulari">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0F2D44">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:site_name" content="Catalog360.ro">
+<meta property="og:title" content="Simulări de probă scrisă – titularizare Informatică și TIC">
+<meta property="og:url" content="https://catalog360.ro/simulari">
+<link rel="icon" href="assets/logo-catalog360.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;600&display=swap">
+{{CSS}}
+<style>
+.page{padding-bottom:64px; max-width:980px}
+.box{background:var(--white); border:1px solid var(--line); border-radius:var(--r-lg); padding:clamp(18px, 3.5vw, 36px); margin-bottom:24px}
+.sims{display:grid; grid-template-columns:repeat(auto-fill, minmax(min(260px,100%),1fr)); gap:14px; margin:12px 0}
+.sim{border:1.5px solid var(--line); border-radius:var(--r); padding:16px; background:var(--paper); display:grid; gap:6px; align-content:start}
+.sim h3{margin:0}
+.sim p{margin:0; font-size:.92rem; color:var(--muted)}
+.sim .last{font-weight:800; color:var(--mint-ink)}
+.sim .btn{justify-self:start; margin-top:6px}
+.row{display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin:8px 0}
+.row select{font:inherit; padding:8px 12px; border-radius:10px; border:1.5px solid var(--line); background:var(--paper); color:var(--ink); max-width:100%}
+.subj{margin-top:28px}
+.subj > h2{display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; align-items:baseline; border-bottom:2px solid var(--navy); padding-bottom:8px}
+.subj > h2 small{font:800 .9rem var(--sans); color:var(--muted)}
+.item{border:1px solid var(--line); border-radius:var(--r); padding:16px 18px; margin:14px 0; background:#FFFEFC}
+.item-h{display:flex; justify-content:space-between; gap:10px; font-weight:800; font-size:.86rem; color:var(--mint-ink); margin-bottom:6px; letter-spacing:.04em}
+.item .opts label{display:flex; gap:10px; align-items:flex-start; border:1.5px solid var(--line); border-radius:10px; padding:9px 14px; background:var(--white); cursor:pointer}
+.item .opts input{margin-top:5px; accent-color:var(--navy)}
+.item .opts label.right{background:var(--mint-soft); border-color:var(--mint); font-weight:700}
+.item .opts label.wrong{background:var(--red-soft); border-color:#E8A39B}
+.item textarea{display:block; width:100%; min-height:160px; margin-top:10px; font:15px/1.55 var(--mono); border:1.5px solid var(--line); border-radius:12px; padding:12px 14px; background:var(--paper); color:var(--ink); resize:vertical; tab-size:4}
+.item .eval{margin-top:12px; border-top:1px dashed var(--line); padding-top:12px}
+.barem{display:grid; gap:6px; padding:12px 14px; background:var(--paper); border-radius:12px; margin-top:10px}
+.barem label{display:grid; grid-template-columns:auto 1fr auto; gap:10px; align-items:start; font-size:.94rem; cursor:pointer}
+.barem input{margin-top:5px; width:16px; height:16px; accent-color:var(--mint-ink)}
+.barem b{white-space:nowrap}
+.pts{font-weight:800; color:var(--navy)}
+.sticky{position:sticky; bottom:0; z-index:20; background:rgba(250,248,245,.96); border-top:1px solid var(--line); padding:12px 0; margin-top:24px}
+.sticky .wrap{display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; padding:0}
+.big{font:600 clamp(2.4rem, 7vw, 3.6rem) var(--serif); line-height:1}
+.timer{font-variant-numeric:tabular-nums; font-weight:800}
+.timer.low{color:var(--red-ink)}
+</style>
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="./" aria-label="Catalog360.ro – titularizare Informatică și TIC"><span class="brand-mark"><img src="assets/logo-catalog360.png" alt="Catalog360.ro" width="2172" height="724"></span></a>
+    <div class="nav-right"><span class="timer" id="timer" aria-live="off"></span></div>
+  </div>
+{{NAV_SITE}}
+</header>
+<main id="continut">
+<section class="hero"><div class="wrap hero-copy">
+  <p class="eyebrow">Verificare finală · Proba scrisă</p>
+  <h1>Simulări de <em>probă scrisă</em></h1>
+  <p class="lede">{{NR_SIM}} lucrări complete: specialitate (algoritmi, Python, C++, baze de date, învățare automată, TIC) și metodică. Lucrezi pe timp, predai lucrarea, apoi te corectezi după barem: grilele se corectează automat, iar la itemii deschiși bifezi elementele din barem pe care le-ai rezolvat.</p>
+  <p class="hint">Structura este orientativă (trei subiecte × 30 de puncte + 10 puncte din oficiu) și nu reproduce un subiect oficial. Durata, structura și punctajul real se stabilesc prin metodologia concursului – exersează și pe subiectele oficiale din anii anteriori. Toate rezultatele din rezolvările-model (ieșiri de programe, interogări SQL, calcule) au fost obținute prin rulare.</p>
+</div></section>
+<div class="wrap page">
+  <section class="box" id="alege" aria-labelledby="alege-t">
+    <h2 id="alege-t">Alege simularea</h2>
+    <div class="row"><label for="durata"><b>Durata</b></label>
+      <select id="durata"><option value="240">4 ore</option><option value="180">3 ore</option><option value="120">2 ore</option><option value="0">fără limită de timp</option></select>
+      <span class="hint">Scrie programele întâi pe hârtie, ca la examen; aici doar le transcrii.</span></div>
+    <div class="sims" id="sims"></div>
+  </section>
+  <section id="lucrare" hidden></section>
+</div>
+</main>
+<footer class="site-footer"><div class="wrap foot-row">
+  <a class="footer-brand-surface" href="./" aria-label="Catalog360.ro"><span class="brand-mark"><img src="assets/logo-catalog360.png" alt="Catalog360.ro" width="2172" height="724" loading="lazy"></span></a>
+  <p style="margin:0;max-width:62ch">Simulări de antrenament, întocmite după programa de concurs (Anexa 49, MO nr. 972 bis/23.XI.2026). Nu sunt subiecte oficiale. Răspunsurile tale se salvează doar în acest browser.</p>
+</div></footer>
+<script>
+var SIM = {{DATE}};
+(function(){
+  var KEY = 'c360-simulari';
+  var st = {}; try { st = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) {}
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} }
+  function esc(t){ return String(t).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  var lucr = document.getElementById('lucrare'), alege = document.getElementById('alege'), timerEl = document.getElementById('timer'), tick = null;
+
+  function lista(){
+    var h = '';
+    SIM.forEach(function(s){
+      var x = st[s.id] || {};
+      var stare = x.predat ? '<p class="last">Ultimul rezultat: ' + x.puncte + ' p · nota ' + ((x.puncte + 10) / 10).toFixed(2) + '</p>' : (x.start ? '<p class="last">În lucru</p>' : '');
+      h += '<div class="sim"><h3>' + esc(s.titlu) + '</h3><p>' + esc(s.tema) + '</p>' + stare +
+           '<div class="row"><button type="button" class="btn btn-primary" data-start="' + s.id + '">' + (x.start && !x.predat ? 'Continuă' : x.predat ? 'Vezi corectarea' : 'Începe') + '</button>' +
+           (x.start ? '<button type="button" class="btn btn-link" data-reset="' + s.id + '">Reia de la zero</button>' : '') + '</div></div>';
+    });
+    document.getElementById('sims').innerHTML = h;
+  }
+  document.getElementById('sims').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.reset) { if (confirm('Ștergi răspunsurile și corectarea acestei simulări?')) { delete st[b.dataset.reset]; save(); lista(); } return; }
+    var id = b.dataset.start, x = st[id] = st[id] || {};
+    if (!x.start) { x.start = Date.now(); x.durata = +document.getElementById('durata').value; x.r = {}; x.bar = {}; save(); }
+    deschide(id);
+  });
+
+  function puncteItem(x, si, ii, it){
+    var k = si + '-' + ii;
+    if (it.t === 'g') return x.r[k] === it.a ? it.p : 0;
+    var b = x.bar[k] || [];
+    return it.b.reduce(function(s, linie, j){ return s + (b[j] ? linie[1] : 0); }, 0);
+  }
+  function total(x, s){ var t = 0; s.subiecte.forEach(function(sub, si){ sub.itemi.forEach(function(it, ii){ t += puncteItem(x, si, ii, it); }); }); return t; }
+
+  function deschide(id){
+    var s = SIM.filter(function(z){ return z.id === id; })[0], x = st[id];
+    alege.hidden = true; lucr.hidden = false;
+    var h = '<div class="box"><h2>' + esc(s.titlu) + '</h2><p class="hint">' + esc(s.tema) + '. Total 90 de puncte + 10 puncte din oficiu.</p>' +
+            (x.predat ? '<div id="scor"></div>' : '<p>Răspunsurile se salvează automat. Când termini, apasă <b>Predau lucrarea</b> (jos).</p>') + '</div>';
+    s.subiecte.forEach(function(sub, si){
+      h += '<section class="subj"><h2>' + esc(sub.titlu) + ' <small>' + sub.p + ' de puncte</small></h2>';
+      sub.itemi.forEach(function(it, ii){
+        var k = si + '-' + ii;
+        h += '<div class="item" data-k="' + k + '"><div class="item-h"><span>' + (ii + 1) + '.</span><span class="pts">' + (x.predat ? '<span data-p="' + k + '"></span> / ' : '') + it.p + ' p</span></div>' + it.e;
+        if (it.t === 'g') {
+          h += '<div class="opts">';
+          it.o.forEach(function(o, j){
+            var cls = x.predat ? (j === it.a ? ' class="right"' : (x.r[k] === j ? ' class="wrong"' : '')) : '';
+            h += '<label' + cls + '><input type="radio" name="r' + k + '" value="' + j + '"' + (x.r[k] === j ? ' checked' : '') + (x.predat ? ' disabled' : '') + '> <span>' + 'abcd'[j] + ') ' + o + '</span></label>';
+          });
+          h += '</div>';
+        } else {
+          h += '<textarea data-ans="' + k + '" spellcheck="false" placeholder="Răspunsul tău"' + (x.predat ? ' readonly' : '') + '>' + esc((x.ans || {})[k] || '') + '</textarea>';
+          if (x.predat) {
+            h += '<div class="eval"><details class="sol" open><summary>Rezolvare-model</summary><div class="body">' + it.m + '</div></details><div class="barem"><p class="io-lbl">Barem – bifează ce conține răspunsul tău</p>';
+            it.b.forEach(function(l, j){ h += '<label><input type="checkbox" data-bar="' + k + '" data-j="' + j + '"' + (((x.bar[k] || [])[j]) ? ' checked' : '') + '> <span>' + l[0] + '</span><b>' + l[1] + ' p</b></label>'; });
+            h += '</div></div>';
+          }
+        }
+        h += '</div>';
+      });
+      h += '</section>';
+    });
+    h += '<div class="sticky"><div class="wrap"><span id="stare"></span><span class="row" style="margin:0">' +
+         (x.predat ? '' : '<button type="button" class="btn btn-primary" id="predau">Predau lucrarea</button>') +
+         '<button type="button" class="btn btn-ghost" id="inapoi">Înapoi la simulări</button></span></div></div>';
+    lucr.innerHTML = h;
+    document.getElementById('inapoi').onclick = function(){ clearInterval(tick); timerEl.textContent = ''; lucr.hidden = true; alege.hidden = false; lista(); window.scrollTo(0, 0); };
+    if (!x.predat) {
+      document.getElementById('predau').onclick = function(){ if (confirm('Predai lucrarea? După predare nu mai poți modifica răspunsurile.')) predau(id); };
+      ceas(id);
+    } else { scor(id); }
+    window.scrollTo(0, 0);
+  }
+  function onChange(e){
+    var t = e.target, id = curent(); if (!id) return; var x = st[id];
+    if (t.type === 'radio' && !x.predat) { x.r[t.name.slice(1)] = +t.value; save(); }
+    if (t.dataset.bar) { var b = x.bar[t.dataset.bar] = x.bar[t.dataset.bar] || []; b[+t.dataset.j] = t.checked; save(); scor(id); }
+  }
+  function onInput(e){ var t = e.target, id = curent(); if (!id || !t.dataset.ans) return; var x = st[id]; x.ans = x.ans || {}; x.ans[t.dataset.ans] = t.value; save(); }
+  var cur = null;
+  function curent(){ return cur; }
+  var _deschide = deschide; deschide = function(id){ cur = id; _deschide(id); };
+
+  function ceas(id){
+    var x = st[id]; clearInterval(tick);
+    function f(){
+      var trecut = Math.floor((Date.now() - x.start) / 1000);
+      if (x.durata) {
+        var r = x.durata * 60 - trecut;
+        if (r <= 0) { clearInterval(tick); alert('Timpul a expirat. Lucrarea se predă automat.'); predau(id); return; }
+        timerEl.textContent = '⏱ ' + Math.floor(r / 3600) + ':' + String(Math.floor(r % 3600 / 60)).padStart(2, '0') + ':' + String(r % 60).padStart(2, '0');
+        timerEl.classList.toggle('low', r < 600);
+      } else timerEl.textContent = '⏱ ' + Math.floor(trecut / 60) + ' min';
+    }
+    f(); tick = setInterval(f, 1000);
+  }
+  function predau(id){
+    var x = st[id]; clearInterval(tick); timerEl.textContent = '';
+    x.predat = true; x.timp = Math.floor((Date.now() - x.start) / 60000);
+    var s = SIM.filter(function(z){ return z.id === id; })[0];
+    x.puncte = total(x, s); save(); deschide(id);
+  }
+  function scor(id){
+    var s = SIM.filter(function(z){ return z.id === id; })[0], x = st[id];
+    var g = 0, d = 0;
+    s.subiecte.forEach(function(sub, si){ sub.itemi.forEach(function(it, ii){
+      var p = puncteItem(x, si, ii, it), el = document.querySelector('[data-p="' + si + '-' + ii + '"]');
+      if (el) el.textContent = p;
+      if (it.t === 'g') g += p; else d += p;
+    }); });
+    x.puncte = g + d; save();
+    var nota = (x.puncte + 10) / 10;
+    var html = '<p class="big">' + nota.toFixed(2) + '</p><p><b>' + x.puncte + ' p</b> din 90 + 10 din oficiu · grile (corectate automat): ' + g + ' p · itemi deschiși (autoevaluare după barem): ' + d + ' p' + (x.timp != null ? ' · timp de lucru: ' + x.timp + ' min' : '') + '</p><p class="hint">Bifează în barem, la fiecare item deschis, doar elementele pe care răspunsul tău le conține complet și corect – ca un corector exigent. Nota se actualizează imediat.</p>';
+    var sc = document.getElementById('scor'); if (sc) sc.innerHTML = html;
+    var stare = document.getElementById('stare'); if (stare) stare.innerHTML = '<b>Nota: ' + nota.toFixed(2) + '</b> (' + x.puncte + ' p)';
+  }
+  lucr.addEventListener('change', onChange);
+  lucr.addEventListener('input', onInput);
+  lista();
+})();
+</script>
+</body>
+</html>

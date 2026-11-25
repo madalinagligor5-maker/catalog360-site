@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Simulări de probă scrisă – titularizare Informatică și TIC | Catalog360.ro</title>
+<meta name="description" content="Simulări complete de probă scrisă pentru titularizarea la Informatică și TIC: specialitate și metodică, cu cronometru, barem detaliat, rezolvări-model verificate și autoevaluare.">
+<link rel="canonical" href="https://catalog360.ro/simulari">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0F2D44">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ro_RO">
+<meta property="og:site_name" content="Catalog360.ro">
+<meta property="og:title" content="Simulări de probă scrisă – titularizare Informatică și TIC">
+<meta property="og:url" content="https://catalog360.ro/simulari">
+<link rel="icon" href="assets/logo-catalog360.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --navy:#0F2D44; --navy-3:#24506F; --paper:#FAF8F5; --paper-2:#F3EFE8; --white:#FFFFFF;
+  --ink:#0F2D44; --muted:#51667A; --line:#E4DED4;
+  --mint:#22C55E; --mint-ink:#15803D; --mint-soft:#E7F7EC;
+  --orange-ink:#9A5B00; --orange-soft:#FEF3DC; --red-ink:#B42318; --red-soft:#FDECEA;
+  --code-bg:#0E2233; --code-ink:#E6EDF3;
+  --serif:"Playfair Display", Georgia, serif;
+  --sans:"Manrope", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Consolas, monospace;
+  --r-sm:10px; --r:16px; --r-lg:24px; --wrap:1240px; --gutter:clamp(16px, 4vw, 40px);
+  color-scheme: light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-padding-top:130px}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--mint); outline-offset:3px; border-radius:6px}
+.wrap{max-width:var(--wrap); margin-inline:auto; padding-inline:var(--gutter)}
+.skip{position:absolute; left:-999px; top:8px; background:var(--navy); color:#fff; padding:10px 16px; border-radius:8px; z-index:100}
+.skip:focus{left:16px}
+h1,h2,h3,h4{font-family:var(--serif); font-weight:600; line-height:1.15; letter-spacing:-.01em; margin:0; text-wrap:balance}
+h1{font-size:clamp(2.2rem, 5vw, 3.6rem)}
+h2{font-size:clamp(1.6rem, 3vw, 2.2rem)}
+h3{font-size:1.25rem; margin:28px 0 10px}
+h4{font-family:var(--sans); font-size:1rem; font-weight:800; margin:18px 0 6px}
+p{margin:0 0 12px} ul,ol{margin:0 0 12px; padding-left:1.3em} li{margin-bottom:4px} li::marker{color:var(--mint-ink)}
+.eyebrow{font-size:.78rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--mint-ink); margin:0}
+.lede{font-size:clamp(1.02rem, 1.5vw, 1.15rem); color:var(--muted); max-width:70ch}
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:44px; padding:0 18px; border-radius:999px; font:700 .94rem var(--sans); text-decoration:none; border:2px solid transparent; cursor:pointer; transition:background-color .2s, color .2s}
+.btn-primary{background:var(--mint); color:var(--navy)}
+.btn-primary:hover{background:#2FD46B}
+.btn-ghost{border-color:var(--navy); color:var(--navy); background:transparent}
+.btn-ghost:hover{background:var(--navy); color:#fff}
+.btn-link{background:none; color:var(--navy-3); padding:0 10px; text-decoration:underline; text-underline-offset:3px}
+.btn:disabled{opacity:.6; cursor:wait}
+
+.site-header{position:sticky; top:0; z-index:50; background:rgba(250,248,245,.94); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid var(--line)}
+.nav{display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:70px}
+.brand-mark{display:block; width:180px; height:36px; overflow:hidden}
+.brand-mark img{width:180px; max-width:none; height:auto; transform:translateY(-12px)}
+.nav-right{display:flex; align-items:center; gap:14px; font-size:.9rem; font-weight:700}
+.nav-right a{text-decoration:none}
+.prog{display:flex; align-items:center; gap:8px; color:var(--muted)}
+.prog .track{width:110px; height:8px; border-radius:4px; background:var(--paper-2); border:1px solid var(--line); overflow:hidden}
+.prog .track i{display:block; height:100%; width:0; background:var(--mint); transition:width .3s}
+.show-s{display:none}
+@media (max-width:640px){ .hide-s{display:none} .show-s{display:inline} .prog .track, .prog .lbl{display:none} .brand-mark{width:150px; height:30px} .brand-mark img{width:150px; transform:translateY(-10px)} }
+
+.hero{padding-block:clamp(32px, 5vw, 64px) 28px}
+.hero-copy{display:grid; gap:16px}
+.hero-copy > *{max-width:900px}
+.hero h1 em{font-style:italic; color:var(--mint-ink)}
+.stats{display:flex; flex-wrap:wrap; gap:10px; margin-top:4px}
+.stats span{background:var(--white); border:1px solid var(--line); border-radius:999px; padding:6px 14px; font-size:.88rem; font-weight:700}
+.stats b{color:var(--mint-ink)}
+
+.layout{display:grid; grid-template-columns:270px minmax(0,1fr); gap:clamp(20px, 3vw, 40px); align-items:start; padding-bottom:72px}
+.toc{position:sticky; top:128px; max-height:calc(100vh - 142px); overflow:auto; background:var(--white); border:1px solid var(--line); border-radius:var(--r); padding:14px 10px; font-size:.9rem}
+.toc h2{font-family:var(--sans); font-size:.72rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:4px 10px 8px}
+.toc ol{list-style:none; margin:0; padding:0; display:grid; gap:2px}
+.toc li{margin:0}
+.toc a{display:grid; grid-template-columns:28px 1fr auto; gap:6px; align-items:start; padding:7px 10px; border-radius:8px; text-decoration:none; font-weight:600; line-height:1.35}
+.toc a:hover{background:var(--paper-2)}
+.toc a.on{background:var(--navy); color:#fff}
+.toc a.on .n{color:var(--mint)}
+.toc .n{font-weight:800; color:var(--mint-ink); font-variant-numeric:tabular-nums}
+.toc .cnt{font-size:.74rem; font-weight:800; color:var(--muted); padding-top:2px}
+.toc a.on .cnt{color:rgba(255,255,255,.7)}
+.toc a.done .cnt::after{content:" ✓"; color:var(--mint-ink)}
+.toc a.on.done .cnt::after{color:var(--mint)}
+@media (max-width:1000px){
+  .layout{grid-template-columns:minmax(0,1fr)}
+  .toc{position:static; max-height:none}
+  .toc ol{grid-template-columns:repeat(auto-fill, minmax(min(220px,100%),1fr))}
+}
+
+.lesson{background:var(--white); border:1px solid var(--line); border-radius:var(--r-lg); padding:clamp(18px, 3.5vw, 40px)}
+.js .lesson:not(.show){display:none}
+.les-head{display:grid; grid-template-columns:auto 1fr; gap:16px; align-items:start; padding-bottom:18px; margin-bottom:18px; border-bottom:1px solid var(--line)}
+.les-nr{width:54px; height:54px; border-radius:16px; background:var(--navy); color:#fff; display:grid; place-items:center; font:600 1.5rem var(--serif)}
+.les-prog{font-size:.86rem; color:var(--muted); margin:6px 0 0}
+.obj{background:var(--mint-soft); border-radius:var(--r-sm); padding:14px 18px; margin-bottom:8px}
+.obj h3{margin:0 0 6px; font-size:1.05rem}
+.obj ul{margin:0}
+h3.sec{font-size:1.45rem; margin-top:40px; padding-top:20px; border-top:1px solid var(--line)}
+.hint{font-size:.93rem; color:var(--muted)}
+.note{background:var(--mint-soft); border-radius:var(--r-sm); padding:12px 16px; margin:12px 0; font-size:.95rem}
+.note.warn{background:var(--orange-soft)}
+.tbl{overflow-x:auto; margin:10px 0 16px; border:1px solid var(--line); border-radius:var(--r-sm)}
+table{width:100%; border-collapse:collapse; font-size:.92rem; min-width:520px}
+th,td{text-align:left; padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top}
+th{background:var(--paper-2); font-weight:800; font-size:.84rem}
+tr:last-child td{border-bottom:0}
+td code{white-space:nowrap}
+p code, li code, legend code{overflow-wrap:anywhere}
+code{font-family:var(--mono); font-size:.86em; background:var(--paper-2); padding:1px 6px; border-radius:5px}
+pre{position:relative; background:var(--code-bg); color:var(--code-ink); border-radius:12px; padding:14px 16px; overflow-x:auto; font-size:.86rem; line-height:1.55; margin:8px 0 12px}
+pre code{background:none; padding:0; color:inherit; font-size:inherit; white-space:pre}
+pre[data-lang]::before{content:attr(data-lang); position:absolute; top:7px; right:12px; font:800 .66rem var(--sans); letter-spacing:.1em; text-transform:uppercase; color:rgba(230,237,243,.5)}
+pre.out{background:var(--paper-2); color:var(--ink); border:1px dashed #CFC6B8}
+pre.out::before{color:var(--muted)}
+.io-lbl{font-size:.8rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); margin:10px 0 2px}
+.io-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(min(220px,100%),1fr)); gap:0 14px}
+.io-grid .io-lbl{margin-top:2px}
+.io-grid pre::before{display:none}
+
+.ex{border:1px solid var(--line); border-radius:var(--r); padding:16px 18px; margin:14px 0; background:#FFFEFC}
+.ex-h{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:8px}
+.ex-h b{font-size:.78rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--mint-ink)}
+.ex-h span{font-weight:700}
+.ex-h .lvl{font-size:.7rem; font-weight:800; padding:2px 8px; border-radius:999px; background:var(--paper-2); color:var(--muted)}
+.ex-h .st{margin-left:auto; font-size:.8rem; font-weight:800; color:var(--mint-ink)}
+.ex.ok{border-color:var(--mint); box-shadow:0 0 0 3px var(--mint-soft)}
+.ide{margin-top:12px}
+.ide textarea{display:block; width:100%; min-height:190px; resize:vertical; font:15px/1.55 var(--mono); tab-size:4; color:var(--code-ink); background:var(--code-bg); border:0; border-radius:12px; padding:14px 16px; white-space:pre; overflow:auto}
+.ide textarea:focus{outline:3px solid var(--mint); outline-offset:2px}
+.ide-bar{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; align-items:center}
+.stdin{margin-top:10px}
+.stdin summary{cursor:pointer; font-size:.88rem; font-weight:700; color:var(--navy-3)}
+.stdin textarea{display:block; width:100%; min-height:70px; margin-top:6px; font:14px/1.5 var(--mono); border:1.5px solid var(--line); border-radius:10px; padding:10px 12px; background:var(--paper); color:var(--ink); resize:vertical}
+.res{margin-top:12px; border-radius:12px; padding:12px 14px; font-size:.92rem; background:var(--paper-2)}
+.res.good{background:var(--mint-soft)}
+.res.bad{background:var(--red-soft)}
+.res h4{margin:0 0 6px}
+.res pre{margin:6px 0}
+.res .tests{display:flex; flex-wrap:wrap; gap:6px; margin:6px 0}
+.res .tests span{font-size:.78rem; font-weight:800; padding:3px 9px; border-radius:999px; background:var(--white)}
+.res .tests .p{color:var(--mint-ink)} .res .tests .f{color:var(--red-ink)}
+.cmp{display:grid; grid-template-columns:repeat(auto-fit, minmax(min(200px,100%),1fr)); gap:10px}
+
+.quiz{background:var(--paper); border:1px solid var(--line); border-radius:var(--r); padding:16px 18px; margin-top:32px}
+.quiz > h3{margin:0; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; align-items:baseline}
+.quiz .score{font:700 .86rem var(--sans); color:var(--muted)}
+.q{border:0; padding:0; margin:16px 0 0; min-width:0} .q legend{font-weight:700; padding:0; margin-bottom:8px; display:block; width:100%; max-width:100%}
+.q legend pre{font-weight:400}
+select{max-width:100%}
+.opts{display:grid; gap:8px}
+.opts button{font:inherit; font-size:.94rem; text-align:left; background:var(--white); border:1.5px solid var(--line); border-radius:10px; padding:9px 14px; cursor:pointer; color:var(--ink)}
+.opts button:hover:not(:disabled){border-color:var(--navy)}
+.opts button:disabled{cursor:default}
+.opts button.right{background:var(--mint-soft); border-color:var(--mint); font-weight:700}
+.opts button.wrong{background:var(--red-soft); border-color:#E8A39B}
+.q .why{margin-top:8px; font-size:.9rem; color:var(--muted)}
+.done-row{display:flex; justify-content:flex-end; margin-top:24px}
+.done-toggle{display:inline-flex; align-items:center; gap:10px; font-weight:700; font-size:.94rem; cursor:pointer; padding:9px 16px; border-radius:999px; border:1.5px solid var(--line); background:var(--white)}
+.done-toggle input{width:18px; height:18px; accent-color:var(--mint-ink)}
+.pn{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-top:18px; padding-top:18px; border-top:1px solid var(--line)}
+.pn .btn{white-space:normal; text-align:center; min-height:44px; padding-block:6px}
+
+.site-footer{background:#0B2335; color:rgba(255,255,255,.75); padding-block:36px 24px; font-size:.92rem}
+.site-footer a{text-decoration:none} .site-footer a:hover{color:#fff; text-decoration:underline}
+.foot-row{display:flex; flex-wrap:wrap; justify-content:space-between; gap:16px; align-items:center}
+.footer-brand-surface{display:inline-flex; background:#fff; border-radius:12px; padding:8px 12px}
+
+.site-nav{background:var(--navy)}
+.site-nav ul{list-style:none; margin:0; padding:0; display:flex; gap:4px; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch}
+.site-nav ul::-webkit-scrollbar{display:none}
+.site-nav li{margin:0; flex:none}
+.site-nav a{display:block; padding:10px 12px; color:rgba(255,255,255,.82); text-decoration:none; font-size:.88rem; font-weight:700; white-space:nowrap; border-bottom:3px solid transparent}
+.site-nav a:hover{color:#fff}
+.site-nav a[aria-current="page"]{color:#fff; border-bottom-color:var(--mint)}
+.ex.app textarea.ans{display:block; width:100%; min-height:120px; margin-top:12px; font:15px/1.55 var(--sans); border:1.5px solid var(--line); border-radius:12px; padding:12px 14px; background:var(--paper); color:var(--ink); resize:vertical}
+.ex.app textarea.ans:focus{outline:3px solid var(--mint); outline-offset:2px}
+details.sol{margin-top:12px}
+details.sol summary{cursor:pointer; display:inline-flex; font-weight:700; font-size:.92rem; color:var(--navy); padding:8px 14px; border-radius:999px; border:1.5px solid var(--navy); list-style:none}
+details.sol summary::-webkit-details-marker{display:none}
+details.sol[open] summary, details.sol summary:hover{background:var(--navy); color:#fff}
+details.sol .body{margin-top:12px; padding-top:12px; border-top:1px dashed var(--line)}
+.crit{display:grid; gap:6px; margin-top:12px; padding:12px 14px; background:var(--paper); border-radius:12px}
+.crit label{display:flex; gap:10px; align-items:flex-start; font-size:.94rem; cursor:pointer}
+.crit input{margin-top:5px; width:16px; height:16px; accent-color:var(--mint-ink); flex:none}
+.done-toggle.sm{font-size:.86rem; padding:6px 12px; margin-top:10px}
+.ex.app.ok{border-color:var(--mint); box-shadow:0 0 0 3px var(--mint-soft)}
+.lesson table + p, .lesson .tbl + p{margin-top:4px}
+
+.exam-btn{min-height:38px; padding:0 14px; font-size:.84rem}
+.exam-btn[aria-pressed="true"]{background:var(--navy); color:#fff}
+.exam .b-sol, .exam .b-run, .exam .stdin{display:none}
+.exam .ex.task{border-color:var(--navy-3)}
+@media (max-width:640px){ .exam-btn{padding:0 10px; font-size:.78rem} }
+code, pre, textarea, kbd{font-variant-ligatures:none; font-feature-settings:"liga" 0, "calt" 0}
+</style>
+<style>
+.page{padding-bottom:64px; max-width:980px}
+.box{background:var(--white); border:1px solid var(--line); border-radius:var(--r-lg); padding:clamp(18px, 3.5vw, 36px); margin-bottom:24px}
+.sims{display:grid; grid-template-columns:repeat(auto-fill, minmax(min(260px,100%),1fr)); gap:14px; margin:12px 0}
+.sim{border:1.5px solid var(--line); border-radius:var(--r); padding:16px; background:var(--paper); display:grid; gap:6px; align-content:start}
+.sim h3{margin:0}
+.sim p{margin:0; font-size:.92rem; color:var(--muted)}
+.sim .last{font-weight:800; color:var(--mint-ink)}
+.sim .btn{justify-self:start; margin-top:6px}
+.row{display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin:8px 0}
+.row select{font:inherit; padding:8px 12px; border-radius:10px; border:1.5px solid var(--line); background:var(--paper); color:var(--ink); max-width:100%}
+.subj{margin-top:28px}
+.subj > h2{display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; align-items:baseline; border-bottom:2px solid var(--navy); padding-bottom:8px}
+.subj > h2 small{font:800 .9rem var(--sans); color:var(--muted)}
+.item{border:1px solid var(--line); border-radius:var(--r); padding:16px 18px; margin:14px 0; background:#FFFEFC}
+.item-h{display:flex; justify-content:space-between; gap:10px; font-weight:800; font-size:.86rem; color:var(--mint-ink); margin-bottom:6px; letter-spacing:.04em}
+.item .opts label{display:flex; gap:10px; align-items:flex-start; border:1.5px solid var(--line); border-radius:10px; padding:9px 14px; background:var(--white); cursor:pointer}
+.item .opts input{margin-top:5px; accent-color:var(--navy)}
+.item .opts label.right{background:var(--mint-soft); border-color:var(--mint); font-weight:700}
+.item .opts label.wrong{background:var(--red-soft); border-color:#E8A39B}
+.item textarea{display:block; width:100%; min-height:160px; margin-top:10px; font:15px/1.55 var(--mono); border:1.5px solid var(--line); border-radius:12px; padding:12px 14px; background:var(--paper); color:var(--ink); resize:vertical; tab-size:4}
+.item .eval{margin-top:12px; border-top:1px dashed var(--line); padding-top:12px}
+.barem{display:grid; gap:6px; padding:12px 14px; background:var(--paper); border-radius:12px; margin-top:10px}
+.barem label{display:grid; grid-template-columns:auto 1fr auto; gap:10px; align-items:start; font-size:.94rem; cursor:pointer}
+.barem input{margin-top:5px; width:16px; height:16px; accent-color:var(--mint-ink)}
+.barem b{white-space:nowrap}
+.pts{font-weight:800; color:var(--navy)}
+.sticky{position:sticky; bottom:0; z-index:20; background:rgba(250,248,245,.96); border-top:1px solid var(--line); padding:12px 0; margin-top:24px}
+.sticky .wrap{display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; padding:0}
+.big{font:600 clamp(2.4rem, 7vw, 3.6rem) var(--serif); line-height:1}
+.timer{font-variant-numeric:tabular-nums; font-weight:800}
+.timer.low{color:var(--red-ink)}
+</style>
+</head>
+<body>
+<a class="skip" href="#continut">Sari la conținut</a>
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="./" aria-label="Catalog360.ro – titularizare Informatică și TIC"><span class="brand-mark"><img src="assets/logo-catalog360.png" alt="Catalog360.ro" width="2172" height="724"></span></a>
+    <div class="nav-right"><span class="timer" id="timer" aria-live="off"></span></div>
+  </div>
+<nav class="site-nav" aria-label="Secțiuni"><div class="wrap"><ul><li><a href="./">Acasă</a></li><li><a href="python">1. Python</a></li><li><a href="culegere">Culegere Python</a></li><li><a href="algoritmi">2. Algoritmi</a></li><li><a href="cpp">3. C++</a></li><li><a href="metodica">4. Metodică</a></li><li><a href="programa">5. Programa (TIC, BD, IA…)</a></li><li><a href="teste">Teste</a></li><li><a href="simulari" aria-current="page">Simulări</a></li></ul></div></nav><script>(function(){var a=document.querySelector('.site-nav a[aria-current]');if(a&&a.parentNode.parentNode.scrollWidth>a.parentNode.parentNode.clientWidth)a.parentNode.parentNode.scrollLeft=a.offsetLeft-16;})();</script>
+</header>
+<main id="continut">
+<section class="hero"><div class="wrap hero-copy">
+  <p class="eyebrow">Verificare finală · Proba scrisă</p>
+  <h1>Simulări de <em>probă scrisă</em></h1>
+  <p class="lede">3 lucrări complete: specialitate (algoritmi, Python, C++, baze de date, învățare automată, TIC) și metodică. Lucrezi pe timp, predai lucrarea, apoi te corectezi după barem: grilele se corectează automat, iar la itemii deschiși bifezi elementele din barem pe care le-ai rezolvat.</p>
+  <p class="hint">Structura este orientativă (trei subiecte × 30 de puncte + 10 puncte din oficiu) și nu reproduce un subiect oficial. Durata, structura și punctajul real se stabilesc prin metodologia concursului – exersează și pe subiectele oficiale din anii anteriori. Toate rezultatele din rezolvările-model (ieșiri de programe, interogări SQL, calcule) au fost obținute prin rulare.</p>
+</div></section>
+<div class="wrap page">
+  <section class="box" id="alege" aria-labelledby="alege-t">
+    <h2 id="alege-t">Alege simularea</h2>
+    <div class="row"><label for="durata"><b>Durata</b></label>
+      <select id="durata"><option value="240">4 ore</option><option value="180">3 ore</option><option value="120">2 ore</option><option value="0">fără limită de timp</option></select>
+      <span class="hint">Scrie programele întâi pe hârtie, ca la examen; aici doar le transcrii.</span></div>
+    <div class="sims" id="sims"></div>
+  </section>
+  <section id="lucrare" hidden></section>
+</div>
+</main>
+<footer class="site-footer"><div class="wrap foot-row">
+  <a class="footer-brand-surface" href="./" aria-label="Catalog360.ro"><span class="brand-mark"><img src="assets/logo-catalog360.png" alt="Catalog360.ro" width="2172" height="724" loading="lazy"></span></a>
+  <p style="margin:0;max-width:62ch">Simulări de antrenament, întocmite după programa de concurs (Anexa 49, MO nr. 972 bis/23.XI.2026). Nu sunt subiecte oficiale. Răspunsurile tale se salvează doar în acest browser.</p>
+</div></footer>
+<script>
+var SIM = [{"id": "s1", "titlu": "Simularea 1", "tema": "liste, frecvențe, SQL, metodica lecției despre liste", "subiecte": [{"titlu": "Subiectul I", "p": 30, "itemi": [{"t": "g", "e": "Ce afișează secvența Python?<pre data-lang=\"python\"><code>v = [3, 1, 4, 1, 5]\nprint(v[1:4][::-1], v.count(1))<\/code><\/pre>", "o": ["[1, 4, 1] 2", "[4, 1, 3] 2", "[1, 4] 2", "[5, 1, 4] 1"], "a": 0, "p": 2}, {"t": "g", "e": "Ce afișează secvența C++?<pre data-lang=\"c++\"><code>int a = 7, b = 2;\ncout &lt;&lt; a / b &lt;&lt; a % b &lt;&lt; (double)a / b;<\/code><\/pre>", "o": ["313.5", "3.513.5", "313", "3 1 3.5"], "a": 0, "p": 2}, {"t": "g", "e": "Un graf neorientat conex are 6 noduri și 8 muchii. Numărul minim de muchii care trebuie eliminate pentru a obține un arbore parțial este:", "o": ["2", "3", "5", "8"], "a": 1, "p": 2}, {"t": "g", "e": "Complexitatea căutării binare într-o listă sortată cu n elemente este:", "o": ["O(n)", "O(log n)", "O(n log n)", "O(1)"], "a": 1, "p": 2}, {"t": "g", "e": "Clauza SQL în care se pun condițiile pe rezultatele funcțiilor agregate (pe grupuri) este:", "o": ["WHERE", "ORDER BY", "HAVING", "SELECT"], "a": 2, "p": 2}, {"t": "g", "e": "Câte adrese de gazdă utilizabile are o subrețea cu masca /27?", "o": ["32", "30", "27", "62"], "a": 1, "p": 2}, {"t": "d", "e": "<p>Se consideră algoritmul scris în pseudocod (<code>[x]<\/code> = partea întreagă, <code>%<\/code> = restul împărțirii):<\/p><pre data-lang=\"pseudocod\"><code>citește n (număr natural)\ns ← 0; p ← 1\ncât timp n &gt; 0 execută\n    c ← n % 10\n    dacă c % 3 = 0 atunci\n        s ← s + c * p; p ← p * 10\n    n ← [n / 10]\nscrie s<\/code><\/pre><ol type=\"a\"><li>Scrieți ce se afișează pentru n = 2369. (4 p)<\/li><li>Scrieți toate numerele din intervalul [20, 30] pentru care se afișează 0. (4 p)<\/li><li>Scrieți programul Python corespunzător algoritmului. (6 p)<\/li><li>Scrieți în pseudocod un algoritm echivalent care folosește în locul structurii <em>cât timp<\/em> o structură repetitivă de tip <em>repetă … până când<\/em>. (4 p)<\/li><\/ol>", "p": 18, "b": [["a) răspuns corect", 4], ["b) toate numerele cerute, fără altele (2 p dacă lipsește/apare în plus un singur număr)", 4], ["c) citire și afișare corecte", 1], ["c) structura repetitivă și condiția", 2], ["c) structura alternativă și calculele", 2], ["c) sintaxă corectă (indentare, operatori //, %)", 1], ["d) structura repetă … până când cu condiția corectă (n = 0)", 2], ["d) tratarea cazului n = 0 (echivalență pentru orice n)", 2]], "m": "<p>a) Cifrele divizibile cu 3, de la dreapta: 9, 6, 3 ⇒ se afișează <strong>369<\/strong>.<\/p><p>b) <strong>20, 21, 22, 24, 25, 27, 28<\/strong> (cifra 0 este divizibilă cu 3, dar adaugă 0 la s; numerele care conțin 3, 6 sau 9 dau un rezultat nenul).<\/p><pre data-lang=\"python\"><code>n = int(input())\ns, p = 0, 1\nwhile n &gt; 0:\n    c = n % 10\n    if c % 3 == 0:\n        s += c * p\n        p *= 10\n    n //= 10\nprint(s)<\/code><\/pre><pre data-lang=\"pseudocod\"><code>citește n\ns ← 0; p ← 1\ndacă n &gt; 0 atunci\n    repetă\n        c ← n % 10\n        dacă c % 3 = 0 atunci\n            s ← s + c * p; p ← p * 10\n        n ← [n / 10]\n    până când n = 0\nscrie s<\/code><\/pre>"}]}, {"titlu": "Subiectul al II-lea", "p": 30, "itemi": [{"t": "d", "e": "<p>Se citesc n (1 ≤ n ≤ 1000) și apoi n numere naturale. Scrieți un program Python care afișează, în ordine crescătoare, valorile care apar de cel puțin două ori (fiecare o singură dată), separate prin spațiu, sau mesajul <code>nu exista<\/code>.<\/p>", "p": 10, "b": [["citirea corectă a datelor", 2], ["determinarea frecvențelor (dicționar, listă de frecvențe sau numărare)", 3], ["selectarea corectă a valorilor cu frecvență ≥ 2, fiecare o dată", 2], ["afișare în ordine crescătoare, în formatul cerut", 2], ["tratarea cazului „nu exista”", 1]], "m": "<p>Rezolvare posibilă (dicționar de frecvențe):<\/p><pre data-lang=\"python\"><code>n = int(input())\nv = list(map(int, input().split()))\nf = {}\nfor x in v:\n    f[x] = f.get(x, 0) + 1\nr = sorted(x for x in f if f[x] &gt;= 2)\nprint(*r if r else ['nu exista'])<\/code><\/pre><p class=\"io-lbl\">Date de test<\/p><pre class=\"out\" data-lang=\"intrare\"><code>8\n5 3 8 3 5 5 1 9<\/code><\/pre><p class=\"io-lbl\">Rezultatul rulării<\/p><pre class=\"out\" data-lang=\"ieșire\"><code>3 5<\/code><\/pre>"}, {"t": "d", "e": "<p>Fișierul <code>bac.txt<\/code> conține cel mult 10<sup>6<\/sup> numere naturale din intervalul [0, 100], separate prin spații. Se cere afișarea, în ordine crescătoare, a numerelor de <strong>exact două cifre<\/strong> care <strong>nu<\/strong> apar în fișier, separate prin spațiu.<\/p><ol type='a'><li>Descrieți în limbaj natural o metodă eficientă din punctul de vedere al timpului de executare și al memoriei, justificând eficiența. (2 p)<\/li><li>Scrieți programul Python corespunzător metodei. (8 p)<\/li><\/ol>", "p": 10, "b": [["a) descrierea metodei (vector de apariții indexat după valoare, o singură parcurgere)", 1], ["a) justificarea eficienței: timp liniar în numărul de valori, memorie constantă (101 elemente)", 1], ["b) deschiderea fișierului și citirea tuturor valorilor", 2], ["b) marcarea aparițiilor", 2], ["b) parcurgerea valorilor 10..99 și selectarea celor neapărute", 2], ["b) afișarea în formatul cerut", 1], ["b) program eficient (fără căutări repetate în listă)", 1]], "m": "<p>a) Se folosește un vector <code>ap<\/code> cu 101 componente, inițial 0; la citirea fiecărei valori x se marchează <code>ap[x] = 1<\/code>. La final se parcurg valorile 10..99 și se afișează cele nemarcate. Datele se parcurg o singură dată (timp liniar), iar memoria nu depinde de numărul de valori din fișier.<\/p><p class=\"io-lbl\">Fișier de test <code>bac.txt<\/code><\/p><pre class=\"out\" data-lang=\"fișier\"><code>1 2 3 4 5 6 8 9 10 12 13 15 16 17 18 19 20 23 24 25 26 27 29 30 31 32 34 36 37 38 39 40 41 43 45 46 47 48 50 51 52 53 54 57 58 59 60 61 62 64 65 67 68 69 71 72 73 74 75 76 78 79 80 81 82 83 85 86 87 89 90 92 93 94 95 96 97 100<\/code><\/pre><pre data-lang=\"python\"><code>ap = [0] * 101\nwith open('bac.txt') as f:\n    for linie in f:\n        for x in linie.split():\n            ap[int(x)] = 1\nprint(*[x for x in range(10, 100) if not ap[x]])<\/code><\/pre><p class=\"io-lbl\">Rezultatul rulării<\/p><pre class=\"out\" data-lang=\"ieșire\"><code>11 14 21 22 28 33 35 42 44 49 55 56 63 66 70 77 84 88 91 98 99<\/code><\/pre>"}, {"t": "d", "e": "<p>Se consideră tabelele <code>ELEVI(id_elev, nume, clasa, media)<\/code> și <code>ABSENTE(id_absenta, id_elev, data, motivata)<\/code>, unde <code>motivata<\/code> are valorile <code>'D'<\/code> sau <code>'N'<\/code>. Scrieți comenzi SQL pentru:<\/p><ol type='a'><li>numele și media elevilor din clasa 9A, în ordinea descrescătoare a mediei; (3 p)<\/li><li>numele elevilor care au mai mult de 2 absențe nemotivate și numărul acestora; (4 p)<\/li><li>crearea tabelei <code>ABSENTE<\/code>, cu cheie primară, cheie externă spre <code>ELEVI<\/code>, valoarea implicită <code>'N'<\/code> și constrângere pentru valorile permise ale câmpului <code>motivata<\/code>. (3 p)<\/li><\/ol>", "p": 10, "b": [["a) proiecție, selecție și ordonare corecte", 3], ["b) join corect între tabele", 1], ["b) condiția motivata = 'N' în WHERE", 1], ["b) GROUP BY și COUNT", 1], ["b) condiția pe grup în HAVING", 1], ["c) tipuri de date și cheie primară", 1], ["c) cheie externă", 1], ["c) DEFAULT și CHECK", 1]], "m": "<p>Rezolvare (rulată pe date de test):<\/p><pre data-lang=\"sql\"><code>SELECT nume, media FROM elevi WHERE clasa = '9A' ORDER BY media DESC;<\/code><\/pre><p class=\"io-lbl\">Rezultat pe datele de test<\/p><div class=\"tbl\"><table><tr><th>nume<\/th><th>media<\/th><\/tr><tr><td>Marin Ioana<\/td><td>9.8<\/td><\/tr><tr><td>Pop Ana<\/td><td>9.45<\/td><\/tr><tr><td>Dinu Dan<\/td><td>8.1<\/td><\/tr><\/table><\/div><pre data-lang=\"sql\"><code>SELECT e.nume, COUNT(*) AS nr_absente\nFROM elevi e JOIN absente a ON a.id_elev = e.id_elev\nWHERE a.motivata = 'N'\nGROUP BY e.id_elev, e.nume\nHAVING COUNT(*) &gt; 2;<\/code><\/pre><p class=\"io-lbl\">Rezultat pe datele de test<\/p><div class=\"tbl\"><table><tr><th>nume<\/th><th>nr_absente<\/th><\/tr><tr><td>Dinu Dan<\/td><td>3<\/td><\/tr><tr><td>Stan Radu<\/td><td>4<\/td><\/tr><\/table><\/div><pre data-lang=\"sql\"><code>CREATE TABLE absente2 (\n  id_absenta INTEGER PRIMARY KEY,\n  id_elev    INTEGER NOT NULL REFERENCES elevi(id_elev),\n  data       DATE NOT NULL,\n  motivata   CHAR(1) DEFAULT 'N' CHECK (motivata IN ('D', 'N'))\n);<\/code><\/pre><p class=\"io-lbl\">Comanda s-a executat corect pe baza de test.<\/p><div class=\"note\">La c) tabela s-a numit <code>absente2<\/code> doar pentru a o putea crea alături de cea existentă în baza de test; în răspuns se scrie <code>ABSENTE<\/code>. În Oracle se folosesc tipurile <code>NUMBER<\/code>, <code>VARCHAR2<\/code>.<\/div>"}]}, {"titlu": "Subiectul al III-lea", "p": 30, "itemi": [{"t": "d", "e": "<p>Pentru o lecție cu tema „Liste – metode ale clasei list” (Python, clasa a IX-a):<\/p><ol type='a'><li>formulați o competență specifică (ilustrativă) și două obiective operaționale derivate din aceasta; (6 p)<\/li><li>descrieți modul în care aplicați, în cadrul lecției, două metode didactice, dintre care una activ-participativă; (8 p)<\/li><li>elaborați un item de tip alegere multiplă și un item de tip rezolvare de problemă, cu barem, care să evalueze obiectivele formulate; (10 p)<\/li><li>precizați două avantaje ale evaluării formative realizate cu un test online la finalul lecției și o măsură de prevenire a erorilor de notare la itemul subiectiv. (6 p)<\/li><\/ol>", "p": 30, "b": [["a) competență formulată corect (verb + conținut + context)", 2], ["a) două obiective operaționale cu comportament observabil, condiții și criteriu (2 × 2 p)", 4], ["b) prima metodă: denumire și aplicare concretă pe temă (etape, sarcini)", 4], ["b) metoda activ-participativă: aplicare concretă pe temă", 4], ["c) item cu alegere multiplă corect construit (premisă, distractori plauzibili)", 3], ["c) item de rezolvare de problemă formulat clar", 3], ["c) bareme corecte, analitic la problemă", 2], ["c) itemii evaluează obiectivele formulate", 2], ["d) două avantaje ale evaluării formative online", 4], ["d) măsură de prevenire a erorilor de notare", 2]], "m": "<p><strong>a)<\/strong> Competență specifică (ilustrativă): „Utilizarea metodelor clasei list în rezolvarea problemelor.” O1 – elevii vor fi capabili să aleagă metoda potrivită (append, insert, pop, index, count, sort) pentru 5 operații descrise, rezolvând corect cel puțin 4; O2 – elevii vor fi capabili să scrie un program care elimină dintr-o listă valorile negative și sortează lista rămasă, programul trecând toate testele date.<\/p>\n<p><strong>b)<\/strong> <em>Demonstrația<\/em>: profesorul rulează în fața clasei, pas cu pas, o secvență cu <code>append<\/code>, <code>insert<\/code>, <code>pop<\/code>, afișând lista după fiecare operație; elevii anticipează rezultatul înainte de rulare. <em>Învățarea prin descoperire în perechi<\/em> (activ-participativă): fiecare pereche primește o fișă cu câte o metodă necunoscută (<code>index<\/code>, <code>count<\/code>, <code>remove<\/code>), o testează pe exemple, formulează regula de funcționare și o prezintă colegilor; profesorul validează.<\/p>\n<p><strong>c)<\/strong> Item cu alegere multiplă: „Ce afișează <code>v = [5, 2, 7]; v.insert(1, 9); print(v)<\/code>? a) [5, 9, 2, 7] b) [9, 5, 2, 7] c) [5, 2, 9, 7] d) [5, 2, 7, 9]” – barem: a – 2 p (distractori: confuzia poziției cu valoarea, inserarea la început, append). Item de rezolvare de problemă: „Scrieți un program care citește o listă de numere întregi, elimină valorile negative și afișează lista rămasă sortată crescător.” – barem (6 p): citire 1 p; eliminarea negativelor 2 p; sortare 1 p; afișare 1 p; tratarea listei vide 1 p.<\/p>\n<p><strong>d)<\/strong> Avantaje: feedback imediat pentru elev și profesor; profesorul identifică pe loc erorile frecvente și le reia în ora următoare (funcția de reglare). Măsură: corectarea pe baza baremului analitic stabilit dinainte, aplicat la fel tuturor lucrărilor (eventual lucrări anonimizate) – previne efectul halo și efectul de contrast.<\/p>"}]}]}, {"id": "s2", "titlu": "Simularea 2", "tema": "recursivitate, șiruri, programare dinamică, învățare automată, metodica bazelor de date", "subiecte": [{"titlu": "Subiectul I", "p": 30, "itemi": [{"t": "g", "e": "Ce afișează secvența Python?<pre data-lang=\"python\"><code>s = {2, 5, 1, 2, 5}\nd = {'a': 1, 'b': 2}\nd['a'] += d['b']\nprint(s, d['a'])<\/code><\/pre>", "o": ["{1, 2, 5} 3", "{1, 2, 2, 5} 4", "{5, 2, 1} 3", "[1, 2, 5] 3"], "a": 0, "p": 2}, {"t": "g", "e": "Ce afișează secvența C++?<pre data-lang=\"c++\"><code>int v[] = {2, 4, 6, 8};\nint *p = v + 1;\ncout &lt;&lt; *p &lt;&lt; \" \" &lt;&lt; *(p + 2) &lt;&lt; \" \" &lt;&lt; *p + 2;<\/code><\/pre>", "o": ["4 8 6", "4 6 6", "2 6 4", "4 8 8"], "a": 0, "p": 2}, {"t": "g", "e": "Ce afișează programul?<pre data-lang=\"python\"><code>def g(n):\n    if n &lt; 1:\n        return\n    print(n, end='')\n    g(n - 2)\n    print(n, end='')\n\ng(5)<\/code><\/pre>", "o": ["531135", "135531", "53135", "5311"], "a": 0, "p": 2}, {"t": "g", "e": "Câte grafuri parțiale are un graf neorientat cu 5 noduri și 4 muchii (inclusiv graful însuși și cel fără muchii)?", "o": ["8", "16", "32", "20"], "a": 1, "p": 2}, {"t": "g", "e": "Într-un min-heap memorat în vector (indexare de la 1), părintele nodului de pe poziția 9 se află pe poziția:", "o": ["3", "4", "5", "8"], "a": 1, "p": 2}, {"t": "g", "e": "Celula C2 conține formula <code>=A2*$B$1<\/code>. După copierea în C5, formula devine:", "o": ["=A5*$B$1", "=A2*$B$4", "=A5*$B$4", "=D5*$B$1"], "a": 0, "p": 2}, {"t": "d", "e": "<p>Se consideră funcția:<\/p><pre data-lang=\"python\"><code>def f(n):\n    if n == 0:\n        return 0\n    if n % 2 == 0:\n        return f(n // 10) + n % 10\n    return f(n // 10)<\/code><\/pre><ol type='a'><li>Ce valoare are <code>f(28374)<\/code>? (4 p)<\/li><li>Câte apeluri ale funcției f (inclusiv primul) se fac pentru calculul lui <code>f(28374)<\/code>? (4 p)<\/li><li>Scrieți o variantă iterativă a funcției. (6 p)<\/li><li>Dați exemplu de un număr de 4 cifre distincte n pentru care f(n) = 20 și justificați. (4 p)<\/li><\/ol>", "p": 18, "b": [["a) valoare corectă", 4], ["b) număr de apeluri corect", 4], ["c) structura repetitivă corectă", 3], ["c) selectarea cifrelor pare și acumularea", 2], ["c) returnarea rezultatului", 1], ["d) exemplu corect (cifre distincte, suma cifrelor pare = 20)", 3], ["d) justificare", 1]], "m": "<p>a) f calculează suma cifrelor pare: 8 + 4 + 2 ⇒ <strong>14<\/strong>.<\/p><p>b) Câte un apel pentru fiecare cifră, plus apelul cu n = 0 ⇒ <strong>6<\/strong> apeluri.<\/p><pre data-lang=\"python\"><code>def f(n):\n    s = 0\n    while n &gt; 0:\n        if n % 2 == 0:\n            s += n % 10      # cifra este pară exact când n este par\n        n //= 10\n    return s<\/code><\/pre><p>d) De exemplu <strong>8642<\/strong>: cifrele pare 8, 6, 4, 2 au suma 20 (orice număr de 4 cifre distincte, toate pare, cu suma 20, de ex. 8642, 2468).<\/p>"}]}, {"titlu": "Subiectul al II-lea", "p": 30, "itemi": [{"t": "d", "e": "<p>Se citește un text format din cuvinte (litere mici) separate prin câte un spațiu. Scrieți un program Python care afișează cuvântul cu cele mai multe vocale (primul, la egalitate) și numărul acestora. Vocalele sunt a, e, i, o, u.<\/p>", "p": 10, "b": [["citirea textului și separarea cuvintelor", 2], ["numărarea vocalelor unui cuvânt", 3], ["determinarea maximului, primul la egalitate", 3], ["afișarea în formatul cerut", 2]], "m": "<p>Rezolvare posibilă:<\/p><pre data-lang=\"python\"><code>cuvinte = input().split()\nbest, nv = '', -1\nfor w in cuvinte:\n    k = sum(1 for c in w if c in 'aeiou')\n    if k &gt; nv:\n        best, nv = w, k\nprint(best, nv)<\/code><\/pre><p class=\"io-lbl\">Date de test<\/p><pre class=\"out\" data-lang=\"intrare\"><code>programarea este o activitate frumoasa<\/code><\/pre><p class=\"io-lbl\">Rezultatul rulării<\/p><pre class=\"out\" data-lang=\"ieșire\"><code>programarea 5<\/code><\/pre>"}, {"t": "d", "e": "<p>Fișierul <code>teren.in<\/code> conține pe prima linie n și m (n, m ≤ 100), apoi o matrice n × m de numere naturale (cantitatea de aur din fiecare parcelă). Un robot pornește din colțul stânga-sus și ajunge în colțul dreapta-jos deplasându-se doar spre dreapta sau în jos, colectând aurul din parcelele prin care trece. Scrieți un program Python care afișează cantitatea maximă de aur colectată. Precizați metoda de programare folosită și complexitatea.<\/p>", "p": 10, "b": [["citirea corectă din fișier", 2], ["identificarea metodei (programare dinamică) și relația de recurență", 2], ["tratarea primei linii și a primei coloane", 2], ["calculul corect pentru restul matricei", 2], ["afișare + complexitatea O(n · m)", 2]], "m": "<p>Programare dinamică: S[i][j] = a[i][j] + max(S[i−1][j], S[i][j−1]); complexitate O(n · m) în timp.<\/p><p class=\"io-lbl\">Fișier de test <code>teren.in<\/code><\/p><pre class=\"out\" data-lang=\"fișier\"><code>3 4\n1 3 1 5\n2 9 1 1\n4 2 8 1<\/code><\/pre><pre data-lang=\"python\"><code>with open('teren.in') as f:\n    n, m = map(int, f.readline().split())\n    a = [list(map(int, f.readline().split())) for _ in range(n)]\nfor i in range(n):\n    for j in range(m):\n        if i == 0 and j &gt; 0:\n            a[i][j] += a[i][j - 1]\n        elif j == 0 and i &gt; 0:\n            a[i][j] += a[i - 1][j]\n        elif i &gt; 0 and j &gt; 0:\n            a[i][j] += max(a[i - 1][j], a[i][j - 1])\nprint(a[n - 1][m - 1])<\/code><\/pre><p class=\"io-lbl\">Rezultatul rulării<\/p><pre class=\"out\" data-lang=\"ieșire\"><code>24<\/code><\/pre>"}, {"t": "d", "e": "<p>Învățare automată.<\/p><ol type='a'><li>Punctele de antrenare sunt: A: (1, 1), (2, 1), (3, 2); B: (4, 4), (5, 4), (4, 5). Clasificați punctul (4, 3) cu algoritmul KNN pentru k = 3 (distanța euclidiană), precizând cei trei vecini. (4 p)<\/li><li>Pentru datele (1, 2), (2, 4), (3, 5), (4, 4), (5, 5), determinați dreapta de regresie liniară y = a·x + b. (3 p)<\/li><li>Un clasificator testat pe 100 de exemple are TP = 8, FN = 2, FP = 4, TN = 86. Calculați precizia și recall-ul și precizați care metrică este mai importantă la depistarea unei boli. (3 p)<\/li><\/ol>", "p": 10, "b": [["a) distanțele și cei 3 vecini corecți", 2], ["a) clasa corectă", 2], ["b) a și b corecte", 3], ["c) precizia și recall-ul corecte", 2], ["c) justificarea: recall (nu trebuie ratate cazurile pozitive)", 1]], "m": "<p>a) Distanțele până la (4, 3): (4, 4) → 1 [B]; (3, 2) → √2 [A]; (5, 4) → √2 [B]; restul sunt mai departe. Vecinii: B, A, B ⇒ clasa <strong>B<\/strong>.<\/p><p>b) <strong>y = 0,6x + 2,2<\/strong>.<\/p><p>c) Precizia = TP/(TP + FP) = 8/12 ≈ <strong>0,667<\/strong>; recall = TP/(TP + FN) = 8/10 = <strong>0,8<\/strong>. La depistarea unei boli contează mai mult <strong>recall-ul<\/strong>: un bolnav ratat (FN) este mai grav decât o alarmă falsă.<\/p>"}]}, {"titlu": "Subiectul al III-lea", "p": 30, "itemi": [{"t": "d", "e": "<p>Pentru unitatea de învățare „Interogarea bazelor de date – SQL” (clasa a XII-a):<\/p><ol type='a'><li>realizați un fragment de proiect al unității de învățare pentru două lecții, cu rubricile uzuale; (10 p)<\/li><li>descrieți aplicarea metodei mozaicului în cadrul unității; (8 p)<\/li><li>construiți matricea de specificații pentru testul de la finalul unității (3 conținuturi, 3 niveluri cognitive); (6 p)<\/li><li>precizați două avantaje și o limită ale portofoliului ca metodă de evaluare la această unitate. (6 p)<\/li><\/ol>", "p": 30, "b": [["a) rubricile uzuale complete (conținuturi, competențe, activități, resurse, evaluare)", 4], ["a) activități de învățare concrete și variate", 3], ["a) coerență competențe – activități – evaluare", 3], ["b) etapele mozaicului în ordinea corectă", 4], ["b) sarcini concrete pe SQL pentru experți", 2], ["b) evaluarea individuală la final", 2], ["c) matrice corectă (conținuturi pe linii, niveluri pe coloane, total 100%)", 4], ["c) ponderi justificate", 2], ["d) două avantaje", 4], ["d) o limită", 2]], "m": "<p><strong>a)<\/strong><\/p><div class='tbl'><table><tr><th>Conținuturi<\/th><th>Comp. spec.<\/th><th>Activități de învățare<\/th><th>Resurse<\/th><th>Evaluare<\/th><\/tr><tr><td>Interogări simple: SELECT, WHERE, ORDER BY<\/td><td>(din programă)<\/td><td>formularea în limbaj natural a cerințelor și traducerea lor în SQL; rularea interogărilor pe baza de date a școlii; corectarea unor interogări greșite<\/td><td>laborator, SGBD, fișă de lucru; frontal + individual; 1 oră<\/td><td>observare sistematică; fișă cu 3 interogări<\/td><\/tr><tr><td>Grupare: funcții agregate, GROUP BY, HAVING<\/td><td>(din programă)<\/td><td>„de ce nu merge COUNT în WHERE?” (problematizare); statistici pe clase; comparare WHERE vs. HAVING<\/td><td>laborator; în perechi; 1 oră<\/td><td>test formativ online<\/td><\/tr><\/table><\/div>\n<p><strong>b)<\/strong> Grupe de bază de 4; fiecare membru devine expert pe o temă: 1 – JOIN, 2 – funcții agregate, 3 – subinterogări, 4 – DML (INSERT/UPDATE/DELETE). Experții lucrează împreună pe fișe cu exemple pe baza de date a clasei, apoi revin în grupele de bază, predau colegilor și rezolvă împreună o sarcină comună. La final – test individual.<\/p>\n<p><strong>c)<\/strong><\/p><div class='tbl'><table><tr><th>Conținut \\ nivel<\/th><th>A înțelege<\/th><th>A aplica<\/th><th>A analiza<\/th><th>Total<\/th><\/tr><tr><td>SELECT, WHERE, ORDER BY<\/td><td>10%<\/td><td>20%<\/td><td>–<\/td><td>30%<\/td><\/tr><tr><td>Funcții agregate, grupare<\/td><td>10%<\/td><td>15%<\/td><td>10%<\/td><td>35%<\/td><\/tr><tr><td>JOIN și subinterogări<\/td><td>5%<\/td><td>20%<\/td><td>10%<\/td><td>35%<\/td><\/tr><tr><td>Total<\/td><td>25%<\/td><td>55%<\/td><td>20%<\/td><td>100%<\/td><\/tr><\/table><\/div>\n<p><strong>d)<\/strong> Avantaje: surprinde progresul pe parcursul unității (interogările din ce în ce mai complexe); implică elevul în autoevaluare. Limită: timp mare de evaluare (și risc de preluare a interogărilor de la colegi – se reduce prin prezentare orală).<\/p>"}]}]}, {"id": "s3", "titlu": "Simularea 3", "tema": "C++, backtracking, grafuri, TIC și rețele, metodica TIC la gimnaziu", "subiecte": [{"titlu": "Subiectul I", "p": 30, "itemi": [{"t": "g", "e": "Ce afișează secvența C++?<pre data-lang=\"c++\"><code>string s = \"programare\";\ns.erase(3, 4);\ns.insert(0, \"X\");\ncout &lt;&lt; s;<\/code><\/pre>", "o": ["Xproare", "Xprore", "Xprogre", "proXare"], "a": 0, "p": 2}, {"t": "g", "e": "Se generează în ordine lexicografică submulțimile cu 3 elemente ale mulțimii {1, 2, 3, 4, 5}. Ce soluție urmează după {1, 4, 5}?", "o": ["{2, 3, 4}", "{1, 5, 6}", "{2, 4, 5}", "{1, 3, 5}"], "a": 0, "p": 2}, {"t": "g", "e": "Algoritmul lui Dijkstra NU funcționează corect pentru grafuri care au:", "o": ["cicluri", "muchii cu cost negativ", "noduri izolate", "peste 100 de noduri"], "a": 1, "p": 2}, {"t": "g", "e": "Ce afișează secvența Python?<pre data-lang=\"python\"><code>n = 13\nprint(bin(n)[2:], int('1101', 2))<\/code><\/pre>", "o": ["1101 13", "1011 11", "1101 11", "13 1101"], "a": 0, "p": 2}, {"t": "g", "e": "Un router lucrează, în modelul OSI, în principal la nivelul:", "o": ["fizic", "legătură de date", "rețea", "aplicație"], "a": 2, "p": 2}, {"t": "g", "e": "În Regulamentul UE privind inteligența artificială, un sistem care evaluează automat elevii este încadrat, de regulă, în categoria de risc:", "o": ["minim", "limitat", "ridicat", "inacceptabil"], "a": 2, "p": 2}, {"t": "d", "e": "<p>Se consideră programul C++:<\/p><pre data-lang=\"c++\"><code>struct Elev { string nume; int nota; };\n\nint main() {\n    Elev v[4] = {{\"Ana\", 9}, {\"Dan\", 7}, {\"Ioana\", 10}, {\"Radu\", 7}};\n    int k = 0;\n    for (int i = 1; i &lt; 4; i++)\n        if (v[i].nota &lt; v[k].nota) k = i;\n    v[k].nota += 2;\n    for (int i = 0; i &lt; 4; i++) cout &lt;&lt; v[i].nume[0] &lt;&lt; v[i].nota &lt;&lt; \" \";\n    return 0;\n}<\/code><\/pre><ol type='a'><li>Ce afișează programul? (6 p)<\/li><li>Ce modificare minimă a condiției din instrucțiunea <code>if<\/code> face ca nota mărită să fie cea a lui Radu? Justificați. (4 p)<\/li><li>Rescrieți secvența de determinare a lui k ca funcție care primește tabloul și numărul de elemente și întoarce poziția. (8 p)<\/li><\/ol>", "p": 18, "b": [["a) afișare complet corectă (3 p dacă doar nota modificată e corectă)", 6], ["b) modificarea corectă (&lt;=)", 2], ["b) justificarea (ultima poziție cu nota minimă)", 2], ["c) antetul funcției corect (tablou + n)", 3], ["c) corpul funcției", 3], ["c) apelul în main", 2]], "m": "<p>a) Nota minimă este 7, prima dată la Dan (poziția 1) ⇒ Dan primește 9. Se afișează:<\/p><pre class=\"out\" data-lang=\"ieșire\"><code>A9 D9 I10 R7<\/code><\/pre><p>b) Condiția <code>v[i].nota &lt;= v[k].nota<\/code> reține <em>ultima<\/em> poziție cu nota minimă ⇒ Radu.<\/p><pre data-lang=\"c++\"><code>int pozMin(Elev v[], int n) {\n    int k = 0;\n    for (int i = 1; i &lt; n; i++)\n        if (v[i].nota &lt; v[k].nota) k = i;\n    return k;\n}\n// în main: int k = pozMin(v, 4);<\/code><\/pre>"}]}, {"titlu": "Subiectul al II-lea", "p": 30, "itemi": [{"t": "d", "e": "<p>Se citesc n și k (1 ≤ k ≤ n ≤ 10). Scrieți un program Python care afișează, în ordine lexicografică, toate submulțimile cu k elemente ale mulțimii {1, …, n} în care oricare două elemente alăturate diferă prin cel puțin 2, câte una pe linie. Precizați metoda folosită.<\/p>", "p": 10, "b": [["precizarea metodei (backtracking)", 1], ["generarea combinărilor în ordine lexicografică", 4], ["condiția de continuare (diferență ≥ 2)", 3], ["afișarea soluțiilor în formatul cerut", 2]], "m": "<p>Backtracking; condiția de continuare: x[k] ≥ x[k−1] + 2.<\/p><pre data-lang=\"python\"><code>n, k = map(int, input().split())\nx = []\ndef bt(start):\n    if len(x) == k:\n        print(*x)\n        return\n    for v in range(start, n + 1):\n        x.append(v)\n        bt(v + 2)\n        x.pop()\nbt(1)<\/code><\/pre><p class=\"io-lbl\">Date de test<\/p><pre class=\"out\" data-lang=\"intrare\"><code>6 3<\/code><\/pre><p class=\"io-lbl\">Rezultatul rulării<\/p><pre class=\"out\" data-lang=\"ieșire\"><code>1 3 5\n1 3 6\n1 4 6\n2 4 6<\/code><\/pre>"}, {"t": "d", "e": "<p>Fișierul <code>graf.in<\/code> conține pe prima linie n și m, apoi m muchii ale unui graf neorientat, iar pe ultima linie un nod s. Scrieți un program Python care afișează, pentru fiecare nod 1..n, distanța minimă (în număr de muchii) de la s, sau -1 pentru nodurile inaccesibile. Precizați algoritmul și complexitatea.<\/p>", "p": 10, "b": [["citirea din fișier și construirea listelor de adiacență", 3], ["BFS corect cu coadă", 4], ["tratarea nodurilor inaccesibile", 1], ["afișare și complexitatea O(n + m)", 2]], "m": "<p>Parcurgere în lățime (BFS), complexitate O(n + m).<\/p><p class=\"io-lbl\">Fișier de test <code>graf.in<\/code><\/p><pre class=\"out\" data-lang=\"fișier\"><code>7 6\n1 2\n1 3\n2 4\n3 4\n4 5\n6 7\n1<\/code><\/pre><pre data-lang=\"python\"><code>from collections import deque\nwith open('graf.in') as f:\n    n, m = map(int, f.readline().split())\n    L = [[] for _ in range(n + 1)]\n    for _ in range(m):\n        x, y = map(int, f.readline().split())\n        L[x].append(y); L[y].append(x)\n    s = int(f.readline())\nd = [-1] * (n + 1)\nd[s] = 0\nq = deque([s])\nwhile q:\n    x = q.popleft()\n    for y in L[x]:\n        if d[y] == -1:\n            d[y] = d[x] + 1\n            q.append(y)\nprint(*d[1:])<\/code><\/pre><p class=\"io-lbl\">Rezultatul rulării<\/p><pre class=\"out\" data-lang=\"ieșire\"><code>0 1 1 2 3 -1 -1<\/code><\/pre>"}, {"t": "d", "e": "<p>TIC și rețele.<\/p><ol type='a'><li>În B2:B31 se află mediile elevilor. Scrieți formulele pentru: numărul de elevi cu media cel puțin 5; media clasei rotunjită la două zecimale; în C2, calificativul „FB” (≥ 9), „B” (≥ 7), „S” (≥ 5) sau „I”, pentru a fi copiat în jos. (4 p)<\/li><li>Ce culoare are un link aflat în <code>&lt;nav id=\"meniu\"&gt;&lt;ul&gt;&lt;li class=\"activ\"&gt;&lt;a&gt;<\/code> la trecerea mouse-ului, dacă există regulile <code>nav ul li a:hover {color: red}<\/code>, <code>#meniu .activ a {color: green}<\/code>, <code>.activ a {color: blue}<\/code>? Justificați prin specificitate. (3 p)<\/li><li>Pentru adresa 172.16.45.130/20 determinați adresa rețelei, adresa de broadcast și numărul de gazde. (3 p)<\/li><\/ol>", "p": 10, "b": [["a) COUNTIF corect", 1], ["a) ROUND(AVERAGE) corect", 1], ["a) IF imbricat cu referință relativă", 2], ["b) culoarea corectă", 1], ["b) justificarea prin specificitate (id)", 2], ["c) adresa rețelei și broadcast", 2], ["c) numărul de gazde", 1]], "m": "<p>a) <code>=COUNTIF(B2:B31;\">=5\")<\/code> · <code>=ROUND(AVERAGE(B2:B31);2)<\/code> · <code>=IF(B2&gt;=9;\"FB\";IF(B2&gt;=7;\"B\";IF(B2&gt;=5;\"S\";\"I\")))<\/code><\/p><p>b) <strong>Verde<\/strong>: specificitățile sunt (0,1,4), (1,1,1), (0,1,1); regula cu id are specificitatea cea mai mare și se aplică și la hover.<\/p><p>c) rețeaua 172.16.32.0, broadcast 172.16.47.255, 4094 gazde<\/p>"}]}, {"titlu": "Subiectul al III-lea", "p": 30, "itemi": [{"t": "d", "e": "<p>Pentru o lecție de Informatică și TIC la clasa a VII-a, cu tema „Siguranța în mediul online”:<\/p><ol type='a'><li>precizați tipul lecției și formulați trei obiective operaționale; (6 p)<\/li><li>descrieți desfășurarea a trei momente ale lecției (captarea atenției, dirijarea învățării, obținerea performanței), cu activitatea profesorului, a elevilor și metodele folosite; (12 p)<\/li><li>propuneți un proiect de grup ca metodă complementară de evaluare: sarcina, produsul și o grilă cu 4 criterii; (8 p)<\/li><li>numiți două efecte perturbatoare care pot apărea la evaluarea proiectelor și o măsură pentru fiecare. (4 p)<\/li><\/ol>", "p": 30, "b": [["a) tipul lecției", 1], ["a) trei obiective operaționale corecte (comportament, condiții, criteriu)", 5], ["b) captarea atenției: activitate concretă și motivantă", 4], ["b) dirijarea învățării: metode active, rolurile profesorului și elevilor", 4], ["b) obținerea performanței: sarcini individuale/în grup, legate de obiective", 4], ["c) sarcina și produsul proiectului", 4], ["c) grilă cu 4 criterii clare", 4], ["d) două efecte numite corect", 2], ["d) măsuri potrivite", 2]], "m": "<p><strong>a)<\/strong> Lecție mixtă. O1 – să identifice cel puțin 4 din 5 indicii de phishing într-un mesaj dat; O2 – să evalueze 5 parole și să justifice pentru cel puțin 4 dacă sunt puternice, folosind cel puțin două criterii; O3 – să configureze setările de confidențialitate ale unui profil fictiv conform unei liste de verificare, respectând toate cele 5 cerințe.<\/p>\n<p><strong>b)<\/strong> <em>Captarea atenției<\/em> (3'): profesorul arată un mesaj „Ai câștigat un telefon – confirmă datele aici” și întreabă câți l-ar deschide; elevii votează și argumentează (problematizare). <em>Dirijarea învățării<\/em> (15'): ciorchine pe tema „pericole online” completat cu propunerile elevilor; profesorul sistematizează (phishing, parole slabe, date personale, cyberbullying) și demonstrează pe exemple reale anonimizate; elevii notează regulile de protecție. <em>Obținerea performanței<\/em> (15'): pe grupe, elevii analizează fișe cu mesaje, parole și profiluri (O1–O3), apoi fiecare grupă prezintă concluziile; profesorul oferă feedback.<\/p>\n<p><strong>c)<\/strong> Proiect pe grupe (2 săptămâni): „Ghid de siguranță online pentru colegii de clasa a V-a” – produs: prezentare digitală de 6–8 diapozitive și un afiș. Grilă (1–4 puncte/criteriu): corectitudinea informațiilor; adecvarea la public (limbaj, exemple); calitatea produsului digital (structură, design, surse citate); colaborarea și prezentarea orală.<\/p>\n<p><strong>d)<\/strong> Efectul halo – evaluarea pe criteriile grilei, separat pe fiecare criteriu, fără a ține cont de rezultatele anterioare ale grupei; efectul de contrast – evaluarea fiecărui proiect raportat la grilă, nu la proiectul prezentat anterior (eventual evaluare cu doi evaluatori sau evaluare între colegi pe aceeași grilă).<\/p>"}]}]}];
+(function(){
+  var KEY = 'c360-simulari';
+  var st = {}; try { st = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) {}
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} }
+  function esc(t){ return String(t).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  var lucr = document.getElementById('lucrare'), alege = document.getElementById('alege'), timerEl = document.getElementById('timer'), tick = null;
+
+  function lista(){
+    var h = '';
+    SIM.forEach(function(s){
+      var x = st[s.id] || {};
+      var stare = x.predat ? '<p class="last">Ultimul rezultat: ' + x.puncte + ' p · nota ' + ((x.puncte + 10) / 10).toFixed(2) + '</p>' : (x.start ? '<p class="last">În lucru</p>' : '');
+      h += '<div class="sim"><h3>' + esc(s.titlu) + '</h3><p>' + esc(s.tema) + '</p>' + stare +
+           '<div class="row"><button type="button" class="btn btn-primary" data-start="' + s.id + '">' + (x.start && !x.predat ? 'Continuă' : x.predat ? 'Vezi corectarea' : 'Începe') + '</button>' +
+           (x.start ? '<button type="button" class="btn btn-link" data-reset="' + s.id + '">Reia de la zero</button>' : '') + '</div></div>';
+    });
+    document.getElementById('sims').innerHTML = h;
+  }
+  document.getElementById('sims').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.reset) { if (confirm('Ștergi răspunsurile și corectarea acestei simulări?')) { delete st[b.dataset.reset]; save(); lista(); } return; }
+    var id = b.dataset.start, x = st[id] = st[id] || {};
+    if (!x.start) { x.start = Date.now(); x.durata = +document.getElementById('durata').value; x.r = {}; x.bar = {}; save(); }
+    deschide(id);
+  });
+
+  function puncteItem(x, si, ii, it){
+    var k = si + '-' + ii;
+    if (it.t === 'g') return x.r[k] === it.a ? it.p : 0;
+    var b = x.bar[k] || [];
+    return it.b.reduce(function(s, linie, j){ return s + (b[j] ? linie[1] : 0); }, 0);
+  }
+  function total(x, s){ var t = 0; s.subiecte.forEach(function(sub, si){ sub.itemi.forEach(function(it, ii){ t += puncteItem(x, si, ii, it); }); }); return t; }
+
+  function deschide(id){
+    var s = SIM.filter(function(z){ return z.id === id; })[0], x = st[id];
+    alege.hidden = true; lucr.hidden = false;
+    var h = '<div class="box"><h2>' + esc(s.titlu) + '</h2><p class="hint">' + esc(s.tema) + '. Total 90 de puncte + 10 puncte din oficiu.</p>' +
+            (x.predat ? '<div id="scor"></div>' : '<p>Răspunsurile se salvează automat. Când termini, apasă <b>Predau lucrarea</b> (jos).</p>') + '</div>';
+    s.subiecte.forEach(function(sub, si){
+      h += '<section class="subj"><h2>' + esc(sub.titlu) + ' <small>' + sub.p + ' de puncte</small></h2>';
+      sub.itemi.forEach(function(it, ii){
+        var k = si + '-' + ii;
+        h += '<div class="item" data-k="' + k + '"><div class="item-h"><span>' + (ii + 1) + '.</span><span class="pts">' + (x.predat ? '<span data-p="' + k + '"></span> / ' : '') + it.p + ' p</span></div>' + it.e;
+        if (it.t === 'g') {
+          h += '<div class="opts">';
+          it.o.forEach(function(o, j){
+            var cls = x.predat ? (j === it.a ? ' class="right"' : (x.r[k] === j ? ' class="wrong"' : '')) : '';
+            h += '<label' + cls + '><input type="radio" name="r' + k + '" value="' + j + '"' + (x.r[k] === j ? ' checked' : '') + (x.predat ? ' disabled' : '') + '> <span>' + 'abcd'[j] + ') ' + o + '</span></label>';
+          });
+          h += '</div>';
+        } else {
+          h += '<textarea data-ans="' + k + '" spellcheck="false" placeholder="Răspunsul tău"' + (x.predat ? ' readonly' : '') + '>' + esc((x.ans || {})[k] || '') + '</textarea>';
+          if (x.predat) {
+            h += '<div class="eval"><details class="sol" open><summary>Rezolvare-model</summary><div class="body">' + it.m + '</div></details><div class="barem"><p class="io-lbl">Barem – bifează ce conține răspunsul tău</p>';
+            it.b.forEach(function(l, j){ h += '<label><input type="checkbox" data-bar="' + k + '" data-j="' + j + '"' + (((x.bar[k] || [])[j]) ? ' checked' : '') + '> <span>' + l[0] + '</span><b>' + l[1] + ' p</b></label>'; });
+            h += '</div></div>';
+          }
+        }
+        h += '</div>';
+      });
+      h += '</section>';
+    });
+    h += '<div class="sticky"><div class="wrap"><span id="stare"></span><span class="row" style="margin:0">' +
+         (x.predat ? '' : '<button type="button" class="btn btn-primary" id="predau">Predau lucrarea</button>') +
+         '<button type="button" class="btn btn-ghost" id="inapoi">Înapoi la simulări</button></span></div></div>';
+    lucr.innerHTML = h;
+    document.getElementById('inapoi').onclick = function(){ clearInterval(tick); timerEl.textContent = ''; lucr.hidden = true; alege.hidden = false; lista(); window.scrollTo(0, 0); };
+    if (!x.predat) {
+      document.getElementById('predau').onclick = function(){ if (confirm('Predai lucrarea? După predare nu mai poți modifica răspunsurile.')) predau(id); };
+      ceas(id);
+    } else { scor(id); }
+    window.scrollTo(0, 0);
+  }
+  function onChange(e){
+    var t = e.target, id = curent(); if (!id) return; var x = st[id];
+    if (t.type === 'radio' && !x.predat) { x.r[t.name.slice(1)] = +t.value; save(); }
+    if (t.dataset.bar) { var b = x.bar[t.dataset.bar] = x.bar[t.dataset.bar] || []; b[+t.dataset.j] = t.checked; save(); scor(id); }
+  }
+  function onInput(e){ var t = e.target, id = curent(); if (!id || !t.dataset.ans) return; var x = st[id]; x.ans = x.ans || {}; x.ans[t.dataset.ans] = t.value; save(); }
+  var cur = null;
+  function curent(){ return cur; }
+  var _deschide = deschide; deschide = function(id){ cur = id; _deschide(id); };
+
+  function ceas(id){
+    var x = st[id]; clearInterval(tick);
+    function f(){
+      var trecut = Math.floor((Date.now() - x.start) / 1000);
+      if (x.durata) {
+        var r = x.durata * 60 - trecut;
+        if (r <= 0) { clearInterval(tick); alert('Timpul a expirat. Lucrarea se predă automat.'); predau(id); return; }
+        timerEl.textContent = '⏱ ' + Math.floor(r / 3600) + ':' + String(Math.floor(r % 3600 / 60)).padStart(2, '0') + ':' + String(r % 60).padStart(2, '0');
+        timerEl.classList.toggle('low', r < 600);
+      } else timerEl.textContent = '⏱ ' + Math.floor(trecut / 60) + ' min';
+    }
+    f(); tick = setInterval(f, 1000);
+  }
+  function predau(id){
+    var x = st[id]; clearInterval(tick); timerEl.textContent = '';
+    x.predat = true; x.timp = Math.floor((Date.now() - x.start) / 60000);
+    var s = SIM.filter(function(z){ return z.id === id; })[0];
+    x.puncte = total(x, s); save(); deschide(id);
+  }
+  function scor(id){
+    var s = SIM.filter(function(z){ return z.id === id; })[0], x = st[id];
+    var g = 0, d = 0;
+    s.subiecte.forEach(function(sub, si){ sub.itemi.forEach(function(it, ii){
+      var p = puncteItem(x, si, ii, it), el = document.querySelector('[data-p="' + si + '-' + ii + '"]');
+      if (el) el.textContent = p;
+      if (it.t === 'g') g += p; else d += p;
+    }); });
+    x.puncte = g + d; save();
+    var nota = (x.puncte + 10) / 10;
+    var html = '<p class="big">' + nota.toFixed(2) + '</p><p><b>' + x.puncte + ' p</b> din 90 + 10 din oficiu · grile (corectate automat): ' + g + ' p · itemi deschiși (autoevaluare după barem): ' + d + ' p' + (x.timp != null ? ' · timp de lucru: ' + x.timp + ' min' : '') + '</p><p class="hint">Bifează în barem, la fiecare item deschis, doar elementele pe care răspunsul tău le conține complet și corect – ca un corector exigent. Nota se actualizează imediat.</p>';
+    var sc = document.getElementById('scor'); if (sc) sc.innerHTML = html;
+    var stare = document.getElementById('stare'); if (stare) stare.innerHTML = '<b>Nota: ' + nota.toFixed(2) + '</b> (' + x.puncte + ' p)';
+  }
+  lucr.addEventListener('change', onChange);
+  lucr.addEventListener('input', onInput);
+  lista();
+})();
+</script>
+</body>
+</html>

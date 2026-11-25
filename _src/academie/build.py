@@ -360,5 +360,104 @@ def main():
     print("index.html: generat")
 
 
+
+
+# ---------------------------------------------------------------- simulări de probă scrisă
+def ruleaza_sql(script, interogari):
+    import sqlite3
+    con = sqlite3.connect(":memory:")
+    con.executescript(script)
+    rez = []
+    for q in interogari:
+        cur = con.execute(q)
+        if cur.description:
+            cap = [d[0] for d in cur.description]
+            rez.append((cap, cur.fetchall()))
+        else:
+            rez.append(None)
+    con.close()
+    return rez
+
+
+def tabel_sql(cap, randuri):
+    h = '<div class="tbl"><table><tr>' + "".join(f"<th>{esc(str(c))}</th>" for c in cap) + "</tr>"
+    for r in randuri:
+        h += "<tr>" + "".join(f"<td>{esc(str(v))}</td>" for v in r) + "</tr>"
+    return h + "</table></div>"
+
+
+def randeaza_simulari():
+    from simulari import SIMULARI
+    date = []
+    for S in SIMULARI:
+        total = 0
+        sim = {"id": S["id"], "titlu": S["titlu"], "tema": S["tema"], "subiecte": []}
+        for sub in S["subiecte"]:
+            s_pct = sum(it["p"] for it in sub["itemi"])
+            if s_pct != sub["punctaj"]:
+                raise SystemExit(f'{S["id"]} {sub["titlu"]}: itemii însumează {s_pct}, nu {sub["punctaj"]}')
+            total += s_pct
+            itemi = []
+            for k, it in enumerate(sub["itemi"], 1):
+                cod_html = bloc_cod(it["cod"], it.get("lang", "python")) if it.get("cod") else ""
+                if it["tip"] == "grila":
+                    if it.get("verif"):
+                        out, _ = executa(it["verif"][0], it["verif"][1])
+                        if norm(out) != norm(text_simplu(it["opts"][it["a"]])):
+                            raise SystemExit(f'{S["id"]} {sub["titlu"]} item {k}: ieșirea {out!r} ≠ varianta corectă')
+                        if sum(1 for o in it["opts"] if norm(text_simplu(o)) == norm(out)) != 1:
+                            raise SystemExit(f'{S["id"]} item {k}: mai multe variante coincid cu ieșirea')
+                    itemi.append({"t": "g", "e": it["enunt"] + cod_html, "o": it["opts"], "a": it["a"], "p": it["p"]})
+                    continue
+                b_pct = sum(p for _, p in it["barem"])
+                if b_pct != it["p"]:
+                    raise SystemExit(f'{S["id"]} {sub["titlu"]} item {k}: baremul însumează {b_pct}, nu {it["p"]}')
+                rezultate = []
+                for cod, intrare in it.get("calc", []):
+                    out, _ = ruleaza(cod, intrare)
+                    rezultate.append(esc(out.strip()))
+                for cod in it.get("calc_cpp", []):
+                    out, _ = ruleaza_cpp(cod)
+                    rezultate.append(bloc_iesire(out))
+                model = it["model"]
+                for i, r in enumerate(rezultate):
+                    model = model.replace("{R%d}" % i, r)
+                if re.search(r"\{R\d+\}", model):
+                    raise SystemExit(f'{S["id"]} item {k}: rezultat lipsă în model')
+                if it.get("cod_model"):
+                    lang = it.get("lang", "python")
+                    out, fis = executa(it["cod_model"], lang, it.get("intrare", ""), it.get("fisiere"))
+                    for n, c in (it.get("fisiere") or {}).items():
+                        model += f'<p class="io-lbl">Fișier de test <code>{esc(n)}</code></p>' + bloc_iesire(c, "fișier")
+                    model += bloc_cod(it["cod_model"], lang)
+                    if it.get("intrare"):
+                        model += '<p class="io-lbl">Date de test</p>' + bloc_iesire(it["intrare"], "intrare")
+                    model += '<p class="io-lbl">Rezultatul rulării</p>' + bloc_iesire(out)
+                if it.get("sql"):
+                    script, qs = it["sql"]
+                    for q, r in zip(qs, ruleaza_sql(script, qs)):
+                        model += bloc_cod(q, "sql")
+                        model += (('<p class="io-lbl">Rezultat pe datele de test</p>' + tabel_sql(*r)) if r
+                                  else '<p class="io-lbl">Comanda s-a executat corect pe baza de test.</p>')
+                if it.get("nota"):
+                    model += f'<div class="note">{it["nota"]}</div>'
+                itemi.append({"t": "d", "e": it["enunt"] + cod_html, "p": it["p"], "b": it["barem"], "m": model})
+            sim["subiecte"].append({"titlu": sub["titlu"], "p": sub["punctaj"], "itemi": itemi})
+        if total != 90:
+            raise SystemExit(f'{S["id"]}: total {total}, nu 90')
+        date.append(sim)
+    with open(os.path.join(AICI, "sablon.html"), encoding="utf-8") as f:
+        css = re.search(r"<style>.*?</style>", f.read(), re.S).group(0)
+    with open(os.path.join(AICI, "sablon_simulari.html"), encoding="utf-8") as f:
+        t = f.read()
+    t = (t.replace("{{CSS}}", css).replace("{{NAV_SITE}}", nav_site("simulari.html"))
+          .replace("{{NR_SIM}}", str(len(date)))
+          .replace("{{DATE}}", json.dumps(date, ensure_ascii=False).replace("</", "<\\/")))
+    with open(os.path.join(RADACINA, "simulari.html"), "w", encoding="utf-8") as f:
+        f.write(t)
+    print(f"simulari.html: {len(date)} simulări verificate")
+
+
 if __name__ == "__main__":
     main()
+    randeaza_simulari()

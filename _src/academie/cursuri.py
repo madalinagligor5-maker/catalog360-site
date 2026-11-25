@@ -3,11 +3,13 @@
 NAV_SITE = [
     ("index.html", "Acasă"),
     ("python.html", "1. Python"),
+    ("culegere.html", "Culegere Python"),
     ("algoritmi.html", "2. Algoritmi"),
     ("cpp.html", "3. C++"),
     ("metodica.html", "4. Metodică"),
     ("programa.html", "5. Programa (TIC, BD, IA…)"),
     ("teste.html", "Teste"),
+    ("simulari.html", "Simulări"),
 ]
 
 CURSURI = [
@@ -20,6 +22,16 @@ CURSURI = [
          lede="De la primul program până la nivelul probei practice: teorie scurtă, probleme rezolvate și exerciții pe care le scrii și le rulezi direct aici. Pagina îți verifică automat programul pe mai multe teste, ca un evaluator.",
          hint="Prima rulare încarcă interpretorul Python (câțiva MB, câteva secunde); după aceea merge instant. Progresul și codul tău se salvează doar în acest browser.",
          stats=lambda nl, ne, nq: [f"<b>{nl}</b> lecții", f"<b>{ne}</b> exerciții cu verificare automată", f"<b>{nq}</b> întrebări de test", "Python rulat în browser"],
+         urmator=("algoritmi", "Etapa 2: Algoritmi")),
+    dict(prefix="culegere", fisier="culegere.html", cheie="c360-curs-culegere", lang="python",
+         sectiune="Programare", scurt="Culegere Python",
+         titlu="Culegere de probleme Python de nivel examen – titularizare | Catalog360.ro",
+         descriere="Peste 90 de probleme Python de nivel examen pentru titularizarea la Informatică, pe capitole, cu teste ascunse, cazuri limită și mod examen cronometrat.",
+         eyebrow="Etapa 1+ · Programare · Exersare de nivel examen",
+         h1="Culegere Python <em>de nivel examen</em>",
+         lede="Probleme pe capitolele programei, de la ușor la dificil, verificate pe teste cu cazuri limită și date mari. Pornește „Modul examen” din antet: fără soluții și fără rulare liberă, teste ascunse și cronometru pe fiecare problemă.",
+         hint="Recomandat după lecțiile 0–13 din cursul Python. Țintă: rezolvi o problemă medie în 15–20 de minute și una dificilă în 30, fără ajutor.",
+         stats=lambda nl, ne, nq: [f"<b>{nl}</b> capitole", f"<b>{ne}</b> probleme cu teste ascunse", "mod examen cronometrat"],
          urmator=("algoritmi", "Etapa 2: Algoritmi")),
     dict(prefix="algoritmi", fisier="algoritmi.html", cheie="c360-curs-algoritmi", lang="python",
          sectiune="Programare", scurt="Algoritmi",
